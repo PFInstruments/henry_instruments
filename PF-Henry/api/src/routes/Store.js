@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controllers = require('./controllers/store');
+const controllers = require('./controllers/Store');
 
 router.get('/', async (req, res, next) => {
     const stores = await controllers.listStores();
