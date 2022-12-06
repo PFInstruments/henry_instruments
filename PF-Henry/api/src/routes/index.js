@@ -4,6 +4,13 @@ const { Router } = require('express');
 const storeMiddleware = require('./Store');
 
 const categoryMiddleware = require('./Categories');
+<<<<<<<<< Temporary merge branch 1
+const checkoutMiddleware = require('./Checkout');
+=========
+
+const userMiddleware = require('./User');
+
+>>>>>>>>> Temporary merge branch 2
 // Ejemplo: const authRouter = require('./auth.js');
 
 
