@@ -18,7 +18,7 @@ router.post('/', async(req, res) => {
         res.status(400).json({info: 'falta ingresar un dato'})
     }
     try {
-        controllers.postCategory(name);
+        controllers.postCategorie(name);
         res.status(200).send('Categoria agregado');
     } catch (error) {
         res.status(404).send(error.message);

@@ -23,9 +23,9 @@ module.exports = {
         return await product;
     },
     createProduct: async (name, image, description, price, stock, category) => {
-        const findCategory = Categorie.findOne({
+        const findCategory = await Categorie.findOne({
             where: { name: category }
-        })
+        });
         const productCreated = await Products.create({
             name: name,
             image: image,
@@ -33,7 +33,7 @@ module.exports = {
             price: price,
             stock: stock,
         });
-        await productCreated.addCategorie(findCategory)
+        await productCreated.setCategorie(findCategory)
         return await Products.findOne(
             {
                 where: { name: name },

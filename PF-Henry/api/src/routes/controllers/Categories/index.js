@@ -10,6 +10,6 @@ module.exports = {
         return categories;
     },
     postCategorie: async (name) => {
-        const Categorie = await Categorie.create({name});
+        const createCategorie = await Categorie.create({name: name});
     }
 }
