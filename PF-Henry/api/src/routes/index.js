@@ -7,6 +7,8 @@ const categoryMiddleware = require('./Categories');
 
 const userMiddleware = require('./User');
 
+const checkoutMiddleware = require('./Checkout');
+
 // Ejemplo: const authRouter = require('./auth.js');
 
 
@@ -19,6 +21,7 @@ router.use('/store', storeMiddleware);
 router.use('/users', userMiddleware);
 
 router.use('/category', categoryMiddleware);
+router.use('/checkout', checkoutMiddleware);
 
 
 module.exports = router;
