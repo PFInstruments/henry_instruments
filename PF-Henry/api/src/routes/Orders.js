@@ -3,7 +3,7 @@ const router = express.Router();
 const { getOrders_Products, getOrders_Users, getAllOrders, postOrder } = require('./controllers/Orders/orders');
 
 
-router.get("/Orders",async (req,res)=>{
+router.get("/",async (req,res)=>{
     try {
         const { productoName, userName } = req.params;  
         if(productoName&&!userName){       // si se le da el nombre de un producto traera todas las orders que tenga ese producto
@@ -24,7 +24,7 @@ router.get("/Orders",async (req,res)=>{
     }
 });
 
-router.post("/Orders",async (req,res)=>{
+router.post("/",async (req,res)=>{
     try {
         const { totalAmount, state, productId, userId }=req.body
         if(totalAmount&&state&&productId&&userId){
