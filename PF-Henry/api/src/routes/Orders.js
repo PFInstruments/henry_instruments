@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getOrders_Products, getOrders_Users, getAllOrders, postOrder } = require('./controllers/Orders/orders');
+const { getOrders_Products, getOrders_Users, getAllOrders, postOrder } = require('./controllers/Orders');
 
 
 router.get("/",async (req,res)=>{
