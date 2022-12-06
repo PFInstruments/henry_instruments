@@ -50,8 +50,8 @@ const getAllOrders=async()=>{
 
 const postOrder=async(totalAmount,state,productId,userId)=>{
     const newOrder=await Order.create({totalAmount,state});
-    await newOrder.addProduct(productId);
-    await newOrder.addUsers(userId);
+    await newOrder.setProducts(productId);
+    await newOrder.setUser(userId);
     return newOrder
 }
 

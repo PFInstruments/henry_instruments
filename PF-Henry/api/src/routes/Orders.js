@@ -20,7 +20,7 @@ router.get("/",async (req,res)=>{
             res.status(200).json(orders);
         }
     } catch (error) {
-        res.status(404).res(message.error)
+        res.status(404).send(error.message)
     }
 });
 
@@ -32,7 +32,8 @@ router.post("/",async (req,res)=>{
             res.status(200).json(newOrder);
         }else throw Error("Faltan datos por introducir")
     } catch (error) {
-        res.status(404).res(message.error)
+        console.log(error)
+        res.status(404).send(error)
     }
 })
 
