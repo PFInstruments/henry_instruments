@@ -21,7 +21,7 @@ router.post('/', async(req, res) => {
         controllers.postCategory(name);
         res.status(200).send('Categoria agregado');
     } catch (error) {
-        alert('Hubo un problema', error);
+        res.status(404).send(error.message);
     }
 });
 
