@@ -1,4 +1,9 @@
 @charset "UTF-8";
+.letraRoja {
+  color: red;
+  background-color: black;
+}
+
 /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
