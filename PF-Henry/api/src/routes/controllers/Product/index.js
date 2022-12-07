@@ -17,12 +17,16 @@ module.exports = {
     product: async (id) => {
         const product = await Products.findOne(
             {
-                where: { id: id }
+                where: { id: id },
+                include: [{ model: Categorie }]
             }
         );
         return await product;
     },
-    createProduct: async (name, image, description, price, stock) => {
+    createProduct: async (name, image, description, price, stock, category) => {
+        const findCategory = await Categorie.findOne({
+            where: { name: category }
+        });
         const productCreated = await Products.create({
             name: name,
             image: image,
@@ -30,25 +34,31 @@ module.exports = {
             price: price,
             stock: stock,
         });
+        await productCreated.setCategorie(findCategory)
         return await Products.findOne(
             {
-                where: { name: name }
+                where: { name: name },
+                include: [{ model: Categorie }]
             }
         );
     },
     updateProduct: async (obj) => {
+        const findCategory = await Categorie.findOne({
+            where: { name: obj.category }
+        });
         let product = await Products.findOne(
             {
                 where: { id: obj.id }
             }
         );
+        await product.setCategorie(findCategory)
         product = await Products.update(
             {
                 name: obj.name,
                 image: obj.image,
                 description: obj.description,
                 price: obj.price,
-                stock: obj.stock
+                stock: obj.stock,
             },
             {
                 where: {
