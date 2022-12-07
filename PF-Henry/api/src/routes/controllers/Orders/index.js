@@ -1,12 +1,12 @@
-const { Product, Users, Order } = require('../../../db');
+const { Products, Users, Order } = require('../../../db');
 
-const getOrders_Products=async(productName)=>{
+const getOrders_Products=async(productId)=>{
     const orders=await Order.findAll({
         include: [
             {
-                model: Product,
+                model: Products,
                 where:{
-                    name: productName
+                    id: productId
                 }
             },
             {
@@ -17,17 +17,17 @@ const getOrders_Products=async(productName)=>{
     return orders
 }
 
-const getOrders_Users=async(userName)=>{
-    const orders=await Order.findAll({
+const getOrders_Users=async(userId)=>{
+    const orders=await Order.findOne({
         include: [
             {
                 model: Users,
                 where: {
-                    id: userName
+                    id: userId
                 }
             },
             {
-                model: Product
+                model: Products
             }
         ]
     });
@@ -38,7 +38,7 @@ const getAllOrders=async()=>{
     const orders=await Order.findAll({
         include: [
             {
-                model: Product,
+                model: Products,
             },
             {
                 model: Users
