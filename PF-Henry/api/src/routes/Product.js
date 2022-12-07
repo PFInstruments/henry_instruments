@@ -36,14 +36,15 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, image, description, price, stock } = req.body;
+    const { name, image, description, price, stock, category } = req.body;
     let update = {
         id,
         name,
         image,
         description,
         price,
-        stock
+        stock,
+        category
     }
     try {
         let change = await controller.updateProduct(update);
