@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import DropdownsFiltros from "../DropdownsFiltros/DropdownsFiltros.jsx";
 import Footer from "../Footer/footer.jsx";
 import NavBar from "../NavBar/NavBar";
 
@@ -16,6 +17,9 @@ export default function Home() {
       <button className="tw-bg-blue-500 hover:tw-bg-blue-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded-full tw-border-dashed ">
         Tailwind
       </button>
+      <div className="tw-flex tw-justify-center">
+      <DropdownsFiltros/>
+      </div>
     </div>
   );
 }
