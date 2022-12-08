@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import DropdownsFiltros from "../DropdownsFiltros/DropdownsFiltros.jsx";
 import Footer from "../Footer/footer.jsx";
 import NavBar from "../NavBar/NavBar";
+//import Card from "../Card/Card";
 
 //import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
-let styleCard = { width: "18rem" };
+//let styleCard = { width: "18rem" };
 
 export default function Home() {
   ///RENDER///
