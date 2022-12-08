@@ -5,6 +5,7 @@ import { getProducts } from '../../Redux/actions';
 
 
 export default function Card() {
+    //dispatch
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products);
     console.log(products);
