@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
-//import DropdownsFiltros from "../DropdownsFiltros/DropdownsFiltros.jsx";
-//import Footer from "../Footer/footer.jsx";
-//import NavBar from "../NavBar/NavBar";
-import Carousel from "../Carousel/Carousel";
-=======
+
 import DropdownsFiltros from "../DropdownsFiltros/DropdownsFiltros.jsx";
 import Footer from "../Footer/footer.jsx";
 import NavBar from "../NavBar/NavBar";
 import Card from "../Card/Card";
->>>>>>> dev
+import Carousel from "../Carousel/Carousel";
+
 
 //import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
 //let styleCard = { width: "18rem" };
