@@ -13,19 +13,19 @@ const Carousel = () => {
   </div>
   <div className="carousel-inner">
     <div className="carousel-item active">
-      <img src="Slides/0110172834_gtr_frt_001_rr.jpg" className="d-block w-100" width="100" height="500" alt="..."/>
+      <img src="Slides/trompeta2.jpg" className="d-block w-100" width="100" height="300" alt="..."/>
+      <div className="carousel-caption d-none d-sm-block">
+        
+      </div>
+    </div>
+    <div className="carousel-item">
+      <img src="Slides/revista_violin.jpg" className="d-block w-100" alt="Guitarra" width="100" height="300"/>
       <div className="carousel-caption d-none d-md-block">
         
       </div>
     </div>
     <div className="carousel-item">
-      <img src="Slides/Taylor-254ce-frl-2020_0.png" className="d-block w-100" alt="Guitarra" width="200" height="500"/>
-      <div className="carousel-caption d-none d-md-block">
-        
-      </div>
-    </div>
-    <div className="carousel-item">
-      <img src="Slides/models-leada1-2.jpg" className="d-block w-100" width="200" height="500" alt="..."/>
+      <img src="Slides/teclado.jpg" className="d-block w-100" width="100" height="300" alt="..."/>
       <div className="carousel-caption d-none d-md-block">
         
       </div>
