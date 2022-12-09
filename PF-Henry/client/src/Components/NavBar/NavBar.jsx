@@ -69,9 +69,6 @@ export default function NavBar() {
                                     </li>
                                 </ul>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link disabled">Link</a>
-                            </li>
                         </ul>
                         <form className="d-flex" role="search">
                             <input
