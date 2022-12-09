@@ -2,12 +2,10 @@ import { Route, BrowserRouter } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
 import Footer from "./Components/Footer/footer";
-<<<<<<< HEAD
-import Carousel from "./Components/Carousel/Carousel";
-=======
+
+
 import Login from "./Components/Login/login";
 import ProductDetail from "./Components/ProductDetails/ProductDetail";
->>>>>>> dev
 
 import "./App.css";
 
