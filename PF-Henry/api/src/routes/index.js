@@ -6,7 +6,8 @@ const productMiddleware = require('./Product');
 const categoryMiddleware = require('./Categories');
 const userMiddleware = require('./User');
 const checkoutMiddleware = require('./Checkout');
-const orderMiddelewere = require('./Orders')
+const orderMiddleware = require('./Orders');
+const reviewMiddleware = require('./Reviews');
 // Ejemplo: const auth Router = require('./auth.js');
 
 // Ejemplo: const authRouter = require('./auth.js');
@@ -20,7 +21,8 @@ router.use('/products', productMiddleware);
 router.use('/users', userMiddleware);
 router.use('/category', categoryMiddleware);
 router.use('/checkout', checkoutMiddleware);
-router.use('/orders', orderMiddelewere);
+router.use('/orders', orderMiddleware);
+router.use('/review', reviewMiddleware);
 
 
 module.exports = router;

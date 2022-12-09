@@ -35,7 +35,7 @@ const getOrders_Users=async(userId)=>{
 }
 
 const getAllOrders=async()=>{
-    const orders=await Order.findAll({
+    const orders = await Order.findAll({
         include: [
             {
                 model: Products,
