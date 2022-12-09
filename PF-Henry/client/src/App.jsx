@@ -7,6 +7,8 @@ import Footer from "./Components/Footer/footer";
 import Login from "./Components/Login/login";
 import ProductDetail from "./Components/ProductDetails/ProductDetail";
 
+
+
 import "./App.css";
 
 function App() {
@@ -21,7 +23,7 @@ function App() {
           render={() => <ProductDetail />}
         />
         <Route exact path="/admin" render={() => <AdminDashboard />} />
-        <Route exact path="/login" render={()=> <Login />}/>
+        <Route exact path="/login" render={() => <Login />} />
         <Route path="/" render={() => <Footer />} />
       </div>
     </BrowserRouter>
