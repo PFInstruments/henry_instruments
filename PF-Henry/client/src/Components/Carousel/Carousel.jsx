@@ -1,8 +1,6 @@
 
 
 const Carousel = () => {
-
-
     return (
 
 <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
@@ -13,19 +11,17 @@ const Carousel = () => {
   </div>
   <div className="carousel-inner">
     <div className="carousel-item active">
-      <img src="Slides/trompeta2.jpg" className="d-block w-100" width="100" height="300" alt="..."/>
-      <div className="carousel-caption d-none d-sm-block">
-        
-      </div>
+      <img src="Slides/trompeta2.jpg" className="d-block w-100" width="200" height="400" alt="..."/>
+     
     </div>
     <div className="carousel-item">
-      <img src="Slides/revista_violin.jpg" className="d-block w-100" alt="Guitarra" width="100" height="300"/>
+      <img src="Slides/revista_violin.jpg" className="d-block w-100" alt="Guitarra" width="200" height="400"/>
       <div className="carousel-caption d-none d-md-block">
         
       </div>
     </div>
     <div className="carousel-item">
-      <img src="Slides/teclado.jpg" className="d-block w-100" width="100" height="300" alt="..."/>
+      <img src="Slides/teclado.jpg" className="d-block w-100" width="200" height="400" alt="..."/>
       <div className="carousel-caption d-none d-md-block">
         
       </div>

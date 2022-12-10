@@ -1,4 +1,4 @@
-import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL } from "./actions";
+import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS } from "./actions";
 
 const intialState = {
   allBuyers: [],
@@ -15,7 +15,7 @@ const intialState = {
 
 export const rootReducer = (state = intialState, action) => {
   switch (action.type) {
-    case "GET_PRODUCTS":
+    case GET_PRODUCTS:
       return {
         ...state,
         allProducts: action.payload,
