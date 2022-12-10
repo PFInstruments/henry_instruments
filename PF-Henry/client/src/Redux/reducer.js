@@ -1,16 +1,13 @@
 import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS } from "./actions";
 
 const intialState = {
-  allBuyers: [],
-  buyerDetail: {},
+  allBuyers: [],   // Administrativos
+  buyerDetail: {},  // Administrativos
   allProducts: [],
   productDetail: {},
   allCategories: [],
   allOrders: [],
   orderDetail: {},
-  admin: [],
-  store: [],
-  cart: [],
 };
 
 export const rootReducer = (state = intialState, action) => {
