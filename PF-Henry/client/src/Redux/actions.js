@@ -12,8 +12,8 @@ export const getProducts = () => async (dispatch) => {
     try {
         const { data } = await axios.get(urlP);
         return dispatch({ 
-            type: GET_PRODUCTS, 
-            payload: data 
+            type: GET_PRODUCTS,
+            payload: data
         });
     } catch (error) {
         console.log(error.message);
@@ -23,7 +23,7 @@ export const getProducts = () => async (dispatch) => {
 export const getProductDetail=(productoId)=>{
     return async function (dispatch) {
         try {
-            const detail = await axios.get(`http://localhost:3001/productdetail/${productoId}`);
+            const detail = await axios.get(`http://localhost:3001/products/${productoId}`);
             const rating = await axios.get(`http://localhost:3001/review/rating/${productoId}`);
             const coments = await axios.get(`http://localhost:3001/review/${productoId}`)
             return dispatch({
@@ -43,7 +43,7 @@ export const getProductDetail=(productoId)=>{
 
             });
         } catch (error) {
-          console.log(error.message);
+            console.log(error.message);
         }
     };
 }
@@ -63,7 +63,7 @@ export const getCategories=()=>{
                 payload: categories.data
             });
         } catch (error) {
-          
+            console.log(error.message);
         }
     }
 }
