@@ -11,6 +11,10 @@ module.exports=(sequelize)=>{
         score: {
             type: DataTypes.INTEGER,
             allowNull: true
+        },
+        comment: {
+            type: DataTypes.TEXT,
+            allowNull: true
         }
     },{timestamps: false});
 };
