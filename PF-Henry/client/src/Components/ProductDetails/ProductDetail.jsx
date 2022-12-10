@@ -14,7 +14,7 @@ const ProductDetail = () => {
     return () => dispatch(clearPageProductDetail());
   }, [dispatch, id]);
 
-  const prDetail = useSelector((state) => state.productDetail);
+  const prDetail = useSelector(state => state.productDetail);
 
   return (
     <div className="bg-secondary product-detail">
