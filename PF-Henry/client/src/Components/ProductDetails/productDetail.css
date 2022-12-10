@@ -1,0 +1,8 @@
+.product-detail .card-text{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
+}.product-detail .card-text .value{
+  font-size: 1.5em;
+  font-weight: 500;
+}
