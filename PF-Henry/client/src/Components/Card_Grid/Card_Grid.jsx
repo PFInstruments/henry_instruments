@@ -10,8 +10,7 @@ export default function Card_Grid() {
     //dispatch
     //aqui se llama a la accion
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.products);
-    console.log(products);
+    const products = useSelector((state) => state.allProducts);
 
     useEffect(() => {
         dispatch(getProducts());

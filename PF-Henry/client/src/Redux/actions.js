@@ -6,18 +6,20 @@ export const CLEAR_PAGE_PRODUCT_DETAIL = "CLEAR_PAGE_PRODUCT_DETAIL";
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 
 
-const urlP = 'http://localhost:3001/products';
+const urlP = 'http://localhost:3001/products/';
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts=()=>{
+  return async function (dispatch){
     try {
-        const { data } = await axios.get(urlP);
+        const instruments = await axios.get(urlP);
         return dispatch({ 
             type: GET_PRODUCTS,
-            payload: data
+            payload: instruments.data
         });
     } catch (error) {
         console.log(error.message);
     }
+  }
 }
 
 export const getProductDetail=(productoId)=>{
