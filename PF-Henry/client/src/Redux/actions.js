@@ -32,17 +32,9 @@ export const getProductDetail=(productoId)=>{
                 type: GET_PRODUCT_DETAIL,
                 payload: {
                     ...detail.data,
-                    rating: rating.data.rating,
+                    rating: rating.data[0].rating,
                     coments: coments.data
-                    /*
-                    name: "guitar",
-                    rating: "5",
-                    descipcion: "detail description",
-                    price: "220",
-                    stock: "21",
-                    */
                 },
-
             });
         } catch (error) {
             console.log(error.message);
