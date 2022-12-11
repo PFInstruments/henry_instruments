@@ -14,7 +14,8 @@ const ProductDetail = () => {
     return () => dispatch(clearPageProductDetail());
   }, [dispatch, id]);
 
-  const prDetail = useSelector(state => state.productDetail);
+  const prDetail = useSelector((state) => state.productDetail);
+  console.log(prDetail);
 
   return (
     <div className="bg-secondary product-detail">
@@ -24,7 +25,7 @@ const ProductDetail = () => {
             <img
               className="card-img-top "
               style={{ maxWidth: "100%", maxHeight: "100%" }}
-              src="https://www.ibanez.com/common/product_artist_file/file/pm_thum_ag_pf_en.png"
+              src={prDetail.image}
               alt="imagen no encontrada"
             />
           </div>
@@ -34,12 +35,12 @@ const ProductDetail = () => {
 
               <span className="card-text py-3">
                 <small className="text-muted"> Descripcion:</small>
-                <span className="value">{prDetail.description}</span>
+                <span className="text-muted"> {prDetail.description}</span>
               </span>
               <br />
               <span className="card-text py-3">
                 <small className="text-muted"> Precio:</small>{" "}
-                <span className="value">
+                <span className="text-muted">
                   <strong>{prDetail.price}</strong>
                 </span>
               </span>
@@ -51,10 +52,10 @@ const ProductDetail = () => {
               <br />
               <span className="card-text py-3">
                 <small className="text-muted"> Rating: </small>
-                <span className="value">{prDetail.rating}</span>
+                <span className="text-muted">{prDetail.rating}</span>
               </span>
               <br />
-              <a href="#" class="btn btn-success py-2 my-4">
+              <a /*href="#"*/ class="btn btn-success py-2 my-4">
                 Añadir al carrito
               </a>
             </div>
