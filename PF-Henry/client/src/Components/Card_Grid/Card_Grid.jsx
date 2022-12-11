@@ -11,6 +11,7 @@ export default function Card_Grid() {
     //aqui se llama a la accion
     const dispatch = useDispatch();
     const products = useSelector((state) => state.allProducts);
+    //console.log(products);
 
     useEffect(() => {
         dispatch(getProducts());
@@ -22,8 +23,8 @@ export default function Card_Grid() {
                 <DropdownsFiltros />
             </div>
             <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-m-4">
-                {Products &&
-                    Products.map((el) => {
+                {products &&
+                    products.map((el) => {
                         return (
                             <Card
                                 key={el.id}
