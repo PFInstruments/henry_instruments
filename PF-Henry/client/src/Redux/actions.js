@@ -3,7 +3,8 @@ import axios from "axios";
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const CLEAR_PAGE_PRODUCT_DETAIL = "CLEAR_PAGE_PRODUCT_DETAIL";
-export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_ORDERS = 'GET_ORDERS';
 
 
 const urlP = 'http://localhost:3001/products/';
@@ -51,11 +52,21 @@ export const clearPageProductDetail=()=>{
 export const getCategories=()=>{
     return async function(dispatch){
         try {
-            const categories = await axios.get(``);
+            const categories = await axios.get(`http://localhost:3001/category`);
             return dispatch({
                 type: GET_CATEGORIES,
                 payload: categories.data
             });
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
+
+export const getOrders=()=>{
+    return async function(dispatch){
+        try {
+            
         } catch (error) {
             console.log(error.message);
         }
