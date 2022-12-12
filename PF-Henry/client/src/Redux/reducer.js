@@ -1,4 +1,5 @@
 import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES } from "./actions";
+import { ADD_TO_CART,DELETE_FROM_CART } from "./constants";
 
 const intialState = {
   allBuyers: [],   // Administrativos
@@ -8,7 +9,14 @@ const intialState = {
   allCategories: [],
   allOrders: [],
   orderDetail: {},
+  cart: [],
 };
+
+if(localStorage.getItem("cart")) {
+    intialState.cart = JSON.parse(localStorage.getItem("cart"));
+} else {
+    intialState.cart = [];
+}
 
 export const rootReducer = (state = intialState, action) => {
   switch (action.type) {
@@ -35,6 +43,14 @@ export const rootReducer = (state = intialState, action) => {
         ...state,
         allCategories: []
       };
+    case ADD_TO_CART:
+        return {
+            cart: [...action.payload]
+        };
+    case DELETE_FROM_CART:
+        return {
+            cart: [...action.payload]
+        }
 
     default:
       return state;
