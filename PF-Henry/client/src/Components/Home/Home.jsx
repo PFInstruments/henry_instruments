@@ -1,21 +1,45 @@
-import React, { useState, useEffect } from "react";
-import Footer from "../Footer/footer.jsx";
 import NavBar from "../NavBar/NavBar";
+import Carousel from "../Carousel/Carousel";
+import SearchBar from "../SearchBar/SearchBar.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getProducts } from "../../Redux/actions";
+import CardGrid from "../CardGrid/CardGrid";
 
 //import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
-let styleCard = { width: "18rem" };
+//let styleCard = { width: "18rem" };
 
 export default function Home() {
-  ///RENDER///
-  return (
-    <div>
-      <NavBar />
-      <h1>HOME</h1>
-      <button className="btn btn-primary ">Bootstrap</button>
+    ///RENDER///
 
-      <button className="tw-bg-blue-500 hover:tw-bg-blue-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded-full tw-border-dashed ">
-        Tailwind
-      </button>
-    </div>
-  );
+    const dispatch = useDispatch();
+
+    let allProducts = useSelector((state) => state.allProducts);
+
+    let [localProducts, setLocalproducts] = useState([]);
+
+    useEffect(() => {
+        dispatch(getProducts());
+    }, []);
+
+    useEffect(() => {
+        setLocalproducts(allProducts);
+    }, [allProducts]);
+
+    return (
+        <div>
+            <Carousel />
+
+            <div className="container  tw-rounded-lg">
+                <SearchBar
+                    localProducts={localProducts}
+                    setLocalproducts={setLocalproducts}
+                    allProducts={allProducts}
+                />
+            </div>
+            <div>
+                <CardGrid localProducts={localProducts} />
+            </div>
+        </div>
+    );
 }
