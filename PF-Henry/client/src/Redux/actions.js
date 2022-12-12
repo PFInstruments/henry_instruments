@@ -9,21 +9,21 @@ export const GET_ORDERS = 'GET_ORDERS';
 
 const urlP = 'http://localhost:3001/products/';
 
-export const getProducts=()=>{
-  return async function (dispatch){
-    try {
-        const instruments = await axios.get(urlP);
-        return dispatch({ 
-            type: GET_PRODUCTS,
-            payload: instruments.data
-        });
-    } catch (error) {
-        console.log(error.message);
+export const getProducts = () => {
+    return async function (dispatch) {
+        try {
+            const instruments = await axios.get(urlP);
+            return dispatch({
+                type: GET_PRODUCTS,
+                payload: instruments.data
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
     }
-  }
 }
 
-export const getProductDetail=(productoId)=>{
+export const getProductDetail = (productoId) => {
     return async function (dispatch) {
         try {
             const detail = await axios.get(`http://localhost:3001/products/${productoId}`);
@@ -33,7 +33,7 @@ export const getProductDetail=(productoId)=>{
                 type: GET_PRODUCT_DETAIL,
                 payload: {
                     ...detail.data,
-                    rating: rating.data[0].rating,
+                    rating: rating.data.rating,
                     coments: coments.data
                 },
             });
@@ -43,14 +43,14 @@ export const getProductDetail=(productoId)=>{
     };
 }
 
-export const clearPageProductDetail=()=>{
+export const clearPageProductDetail = () => {
     return {
         type: CLEAR_PAGE_PRODUCT_DETAIL,
     }
 }
 
-export const getCategories=()=>{
-    return async function(dispatch){
+export const getCategories = () => {
+    return async function (dispatch) {
         try {
             const categories = await axios.get(`http://localhost:3001/category`);
             return dispatch({
@@ -63,10 +63,10 @@ export const getCategories=()=>{
     }
 }
 
-export const getOrders=()=>{
-    return async function(dispatch){
+export const getOrders = () => {
+    return async function (dispatch) {
         try {
-            
+
         } catch (error) {
             console.log(error.message);
         }
