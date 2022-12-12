@@ -2,8 +2,9 @@ import React from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { ADD_TO_CART } from "../../Redux/actions";
 import { deleteFromCart } from "../../Redux/actions";
+import { Link } from "react-router-dom";
 
-const Cart = () => {
+const Cart = ({history}) => {
     const {cart} = useSelector(state => state.cart);
     const dispatch = useDispatch();
 
@@ -53,8 +54,20 @@ const Cart = () => {
                         {cart.map(product => (
                         <tr key={product.id}>
                             <th scope="row">Imagen</th>
-                            <td>Producto</td>
-                            <td>Precio</td>
+                            <td>
+                                {" "}
+                                <Link to={`/product/${product.id}`}>
+                                    {product.name}
+                                </Link>
+                            </td>
+                            <td>
+                                {" "}
+                                {product.price.toLocaleString("en-US",
+                                {
+                                    style: "currency",
+                                    currency: "USD"
+                                })}
+                            </td>
                             <td>
                                 <input 
                                 type="number"
