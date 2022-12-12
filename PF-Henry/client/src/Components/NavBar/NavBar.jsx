@@ -28,9 +28,7 @@ export default function NavBar() {
         <div>
             <nav className="navbar navbar-expand-lg  ">
                 <div className="container">
-                    <a className="navbar-brand" href="#">
-                        Music Store
-                    </a>
+                    <Link to="/">Henry Music</Link>
                     <button
                         className="navbar-toggler"
                         type="button"
