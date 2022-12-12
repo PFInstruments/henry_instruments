@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES, GET_ORDERS } from "./actions";
-=======
-import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES } from "./actions";
 import { ADD_TO_CART,DELETE_FROM_CART } from "./constants";
->>>>>>> dev
 
 const intialState = {
   allBuyers: [],   // Administrativos
