@@ -1,21 +1,18 @@
-import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL } from "./actions";
+import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES } from "./actions";
 
 const intialState = {
-  allBuyers: [],
-  buyerDetail: {},
+  allBuyers: [],   // Administrativos
+  buyerDetail: {},  // Administrativos
   allProducts: [],
   productDetail: {},
   allCategories: [],
   allOrders: [],
   orderDetail: {},
-  admin: [],
-  store: [],
-  cart: [],
 };
 
 export const rootReducer = (state = intialState, action) => {
   switch (action.type) {
-    case "GET_PRODUCTS":
+    case GET_PRODUCTS:
       return {
         ...state,
         allProducts: action.payload,
@@ -31,6 +28,12 @@ export const rootReducer = (state = intialState, action) => {
       return {
         ...state,
         productDetail: {},
+      };
+
+    case GET_CATEGORIES:
+      return{
+        ...state,
+        allCategories: []
       };
 
     default:

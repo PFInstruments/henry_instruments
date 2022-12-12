@@ -1,30 +1,17 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 //import style from './Card.module.scss';
-import { getProducts } from "../../Redux/actions";
-import Products from "../Utils/Product";
-import DropdownsFiltros from "../DropdownsFiltros/DropdownsFiltros";
+import React from "react";
 import Card from "../Card/Card";
 
-export default function Card_Grid() {
+export default function CardGrid({ localProducts }) {
     //dispatch
     //aqui se llama a la accion
-    const dispatch = useDispatch();
-    const products = useSelector((state) => state.products);
-    console.log(products);
-
-    useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch]);
+    //console.log(localProducts);
 
     return (
         <div>
-            <div className="tw-flex tw-justify-center">
-                <DropdownsFiltros />
-            </div>
             <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-m-4">
-                {Products &&
-                    Products.map((el) => {
+                {localProducts &&
+                    localProducts.map((el) => {
                         return (
                             <Card
                                 key={el.id}
