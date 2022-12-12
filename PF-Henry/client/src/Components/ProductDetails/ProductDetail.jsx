@@ -15,7 +15,6 @@ const ProductDetail = () => {
   }, [dispatch, id]);
 
   const prDetail = useSelector((state) => state.productDetail);
-  console.log(prDetail);
 
   return (
     <div className="bg-secondary product-detail">

@@ -1,4 +1,4 @@
-import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES } from "./actions";
+import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES, GET_ORDERS } from "./actions";
 
 const intialState = {
   allBuyers: [],   // Administrativos
@@ -33,8 +33,14 @@ export const rootReducer = (state = intialState, action) => {
     case GET_CATEGORIES:
       return{
         ...state,
-        allCategories: []
+        allCategories: action.payload
       };
+
+    case GET_ORDERS:
+      return{
+        ...state,
+        allOrders: action.payload
+      }
 
     default:
       return state;
