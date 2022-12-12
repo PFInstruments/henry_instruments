@@ -1,8 +1,7 @@
-
 import NavBar from "../NavBar/NavBar";
 import Carousel from "../Carousel/Carousel";
 import SearchBar from "../SearchBar/SearchBar.jsx";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../Redux/actions";
 import CardGrid from "../CardGrid/CardGrid";
@@ -29,12 +28,14 @@ export default function Home() {
 
     return (
         <div>
-            <NavBar />
-
             <Carousel />
 
             <div className="container  tw-rounded-lg">
-                <SearchBar localProducts={localProducts} setLocalproducts={setLocalproducts} allProducts={allProducts} />
+                <SearchBar
+                    localProducts={localProducts}
+                    setLocalproducts={setLocalproducts}
+                    allProducts={allProducts}
+                />
             </div>
             <div>
                 <CardGrid localProducts={localProducts} />
