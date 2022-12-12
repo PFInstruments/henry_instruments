@@ -28,7 +28,16 @@ export default function NavBar() {
         <div>
             <nav className="navbar navbar-expand-lg  ">
                 <div className="container">
-                    <Link to="/">Henry Music</Link>
+                    <Link to="/">
+                        <div>
+                            <h1>
+                                <img
+                                    src="https://see.fontimg.com/api/renderfont4/ZjpJ/eyJyIjoiZnMiLCJoIjo0OCwidyI6MTAwMCwiZnMiOjQ4LCJmZ2MiOiIjNkMzMkM3IiwiYmdjIjoiIzIzMTJDMSIsInQiOjF9/SGVucnkgTXVzaWM/music-magic-personal-use-regular.png"
+                                    alt="Henry Music"
+                                />
+                            </h1>
+                        </div>
+                    </Link>
                     <button
                         className="navbar-toggler"
                         type="button"
