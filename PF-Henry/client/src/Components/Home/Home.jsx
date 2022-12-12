@@ -1,4 +1,3 @@
-import NavBar from "../NavBar/NavBar";
 import Carousel from "../Carousel/Carousel";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +19,7 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(getProducts());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         setLocalproducts(allProducts);
