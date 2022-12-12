@@ -23,7 +23,7 @@ module.exports = {
         );
         return await product;
     },
-    createProduct: async (name, image, description, price, stock, category) => {
+    createProduct: async (name, image, description, price, stock, category, trademark, model) => {
         const findCategory = await Categorie.findOne({
             where: { name: category }
         });
@@ -33,6 +33,8 @@ module.exports = {
             description: description,
             price: price,
             stock: stock,
+            trademark, 
+            model
         });
         await productCreated.setCategorie(findCategory)
         return await Products.findOne(
@@ -59,6 +61,8 @@ module.exports = {
                 description: obj.description,
                 price: obj.price,
                 stock: obj.stock,
+                trademark: obj.trademark, 
+                model: obj.model
             },
             {
                 where: {

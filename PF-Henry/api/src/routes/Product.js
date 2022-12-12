@@ -22,12 +22,12 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { name, image, description, price, stock, category } = req.body;
-    if (!name || !image || !description || !price || !stock || !category) {
+    const { name, image, description, price, stock, category, trademark, model} = req.body;
+    if (!name || !image || !description || !price || !stock || !category || !trademark || !model) {
         return res.status(404).send('faltan datos por completar');
     }
     try {
-        const createProduct = await controller.createProduct(name, image, description, price, stock, category);
+        const createProduct = await controller.createProduct(name, image, description, price, stock, category, trademark, model);
         res.status(200).send(createProduct);
     } catch (error) {
         res.status(404).send(error.message);
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, image, description, price, stock, category } = req.body;
+    const { name, image, description, price, stock, category, trademark, model } = req.body;
     let update = {
         id,
         name,
@@ -44,7 +44,9 @@ router.put('/:id', async (req, res) => {
         description,
         price,
         stock,
-        category
+        category, 
+        trademark, 
+        model
     }
     try {
         let change = await controller.updateProduct(update);

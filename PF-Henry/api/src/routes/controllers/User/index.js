@@ -1,4 +1,6 @@
+const e = require('express');
 const { Users, Order } = require('../../../db');
+const { use } = require('../../User');
 
 module.exports = {
     getUsers: async ()=>{
@@ -24,5 +26,35 @@ module.exports = {
         if(!name || !phone_num || !email || !password, !adress) throw new Error("insufficient arguments to create User");
         await Users.create({name, phone_num, email, password, adress, isAdmin});
         return "User created successfully";
+    },
+
+    updateUser: async (id, name, phone_num, email, password, adress, isAdmin=false)=>{
+        let user = await Users.findOne(
+            {
+                where: { id }
+            }
+        );
+
+        if(!name) name = user.name;
+        if(!phone_num) phone_num = user.phone_num;
+        if(!email) email = user.email;
+        if(!password) password = user.password;
+        if(!adress) adress = user.adress;
+        if(!isAdmin) isAdmin = user.isAdmin;
+
+        await Users.update({ 
+            name, 
+            phone_num, 
+            email, 
+            password, 
+            adress, 
+            isAdmin
+        }, 
+        {
+            where: {
+                id
+            }
+        });
+        return "Usuario modificado"
     },
 };
