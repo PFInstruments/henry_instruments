@@ -30,4 +30,15 @@ router.post('/', async(req, res, next) => {
     }
 });
 
+router.put('/:id', async(req, res, next) => {
+    const { id } = req.params;
+    const { name, phone_num, email, password, adress, isAdmin } = req.body;
+    try{
+        const request = await controllers.updateUser(id, name, phone_num, email, password, adress, isAdmin);
+        res.status(201).json({details: request});
+    } catch(err){
+        res.status(404).json({error: err.message});
+    }
+});
+
 module.exports = router;
