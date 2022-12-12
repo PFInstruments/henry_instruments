@@ -1,4 +1,4 @@
-import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES } from "./actions";
+import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES, GET_ORDERS } from "./actions";
 import { ADD_TO_CART,DELETE_FROM_CART } from "./constants";
 
 const intialState = {
@@ -41,7 +41,7 @@ export const rootReducer = (state = intialState, action) => {
     case GET_CATEGORIES:
       return{
         ...state,
-        allCategories: []
+        allCategories: action.payload
       };
     case ADD_TO_CART:
         return {
@@ -51,6 +51,12 @@ export const rootReducer = (state = intialState, action) => {
         return {
             cart: [...action.payload]
         }
+
+    case GET_ORDERS:
+      return{
+        ...state,
+        allOrders: action.payload
+      }
 
     default:
       return state;
