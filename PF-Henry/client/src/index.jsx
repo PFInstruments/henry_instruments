@@ -7,6 +7,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
+import axios from "axios";
+//axios bd local
+//axios.defaults.baseURL = 'http://localhost:3001/';
+//axios bd railway
+axios.defaults.baseURL = 'https://henryinstruments-production.up.railway.app/';
 
 ReactDOM.render(
     <React.StrictMode>
