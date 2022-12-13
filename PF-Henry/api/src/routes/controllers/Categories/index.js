@@ -11,5 +11,19 @@ module.exports = {
     },
     postCategorie: async (name) => {
         const createCategorie = await Categorie.create({name: name});
-    }
+    }, 
+    createMultipleCategories: async () => {
+        const categories = [
+            {name: "Digital Keyboards"},
+            {name: "Electric Guitars"},
+            {name: "Digital Drums"},
+            {name: "Electric Violin"},
+            {name: "Acoustic Violin"},
+            {name: "Electric Bass"},
+            {name: "Electro-Acoustic Guitars"},
+        ];
+
+        await Categorie.bulkCreate(categories);
+        return "Categorias creadas";
+    },
 }
