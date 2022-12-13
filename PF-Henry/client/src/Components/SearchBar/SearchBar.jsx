@@ -13,9 +13,9 @@ const SearchBar = ({ localProducts, setLocalproducts, allProducts }) => {
         } else {
             // eslint-disable-next-line array-callback-return
             let filter = localProducts.filter((product) => {
-                if (product.name.toLowerCase().indexOf(name.toLowerCase()) > -1
-                    || product.trademark.toLowerCase().indexOf(name.toLowerCase()) > -1
-                    || product.model.toLowerCase().indexOf(name.toLowerCase()) > -1
+                if (product.name.toLowerCase().indexOf(ev.target.value.toLowerCase()) > -1
+                    || product.trademark.toLowerCase().indexOf(ev.target.value.toLowerCase()) > -1
+                    || product.model.toLowerCase().indexOf(ev.target.value.toLowerCase()) > -1
                 ) {
                     return product;
                 }
