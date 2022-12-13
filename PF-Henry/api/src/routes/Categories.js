@@ -56,4 +56,12 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.post('/bulkcreate', async(req, res) => {
+    try{
+        res.status(201).send(await controllers.createMultipleCategories());
+    } catch(err){
+        res.status(404).send(err.message);
+    }
+});
+
 module.exports = router;
