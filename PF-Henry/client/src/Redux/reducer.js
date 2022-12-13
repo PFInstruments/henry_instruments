@@ -1,4 +1,4 @@
-import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES, GET_ORDERS } from "./actions";
+import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES, GET_ORDERS, GET_ORDERS_USER } from "./actions";
 import { ADD_TO_CART,DELETE_FROM_CART } from "./constants";
 
 const intialState = {
@@ -51,7 +51,6 @@ export const rootReducer = (state = intialState, action) => {
         return {
             cart: [...action.payload]
         }
-
     case GET_ORDERS:
       return{
         ...state,
