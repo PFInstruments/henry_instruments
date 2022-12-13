@@ -3,7 +3,6 @@ import SearchBar from "../SearchBar/SearchBar.jsx";
 import { getProducts, getCategories } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getProducts } from "../../Redux/actions";
 import CardGrid from "../CardGrid/CardGrid";
 
 //import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
