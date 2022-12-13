@@ -15,6 +15,7 @@ const ProductDetail = () => {
   }, [dispatch, id]);
 
   const prDetail = useSelector((state) => state.productDetail);
+  console.log(prDetail);
 
   return (
     <div className="bg-secondary product-detail">
@@ -34,29 +35,34 @@ const ProductDetail = () => {
 
               <span className="card-text py-3">
                 <small className="text-muted"> Descripcion:</small>
-                <span className="text-muted"> {prDetail.description}</span>
+                <span className="text-secondary"> {prDetail.description}</span>
               </span>
               <br />
               <span className="card-text py-3">
                 <small className="text-muted"> Precio:</small>{" "}
-                <span className="text-muted">
-                  <strong>{prDetail.price}</strong>
+                <span className="text-secondary"> AR$ {prDetail.price}</span>
+              </span>
+              <br />
+              <span className="card-text py-3">
+                <small className="text-muted"> Categoría:</small>
+                <span className="text-secondary">
+                  como ver nombre de categoria?
                 </span>
               </span>
               <br />
               <span className="card-text py-3">
-                <small className="text-muted"> Stock:</small>{" "}
-                <span className="value">{prDetail.stock}</span>
-              </span>
-              <br />
-              <span className="card-text py-3">
                 <small className="text-muted"> Rating: </small>
-                <span className="text-muted">{prDetail.rating}</span>
+                <span className="text-secondary">
+                  {prDetail.rating
+                    ? prDetail.rating + "/5"
+                    : "aun no hay rating"}
+                </span>
               </span>
               <br />
-              <a className="btn btn-success py-2 my-4">
+
+              <button className="tw-text-green-700 hover:tw-text-white tw-border tw-border-green-700 hover:tw-bg-green-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-800">
                 Añadir al carrito
-              </a>
+              </button>
             </div>
           </div>
         </div>

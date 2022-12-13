@@ -1,6 +1,6 @@
-import NavBar from "../NavBar/NavBar";
 import Carousel from "../Carousel/Carousel";
 import SearchBar from "../SearchBar/SearchBar.jsx";
+import { getProducts, getCategories } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../Redux/actions";
@@ -10,21 +10,32 @@ import CardGrid from "../CardGrid/CardGrid";
 //let styleCard = { width: "18rem" };
 
 export default function Home() {
-    ///RENDER///
-
+    //// DISPATCH ////
     const dispatch = useDispatch();
 
-    let allProducts = useSelector((state) => state.allProducts);
+    //// ESTADOS GLOBALES ////
+    const { allProducts, allCategories } = useSelector((state) => state);
 
-    let [localProducts, setLocalproducts] = useState([]);
+    //// ESTADOS LOCALES ////
+    const [localProducts, setLocalProducts] = useState([]);
+    const [localOrder, setLocalOrder] = useState("-");
 
+    ////HOOKS////
     useEffect(() => {
         dispatch(getProducts());
+        dispatch(getCategories());
     }, []);
 
     useEffect(() => {
-        setLocalproducts(allProducts);
+        setLocalProducts(allProducts);
     }, [allProducts]);
+
+    /*
+    useEffect(() => {
+        let arr = orderBy(localOrder, [...localPokemons]);
+        setLocalPokemons(arr);
+    }, [localOrder]);
+    */
 
     return (
         <div>
@@ -33,8 +44,11 @@ export default function Home() {
             <div className="container  tw-rounded-lg">
                 <SearchBar
                     localProducts={localProducts}
-                    setLocalproducts={setLocalproducts}
+                    setLocalproducts={setLocalProducts}
+                    localOrder={localOrder}
+                    setLocalOrder={setLocalOrder}
                     allProducts={allProducts}
+                    allCategories={allCategories}
                 />
             </div>
             <div>
