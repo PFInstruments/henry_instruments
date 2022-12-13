@@ -11,7 +11,15 @@ const SearchBar = ({ localProducts, setLocalproducts, allProducts }) => {
         if (!ev.target.value) {
             setLocalproducts(allProducts);
         } else {
-            let filter = localProducts.filter((p) => p.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+            // eslint-disable-next-line array-callback-return
+            let filter = localProducts.filter((product) => {
+                if (product.name.toLowerCase().indexOf(name.toLowerCase()) > -1
+                    || product.trademark.toLowerCase().indexOf(name.toLowerCase()) > -1
+                    || product.model.toLowerCase().indexOf(name.toLowerCase()) > -1
+                ) {
+                    return product;
+                }
+            });
             setLocalproducts(filter);
         };
     };
@@ -23,7 +31,7 @@ const SearchBar = ({ localProducts, setLocalproducts, allProducts }) => {
                 <nav className="navbar bg-light">
                     <div className="container-fluid">
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2"
+                            <input className="form-control me-2 .ms-1"
                                 type="search"
                                 value={name}
                                 placeholder="Search product"

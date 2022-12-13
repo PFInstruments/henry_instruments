@@ -5,7 +5,7 @@ import Card from "../Card/Card";
 export default function CardGrid({ localProducts }) {
     //dispatch
     //aqui se llama a la accion
-    //console.log(localProducts);
+    console.log(localProducts);
 
     return (
         <div>
@@ -20,6 +20,8 @@ export default function CardGrid({ localProducts }) {
                                 image={el.image}
                                 category={el.category}
                                 price={el.price}
+                                trademark={el.trademark}
+                                model={el.model}
                             />
                         )
                     })}
