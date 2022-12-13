@@ -1,6 +1,5 @@
 const e = require('express');
 const { Users, Order } = require('../../../db');
-const { use } = require('../../User');
 
 module.exports = {
     getUsers: async ()=>{
