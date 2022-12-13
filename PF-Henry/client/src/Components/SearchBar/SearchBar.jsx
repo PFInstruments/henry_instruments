@@ -6,16 +6,6 @@ const SearchBar = ({ localProducts, setLocalproducts, allProducts }) => {
 
     const [name, setName] = useState('');
 
-    // const handleInputChange = (ev) => {
-    //     setName(ev.target.value);
-    //     if (!ev.target.value) {
-    //         setLocalproducts(allProducts);
-    //     } else {
-    //         let filter = localProducts.filter((p) => p.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
-    //         setLocalproducts(filter);
-    //     };
-    // };
-
     const handleInputChange = (ev) => {
         setName(ev.target.value);
         if (!ev.target.value) {
