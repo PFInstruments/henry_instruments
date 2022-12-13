@@ -8,6 +8,7 @@ export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const CLEAR_PAGE_PRODUCT_DETAIL = "CLEAR_PAGE_PRODUCT_DETAIL";
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_ORDERS = 'GET_ORDERS';
+//export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 
 
 
@@ -119,3 +120,17 @@ export const getAllOrders = () => {
         }
     }
 }
+
+/*export const getOrderByUser = (userId) =>{
+    return async function(dispatch) {
+        try {
+            const orders = await axios.get(`http://localhost:3001/orders/?userId=${userId}`);
+            return dispatch({
+                type: GET_ORDERS_USER,
+                payload: orders.data
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}*/
