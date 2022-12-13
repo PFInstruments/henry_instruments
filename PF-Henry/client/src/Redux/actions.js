@@ -48,15 +48,10 @@ export const deleteFromCart = product => async dispatch => {
     })
 }
 
-
-
-
-const urlP = 'http://localhost:3001/products/';
-
 export const getProducts = () => {
     return async function (dispatch) {
         try {
-            const instruments = await axios.get(urlP);
+            const instruments = await axios.get('/products/');
             return dispatch({
                 type: GET_PRODUCTS,
                 payload: instruments.data
@@ -70,9 +65,9 @@ export const getProducts = () => {
 export const getProductDetail = (productoId) => {
     return async function (dispatch) {
         try {
-            const detail = await axios.get(`http://localhost:3001/products/${productoId}`);
-            const rating = await axios.get(`http://localhost:3001/review/rating/${productoId}`);
-            const coments = await axios.get(`http://localhost:3001/review/${productoId}`)
+            const detail = await axios.get(`/products/${productoId}`);
+            const rating = await axios.get(`/review/rating/${productoId}`);
+            const coments = await axios.get(`/review/${productoId}`)
             return dispatch({
                 type: GET_PRODUCT_DETAIL,
                 payload: {
@@ -96,7 +91,7 @@ export const clearPageProductDetail = () => {
 export const getCategories = () => {
     return async function (dispatch) {
         try {
-            const categories = await axios.get(`http://localhost:3001/category`);
+            const categories = await axios.get(`/category`);
             return dispatch({
                 type: GET_CATEGORIES,
                 payload: categories.data
@@ -110,7 +105,7 @@ export const getCategories = () => {
 export const getAllOrders = () => {
     return async function (dispatch) {
         try {
-            const orders = await axios.get(`http://localhost:3001/orders/`);
+            const orders = await axios.get(`/orders/`);
             return dispatch({
                 type: GET_ORDERS,
                 payload: orders.data
@@ -124,7 +119,7 @@ export const getAllOrders = () => {
 /*export const getOrderByUser = (userId) =>{
     return async function(dispatch) {
         try {
-            const orders = await axios.get(`http://localhost:3001/orders/?userId=${userId}`);
+            const orders = await axios.get(`/orders/?userId=${userId}`);
             return dispatch({
                 type: GET_ORDERS_USER,
                 payload: orders.data
