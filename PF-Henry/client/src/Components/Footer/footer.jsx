@@ -25,7 +25,7 @@ export default function Footer() {
             <Link to="/">Home</Link>
           </li>
           <li className="list-inline-item">
-            <Link to="/thisisus">Sobre Nosotros</Link>
+            <Link to="/aboutus">Sobre Nosotros</Link>
           </li>
           <li className="list-inline-item">
             <Link to="/contact">Contacto</Link>
@@ -34,7 +34,7 @@ export default function Footer() {
             <Link to="/privacy">Politicas de Privacidad</Link>
           </li>
         </ul>
-        <p className="copyright">Henry Instruments © 2022</p>
+        <p className="copyright">Henry Music © 2022</p>
       </footer>
     </div>
   );
