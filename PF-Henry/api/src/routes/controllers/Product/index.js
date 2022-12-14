@@ -1,4 +1,4 @@
-const { Products, Categorie, Order } = require('../../../db');
+const { Products, Categorie, Order, Trademarks } = require('../../../db');
 
 module.exports = {
     listProducts: async () => {
@@ -27,6 +27,9 @@ module.exports = {
         const findCategory = await Categorie.findOne({
             where: { name: category }
         });
+        const findTrademark= await Trademarks.findOne({
+            where: { name: trademark }
+        });
         const productCreated = await Products.create({
             name: name,
             image: image,
@@ -36,11 +39,15 @@ module.exports = {
             trademark, 
             model
         });
-        await productCreated.setCategorie(findCategory)
+        await productCreated.setCategorie(findCategory);
+        await productCreated.setTrademarks(findTrademark);
         return await Products.findOne(
             {
                 where: { name: name },
-                include: [{ model: Categorie }]
+                include: [
+                    { model: Categorie },
+                    { model: Trademarks }
+                ]
             }
         );
     },

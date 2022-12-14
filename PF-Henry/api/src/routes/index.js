@@ -8,6 +8,7 @@ const userMiddleware = require('./User');
 const checkoutMiddleware = require('./Checkout');
 const orderMiddleware = require('./Orders');
 const reviewMiddleware = require('./Reviews');
+const trademarkMiddleware = require('./Trademark');
 // Ejemplo: const auth Router = require('./auth.js');
 
 // Ejemplo: const authRouter = require('./auth.js');
@@ -23,6 +24,7 @@ router.use('/category', categoryMiddleware);
 router.use('/checkout', checkoutMiddleware);
 router.use('/orders', orderMiddleware);
 router.use('/review', reviewMiddleware);
+router.use('/trademarks', trademarkMiddleware);
 
 
 module.exports = router;
