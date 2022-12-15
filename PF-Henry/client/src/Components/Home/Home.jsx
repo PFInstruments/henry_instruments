@@ -24,7 +24,7 @@ export default function Home() {
     useEffect(() => {
         dispatch(getProducts());
         dispatch(getCategories());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         setLocalProducts(allProducts);
