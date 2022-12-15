@@ -107,7 +107,7 @@ export default function NavBar() {
                                     className="badge badge-danger"
                                     style={{ position: "absolute", top: "0px" }}
                                 >
-                                    {cart[0] ? cart.length : 0}
+                                    {/*cart[0] ? cart.length : 0*/}
                                 </span>
                             </button>
                             {isAuthenticated ? (
