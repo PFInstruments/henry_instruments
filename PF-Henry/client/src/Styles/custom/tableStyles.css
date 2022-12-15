@@ -1,0 +1,14 @@
+.listImg {
+  width: 80px;
+  aspect-ratio: auto 80/80;
+  height: 80px;
+  margin-left: 15px;
+}
+
+.listButton {
+  margin: 5px;
+}
+
+.listIcon {
+  margin: 15px;
+}/*# sourceMappingURL=tableStyles.css.map */
