@@ -1,4 +1,4 @@
-const { Products, Categorie, Order } = require('../../../db');
+const { Products, Categorie, Order, Trademarks } = require('../../../db');
 
 module.exports = {
     listProducts: async () => {
@@ -9,7 +9,8 @@ module.exports = {
                 },
                 {
                     model: Order
-                }
+                }, 
+                { model: Trademarks }
             ]
         });
         return products;
@@ -18,7 +19,10 @@ module.exports = {
         const product = await Products.findOne(
             {
                 where: { id: id },
-                include: [{ model: Categorie }]
+                include: [
+                    { model: Categorie },
+                    { model: Trademarks }
+                ]
             }
         );
         return await product;
@@ -27,20 +31,26 @@ module.exports = {
         const findCategory = await Categorie.findOne({
             where: { name: category }
         });
+        const findTrademark= await Trademarks.findOne({
+            where: { name: trademark }
+        });
         const productCreated = await Products.create({
             name: name,
             image: image,
             description: description,
             price: price,
             stock: stock,
-            trademark, 
             model
         });
-        await productCreated.setCategorie(findCategory)
+        await productCreated.setCategorie(findCategory);
+        await productCreated.setTrademark(findTrademark);
         return await Products.findOne(
             {
                 where: { name: name },
-                include: [{ model: Categorie }]
+                include: [
+                    { model: Categorie },
+                    { model: Trademarks }
+                ]
             }
         );
     },
@@ -48,20 +58,23 @@ module.exports = {
         const findCategory = await Categorie.findOne({
             where: { name: obj.category }
         });
+        const findTrademark = await Trademarks.findOne({
+            where: { name: obj.trademark }
+        });
         let product = await Products.findOne(
             {
                 where: { id: obj.id }
             }
         );
-        await product.setCategorie(findCategory)
+        await product.setCategorie(findCategory);
+        await product.setTrademark(findTrademark);
         product = await Products.update(
             {
                 name: obj.name,
                 image: obj.image,
                 description: obj.description,
                 price: obj.price,
-                stock: obj.stock,
-                trademark: obj.trademark, 
+                stock: obj.stock, 
                 model: obj.model
             },
             {
@@ -86,7 +99,6 @@ module.exports = {
                 image: "https://www.taylorguitars.com/sites/default/files/responsive-guitar-detail/Taylor-254ce-frl-2020_0.png",
                 stock: 10,
                 price: 1099,
-                trademark: "Taylor",
                 model: "255ce",
                 category: "Electro-Acoustic Guitars"
             },
@@ -96,7 +108,6 @@ module.exports = {
                 image: "https://www.taylorguitars.com/sites/default/files/responsive-guitar-detail/Taylor-214ce-DLX-RW-fr-2020.png",
                 stock: 10,
                 price: 1399,
-                trademark: "Taylor",
                 model: "214ce",
                 category: "Electro-Acoustic Guitars"
             },
@@ -106,7 +117,6 @@ module.exports = {
                 image: "https://www.taylorguitars.com/sites/default/files/responsive-guitar-detail/Taylor-GSMini-e-RW-frl-2019-1_0.png",
                 stock: 10,
                 price: 599,
-                trademark: "Taylor",
                 model: "GS Mini Rosewood",
                 category: "Electro-Acoustic Guitars"
             },
@@ -116,7 +126,6 @@ module.exports = {
                 image: "https://static.gibson.com/product-images/USA/USAVLJ627/Sixties%20Cherry/front-banner-1600_900.png",
                 stock: 10,
                 price: 3299,
-                trademark: "Gibson",
                 model: "ES 335",
                 category: "Electric Guitars"
             },
@@ -126,7 +135,6 @@ module.exports = {
                 image: "https://static.gibson.com/product-images/USA/USAUBC849/Gold%20Top/front-banner-1600_900.png",
                 stock: 10,
                 price: 2699,
-                trademark: "Gibson",
                 model: "Les Paul Standard '50s - Gold Top",
                 category: "Electric Guitars"
             },
@@ -136,7 +144,6 @@ module.exports = {
                 image: "https://s3-us-west-2.amazonaws.com/static.music-man.com/website/images/instruments/instrument-74.png?1630695140",
                 stock: 10,
                 price: 2699,
-                trademark: "Music Man",
                 model: "StyngRay",
                 category: "Electric Bass"
             },
@@ -146,7 +153,6 @@ module.exports = {
                 image: "https://usa.yamaha.com/files/PSR-EW310_thumbnail-gradient_609bb3ddbad47e9a1c411c50ba92e1ba.jpg?impolicy=resize&imwid=396&imhei=396",
                 stock: 10,
                 price: 599,
-                trademark: "Yamaha",
                 model: "PSR-EW310",
                 category: "Digital Keyboards"
             },
@@ -155,8 +161,7 @@ module.exports = {
                 description: "The DTX6 Series features the innovative KIT MODIFIER, which sparks creativity and delivers superb performance in a compact configuration. The original Yamaha TCS (Textured Cellular Silicone) head used in the flagship models combines with real sound and ambience recorded in a world-renowned studio to provide an authentic playing experience.The DTX6 Series is recommended for all drummers who want to have fun, play like a pro and hope to easily transfer their skills to acoustic drums",
                 image: "https://usa.yamaha.com/files/DTX6K-X_f_0001_657901ae9c778e17d01ef7ca7fcc0208.jpg?impolicy=resize&imwid=735&imhei=735",
                 stock: 10,
-                price: 1360,
-                trademark: "Yamaha",
+                price: 1360,                
                 model: "DTX6K-X",
                 category: "Digital Drums"
             },
@@ -166,7 +171,6 @@ module.exports = {
                 image: "https://usa.yamaha.com/files/12860D429D03487A9566646B9352F275_12073_1200x480_c1a88ee3506853b29089dd1ae0815177.jpg",
                 stock: 10,
                 price: 1095,
-                trademark: "Yamaha",
                 model: "AV5-SKU",
                 category: "Acoustic Violin"
             },
@@ -175,8 +179,7 @@ module.exports = {
                 description: "A new kind of electric violin taking its design inspiration from the organic beauty of wood, the simplicity of clean lines, and the comfort of light weight, combined with innovative Yamaha sound to create this gorgeous live-performance instrument. (5-string model)",
                 image: "https://usa.yamaha.com/files/p_0500_007_02_1200x480_4c2b3b240a6bca6efff8424b7d05ab68.jpg",
                 stock: 10,
-                price: 2095,
-                trademark: "Yamaha",
+                price: 2095,  
                 model: "YEV-105",
                 category: "Electric Violin"
             },
@@ -186,7 +189,6 @@ module.exports = {
                 image: "https://www.fmicassets.com/Damroot/LgJpg/10001/0110172834_gtr_frt_001_rr.jpg",
                 stock: 10,
                 price: 2500,
-                trademark: "Fender",
                 model: "AMERICAN ORIGINAL '60S TELECASTER THINLINE",
                 category: "Electric Guitars"
             },
@@ -196,7 +198,6 @@ module.exports = {
                 image: "https://www.nordkeyboards.com/sites/default/files/styles/308x160/public/files/products/nord-piano-5/NP5-overview.jpg?itok=YIIX_IAO",
                 stock: 10,
                 price: 1500,
-                trademark: "Nord",
                 model: "Piano 5",
                 category: "Digital Keyboards"
             },
@@ -206,7 +207,6 @@ module.exports = {
                 image: "https://www.nordkeyboards.com/sites/default/files/files/products/nord-drum-3p/images/Nord%20Drum%203P%20Top.jpg",
                 stock: 10,
                 price: 900,
-                trademark: "Nord",
                 model: "Drum 3p",
                 category: "Digital Drums"
             },
@@ -216,7 +216,6 @@ module.exports = {
                 image: "https://www.taylorguitars.com/sites/default/files/styles/multi_column_guitar_light/public/Taylor-T5-Classic-fr-2015.png?itok=3sQQWULV",
                 stock: 10,
                 price: 1899,
-                trademark: "Taylor",
                 model: "T5 Classic",
                 category: "Electric Guitars"
             },
@@ -226,11 +225,10 @@ module.exports = {
                 image: "https://www.nordkeyboards.com/sites/default/files/files/products/nord-lead-a1/images/models-leada1.jpg",
                 stock: 10,
                 price: 1800,
-                trademark: "Nord",
                 model: "Lead A1",
                 category: "Digital Keyboards"
             },
-        ]
+        ];
         await Products.bulkCreate(products);
         return "Productos creados";
     },
