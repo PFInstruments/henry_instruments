@@ -33,10 +33,6 @@ module.exports = (sequelize)=>{
             defaultValue: false,
             allowNull: false
         }, 
-        trademark: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         model: {
             type: DataTypes.STRING,
             allowNull: false,
