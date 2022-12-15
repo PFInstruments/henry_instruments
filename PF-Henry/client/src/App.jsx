@@ -4,6 +4,9 @@ import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
 import Footer from "./Components/Footer/footer";
 import NavBar from "./Components/NavBar/NavBar";
 import ProductDetail from "./Components/ProductDetails/ProductDetail";
+import Privacy from "./Components/Footer/privacy";
+import Contact from "./Components/Footer/contact";
+import About from "./Components/Footer/about";
 import "./App.css";
 
 function App() {
@@ -18,7 +21,9 @@ function App() {
           path="/productdetail/:id"
           render={() => <ProductDetail />}
         />
-
+        <Route exact path="/privacy" render={() => <Privacy />} />
+        <Route exact path="/contact" render={() => <Contact />} />
+        <Route exact path="/about" render={() => <About />} />
         <Route path="/" render={() => <Footer />} />
       </div>
     </BrowserRouter>
