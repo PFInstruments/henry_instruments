@@ -4,6 +4,7 @@ const router = express.Router();
 const { HENRY_INSTRUMENT_USERNAME, HENRY_INSTRUMENT_PASS } = process.env;
 
 router.post('/welcome', async (req, res) => {
+    const { username } = req.body;
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -18,15 +19,15 @@ router.post('/welcome', async (req, res) => {
     });
 
     let mailOptions = {
-        from: `<${HENRY_INSTRUMENT_USERNAME}>`,
-        to: 'usuario32@ejemplo.com', //el parametro 'to' es el username del usuario logueado que viene por req.body
-        subject: 'hello!!',
+        from: `${HENRY_INSTRUMENT_USERNAME}`,
+        to: `${username}`,
+        subject: 'Welcome',
         html: '<H1>Welcome to Henry Instruments</h1>',
     };
 
     await transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            res.status(404).send(error.message)
+            res.status(404).send(error.message);
         } else {
             console.log('mail enviado');
             res.status(200).jsonp(req.body);
@@ -35,6 +36,7 @@ router.post('/welcome', async (req, res) => {
 });
 
 router.post('/neworder', async (req, res) => {
+    const { username } = req.body;
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -50,8 +52,8 @@ router.post('/neworder', async (req, res) => {
 
     let mailOptions = {
         from: `<${HENRY_INSTRUMENT_USERNAME}>`,
-        to: 'usuario32@ejemplo.com', //el parametro 'to' es el username del usuario logueado que viene por req.body
-        subject: 'hello!!',
+        to: `${username}`,
+        subject: 'New Order',
         html: '<H1>New order</h1>',
     };
 
@@ -66,6 +68,7 @@ router.post('/neworder', async (req, res) => {
 });
 
 router.post('/ordersuccessfull', async (req, res) => {
+    const { username } = req.body;
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -81,8 +84,8 @@ router.post('/ordersuccessfull', async (req, res) => {
 
     let mailOptions = {
         from: `<${HENRY_INSTRUMENT_USERNAME}>`,
-        to: 'usuario32@ejemplo.com', //el parametro 'to' es el username del usuario logueado que viene por req.body
-        subject: 'hello!!',
+        to: `${username}`,
+        subject: 'Order Succesfull',
         html: '<H1>Order successfull</h1>',
     };
 
