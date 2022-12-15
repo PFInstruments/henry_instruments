@@ -25,7 +25,7 @@ export default function Footer() {
             <Link to="/">Home</Link>
           </li>
           <li className="list-inline-item">
-            <Link to="/aboutus">Sobre Nosotros</Link>
+            <Link to="/about">Sobre Nosotros</Link>
           </li>
           <li className="list-inline-item">
             <Link to="/contact">Contacto</Link>
