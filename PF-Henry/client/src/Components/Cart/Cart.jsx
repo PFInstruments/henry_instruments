@@ -28,101 +28,111 @@ const Cart = ({history}) => {
         })
     }
 
-    return <section className="cart-page m4">
-        {cart.length <= 0 ? (
-            <div className="jumbotron">
-                <h1 className="display-4">Your cart is empty{" "}</h1>
-            </div>
-        ) : (
-            <>
-            <div className="jumbotron">
-                <h1 className="display-4">Cart</h1>
-            </div>
-            <div className="row">
-                <div className="col-md-8">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Remove</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {cart.map(product => (
-                        <tr key={product.id}>
-                            <th scope="row">Imagen</th>
-                            <td>
-                                {" "}
-                                <Link to={`/product/${product.id}`}>
-                                    {product.name}
-                                </Link>
-                            </td>
-                            <td>
-                                {" "}
-                                {product.price.toLocaleString("en-US",
-                                {
-                                    style: "currency",
-                                    currency: "USD"
-                                })}
-                            </td>
-                            <td>
-                                <input 
-                                type="number"
-                                min="1"
-                                max={product.stock} 
-                                value={product.count}
-                                onChange={e => handleQtyChange(e, product)} />
-                            </td>
-                            <td>
+    return (
+
+        <div 
+        className="modal fade"
+        id="Cart"
+        tabIndex="-1"
+        aria-aria-labelledby="shoppingCart"
+        aria-hidden="true" >
+            <div className="modal-dialog modal-dialog-scrollable">
+                <section className="cart-page m4">
+                    {cart.length <= 0 ? (
+                    <div className="jumbotron">
+                        <h1 className="display-4">Your cart is empty{" "}</h1>
+                    </div>
+                    ) : (
+                        <>
+                        <div className="jumbotron">
+                            <h1 className="display-4">Cart</h1>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-8">
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Remove</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {cart.map(product => (
+                                            <tr key={product.id}>
+                                                <th scope="row">Imagen</th>
+                                                <td>
+                                                    {" "}
+                                                    <Link to={`/product/${product.id}`}>
+                                                        {product.name}
+                                                    </Link>
+                                                </td>
+                                                <td>
+                                                    {" "}
+                                                    {product.price.toLocaleString("en-US",
+                                                    {
+                                                        style: "currency",
+                                                        currency: "USD"
+                                                    })}
+                                                </td>
+                                                <td>
+                                                    <input 
+                                                    type="number"
+                                                    min="1"
+                                                    max={product.stock} 
+                                                    value={product.count}
+                                                    onChange={e => handleQtyChange(e, product)} />
+                                                </td>
+                                                <td>
+                                                    <button 
+                                                    type="button" 
+                                                    className="btn-btn-danger btn-sm" 
+                                                    onClick={() => 
+                                                        dispatch(deleteFromCart(product))}
+                                                    >
+                                                        <i className="far fa-trash-alt pr-1">Delete</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="col-md-4 border-left">
+                                <h2>Cart Summary</h2>
+                                <p className="font-weight-light text-muted border-bottom">
+                                    {cart.length === 1 
+                                    ? "(1) Item" 
+                                    : `{${cart.length}} Items`}
+                                </p>
+                                <p className="font-weight-bold">
+                                        Total: ${cart.reduce((currentSum, currentCartItem) => 
+                                        currentSum + 
+                                        currentCartItem.count * 
+                                        currentCartItem.price, 
+                                        0
+                                        )
+                                        .toFixed(2) }
+                                </p>
                                 <button 
-                                type="button" 
-                                className="btn-btn-danger btn-sm" 
-                                onClick={() => 
-                                    dispatch(deleteFromCart(product))}
-                                >
-                                        <i className="far fa-trash-alt pr-1">Delete</i>
+                                className="btn btn-dark btn-large btn-block mb-5 py-2">
+                                    Pagar
                                 </button>
-                            </td>
-                            </tr>
-                            ))}
-                    </tbody>
-                </table>
-                </div>
-                <div className="col-md-4 border-left">
-                    <h2>Cart Summary</h2>
-                    <p className="font-weight-light text-muted border-bottom">
-                        {cart.length === 1 
-                        ? "(1) Item" 
-                        : `{${cart.length}} Items`}
-                    </p>
-                    <p className="font-weight-bold">
-                        Total: ${cart.reduce((currentSum, currentCartItem) => 
-                        currentSum + 
-                        currentCartItem.count * 
-                        currentCartItem.price, 
-                        0
-                        )
-                        .toFixed(2) }
-                    </p>
-                    <button 
-                    className="btn btn-dark btn-large btn-block mb-5 py-2">
-                        Pagar
-                    </button>
-                </div>
-            </div>
-            </>
-        )}
-    </section>
+                            </div>
+                            </div>
+                            </>
+                        )}
+                    </section>
+                    </div>
+                    </div>
+    )
 }
 
+
 export default Cart;
-
-
-
-//Video 2 navBar
 
 //Para la nav
 
@@ -139,25 +149,3 @@ export default Cart;
 //    </Link>
 //</li>
 
-//Para la card
-// import {useDispatch} from "react-redux"
-// import { addToCart } from "../../Redux/actions";
-// const Card = ({product}) => {
-//     const dispatch = useDispatch();
-
-//     const handleAddToCart = () => {
-//         dispatch(addToCart(product))
-//     }
-
-//     return (
-//         <button 
-// type="button" 
-// className="btn btn-success" 
-// disabled={product.Qty <= 0}
-// onClick={handleAddToCart}>
-//     Add To Cart
-// </button>
-//     )
-// }
-
-// export default Card;
