@@ -11,7 +11,7 @@ import axios from "axios";
 //axios bd local
 //axios.defaults.baseURL = 'http://localhost:3001/';
 //axios bd railway
-axios.defaults.baseURL = 'https://henryinstruments-production.up.railway.app/';
+axios.defaults.baseURL = 'https://henryinstruments-production-ef64.up.railway.app/';
 
 ReactDOM.render(
     <React.StrictMode>
