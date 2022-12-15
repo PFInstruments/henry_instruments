@@ -12,10 +12,10 @@ const sequelize = new Sequelize(URL_DATABASE, {
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
 // deploy local
-/*const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {   
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});*/
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+// logging: false, // set to console.log to see the raw SQL queries
+// native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -36,7 +36,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Categorie, Products, Users, Order, Review} = sequelize.models;
+const { Categorie, Products, Users, Order, Review } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
