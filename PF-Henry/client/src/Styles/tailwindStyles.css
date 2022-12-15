@@ -30,6 +30,10 @@
   grid-template-columns: repeat(3, minmax(0, 1fr))
 }
 
+.tw-items-center {
+  align-items: center
+}
+
 .tw-justify-center {
   justify-content: center
 }
@@ -46,6 +50,19 @@
 
 .tw-rounded-lg {
   border-radius: 0.5rem
+}
+
+.tw-rounded-full {
+  border-radius: 9999px
+}
+
+.tw-rounded-t-full {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px
+}
+
+.tw-rounded-bl-full {
+  border-bottom-left-radius: 9999px
 }
 
 .tw-border {

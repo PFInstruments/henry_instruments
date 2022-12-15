@@ -8,6 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 import axios from "axios";
+import { Auth0Provider } from "@auth0/auth0-react"
 //axios bd local
 //axios.defaults.baseURL = 'http://localhost:3001/';
 //axios bd railway
@@ -16,9 +17,11 @@ axios.defaults.baseURL = 'https://henryinstruments-production.up.railway.app/';
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
+        <Auth0Provider domain="dev-w13mh41y6tcoh6qo.us.auth0.com" clientId="FG1yh8K03AYA7cTh9mBtwqoifliLDg4B" redirectUri={window.location.origin} >
             <BrowserRouter>
                 <App />
             </BrowserRouter>
+            </Auth0Provider>
         </Provider>
     </React.StrictMode>,
     document.getElementById("root")
