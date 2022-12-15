@@ -7,3 +7,14 @@
   font-weight: 500;
 }
 
+.comments {
+  /*background-color: yellow;*/
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+

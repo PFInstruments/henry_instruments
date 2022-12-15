@@ -44,8 +44,8 @@ router.put('/:id', async (req, res) => {
         description,
         price,
         stock,
-        category, 
-        trademark, 
+        category,  
+        trademark,
         model
     }
     try {
@@ -63,6 +63,14 @@ router.delete('/:id', async (req, res) => {
         res.status(200).send(deleted);
     } catch (error) {
         res.status(404).send(error.message);
+    }
+});
+
+router.post('/bulkcreate', async (req, res) => {
+    try{
+        res.status(201).send(await controller.createMultipleProducts());
+    } catch(err){
+        res.status(404).send(err.message);
     }
 });
 

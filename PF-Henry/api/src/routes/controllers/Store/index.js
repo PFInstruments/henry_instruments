@@ -1,4 +1,4 @@
-const { User, Store } = require('../../../db');
+const { Store } = require('../../../db');
 
 module.exports = {
     listStores: async () => {

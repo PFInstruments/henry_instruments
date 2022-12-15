@@ -1,6 +1,5 @@
 const e = require('express');
 const { Users, Order } = require('../../../db');
-const { use } = require('../../User');
 
 module.exports = {
     getUsers: async ()=>{
@@ -56,5 +55,69 @@ module.exports = {
             }
         });
         return "Usuario modificado"
+    },
+    createMultipleUsers: async ()=>{
+        const users = [
+            {
+                name:"Benja",
+                email:"correoloco@benja.com",
+                phone_num:"123789",
+                adress:"este es mi adress loco",
+                password:"asdassd",
+                isAdmin: true,
+            },
+            {
+                name:"Andy",
+                email:"correoloco@andy.com",
+                phone_num:"123789",
+                adress:"este es mi adress loco",
+                password:"asdassd",
+                isAdmin: true,
+            },
+            {
+                name:"Antonio",
+                email:"correoloco@antonio.com",
+                phone_num:"123789",
+                adress:"este es mi adress loco",
+                password:"asdassd"
+            },
+            {
+                name:"Mari",
+                email:"correoloco@mari.com",
+                phone_num:"123789",
+                adress:"este es mi adress loco",
+                password:"asdassd"
+            },
+            {
+                name:"Henrique",
+                email:"correoloco@henrique.com",
+                phone_num:"123789",
+                adress:"este es mi adress loco",
+                password:"asdassd"
+            },
+            {
+                name:"Guille",
+                email:"correoloco@guille.com",
+                phone_num:"123789",
+                adress:"este es mi adress loco",
+                password:"asdassd"
+            },
+            {
+                name:"Santi",
+                email:"correoloco@santi.com",
+                phone_num:"123789",
+                adress:"este es mi adress loco",
+                password:"asdassd"
+            },
+            {
+                name:"Facu",
+                email:"correoloco@facu.com",
+                phone_num:"123789",
+                adress:"este es mi adress loco",
+                password:"asdassd"
+            },
+        ];
+        await Users.bulkCreate(users);
+        return "Usuarios creados";
     },
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Card.css';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../../Redux/actions';
@@ -10,32 +11,41 @@ const Card = (props) => {
         dispatch(addToCart(props))
     }
 
+    let num = 5
+
     return (
-        <div
-            className="card tw-m-3 tw-p-3 tw-text-center"
-        >
-            <Link to={`/productdetail/${props.id}`}>
-                <div className="card-img-top">
-                    <h6>{`${props.name} ${props.trademark} ${props.model}`}</h6>
-                    <img
-                        src={props.image}
-                        alt={props.name}
-                        width={300}
-                        height={150}
-                    />
-                </div>
-            </Link>
-            <div className="card-body">
-                <div className="card-title">
-                    <h6>{props.category}</h6>
-                    <p>${props.price}</p>
-                    <div className="tw-grid tw-grid-cols-2 tw-gap-4">
-                        <button
-                            className="tw-text-green-700 hover:tw-text-white tw-border tw-border-green-700 hover:tw-bg-green-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-800"
-                            onClick={handleAddToCart}
-                        >
-                            add to cart
-                        </button>
+        <div className="container-fluid bg-trasparent my-4 p-3" >
+            <div className="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+
+                <div className="col">
+                    <div className="card h-100 shadow-sm">
+                        <Link to={`/productdetail/${props.id}`}>
+                            <img src={props.image} className="card-img-top" alt="..." />
+                        </Link>
+                        <div className="label-top shadow-sm">{props.trademark}</div>
+                        <div className="card-body">
+                            <div className="clearfix mb-3">
+                                <span className="float-start badge rounded-pill bg-success">{`$ ${props.price}`}</span>
+                                <ul className="list-inline small float-end">
+                                    <li className="list-inline-item m-0"><i className={`bi bi-star${num === 0 ? ' text-success' : '-fill text-success'}`}></i></li>
+                                    <li className="list-inline-item m-0"><i className={`bi bi-star${num <= 1 ? ' text-success' : '-fill text-success'}`}></i></li>
+                                    <li className="list-inline-item m-0"><i className={`bi bi-star${num <= 2 ? ' text-success' : '-fill text-success'}`}></i></li>
+                                    <li className="list-inline-item m-0"><i className={`bi bi-star${num <= 3 ? ' text-success' : '-fill text-success'}`}></i></li>
+                                    <li className="list-inline-item m-0"><i className={`bi bi-star${num <= 4 ? ' text-success' : '-fill text-success'}`}></i></li>
+                                </ul>
+                            </div>
+                            <h5 className="card-title">{`${props.name} ${props.trademark} ${props.model}`}</h5>
+                            <div className="text-center my-4">
+                                <button href="#" className="btn btn-warning" onClick={handleAddToCart}>Add to cart</button>
+                            </div>
+                            <div className="clearfix mb-1">
+                                <div className="float-end">
+                                    <button type="button" className="btn btn-outline-danger btn-sm" >
+                                        <i className="bi bi-heart-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
+    "start": "node ./index.js",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
   "author": "Henry",
@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "mercadopago": "^1.5.14",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.8.0",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
     "uuid": "^9.0.0"

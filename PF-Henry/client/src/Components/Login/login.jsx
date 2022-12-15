@@ -1,35 +1,22 @@
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const Login=()=>{
-    return(
-        <div className="container mt-3">
-            <h3>Form Validation</h3>
-            <p>Try to submit the form.</p>
-            <form className="was-validated">
-                <div className="mb-3 mt-3">
-                    <label for="uname" className="form-label">Username:</label>
-                    <input type="text" className="form-control" placeholder="introduzca correo" required/>
-                    <div className="valid-feedback">Valido.</div>
-                    <div className="invalid-feedback">Correo invalido.</div>
-                </div>
-                <div className="mb-3">
-                    <label for="pwd" className="form-label">Password:</label>
-                    <input type="password" className="form-control" placeholder="introduzca contrasena"  required/>
-                    <div className="valid-feedback">Valido.</div>
-                    <div className="invalid-feedback">contrasena invalida.</div>
-                </div>
-                <div className="form-check mb-3">
-                    <input className="form-check-input" type="checkbox" required/>
-                    <label className="form-check-label" for="myCheck">I agree on blabla.</label>
-                    <div className="valid-feedback">Aceptas los terminos y condiciones.</div>
-                    <div className="invalid-feedback">Debe aceptar los terminos y condiciones.</div>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-            <br />
-            <br />
-        </div>
-    )
+function Login() {
+  const { loginWithRedirect } = useAuth0();
+  return (
+    <>
+      <button type="button"
+className="btn btn-outline-success" onClick={() => loginWithRedirect()}> <svg
+xmlns="http://www.w3.org/2000/svg"
+width="16"
+height="16"
+fill="currentColor"
+class="bi bi-person"
+viewBox="0 0 16 16"
+>
+<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"></path>
+</svg> Login </button>
+    </>
+  );
 }
-
 export default Login;
