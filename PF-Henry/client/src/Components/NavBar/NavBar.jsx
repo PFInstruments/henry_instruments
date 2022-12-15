@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState, useReducer, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Login from "../Login/Login";
+import Login from "../Login/login";
 import Logout from "../Login/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 import Profile from "../Login/Profile";
@@ -121,8 +121,6 @@ export default function NavBar() {
                     </div>
                 </div>
             </nav>
-        </div>
-      </nav>
     </div>
   );
 }
