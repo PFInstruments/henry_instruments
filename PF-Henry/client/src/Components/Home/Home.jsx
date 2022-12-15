@@ -1,3 +1,4 @@
+import React from "react";
 import Carousel from "../Carousel/Carousel";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import { getProducts, getCategories } from "../../Redux/actions";
