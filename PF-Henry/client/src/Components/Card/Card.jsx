@@ -16,11 +16,10 @@ const Card = (props) => {
     return (
         <div className="container-fluid bg-trasparent my-4 p-3" >
             <div className="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
-
                 <div className="col">
                     <div className="card h-100 shadow-sm">
                         <Link to={`/productdetail/${props.id}`}>
-                            <img src={props.image} className="card-img-top" alt="..." />
+                            <img src={props.image} width="500" className="card-img-top imageClass" alt="..." />
                         </Link>
                         <div className="label-top shadow-sm">{props.trademark}</div>
                         <div className="card-body">

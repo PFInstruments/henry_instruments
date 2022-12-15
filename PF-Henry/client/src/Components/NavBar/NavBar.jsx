@@ -1,76 +1,75 @@
 import { Link } from "react-router-dom";
 import React, { useState, useReducer, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Login from "../Login/login";
+import Login from "../Login/Login";
 import Logout from "../Login/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 import Profile from "../Login/Profile";
 
 let scrollHeight = {
-    "--bs-scroll-height": "100px",
+  "--bs-scroll-height": "100px",
 };
 export default function NavBar() {
-    const { user, isAuthenticated, isLoading } = useAuth0();
-    /// ESTADO GLOBAL ////
-    const { allcategories } = useSelector((state) => state);
-    const { cart } = useSelector((state) => state.cart);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  /// ESTADO GLOBAL ////
+  const { allcategories } = useSelector((state) => state);
+  const { cart } = useSelector((state) => state.cart);
 
-    /// LISTA DE CATEGORIAS POR ORDEN ALPHABETICO///
-    let categoryList = allcategories?.map((c) => {
-        return c.name;
-    });
-    categoryList?.sort();
-    let optionsList = [];
-    for (let i = 0; i < categoryList?.length; i++) {
-        optionsList?.push(
-            <li key={i}>
-                {categoryList[i].charAt(0).toUpperCase() +
-                    categoryList[i].slice(1)}
-            </li>
-        );
-    }
+  /// LISTA DE CATEGORIAS POR ORDEN ALPHABETICO///
+  let categoryList = allcategories?.map((c) => {
+    return c.name;
+  });
+  categoryList?.sort();
+  let optionsList = [];
+  for (let i = 0; i < categoryList?.length; i++) {
+    optionsList?.push(
+      <li key={i}>
+        {categoryList[i].charAt(0).toUpperCase() +
+          categoryList[i].slice(1)}
+      </li>
+    );
+  }
 
-    return (
-        <div>
-            <nav className="navbar navbar-expand-lg  ">
-                <div className="container">
-                    <Link to="/">
-                        <div>
-                            <h1>
-                                <img
-                                    src="https://see.fontimg.com/api/renderfont4/ZjpJ/eyJyIjoiZnMiLCJoIjo0OCwidyI6MTAwMCwiZnMiOjQ4LCJmZ2MiOiIjNkMzMkM3IiwiYmdjIjoiIzIzMTJDMSIsInQiOjF9/SGVucnkgTXVzaWM/music-magic-personal-use-regular.png"
-                                    alt="Henry Music"
-                                />
-                            </h1>
-                        </div>
-                    </Link>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarScroll"
-                        aria-controls="navbarScroll"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarScroll">
-                        <ul
-                            className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
-                            style={scrollHeight}
-                        >
-                            <li className="nav-item">
-                                <a
-                                    className="nav-link active"
-                                    aria-current="page"
-                                    href="#"
-                                >
-                                    Contacto
-                                </a>
-                            </li>
-
-                            <li className="nav-item dropdown">
+  return (
+    <div>
+      <nav className="navbar navbar-expand-lg  ">
+        <div className="container">
+          <Link to="/">
+            <div>
+              <h1>
+                <img
+                  src="https://see.fontimg.com/api/renderfont4/ZjpJ/eyJyIjoiZnMiLCJoIjo0OCwidyI6MTAwMCwiZnMiOjQ4LCJmZ2MiOiIjNkMzMkM3IiwiYmdjIjoiIzIzMTJDMSIsInQiOjF9/SGVucnkgTXVzaWM/music-magic-personal-use-regular.png"
+                  alt="Henry Music"
+                />
+              </h1>
+            </div>
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarScroll">
+            <ul
+              className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+              style={scrollHeight}
+            >
+              <li className="nav-item">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="#"
+                >
+                  Contacto
+                </a>
+              </li>
+              <li className="nav-item dropdown">
                                 <a
                                     className="nav-link dropdown-toggle"
                                     href="#"
@@ -123,5 +122,7 @@ export default function NavBar() {
                 </div>
             </nav>
         </div>
-    );
+      </nav>
+    </div>
+  );
 }
