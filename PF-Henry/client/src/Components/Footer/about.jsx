@@ -13,23 +13,23 @@ export default function About() {
           clientes posible, ofreciéndoles una solución sencilla y práctica.
         </p>
 
-        <div class="row align-items-center text-center">
-          <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
-            <div class="card shadow">
-              <div class="card-body">
-                <h5 class="card-title text-muted">MISION</h5>
-                <p class="card-text text-muted">
+        <div className="row align-items-center text-center">
+          <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
+            <div className="card shadow">
+              <div className="card-body">
+                <h5 className="card-title text-muted">MISION</h5>
+                <p className="card-text text-muted">
                   Satisfacer con excelencia a los músicos, profesionales o
                   amateurs, del pais y del mundo.
                 </p>
               </div>
             </div>
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
-            <div class="card shadow">
-              <div class="card-body">
-                <h5 class="card-title text-muted">VISION</h5>
-                <p class="card-text text-muted">
+          <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
+            <div className="card shadow">
+              <div className="card-body">
+                <h5 className="card-title text-muted">VISION</h5>
+                <p className="card-text text-muted">
                   Ser el líder en tanto en servicio como en variedad de
                   productos musicales, que genere valor económico, social y
                   ambiental sostenible, gestionando modelos de negocio
@@ -39,11 +39,11 @@ export default function About() {
               </div>
             </div>
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
-            <div class="card shadow">
-              <div class="card-body">
-                <h5 class="card-title text-muted">VALORES</h5>
-                <p class="card-text text-muted">
+          <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
+            <div className="card shadow">
+              <div className="card-body">
+                <h5 className="card-title text-muted">VALORES</h5>
+                <p className="card-text text-muted">
                   Honestidad, transparencia, respeto. Son la clave para guiar
                   nuestra conducta día con día. Y expresan quiénes somos y en
                   qué creemos.
