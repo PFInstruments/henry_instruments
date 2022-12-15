@@ -45,6 +45,7 @@ router.put('/:id', async (req, res) => {
         price,
         stock,
         category,  
+        trademark,
         model
     }
     try {

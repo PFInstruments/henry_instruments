@@ -23,4 +23,25 @@ module.exports = {
         await Trademarks.create({name});
         return "Marca comercial creada.";
     },
+    updateTrademark: async (id, name) => {
+        if(!name) throw new Error("Faltan argumentos para actualizar marca comercial.");
+        const trademark = Trademarks.findOne({
+            where: {id}
+        });
+        await Trademarks.update({
+            name
+        }, { where: { id }});
+        return "Marca comercial actualizada."
+    },
+    createMultipleTrademarks: async () => {
+        const trademarks = [
+            {name: "Taylor"},
+            {name: "Nord"},
+            {name: "Fender"},
+            {name: "Yamaha"},
+            {name: "Music Man"},
+            {name: "Gibson"},];
+        await Trademarks.bulkCreate(trademarks);
+        return "Marcas comerciales creadas.";
+    },
 };

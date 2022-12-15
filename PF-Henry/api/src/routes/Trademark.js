@@ -24,10 +24,28 @@ router.get('/:name', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     const { name } = req.body;
     try{
-        res.status(201).json({details: await createTrademark(name)});
+        res.status(201).json({details: await controllers.createTrademark(name)});
     } catch(err){
         res.status(404).json({error: err.message});
     }
+});
+
+router.put('/:id', async (req, res, next) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    try{
+        res.status(201).json({details: await controllers.updateTrademark(id,name)});
+    } catch(err){
+        res.status(404).json({error: err.message});
+    }
+});
+
+router.post('/bulkcreate', async (req, res, next) => {
+  try {
+    res.status(201).send(await controllers.createMultipleTrademarks());
+  } catch(err){
+    res.status(404).send(err.message);
+  }
 });
 
 module.exports = router;
