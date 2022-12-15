@@ -95,7 +95,7 @@ const ProductDetail = () => {
           <small className="text-muted"> Comentarios:</small>
           <span className="comments">
             {prDetail.coments?.map((e) => {
-              return <Comments score={e.score} comment={e.comment} />;
+              return <Comments key={e.id} score={e.score} comment={e.comment} />;
             })}
           </span>
         </span>
