@@ -5,6 +5,7 @@ import Login from "../Login/login";
 import Logout from "../Login/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 import Profile from "../Login/Profile";
+import Cart from "../Cart/Cart";
 
 let scrollHeight = {
   "--bs-scroll-height": "100px",
@@ -84,7 +85,12 @@ export default function NavBar() {
               </li>
             </ul>
             <div className="d-flex tw-space-x-4 ">
-              <button type="button" class="btn btn-outline-secondary">
+              <button 
+              type="button" 
+              class="btn btn-outline-secondary"
+              data-bs-toggle="modal"
+              data-bs-target="#cart"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -97,10 +103,12 @@ export default function NavBar() {
                 </svg>
                 <span
                 className="badge badge-danger" 
-                style={{position: "absolute", top: "0px"}}>{cart.length}
-                </span>
+                style={{position: "absolute", top: "0px"}}>
+                  {/*cart[0] ? cart.length : 0*/} 
+                </span> 
               </button>
-              {isAuthenticated ? (
+              <Cart  />
+              {isAuthenticated ? ( 
                 <>
                   <Profile />
                   <Logout />
