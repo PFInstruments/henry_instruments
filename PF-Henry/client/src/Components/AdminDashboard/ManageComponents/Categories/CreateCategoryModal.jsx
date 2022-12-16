@@ -1,11 +1,10 @@
 // import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 import React, { useState, useReducer /*useEffect */ } from "react";
-<<<<<<< HEAD
 //import { useDispatch /* useSelector */ } from "react-redux";
 // import { getAllCategories, postCategory } from "../../../../Redux/actions";
 
 //import checkmark from "../../../../Images/checkmark.gif";
-=======
+
 // import { useDispatch /* useSelector */ } from "react-redux";
 // import { getAllCategories, postCategory } from "../../../../Redux/actions";
 // import checkmark from "../../../../Images/checkmark.gif";
