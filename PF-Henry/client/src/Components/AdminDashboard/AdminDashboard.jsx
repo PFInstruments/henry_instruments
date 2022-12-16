@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-
-//import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
+import React from "react";
+import AdminMenuTabs from "./AdminMenuTabs";
+// import AdminNavbar from "./AdminNavBar";
 
 export default function AdminDashboard() {
-    ///RENDER///
     return (
         <div>
-            <h1>ADMIN DASHBOARD</h1>
+            <AdminMenuTabs />
         </div>
     );
 }

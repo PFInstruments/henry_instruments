@@ -81,10 +81,10 @@ export default function Filters({
         if (localCategory === "All" && localBrand === "All") {
             setLocalProducts(orderBy(localOrder, allPokemons));
         }
-        if (pokemonByType.length > 0 && localBrand === "All") {
+        if (productByCategory.length > 0 && localBrand === "All") {
             setLocalProducts(orderBy(localOrder, productByCategory));
         }
-        if (pokemonByOrigin.length > 0 && localCategory === "All") {
+        if (productByBrand.length > 0 && localCategory === "All") {
             setLocalProducts(orderBy(localOrder, productByBrand));
         }
         if (productBothFilters.length > 0) {

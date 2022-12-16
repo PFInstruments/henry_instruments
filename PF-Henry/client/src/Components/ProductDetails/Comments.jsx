@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Comments({ score, comment }) {
   return (
-    <div class="card">
-      <div class="card-body text-muted">
+    <div className="card">
+      <div className="card-body text-muted">
         Rating: {score}
         <p />
         {comment}

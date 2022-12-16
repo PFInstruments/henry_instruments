@@ -104,7 +104,7 @@ export function orderRatingDesc(array) {
     return result;
 }
 
-export function orderBy(e, array) {
+export function orderBy(e, array, localProducts) {
     let sorted = [];
     if (localProducts === undefined) {
         sorted = [];
@@ -134,5 +134,5 @@ export function orderBy(e, array) {
         sorted = orderRatingDesc(array);
     }
 
-    return array;
+    return sorted;
 }
