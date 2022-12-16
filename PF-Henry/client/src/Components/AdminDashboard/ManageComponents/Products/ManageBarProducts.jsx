@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CreateProductModal from "./CreateProductModal";
 
 export default function ManageBarProducts({
@@ -6,7 +6,7 @@ export default function ManageBarProducts({
     //  localProducts,
 }) {
     ////ESTADOS LOCALES//////
-    const [localOrder, setLocalOrder] = useState();
+    // const [localOrder, setLocalOrder] = useState();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-dark">

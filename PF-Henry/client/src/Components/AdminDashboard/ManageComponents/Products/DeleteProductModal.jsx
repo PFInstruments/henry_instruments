@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 //import { deleteProduct, getAllProducts } from "../../../../Redux/actions";
-import { useDispatch /*useSelector*/ } from "react-redux";
+// import { useDispatch /*useSelector*/ } from "react-redux";
 
 export default function DeleteProductModal({ product }) {
     ///DISPATCH///
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     ///ESTADO LOCAL////
-    const [success, setSuccess] = useState();
+    // const [success, setSuccess] = useState();
 
     /////Event Handler/////
 

@@ -52,6 +52,7 @@ export default function CreateProductModal({ localCategories }) {
     };
 
     const createProductReducer = (state, action) => {
+        // eslint-disable-next-line default-case
         switch (action.type) {
             case "SET_NAME": {
                 return {
@@ -149,20 +150,20 @@ export default function CreateProductModal({ localCategories }) {
 
     //EVENT HANDLERS///
 
-    const handleCheck = (e) => {
-        if (e.target.value === "on") {
-            setProductForm({
-                type: "SET_ACTIVE",
-                payload: true,
-            });
-        }
-        if (e.target.value === "off") {
-            setProductForm({
-                type: "SET_ACTIVE",
-                payload: false,
-            });
-        }
-    };
+    // const handleCheck = (e) => {
+    //     if (e.target.value === "on") {
+    //         setProductForm({
+    //             type: "SET_ACTIVE",
+    //             payload: true,
+    //         });
+    //     }
+    //     if (e.target.value === "off") {
+    //         setProductForm({
+    //             type: "SET_ACTIVE",
+    //             payload: false,
+    //         });
+    //     }
+    // };
 
     const handleImage = (e) => {
         const file = e.target.files[0];
@@ -320,6 +321,7 @@ export default function CreateProductModal({ localCategories }) {
                                 </div>
                                 <div>
                                     {productForm.image[0] && (
+                                        // eslint-disable-next-line jsx-a11y/alt-text
                                         <img
                                             src={productForm.image}
                                             className="listImg img-thumbnail"
@@ -404,6 +406,7 @@ export default function CreateProductModal({ localCategories }) {
                                         <input
                                             className="form-check-input"
                                             type="checkbox"
+                                            // eslint-disable-next-line jsx-a11y/aria-role
                                             role="ceheckbox"
                                             id="flexSwitchCheckChecked"
                                             onChange={(e) => {
