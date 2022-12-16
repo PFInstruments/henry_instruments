@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { deleteCategory, getAllCategories } from "../../../../Redux/actions";
-import { useDispatch /*useSelector*/ } from "react-redux";
+//import { deleteCategory, getAllCategories } from "../../../../Redux/actions";
+//import { useDispatch /*useSelector*/ } from "react-redux";
 
 export default function DeleteCategoryModal({ category }) {
     ///DISPATCH///
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     ///ESTADO LOCAL////
     const [success, setSuccess] = useState(false);

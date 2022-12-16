@@ -1,23 +1,28 @@
 // import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 import React, { useState, useReducer /*useEffect */ } from "react";
-// import { useDispatch /* useSelector */ } from "react-redux";
+<<<<<<< HEAD
+//import { useDispatch /* useSelector */ } from "react-redux";
 // import { getAllCategories, postCategory } from "../../../../Redux/actions";
 
+//import checkmark from "../../../../Images/checkmark.gif";
+=======
+// import { useDispatch /* useSelector */ } from "react-redux";
+// import { getAllCategories, postCategory } from "../../../../Redux/actions";
 // import checkmark from "../../../../Images/checkmark.gif";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
 
 export default function CreateCategoryModal() {
     ///DISPATCH///
-    // const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     ///ESTADOS GLOBALES///
 
     ///ESTADOS LOCALES///
-    // const [disabledSubmit, setDisabledSubmit] = useState(true);
-    // const [checkActive, setCheckActive] = useState([]);
+    //const [disabledSubmit, setDisabledSubmit] = useState(true);
+    //const [checkActive, setCheckActive] = useState([]);
     const [postSuccess, setPostSuccess] = useState(false);
 
     /// VARIABLE GIF///
-    // const checkMarkGif = checkmark;
+    //const checkMarkGif = checkmark;
     const checkMarkGifInfinito = checkmarkInfinito;
     /////LOCAL REDUCER//////////
     const initialState = {
