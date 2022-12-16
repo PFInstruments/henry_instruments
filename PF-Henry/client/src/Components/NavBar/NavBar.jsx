@@ -1,19 +1,21 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
-import React, { useState, useReducer, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import Login from "../Login/login";
 import Logout from "../Login/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 import Profile from "../Login/Profile";
+import { useSelector } from "react-redux";
 
 let scrollHeight = {
   "--bs-scroll-height": "100px",
 };
 export default function NavBar() {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   /// ESTADO GLOBAL ////
   const { allcategories } = useSelector((state) => state);
-  const { cart } = useSelector((state) => state.cart);
+  // const { cart } = useSelector((state) => state.cart);
 
   /// LISTA DE CATEGORIAS POR ORDEN ALPHABETICO///
   let categoryList = allcategories?.map((c) => {
@@ -61,11 +63,7 @@ export default function NavBar() {
               style={scrollHeight}
             >
               <li className="nav-item">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="#"
-                >
+                <a className="nav-link active" aria-current="page" href="#">
                   Contacto
                 </a>
               </li>
