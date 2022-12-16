@@ -1,9 +1,9 @@
-import React, { useState, useReducer } from "react";
-import { useDispatch /* useSelector*/ } from "react-redux";
+import React, { useReducer } from "react";
+// import { useDispatch /* useSelector*/ } from "react-redux";
 
 export default function AdminManageStore() {
     ///DISPATCH///
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     ///ESTADOS GLOBALES///
     //   const { store } = useSelector((state) => state);
@@ -33,6 +33,7 @@ export default function AdminManageStore() {
         country: "Middle-Earth",
     };
     const contactFormReducer = (state, action) => {
+        // eslint-disable-next-line default-case
         switch (action.type) {
             case "SET_EMAIL": {
                 return {
