@@ -1,12 +1,12 @@
 // import { getAllCategories, getAllProducts } from "../../../../Redux/actions";
 import React, { useState /*, Fragment,  useEffect*/ } from "react";
-import { useDispatch /*useSelector*/ } from "react-redux";
+// import { useDispatch /*useSelector*/ } from "react-redux";
 import ManageBarProducts from "./ManageBarProducts";
 import ProductTable from "./ProductTable";
 
 export default function AdminManageProducts() {
     ///DISPATCH///
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     ///ESTADOS GLOBALES///
 
@@ -29,7 +29,7 @@ export default function AdminManageProducts() {
             active: true,
         },
     ]);
-    const [localCategories, setLocalCategories] = useState([]);
+    const [localCategories] = useState([]);
 
     /*
 
