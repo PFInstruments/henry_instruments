@@ -1,19 +1,19 @@
-import React, { /*Fragment, useEffect  */ useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { /*Fragment, useEffect   useState */} from "react";
+//import { useDispatch, useSelector } from "react-redux";
 import DeleteCategoryModal from "./DeleteCategoryModal";
 
 import EditCategoryModal from "./EditCategoryModal";
 
 export default function CategoryTable({ localCategories }) {
     //DISPATCH //
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     //estalo Local//
-    const [refresh, setRefresh] = useState(true);
-    const [testState, setTestState] = useState([]);
+    //const [refresh, setRefresh] = useState(true);
+    //const [testState, setTestState] = useState([]);
 
     ////ESTADO GLOBAL/////
-    const { allCategories } = useSelector((state) => state);
+    //const { allCategories } = useSelector((state) => state);
 
     /*
     ///HOOKS///

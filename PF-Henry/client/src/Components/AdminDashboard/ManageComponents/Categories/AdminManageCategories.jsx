@@ -1,12 +1,12 @@
 // import { getAllCategories } from "../../../../Redux/actions";
 import React, { /*Fragment,, useEffect  */ useState } from "react";
-import { useDispatch /* useSelector*/ } from "react-redux";
+//import { useDispatch /* useSelector*/ } from "react-redux";
 import ManageBarCategories from "./ManageBarCategories";
 import CategoryTable from "./CategoryTable";
 
 export default function SellerManageCategories() {
     ///DISPATCH///
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     ///ESTADOS GLOBALES///
 
