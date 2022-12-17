@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ManageBarUsers({}) {
+export default function ManageBarUsers(/*{}*/) {
     ////ESTADOS LOCALES//////
     // const [localOrder, setLocalOrder] = useState();
 
