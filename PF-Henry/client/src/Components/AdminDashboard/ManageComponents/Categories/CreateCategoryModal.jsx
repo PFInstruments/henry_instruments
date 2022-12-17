@@ -4,7 +4,6 @@ import React, { useState, useReducer /*useEffect */ } from "react";
 // import { getAllCategories, postCategory } from "../../../../Redux/actions";
 
 //import checkmark from "../../../../Images/checkmark.gif";
-
 // import { useDispatch /* useSelector */ } from "react-redux";
 // import { getAllCategories, postCategory } from "../../../../Redux/actions";
 // import checkmark from "../../../../Images/checkmark.gif";
