@@ -14,7 +14,7 @@ export const GET_ORDERS = 'GET_ORDERS';
 
 export const addToCart = product => async dispatch => {
     const cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart"))
-    : []
+        : []
 
     const duplicates = cart.filter(cartItem => cartItem.id === product.id)
 
@@ -34,9 +34,9 @@ export const addToCart = product => async dispatch => {
 };
 
 export const deleteFromCart = product => async dispatch => {
-    const cart = localStorage.getItem("cart") 
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+    const cart = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : [];
 
     const updatedCart = cart.filter(cartItem => cartItem.id !== product.id)
 
@@ -66,13 +66,13 @@ export const getProductDetail = (productoId) => {
     return async function (dispatch) {
         try {
             const detail = await axios.get(`/products/${productoId}`);
-            const rating = await axios.get(`/review/rating/${productoId}`);
+            // const rating = await axios.get(`/review/rating/${productoId}`);
             const coments = await axios.get(`/review/${productoId}`)
             return dispatch({
                 type: GET_PRODUCT_DETAIL,
                 payload: {
                     ...detail.data,
-                    rating: rating.data[0].rating,
+                    // rating: rating.data[0].rating,
                     coments: coments.data
                 },
             });
