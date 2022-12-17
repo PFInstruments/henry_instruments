@@ -45,7 +45,7 @@ export default function DeleteProductModal({ product }) {
                     <div className="modal-body">
                         <img
                             className="img-fluid"
-                            src={product.img}
+                            src={product.image}
                             alt="productimage"
                         />
                         <br />
