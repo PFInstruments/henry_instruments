@@ -11,7 +11,12 @@ import Comments from "./Comments";
 import "./productDetail.css";
 
 const ProductDetail = () => {
+
   const { id } = useParams();
+
+  const prDetail = useSelector((state) => state.productDetail);
+  console.log(prDetail);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,8 +24,6 @@ const ProductDetail = () => {
     return () => dispatch(clearPageProductDetail());
   }, [dispatch, id]);
 
-  const prDetail = useSelector((state) => state.productDetail);
-  console.log(prDetail);
 
   const handleAddToCart = () => {
     dispatch(addToCart(id));
@@ -44,7 +47,7 @@ const ProductDetail = () => {
 
               <span className="card-text py-3">
                 <small className="text-muted"> Marca:</small>
-                <span className="text-secondary"> {prDetail.trademark}</span>
+                <span className="text-secondary"> {prDetail.Trademark?.name}</span>
               </span>
 
               <span className="card-text py-3">
@@ -68,9 +71,9 @@ const ProductDetail = () => {
               <span className="card-text py-3">
                 <small className="text-muted"> Rating: </small>
                 <span className="text-secondary">
-                  {prDetail.rating
+                  {/* {prDetail.rating
                     ? prDetail.rating + "/5"
-                    : "aun no hay rating"}
+                    : "aun no hay rating"} */}
                 </span>
               </span>
               <br />
