@@ -146,12 +146,12 @@ export const getAllUsers=()=>{
     }
 }
 
-export const deleteUser=()=>{
+export const deleteUser=(id)=>{
     return async function(){
         try {
-            return axios.delete('')
+            return axios.delete(`/users/${id}`);
         } catch (error) {
-            
+            console.log(error.message)
         }
     }
 }
