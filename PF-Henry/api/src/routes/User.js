@@ -41,6 +41,15 @@ router.put('/:id', async(req, res, next) => {
     }
 });
 
+router.delete('/:id', async(req,res)=>{
+    try{
+        const { id } = req.params;
+        //const request = await ;
+    } catch(err){
+        res.status(404).send(err.message);
+    }
+});
+
 router.post('/bulkcreate', async(req, res, next) => {
     try{
         res.status(201).send(await controllers.createMultipleUsers());

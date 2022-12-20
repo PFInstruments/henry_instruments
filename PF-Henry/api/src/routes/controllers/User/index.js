@@ -56,6 +56,11 @@ module.exports = {
         });
         return "Usuario modificado"
     },
+
+    deleteUser: async()=>{
+        const deleteUser = await Users;
+    },
+
     createMultipleUsers: async ()=>{
         const users = [
             {
