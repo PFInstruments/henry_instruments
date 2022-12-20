@@ -8,6 +8,8 @@ export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const CLEAR_PAGE_PRODUCT_DETAIL = "CLEAR_PAGE_PRODUCT_DETAIL";
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_ORDERS = 'GET_ORDERS';
+export const GET_USERS = 'GET_USERS';
+export const PUT_USER = 'PUT_USER';
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 
 
@@ -129,3 +131,37 @@ export const getAllOrders = () => {
         }
     }
 }*/
+
+export const getAllUsers=()=>{
+    return async function(dispatch){
+        try {
+            const users=await axios.get('/users/');
+            return dispatch({
+                type: GET_USERS,
+                payload: users.data.results
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
+
+export const deleteUser=(id)=>{
+    return async function(){
+        try {
+            return axios.delete(`/users/${id}`);
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+}
+
+/* 
+export function deleteActivity(idCountry, id) {
+    return axios.delete(`http://localhost:3001/activities/${idCountry}/${id}`)
+        .then((response) => {
+            if (response.data) { alert("Activity delete succelifully") }
+            else { alert("an error occurred while deleting") }
+        })
+}
+*/
