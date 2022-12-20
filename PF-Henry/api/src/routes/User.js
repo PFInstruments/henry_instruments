@@ -44,7 +44,13 @@ router.put('/:id', async(req, res, next) => {
 router.delete('/:id', async(req,res)=>{
     try{
         const { id } = req.params;
-        //const request = await ;
+        const allUsers = await controllers.getUsers();
+        if(id){
+            const deleteUser = allUsers.filter(user => user.id === id);
+            deleteUser.length?
+            res.status(200).send(deleteUser):
+            res.status(404).send('Error al eliminar el usuario');
+        }else throw Error("No se proporsiono Id de usuario")
     } catch(err){
         res.status(404).send(err.message);
     }
