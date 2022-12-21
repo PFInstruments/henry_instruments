@@ -10,6 +10,7 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_ORDERS = 'GET_ORDERS';
 export const GET_USERS = 'GET_USERS';
 export const PUT_USER = 'PUT_USER';
+export const POST_REVIEW = 'POST_REVIEW';
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 
 
@@ -68,14 +69,14 @@ export const getProductDetail = (productoId) => {
     return async function (dispatch) {
         try {
             const detail = await axios.get(`/products/${productoId}`);
-            // const rating = await axios.get(`/review/rating/${productoId}`);
-            const coments = await axios.get(`/review/${productoId}`)
+            const rating = await axios.get(`/review/rating/${productoId}`);
+            // const coments = await axios.get(`/review/${productoId}`)
             return dispatch({
                 type: GET_PRODUCT_DETAIL,
                 payload: {
                     ...detail.data,
-                    // rating: rating.data[0].rating,
-                    coments: coments.data
+                    rating: rating.data[0].rating,
+                    // coments: coments.data
                 },
             });
         } catch (error) {
@@ -132,10 +133,10 @@ export const getAllOrders = () => {
     }
 }*/
 
-export const getAllUsers=()=>{
-    return async function(dispatch){
+export const getAllUsers = () => {
+    return async function (dispatch) {
         try {
-            const users=await axios.get('/users/');
+            const users = await axios.get('/users/');
             return dispatch({
                 type: GET_USERS,
                 payload: users.data.results
@@ -146,8 +147,8 @@ export const getAllUsers=()=>{
     }
 }
 
-export const deleteUser=(id)=>{
-    return async function(){
+export const deleteUser = (id) => {
+    return async function () {
         try {
             return axios.delete(`/users/${id}`);
         } catch (error) {
@@ -155,6 +156,14 @@ export const deleteUser=(id)=>{
         }
     }
 }
+
+export const postReview = (review) => {
+    return async (dispatch) => {
+        return await axios.post('/review', review)
+            .then(res => { dispatch({ type: POST_REVIEW, payload: res.data }) })
+            .catch(error => error);
+    };
+};
 
 /* 
 export function deleteActivity(idCountry, id) {

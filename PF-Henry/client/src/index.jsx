@@ -10,24 +10,24 @@ import store from "./Redux/store";
 import axios from "axios";
 import { Auth0Provider } from "@auth0/auth0-react";
 //axios bd local
-//axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = 'http://localhost:5899';
 //axios bd railway
-axios.defaults.baseURL =
-  "https://henryinstruments-production-ef64.up.railway.app";
+// axios.defaults.baseURL =
+//   "https://henryinstruments-production-ef64.up.railway.app";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Auth0Provider
-        domain="dev-w13mh41y6tcoh6qo.us.auth0.com"
-        clientId="FG1yh8K03AYA7cTh9mBtwqoifliLDg4B"
-        redirectUri={window.location.origin}
-      >
+    <Auth0Provider
+      domain="dev-w13mh41y6tcoh6qo.us.auth0.com"
+      clientId="FG1yh8K03AYA7cTh9mBtwqoifliLDg4B"
+      redirectUri={window.location.origin}
+    >
+      <Provider store={store}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </Auth0Provider>
-    </Provider>
+      </Provider>
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
