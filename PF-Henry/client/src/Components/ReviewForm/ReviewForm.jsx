@@ -1,5 +1,5 @@
 import './ReviewForm.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
@@ -11,16 +11,27 @@ const ReviewForm = (props) => {
 
     const { id } = useParams();
 
-    const { user } = useAuth0();
+    const { user, isLoading } = useAuth0();
 
     const [review, setReview] = useState({
         productId: id,
-        image: user.picture,
-        name: user.name,
+        image: '',
+        name: '',
         score: 0,
         comment: ''
     });
-    console.log(review)
+
+    useEffect(() => {
+        if (!isLoading) {
+            setReview({
+                ...review,
+                image: user.picture,
+                name: user.name
+            })
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading]);
+
 
     const handleInputChange = (ev) => {
         setReview({
