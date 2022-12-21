@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { ADD_TO_CART, DELETE_FROM_CART } from "./constants";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
@@ -17,12 +18,6 @@ export const addToCart = (product) => async (dispatch) => {
     : [];
 
   const duplicates = cart.filter((cartItem) => cartItem.id === product.id);
-  
-export const addToCart = product => async dispatch => {
-  const cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart"))
-    : []
-
-  const duplicates = cart.filter(cartItem => cartItem.id === product.id)
 
   if (duplicates.length === 0) {
     const productToAdd = {
@@ -52,7 +47,7 @@ export const deleteFromCart = product => async dispatch => {
     type: DELETE_FROM_CART,
     payload: updatedCart,
   })
-}
+};
 
 export const getProducts = () => {
   return async function (dispatch) {
@@ -66,14 +61,14 @@ export const getProducts = () => {
       console.log(error.message);
     }
   }
-}
+};
 
 export const getProductDetail = (productoId) => {
   return async function (dispatch) {
     try {
       const detail = await axios.get(`/products/${productoId}`);
       const rating = await axios.get(`/review/rating/${productoId}`);
-       const coments = await axios.get(`/review/${productoId}`);
+      // const coments = await axios.get(`/review/${productoId}`);
       return dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: {
@@ -87,15 +82,12 @@ export const getProductDetail = (productoId) => {
     }
   };
 }
-};
 
 export const clearPageProductDetail = () => {
   return {
     type: CLEAR_PAGE_PRODUCT_DETAIL,
   }
 }
-  };
-};
 
 export const getCategories = () => {
   return async function (dispatch) {
@@ -110,8 +102,6 @@ export const getCategories = () => {
     }
   }
 }
-  };
-};
 
 export const getAllOrders = () => {
   return async function (dispatch) {
@@ -126,13 +116,6 @@ export const getAllOrders = () => {
     }
   }
 }
-        payload: orders.data,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
 
 /*export const getOrderByUser = (userId) =>{
     return async function(dispatch) {
@@ -176,10 +159,8 @@ export const postReview = (review) => {
   return async (dispatch) => {
     return await axios.post('/review', review)
       .then(res => { dispatch({ type: POST_REVIEW, payload: res.data }) })
-      .catch(error => error);
-      console.log(error.message);
-    }
-  };
+      .catch(error => console.log(error));
+  }
 };
 
 /* 

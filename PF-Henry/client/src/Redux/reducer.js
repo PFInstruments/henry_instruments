@@ -8,7 +8,7 @@ import {
   GET_USERS, POST_REVIEW,
   MP_CHECKOUT,
 } from "./actions";
-import { ADD_TO_CART,  DELETE_FROM_CART } from "./constants";
+import { ADD_TO_CART, DELETE_FROM_CART } from "./constants";
 
 const intialState = {
   allBuyers: [], // Administrativos
@@ -50,7 +50,7 @@ export const rootReducer = (state = intialState, action) => {
       };
 
     case GET_CATEGORIES:
-      return  {
+      return {
         ...state,
         allCategories: action.payload,
       };
@@ -58,23 +58,17 @@ export const rootReducer = (state = intialState, action) => {
       return {
         cart: [...action.payload],
       };
-      return {
-        cart: [...action.payload]
-      };
     case DELETE_FROM_CART:
       return {
         cart: [...action.payload]
       }
-      return {
-        cart: [...action.payload],
-      };
     case GET_ORDERS:
-      return  {
+      return {
         ...state,
         allOrders: action.payload,
       };
     case GET_USERS:
-      return  {
+      return {
         ...state,
         allUsers: action.payload,
       };
@@ -84,7 +78,7 @@ export const rootReducer = (state = intialState, action) => {
       };
 
     case MP_CHECKOUT:
-      return  {
+      return {
         ...state,
         cart: [],
       };
