@@ -8,6 +8,7 @@ export const GET_ORDERS = "GET_ORDERS";
 export const GET_USERS = "GET_USERS";
 export const PUT_USER = "PUT_USER";
 export const MP_CHECKOUT = "MP_CHECKOUT";
+export const POST_REVIEW = "POST_REVIEW";
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 
 export const addToCart = (product) => async (dispatch) => {
@@ -65,14 +66,14 @@ export const getProductDetail = (productoId) => {
   return async function (dispatch) {
     try {
       const detail = await axios.get(`/products/${productoId}`);
-      // const rating = await axios.get(`/review/rating/${productoId}`);
-      const coments = await axios.get(`/review/${productoId}`);
+      const rating = await axios.get(`/review/rating/${productoId}`);
+      // const coments = await axios.get(`/review/${productoId}`);
       return dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: {
           ...detail.data,
-          // rating: rating.data[0].rating,
-          coments: coments.data,
+          rating: rating.data[0].rating,
+          // coments: coments.data,
         },
       });
     } catch (error) {
