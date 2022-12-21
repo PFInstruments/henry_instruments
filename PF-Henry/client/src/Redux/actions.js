@@ -1,20 +1,23 @@
 import axios from "axios";
-import {
-  ADD_TO_CART,
-  DELETE_FROM_CART
-} from "./constants";
-export const GET_PRODUCTS = 'GET_PRODUCTS';
+import { ADD_TO_CART, DELETE_FROM_CART } from "./constants";
+export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const CLEAR_PAGE_PRODUCT_DETAIL = "CLEAR_PAGE_PRODUCT_DETAIL";
-export const GET_CATEGORIES = 'GET_CATEGORIES';
-export const GET_ORDERS = 'GET_ORDERS';
-export const GET_USERS = 'GET_USERS';
-export const PUT_USER = 'PUT_USER';
-export const POST_REVIEW = 'POST_REVIEW';
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_ORDERS = "GET_ORDERS";
+export const GET_USERS = "GET_USERS";
+export const PUT_USER = "PUT_USER";
+export const MP_CHECKOUT = "MP_CHECKOUT";
+export const POST_REVIEW = "POST_REVIEW";
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 
+export const addToCart = (product) => async (dispatch) => {
+  const cart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
 
-
+  const duplicates = cart.filter((cartItem) => cartItem.id === product.id);
+  
 export const addToCart = product => async dispatch => {
   const cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart"))
     : []
@@ -70,7 +73,7 @@ export const getProductDetail = (productoId) => {
     try {
       const detail = await axios.get(`/products/${productoId}`);
       const rating = await axios.get(`/review/rating/${productoId}`);
-      // const coments = await axios.get(`/review/${productoId}`)
+       const coments = await axios.get(`/review/${productoId}`);
       return dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: {
@@ -84,12 +87,15 @@ export const getProductDetail = (productoId) => {
     }
   };
 }
+};
 
 export const clearPageProductDetail = () => {
   return {
     type: CLEAR_PAGE_PRODUCT_DETAIL,
   }
 }
+  };
+};
 
 export const getCategories = () => {
   return async function (dispatch) {
@@ -97,13 +103,15 @@ export const getCategories = () => {
       const categories = await axios.get(`/category`);
       return dispatch({
         type: GET_CATEGORIES,
-        payload: categories.data
+        payload: categories.data,
       });
     } catch (error) {
       console.log(error.message);
     }
   }
 }
+  };
+};
 
 export const getAllOrders = () => {
   return async function (dispatch) {
@@ -118,6 +126,13 @@ export const getAllOrders = () => {
     }
   }
 }
+        payload: orders.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
 /*export const getOrderByUser = (userId) =>{
     return async function(dispatch) {
@@ -162,6 +177,8 @@ export const postReview = (review) => {
     return await axios.post('/review', review)
       .then(res => { dispatch({ type: POST_REVIEW, payload: res.data }) })
       .catch(error => error);
+      console.log(error.message);
+    }
   };
 };
 
@@ -174,3 +191,17 @@ export function deleteActivity(idCountry, id) {
         })
 }
 */
+
+export const mpCheckout = () => {
+  return async function (dispatch) {
+    try {
+      const payment = await axios.get("/checkout");
+      return dispatch({
+        type: MP_CHECKOUT,
+        payload: payment.data.response.body.init_point,
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
