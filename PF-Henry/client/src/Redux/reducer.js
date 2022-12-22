@@ -1,9 +1,18 @@
-import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES, GET_ORDERS, PUT_USER, GET_USERS, POST_REVIEW } from "./actions";
+import {
+  GET_PRODUCT_DETAIL,
+  CLEAR_PAGE_PRODUCT_DETAIL,
+  GET_PRODUCTS,
+  GET_CATEGORIES,
+  GET_ORDERS,
+  PUT_USER,
+  GET_USERS, POST_REVIEW,
+  MP_CHECKOUT,
+} from "./actions";
 import { ADD_TO_CART, DELETE_FROM_CART } from "./constants";
 
 const intialState = {
-  allBuyers: [],   // Administrativos
-  buyerDetail: {},  // Administrativos
+  allBuyers: [], // Administrativos
+  buyerDetail: {}, // Administrativos
   allProducts: [],
   productDetail: {},
   allCategories: [],
@@ -43,11 +52,11 @@ export const rootReducer = (state = intialState, action) => {
     case GET_CATEGORIES:
       return {
         ...state,
-        allCategories: action.payload
+        allCategories: action.payload,
       };
     case ADD_TO_CART:
       return {
-        cart: [...action.payload]
+        cart: [...action.payload],
       };
     case DELETE_FROM_CART:
       return {
@@ -56,17 +65,23 @@ export const rootReducer = (state = intialState, action) => {
     case GET_ORDERS:
       return {
         ...state,
-        allOrders: action.payload
-      }
+        allOrders: action.payload,
+      };
     case GET_USERS:
       return {
         ...state,
-        allUsers: action.payload
-      }
+        allUsers: action.payload,
+      };
     case PUT_USER:
       return {
-        ...state
-      }
+        ...state,
+      };
+
+    case MP_CHECKOUT:
+      return {
+        ...state,
+        cart: [],
+      };
     case POST_REVIEW:
       return {
         ...state,
