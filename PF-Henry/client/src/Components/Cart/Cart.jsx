@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { ADD_TO_CART } from "../../Redux/actions";
+import { ADD_TO_CART } from "../../Redux/constants";
 import { deleteFromCart } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 
@@ -29,14 +29,17 @@ const Cart = ({history}) => {
     }
 
     return (
-
-        <div 
-        className="modal fade"
-        id="Cart"
-        tabIndex="-1"
-        aria-aria-labelledby="shoppingCart"
-        aria-hidden="true" >
-            <div className="modal-dialog modal-dialog-scrollable">
+        <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartModalLabel">Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div className="modal-dialog modal-dialog-scrollable">
                 <section className="cart-page m4">
                     {cart.length <= 0 ? (
                     <div className="jumbotron">
@@ -63,7 +66,7 @@ const Cart = ({history}) => {
                                     <tbody>
                                         {cart.map(product => (
                                             <tr key={product.id}>
-                                                <th scope="row">Imagen</th>
+                                                
                                                 <td>
                                                     {" "}
                                                     <Link to={`/product/${product.id}`}>
@@ -117,17 +120,20 @@ const Cart = ({history}) => {
                                         )
                                         .toFixed(2) }
                                 </p>
-                                <button 
-                                className="btn btn-dark btn-large btn-block mb-5 py-2">
-                                    Pagar
-                                </button>
                             </div>
                             </div>
                             </>
                         )}
                     </section>
                     </div>
-                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
     )
 }
 
@@ -148,4 +154,6 @@ export default Cart;
 //            style={{position: "absolute", top: "0px"}}>{cart.length}</span>
 //    </Link>
 //</li>
+
+//Anterior
 
