@@ -30,18 +30,18 @@ export default function CardGrid({ localProducts }) {
                 image={el.image}
                 category={el.category}
                 price={el.price}
-                trademark={el.trademark}
+                trademark={el.Trademark}
                 model={el.model}
               />
             );
           })}
       </div>
       <div className="tw-flex tw-justify-center">
-       <Paginado
-        productsPerPage={productsPerPage}
-        paginado={paginado}
-        localProducts={localProducts.length}
-      />
+        <Paginado
+          productsPerPage={productsPerPage}
+          paginado={paginado}
+          localProducts={localProducts.length}
+        />
       </div>
     </div>
   );
