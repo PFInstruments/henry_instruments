@@ -87,7 +87,7 @@ export default function Contact() {
           <div className="col-md-3">
             <div className="dbox w-100 text-center">
               <div className="icon d-flex align-items-center justify-content-center">
-                <span className="bi bi-shop"></span>
+                <span className="bi bi-shop" ></span>
               </div>
               <div className="text">
                 <p><span>Address:</span> Argentina, Buenos Aires 10016</p>
