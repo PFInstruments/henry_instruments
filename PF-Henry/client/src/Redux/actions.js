@@ -3,6 +3,7 @@ import axios from "axios";
 import { ADD_TO_CART, DELETE_FROM_CART } from "./constants";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
+export const GET_REVIEWS = "GET_REVIEWS";
 export const CLEAR_PAGE_PRODUCT_DETAIL = "CLEAR_PAGE_PRODUCT_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_ORDERS = "GET_ORDERS";
@@ -62,6 +63,26 @@ export const getProducts = () => {
     }
   }
 };
+
+export const getReviews = (productoId) => {
+  return async function (dispatch) {
+    try {
+      const detail = await axios.get(`/products/${productoId}`);
+      // const rating = await axios.get(`/review/rating/${productoId}`);
+      // const coments = await axios.get(`/review/${productoId}`);
+      return dispatch({
+        type: GET_REVIEWS,
+        payload: [
+          ...detail.data.reviews,
+          // rating: rating.data[0].rating,
+          // coments: coments.data
+        ],
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
 
 export const getProductDetail = (productoId) => {
   return async function (dispatch) {

@@ -1,5 +1,6 @@
 import {
   GET_PRODUCT_DETAIL,
+  GET_REVIEWS,
   CLEAR_PAGE_PRODUCT_DETAIL,
   GET_PRODUCTS,
   GET_CATEGORIES,
@@ -15,6 +16,7 @@ const intialState = {
   buyerDetail: {}, // Administrativos
   allProducts: [],
   productDetail: {},
+  reviews: [],
   allCategories: [],
   allOrders: [],
   orderDetail: {},
@@ -43,10 +45,19 @@ export const rootReducer = (state = intialState, action) => {
         productDetail: action.payload,
       };
 
+    case GET_REVIEWS:
+      console.log(state.reviews)
+      return {
+        ...state,
+        reviews: action.payload.reverse(),
+
+      };
+
     case CLEAR_PAGE_PRODUCT_DETAIL:
       return {
         ...state,
         productDetail: {},
+        reviews: []
       };
 
     case GET_CATEGORIES:
