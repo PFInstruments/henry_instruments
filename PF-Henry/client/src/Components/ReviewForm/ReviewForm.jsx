@@ -1,17 +1,20 @@
 import './ReviewForm.css';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
-import { postReview } from '../../Redux/actions';
+import { getReviews, postReview } from '../../Redux/actions';
+import ReviewGrid from '../ReviewGrid/ReviewGrid';
 
-const ReviewForm = (props) => {
+const ReviewForm = () => {
 
     const dispatch = useDispatch();
 
+    const reviews = useSelector((state) => state.reviews)
+
     const { id } = useParams();
 
-    const { user, isLoading } = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
 
     const [review, setReview] = useState({
         productId: id,
@@ -22,15 +25,17 @@ const ReviewForm = (props) => {
     });
 
     useEffect(() => {
-        if (!isLoading) {
+        if (isAuthenticated) {
             setReview({
                 ...review,
                 image: user.picture,
                 name: user.name
             })
-        };
+        } else {
+            setReview(review)
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading]);
+    }, [isAuthenticated]);
 
 
     const handleInputChange = (ev) => {
@@ -49,7 +54,10 @@ const ReviewForm = (props) => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        dispatch(postReview(review))
+        dispatch(postReview(review));
+        dispatch(getReviews(id));
+        dispatch(getReviews(id));
+        dispatch(getReviews(id));
     };
 
     return (
@@ -71,31 +79,31 @@ const ReviewForm = (props) => {
                                                             name="score"
                                                             value="5"
                                                             onChange={(ev) => { rating(ev) }}
-                                                        /><label htmlFor="star5" title="Meh">5 stars</label>
+                                                        /><label htmlFor="star5" title="perfect">5 stars</label>
                                                         <input type="radio"
                                                             id="star4"
                                                             name="score"
                                                             value="4"
                                                             onChange={(ev) => { rating(ev) }}
-                                                        /><label htmlFor="star4" title="Kinda bad">4 stars</label>
+                                                        /><label htmlFor="star4" title="good">4 stars</label>
                                                         <input type="radio"
                                                             id="star3"
                                                             name="score"
                                                             value="3"
                                                             onChange={(ev) => { rating(ev) }}
-                                                        /><label htmlFor="star3" title="Kinda bad">3 stars</label>
+                                                        /><label htmlFor="star3" title="nice">3 stars</label>
                                                         <input type="radio"
                                                             id="star2"
                                                             name="score"
                                                             value="2"
                                                             onChange={(ev) => { rating(ev) }}
-                                                        /><label htmlFor="star2" title="Sucks big tim">2 stars</label>
+                                                        /><label htmlFor="star2" title="meh">2 stars</label>
                                                         <input type="radio"
                                                             id="star1"
                                                             name="score"
                                                             value="1"
                                                             onChange={(ev) => { rating(ev) }}
-                                                        /><label htmlFor="star1" title="Sucks big time">1 star</label>
+                                                        /><label htmlFor="star1" title="bad">1 star</label>
                                                     </div>
                                                 </div>
                                                 <div className="form-outline">
@@ -107,10 +115,32 @@ const ReviewForm = (props) => {
                                                         rows="4"></textarea>
                                                     <label className="form-label" htmlFor="textAreaExample">What is your view?</label>
                                                 </div>
-                                                <div className="d-flex justify-content-between mt-3">
-                                                    <button type="submit" className="btn btn-success" >
+                                                <div className="d-flex justify-content-between mt-3" >
+                                                    <button type="submit"
+                                                        className="btn btn-success"
+                                                        data-toggle={!isAuthenticated ? "modal" : ""}
+                                                        data-target={!isAuthenticated ? "#Authenticate" : ""} >
                                                         Send <i className="fas fa-long-arrow-alt-right ms-1"></i>
                                                     </button>
+                                                    <div className="modal fade" id="Authenticate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div className="modal-dialog" role="document">
+                                                            <div className="modal-content">
+                                                                <div className="modal-header">
+                                                                    <h5 className="modal-title" id="exampleModalLabel">You are not logged in</h5>
+                                                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div className="modal-body">
+                                                                    ...
+                                                                </div>
+                                                                <div className="modal-footer">
+                                                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" className="btn btn-primary">Save changes</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,6 +151,14 @@ const ReviewForm = (props) => {
                     </div>
                 </section>
             </form>
+            <div>
+                <br />
+                <ReviewGrid reviews={reviews} />
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
         </div>
     )
 }
