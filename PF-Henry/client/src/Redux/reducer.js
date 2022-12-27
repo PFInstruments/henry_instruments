@@ -8,6 +8,7 @@ import {
   PUT_USER,
   GET_USERS, POST_REVIEW,
   MP_CHECKOUT,
+  ADD_FAV
 } from "./actions";
 import { ADD_TO_CART, DELETE_FROM_CART } from "./constants";
 
@@ -22,7 +23,8 @@ const intialState = {
   orderDetail: {},
   allUsers: [],
   cart: [],
-  postReview: {}
+  postReview: {},
+  ProductFav: []
 };
 
 if (localStorage.getItem("cart")) {
@@ -97,6 +99,11 @@ export const rootReducer = (state = intialState, action) => {
       return {
         ...state,
         postReview: action.payload
+      }
+    case ADD_FAV:
+      return {
+        ...state,
+        ProductFav : [...state.ProductFav, action.payload]
       }
 
     default:

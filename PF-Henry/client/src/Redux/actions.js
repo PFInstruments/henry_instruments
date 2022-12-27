@@ -12,6 +12,7 @@ export const PUT_USER = "PUT_USER";
 export const MP_CHECKOUT = "MP_CHECKOUT";
 export const POST_REVIEW = "POST_REVIEW";
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
+export const ADD_FAV = "ADD_FAV"
 
 export const addToCart = (product) => async (dispatch) => {
   const cart = localStorage.getItem("cart")
@@ -207,3 +208,10 @@ export const mpCheckout = () => {
     }
   };
 };
+
+export const addFavProduct = (product) => {
+  return {
+    type: ADD_FAV,
+    payload: product
+  }
+}

@@ -1,17 +1,24 @@
 import React from "react";
 import "./Card.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../Redux/actions";
+import { addToCart, addFavProduct } from "../../Redux/actions";
 
 const Card = (props) => {
   const dispatch = useDispatch();
+  const fav = useSelector((state) => state.ProductFav) 
 
   const handleAddToCart = () => {
     dispatch(addToCart(props));
   };
 
+  const handleAddProductFav = () => {
+    dispatch(addFavProduct(props));
+  };
+
   let num = 5;
+
+  console.log(props)
 
   return (
     <div className="container-fluid bg-trasparent my-4 p-3">
@@ -76,6 +83,8 @@ const Card = (props) => {
                   <button
                     type="button"
                     className="btn btn-outline-danger btn-sm"
+                    onClick={handleAddProductFav}
+                    disabled={fav.find(({id}) => id === props.id)}
                   >
                     <i className="bi bi-heart-fill"></i>
                   </button>
