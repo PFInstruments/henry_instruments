@@ -11,10 +11,15 @@ const ReviewForm = () => {
     const dispatch = useDispatch();
 
     const reviews = useSelector((state) => state.reviews)
+    console.log(reviews)
 
     const { id } = useParams();
 
-    const { user, isAuthenticated } = useAuth0();
+    const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+    console.log(isAuthenticated)
+
+    const userComment = user ? reviews.map((el) => el.name === user.name) : ""
+    console.log("userComment ---> ", userComment)
 
     const [review, setReview] = useState({
         productId: id,
@@ -23,6 +28,7 @@ const ReviewForm = () => {
         score: 0,
         comment: ''
     });
+    console.log(review)
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -62,7 +68,7 @@ const ReviewForm = () => {
 
     return (
         <div>
-            <form name='form' onSubmit={(ev) => { handleSubmit(ev) }} >
+            <form name='form' novalidate onSubmit={(ev) => { handleSubmit(ev) }} >
                 <section >
                     <div className="container my-5 py-5 text-dark">
                         <div className="row d-flex justify-content-center">
@@ -107,40 +113,24 @@ const ReviewForm = () => {
                                                     </div>
                                                 </div>
                                                 <div className="form-outline">
-                                                    <textarea className="form-control"
+                                                    <textarea
+                                                        className="form-control"
                                                         name="comment"
                                                         value={review.comment}
                                                         onChange={(ev) => { handleInputChange(ev) }}
                                                         id="textAreaExample"
-                                                        rows="4"></textarea>
+                                                        rows="4"
+                                                    ></textarea>
                                                     <label className="form-label" htmlFor="textAreaExample">What is your view?</label>
                                                 </div>
                                                 <div className="d-flex justify-content-between mt-3" >
-                                                    <button type="submit"
-                                                        className="btn btn-success"
-                                                        data-toggle={!isAuthenticated ? "modal" : ""}
-                                                        data-target={!isAuthenticated ? "#Authenticate" : ""} >
+                                                    <button type={userComment.includes(true) ? "button" : "submit"}
+                                                        className={review.comment === "" || review.score === 0 ?
+                                                            "btn btn-success disabled" : "btn btn-success"}
+                                                        data-bs-toggle={!isAuthenticated || userComment.includes(true) ? "modal" : ""}
+                                                        data-bs-target={!isAuthenticated ? "#Authenticate" : userComment ? "#Commented" : ""}>
                                                         Send <i className="fas fa-long-arrow-alt-right ms-1"></i>
                                                     </button>
-                                                    <div className="modal fade" id="Authenticate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div className="modal-dialog" role="document">
-                                                            <div className="modal-content">
-                                                                <div className="modal-header">
-                                                                    <h5 className="modal-title" id="exampleModalLabel">You are not logged in</h5>
-                                                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div className="modal-body">
-                                                                    ...
-                                                                </div>
-                                                                <div className="modal-footer">
-                                                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,8 +141,28 @@ const ReviewForm = () => {
                     </div>
                 </section>
             </form>
+            <div className="modal fade" id="Authenticate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">You need to log in to comment</h5>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-light" data-dismiss="modal" onClick={() => loginWithRedirect({ returnTo: window.location.origin })}>Log in</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="modal fade" id="Commented" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">You can only comment once per product</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div>
-                <br />
                 <ReviewGrid reviews={reviews} />
                 <br />
                 <br />
