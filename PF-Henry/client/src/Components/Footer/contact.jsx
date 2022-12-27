@@ -1,22 +1,33 @@
 import React from "react";
 import Carousel from "../Carousel/Carousel";
 import emailjs from "@emailjs/browser";
+import { useState } from "react";
 
 
 export default function Contact() {
+  const [form , setForm] = useState({});
+
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+    [e.target]: e.target.value,
+    });
+  };
+  
   function sendMail(e) {
     e.preventDefault();
     emailjs.sendForm('service_x6w3gw3', 'template_ypwesae', e.target, 'bqIvzfBDGrlv2Ww24' )
     .then(response => console.log(response))
     .catch(error => console.log(error))
-    e.target.reset()
     alert("Your message was sent, thank you");
+    e.target.reset();
   }
 
   return (
     <>
   <Carousel />
-        <section className="ftco-section">
+<section className="ftco-section">
 <div className="container">
   <div className="row justify-content-center">
     <div className="col-md-6 text-center mb-5">
@@ -39,19 +50,19 @@ export default function Contact() {
                   <div className="col-md-6">
                     <div className="form-group">
                       <label className="label" htmlFor="name">Full Name</label>
-                      <input type="text" className="form-control" name="user_name" id="name" placeholder="Name"/>
+                      <input type="text" className="form-control" name="user_name" id="name" placeholder="Name" value={form.user_nombre} onChange={handleChange}/>
                     </div>
                   </div>
                   <div className="col-md-6"> 
                     <div className="form-group">
                       <label className="label" htmlFor="email">Email Address</label>
-                      <input type="email" className="form-control" name="user_email" id="email" placeholder="Email"/>
+                      <input type="email" className="form-control" name="user_email" id="email" placeholder="Email" value={form.user_email} onChange={handleChange}/>
                     </div>
                   </div>
                   <div className="col-md-12">
                     <div className="form-group">
                       <label className="label" htmlFor="#">Message</label>
-                      <textarea name="user_message" className="form-control" id="message" cols="30" rows="4" placeholder="Message"></textarea>
+                      <textarea name="user_message" className="form-control" id="message" cols="30" rows="4" placeholder="Message" value={form.user_message} onChange={handleChange}></textarea>
                     </div>
                   </div>
                   <div className="col-md-12">
