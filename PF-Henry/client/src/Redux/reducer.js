@@ -7,10 +7,12 @@ import {
   PUT_USER,
   GET_USERS, POST_REVIEW,
   MP_CHECKOUT,
+  ADD_TO_CART, 
+  DELETE_FROM_CART,
 } from "./actions";
-import { ADD_TO_CART, DELETE_FROM_CART } from "./constants";
 
-const intialState = {
+
+const initialState = {
   allBuyers: [], // Administrativos
   buyerDetail: {}, // Administrativos
   allProducts: [],
@@ -24,12 +26,12 @@ const intialState = {
 };
 
 if (localStorage.getItem("cart")) {
-  intialState.cart = JSON.parse(localStorage.getItem("cart"));
+  initialState.cart = JSON.parse(localStorage.getItem("cart"));
 } else {
-  intialState.cart = [];
+  initialState.cart = [];
 }
 
-export const rootReducer = (state = intialState, action) => {
+export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
@@ -56,11 +58,13 @@ export const rootReducer = (state = intialState, action) => {
       };
     case ADD_TO_CART:
       return {
-        cart: [...action.payload],
+        ...state,
+        cart: action.payload,
       };
     case DELETE_FROM_CART:
       return {
-        cart: [...action.payload]
+        ...state,
+        cart: action.payload,
       }
     case GET_ORDERS:
       return {
