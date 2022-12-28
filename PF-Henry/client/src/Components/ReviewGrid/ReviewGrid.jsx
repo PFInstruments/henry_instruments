@@ -5,7 +5,7 @@ const ReviewGrid = ({ reviews }) => {
     return (
         <div className="row d-flex justify-content-center">
             <div className="col-md-8 col-lg-6">
-                <div className="card shadow-0 border" >
+                <div className="shadow-0 border" >
                     <div className="card-body p-4">
                         {reviews?.map((e) => {
                             return <ReviewCard
