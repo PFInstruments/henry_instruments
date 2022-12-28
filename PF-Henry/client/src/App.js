@@ -6,9 +6,10 @@ import NavBar from "./Components/NavBar/NavBar";
 import ProductDetail from "./Components/ProductDetails/ProductDetail";
 import Privacy from "./Components/Footer/privacy";
 import Contact from "./Components/Footer/contact";
-import About from "./Components/Footer/about";
+import About from "./Components/Footer/about"; 
 import "./App.css";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
+
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <div>
         <Route path="/" render={() => <NavBar />} />
         <Route exact path="/" render={() => <Home />} />
-        <Route exact path="/admin" render={() => <AdminDashboard />} />
+        <Route exact path="/admin" render={() => <AdminDashboard />} /> 
         <Route
           exact
           path="/productdetail/:id"

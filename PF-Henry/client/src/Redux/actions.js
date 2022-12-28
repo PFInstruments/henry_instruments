@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { ADD_TO_CART, DELETE_FROM_CART } from "./constants";
+
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const GET_REVIEWS = "GET_REVIEWS";
@@ -11,15 +11,17 @@ export const GET_USERS = "GET_USERS";
 export const PUT_USER = "PUT_USER";
 export const MP_CHECKOUT = "MP_CHECKOUT";
 export const POST_REVIEW = "POST_REVIEW";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const DELETE_FROM_CART = "DELETE_FROM_CART"
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 export const ADD_FAV = "ADD_FAV"
 
-export const addToCart = (product) => async (dispatch) => {
+export const addToCart = product => async dispatch => {
   const cart = localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [];
 
-  const duplicates = cart.filter((cartItem) => cartItem.id === product.id);
+  const duplicates = cart.filter(cartItem => cartItem.id === product.id);
 
   if (duplicates.length === 0) {
     const productToAdd = {

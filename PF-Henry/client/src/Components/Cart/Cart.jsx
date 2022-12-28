@@ -1,21 +1,22 @@
 import React from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { ADD_TO_CART } from "../../Redux/actions";
-import { deleteFromCart } from "../../Redux/actions";
+import { deleteFromCart, ADD_TO_CART } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 
 const Cart = ({history}) => {
     const {cart} = useSelector(state => state.cart);
+    
+    
     const dispatch = useDispatch();
 
 
-    const handleQtyChange = (e, product) => {
+    const handleQtyChange = (e, props) => {
         const cart = localStorage.getItem("cart") 
         ? JSON.parse(localStorage.getItem("cart"))
         : [];
 
         cart.forEach(cartItem => {
-            if(cartItem.id === product.id) {
+            if(cartItem.id === props.id) {
                 cartItem.count = e.target.value
             }
         });
@@ -29,18 +30,13 @@ const Cart = ({history}) => {
     }
 
     return (
-
-        <div 
-        className="modal fade"
-        id="Cart"
-        tabIndex="-1"
-        aria-aria-labelledby="shoppingCart"
-        aria-hidden="true" >
-            <div className="modal-dialog modal-dialog-scrollable">
+        
                 <section className="cart-page m4">
                     {cart.length <= 0 ? (
                     <div className="jumbotron">
-                        <h1 className="display-4">Your cart is empty{" "}</h1>
+                        <h1 className="display-4">
+                            Your cart is empty{" "}
+                        </h1>
                     </div>
                     ) : (
                         <>
@@ -61,18 +57,18 @@ const Cart = ({history}) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {cart.map(product => (
-                                            <tr key={product.id}>
-                                                <th scope="row">Imagen</th>
+                                        {cart.map(props => (
+                                            <tr key={props.id}>
+                                                
                                                 <td>
                                                     {" "}
-                                                    <Link to={`/product/${product.id}`}>
-                                                        {product.name}
+                                                    <Link to={`/product/${props.id}`}>
+                                                        {props.name}
                                                     </Link>
                                                 </td>
                                                 <td>
                                                     {" "}
-                                                    {product.price.toLocaleString("en-US",
+                                                    {props.price.toLocaleString("en-US",
                                                     {
                                                         style: "currency",
                                                         currency: "USD"
@@ -82,16 +78,16 @@ const Cart = ({history}) => {
                                                     <input 
                                                     type="number"
                                                     min="1"
-                                                    max={product.stock} 
-                                                    value={product.count}
-                                                    onChange={e => handleQtyChange(e, product)} />
+                                                    max={props.stock} 
+                                                    value={props.count}
+                                                    onChange={e => handleQtyChange(e, props)} />
                                                 </td>
                                                 <td>
                                                     <button 
                                                     type="button" 
                                                     className="btn-btn-danger btn-sm" 
                                                     onClick={() => 
-                                                        dispatch(deleteFromCart(product))}
+                                                        dispatch(deleteFromCart(props))}
                                                     >
                                                         <i className="far fa-trash-alt pr-1">Delete</i>
                                                     </button>
@@ -117,19 +113,20 @@ const Cart = ({history}) => {
                                         )
                                         .toFixed(2) }
                                 </p>
-                                <button 
-                                className="btn btn-dark btn-large btn-block mb-5 py-2">
-                                    Pagar
-                                </button>
+                                <button
+								className='btn btn-dark btn-large btn-block mb-5 py-2'
+								
+							>
+								Proceed to Checkout
+							</button>
                             </div>
                             </div>
                             </>
                         )}
                     </section>
-                    </div>
-                    </div>
-    )
-}
+                    
+    );
+};
 
 
 export default Cart;
@@ -148,4 +145,6 @@ export default Cart;
 //            style={{position: "absolute", top: "0px"}}>{cart.length}</span>
 //    </Link>
 //</li>
+
+//Anterior
 
