@@ -1,5 +1,6 @@
 import {
   GET_PRODUCT_DETAIL,
+  GET_REVIEWS,
   CLEAR_PAGE_PRODUCT_DETAIL,
   GET_PRODUCTS,
   GET_CATEGORIES,
@@ -9,6 +10,7 @@ import {
   MP_CHECKOUT,
   ADD_TO_CART, 
   DELETE_FROM_CART,
+  ADD_FAV
 } from "./actions";
 
 
@@ -17,12 +19,14 @@ const initialState = {
   buyerDetail: {}, // Administrativos
   allProducts: [],
   productDetail: {},
+  reviews: [],
   allCategories: [],
   allOrders: [],
   orderDetail: {},
   allUsers: [],
   cart: [],
-  postReview: {}
+  postReview: {},
+  ProductFav: []
 };
 
 if (localStorage.getItem("cart")) {
@@ -45,10 +49,19 @@ export const rootReducer = (state = initialState, action) => {
         productDetail: action.payload,
       };
 
+    case GET_REVIEWS:
+      console.log(state.reviews)
+      return {
+        ...state,
+        reviews: action.payload.reverse(),
+
+      };
+
     case CLEAR_PAGE_PRODUCT_DETAIL:
       return {
         ...state,
         productDetail: {},
+        reviews: []
       };
 
     case GET_CATEGORIES:
@@ -90,6 +103,11 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         postReview: action.payload
+      }
+    case ADD_FAV:
+      return {
+        ...state,
+        ProductFav : [...state.ProductFav, action.payload]
       }
 
     default:

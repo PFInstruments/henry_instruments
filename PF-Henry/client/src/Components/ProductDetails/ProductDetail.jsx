@@ -7,8 +7,8 @@ import {
   clearPageProductDetail,
   getProductDetail,
   addToCart,
+  getReviews,
 } from "../../Redux/actions";
-import ReviewCard from "../ReviewCard/ReviewCard";
 import ReviewForm from "../ReviewForm/ReviewForm";
 import "./productDetail.css";
 
@@ -23,6 +23,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(getProductDetail(id));
+    dispatch(getReviews(id));
     return () => dispatch(clearPageProductDetail());
   }, [dispatch, id]);
 
@@ -85,7 +86,6 @@ const ProductDetail = () => {
                   <span className="text-secondary"> {prDetail.description}</span>
                 </span>
                 <br />
-
                 <button
                   className="tw-text-green-700 hover:tw-text-white tw-border tw-border-green-700 hover:tw-bg-green-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-800"
                   onClick={handleAddToCart}
@@ -100,24 +100,7 @@ const ProductDetail = () => {
       <br />
       <hr />
       <br />
-      <ReviewForm productId={prDetail.id} />
-      <div className="row d-flex justify-content-center">
-        <div className="col-md-8 col-lg-6">
-          <div className="card shadow-0 border" >
-            <div className="card-body p-4">
-              {prDetail.reviews?.map((e) => {
-                return <ReviewCard
-                  key={e.id}
-                  image={e.image}
-                  name={e.name}
-                  score={e.score}
-                  comment={e.comment}
-                />;
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
+      <ReviewForm />
     </div>
   );
 };

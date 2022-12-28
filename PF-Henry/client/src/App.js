@@ -8,11 +8,13 @@ import Privacy from "./Components/Footer/privacy";
 import Contact from "./Components/Footer/contact";
 import About from "./Components/Footer/about"; 
 import "./App.css";
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div>
         <Route path="/" render={() => <NavBar />} />
         <Route exact path="/" render={() => <Home />} />
