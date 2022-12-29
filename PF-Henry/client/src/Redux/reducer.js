@@ -8,7 +8,7 @@ import {
   PUT_USER,
   GET_USERS, POST_REVIEW,
   MP_CHECKOUT,
-  ADD_TO_CART, 
+  ADD_TO_CART,
   DELETE_FROM_CART,
   ADD_FAV
 } from "./actions";
@@ -50,7 +50,6 @@ export const rootReducer = (state = initialState, action) => {
       };
 
     case GET_REVIEWS:
-      console.log(state.reviews)
       return {
         ...state,
         reviews: action.payload.reverse(),
@@ -107,7 +106,7 @@ export const rootReducer = (state = initialState, action) => {
     case ADD_FAV:
       return {
         ...state,
-        ProductFav : [...state.ProductFav, action.payload]
+        ProductFav: [...state.ProductFav, action.payload]
       }
 
     default:
