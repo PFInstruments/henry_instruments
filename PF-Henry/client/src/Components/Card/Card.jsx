@@ -16,8 +16,6 @@ const Card = (props) => {
     dispatch(addFavProduct(props));
   };
 
-  console.log(props.rating)
-
   return (
     <div className="container-fluid bg-trasparent my-4 p-3">
       <div className="col">

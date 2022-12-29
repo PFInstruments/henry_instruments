@@ -10,16 +10,13 @@ const ReviewForm = () => {
 
     const dispatch = useDispatch();
 
-    const reviews = useSelector((state) => state.reviews)
-    console.log(reviews)
+    const reviews = useSelector((state) => state.reviews);
 
     const { id } = useParams();
 
     const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-    console.log(isAuthenticated)
 
-    const userComment = user ? reviews.map((el) => el.name === user.name) : ""
-    console.log("userComment ---> ", userComment)
+    const userComment = user ? reviews.map((el) => el.name === user.name) : "";
 
     const [review, setReview] = useState({
         productId: id,
@@ -28,7 +25,6 @@ const ReviewForm = () => {
         score: 0,
         comment: ''
     });
-    console.log(review)
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -68,7 +64,7 @@ const ReviewForm = () => {
 
     return (
         <div>
-            <form name='form' novalidate onSubmit={(ev) => { handleSubmit(ev) }} >
+            <form name='form' noValidate onSubmit={(ev) => { handleSubmit(ev) }} >
                 <section >
                     <div className="container my-5 py-5 text-dark">
                         <div className="row d-flex justify-content-center">
@@ -141,7 +137,7 @@ const ReviewForm = () => {
                     </div>
                 </section>
             </form>
-            <div className="modal fade" id="Authenticate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="Authenticate" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -153,7 +149,7 @@ const ReviewForm = () => {
                     </div>
                 </div>
             </div>
-            <div className="modal fade" id="Commented" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="Commented" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
