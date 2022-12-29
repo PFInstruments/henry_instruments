@@ -4,7 +4,7 @@ import { deleteFromCart, ADD_TO_CART } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 
 const Cart = ({history}) => {
-    const {cart} = useSelector(state => state.cart);
+    const cart = useSelector(state => state.cart);
     
     
     const dispatch = useDispatch();

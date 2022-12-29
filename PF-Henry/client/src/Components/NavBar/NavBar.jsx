@@ -8,7 +8,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Profile from "../Login/Profile";
 import { useSelector } from "react-redux";
 
-
 let scrollHeight = {
   "--bs-scroll-height": "100px",
 };
@@ -16,7 +15,7 @@ export default function NavBar() {
   const { isAuthenticated } = useAuth0();
   /// ESTADO GLOBAL ////
   const { allcategories } = useSelector((state) => state);
-  //const { cart } = useSelector(state => state.cart);
+  const cart = useSelector((state) => state.cart);
 
   /// LISTA DE CATEGORIAS POR ORDEN ALPHABETICO///
   let categoryList = allcategories?.map((c) => {
@@ -27,8 +26,7 @@ export default function NavBar() {
   for (let i = 0; i < categoryList?.length; i++) {
     optionsList?.push(
       <li key={i}>
-        {categoryList[i].charAt(0).toUpperCase() +
-          categoryList[i].slice(1)}
+        {categoryList[i].charAt(0).toUpperCase() + categoryList[i].slice(1)}
       </li>
     );
   }
@@ -87,22 +85,27 @@ export default function NavBar() {
               </li>
             </ul>
             <div className="d-flex tw-space-x-4 ">
-              <button
-                type="button"
-                className="btn btn-outline-secondary"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-cart"
-                  viewBox="0 0 16 16"
+              <Link to="/cart">
+                <button
+                  type="button"
+                  className=" tw-relative tw-flex
+                tw-items-center tw-justify-center tw-w-10 tw-h-10 tw-rounded-full tw-border tw-border-gray-300 tw-text-gray-500 hover:tw-text-gray-700 hover:tw-border-gray-400 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-indigo-500"
                 >
-                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-                </svg>
-              </button>
-              
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-cart tw-fill-current"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                  </svg>
+                  <span class="tw-absolute tw-right-0 tw-top-0 tw-rounded-full tw-bg-red-600 tw-w-4 tw-h-4 tw-top tw-right tw-p-0 tw-m-0 tw-text-white tw-font-mono tw-text-sm  tw-leading-tight tw-text-center">
+                    {cart.length}
+                  </span>
+                </button>
+              </Link>
               {isAuthenticated ? (
                 <>
                   <Profile />

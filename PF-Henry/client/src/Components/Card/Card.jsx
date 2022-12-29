@@ -38,7 +38,7 @@ const Card = (props) => {
             <h5 className="card-title">{`${props.name} ${props.trademark?.name} ${props.model}`}</h5>
             <div className="text-center  tw-grid tw-grid-cols-2">
               <button
-                href="#"
+                type="button"
                 className="btn btn-warning"
                 onClick={handleAddToCart}
               >
