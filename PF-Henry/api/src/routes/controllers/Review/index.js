@@ -27,7 +27,7 @@ const getScore_Product = async (productId) => {
             where: {
                 id: productId
             },
-            //attributes: ['id']
+            attributes: ['id']
         },
         group: ['productId', 'product.id'],
         attributes: [[Sequelize.fn('AVG', Sequelize.col('score')), "rating"]],

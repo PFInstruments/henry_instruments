@@ -10,7 +10,7 @@ import store from "./Redux/store";
 import axios from "axios";
 import { Auth0Provider } from "@auth0/auth0-react";
 //axios bd local
-// axios.defaults.baseURL = 'http://localhost:5899';
+// axios.defaults.baseURL = 'http://localhost:5486';
 //axios bd railway
 axios.defaults.baseURL =
   "https://henryinstruments-production-ef64.up.railway.app";

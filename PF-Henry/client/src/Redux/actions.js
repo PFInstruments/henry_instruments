@@ -91,13 +91,13 @@ export const getProductDetail = (productoId) => {
   return async function (dispatch) {
     try {
       const detail = await axios.get(`/products/${productoId}`);
-      // const rating = await axios.get(`/review/rating/${productoId}`);
+      const rating = await axios.get(`/review/rating/${productoId}`);
       // const coments = await axios.get(`/review/${productoId}`);
       return dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: {
           ...detail.data,
-          // rating: rating.data[0].rating,
+          rating: rating.data[0] ? Math.round(rating.data[0].rating) : '0',
           // coments: coments.data
         },
       });
