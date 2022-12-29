@@ -6,7 +6,7 @@ import { addToCart, addFavProduct } from "../../Redux/actions";
 
 const Card = (props) => {
   const dispatch = useDispatch();
-  const fav = useSelector((state) => state.ProductFav) 
+  const fav = useSelector((state) => state.ProductFav)
 
   const handleAddToCart = () => {
     dispatch(addToCart(props));
@@ -16,14 +16,14 @@ const Card = (props) => {
     dispatch(addFavProduct(props));
   };
 
-  let num = 5;
+  let num = props.rating;
 
-  console.log(props)
+  console.log(props.rating)
 
   return (
     <div className="container-fluid bg-trasparent my-4 p-3">
       <div className="col">
-        <div className="card h-100 shadow-sm">
+        <div className="card h-100 shadow p-3 mb-5 bg-body rounded">
           <Link to={`/productdetail/${props.id}`}>
             <img
               src={props.image}
@@ -84,7 +84,7 @@ const Card = (props) => {
                     type="button"
                     className="btn btn-outline-danger btn-sm"
                     onClick={handleAddProductFav}
-                    disabled={fav.find(({id}) => id === props.id)}
+                    disabled={fav.find(({ id }) => id === props.id)}
                   >
                     <i className="bi bi-heart-fill"></i>
                   </button>

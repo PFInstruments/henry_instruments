@@ -10,7 +10,9 @@ module.exports = {
                 {
                     model: Order
                 },
-                { model: Trademarks }
+                {
+                    model: Trademarks
+                },
             ]
         });
         return products;

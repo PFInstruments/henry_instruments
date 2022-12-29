@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { name, image, description, price, stock, category, trademark, model} = req.body;
+    const { name, image, description, price, stock, category, trademark, model } = req.body;
     if (!name || !image || !description || !price || !stock || !category || !trademark || !model) {
         return res.status(404).send('faltan datos por completar');
     }
@@ -44,7 +44,7 @@ router.put('/:id', async (req, res) => {
         description,
         price,
         stock,
-        category,  
+        category,
         trademark,
         model
     }
@@ -67,9 +67,9 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.post('/bulkcreate', async (req, res) => {
-    try{
+    try {
         res.status(201).send(await controller.createMultipleProducts());
-    } catch(err){
+    } catch (err) {
         res.status(404).send(err.message);
     }
 });
