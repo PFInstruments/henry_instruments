@@ -1,14 +1,13 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import {
-    /*  orderID,
+    orderID,
     orderAlphaAZ,
     orderAlphaZA,
     orderPriceAsc,
     orderPriceDesc,
     orderRatingAsc,
     orderRatingDesc,
-    */
     orderBy,
 } from "../Utils/Filters-Order/orderBy";
 
@@ -32,13 +31,15 @@ export default function Filters({
         } else setDisabledState(false);
     }, [content]);
 
+    console.log(allCategories);
     /////Creo una lista de tipos en orden ascendente y Creo el componente option list/////
-    let categoryList = allCategories.map((t) => {
+
+    let categoryList = allCategories.categories?.map((t) => {
         return t.name;
     });
-    categoryList.sort();
+    categoryList?.sort();
     let optionsList = [];
-    for (let i = 0; i < categoryList.length; i++) {
+    for (let i = 0; i < categoryList?.length; i++) {
         optionsList.push(
             <option value={categoryList[i]} key={i}>
                 {categoryList[i].charAt(0).toUpperCase() +
@@ -46,6 +47,46 @@ export default function Filters({
             </option>
         );
     }
+
+    ///////Creo Array  de marcas por nombre unico ///////////
+    function getUniqueBrands(array) {
+        // Create an empty array to store the unique brand names
+        const uniqueBrands = [];
+
+        // Iterate over the array of product objects
+        for (let i = 0; i < array.length; i++) {
+            // Get the current product object
+            const product = array[i];
+
+            // Check if the brand name exists in the array of unique brand names
+            if (!uniqueBrands.includes(product.brand)) {
+                // If it does not exist, add it to the array
+                uniqueBrands.push(product.brand);
+            }
+        }
+
+        // Return the array of unique brand names
+        return uniqueBrands;
+    }
+    //// Creo lista de brands unicas //////
+    const uniqueBrands = getUniqueBrands(allProducts);
+    console.log(uniqueBrands);
+
+    let brandList = uniqueBrands?.map((t) => {
+        return t;
+    });
+    brandList?.sort();
+    let uniqueBrandList = [];
+    for (let i = 0; i < brandList?.length; i++) {
+        uniqueBrandList.push(
+            <option value={brandList[i]} key={i}>
+                {brandList[i].charAt(0).toUpperCase() + brandList[i].slice(1)}
+            </option>
+        );
+    }
+
+    ///////////////////////////////
+
     ///////FUNCIONES SETTERS ONCHANGE EL ESTADO LOCAL///////
     function setterCategory(e) {
         setLocalCategory(e.target.value);
@@ -79,7 +120,7 @@ export default function Filters({
         let productBothFilters = filterBrand(localBrand, productByCategory);
 
         if (localCategory === "All" && localBrand === "All") {
-            setLocalProducts(orderBy(localOrder, allPokemons));
+            setLocalProducts(orderBy(localOrder, allProducts));
         }
         if (productByCategory.length > 0 && localBrand === "All") {
             setLocalProducts(orderBy(localOrder, productByCategory));
@@ -106,7 +147,7 @@ export default function Filters({
             (productByBrand.length === 0 && localBrand !== "All")
         ) {
             console.log("No filter match");
-            setLocalPokemons(["Product Not Found"]);
+            setLocalProducts(["Product Not Found"]);
         }
     }
 
@@ -135,12 +176,7 @@ export default function Filters({
                     <option key="keyAllBrands" value="All">
                         All
                     </option>
-                    <option key="keyOriginal" value="Gibson">
-                        Gibson
-                    </option>
-                    <option key="keyUser" value="Fender">
-                        Fender
-                    </option>
+                    {uniqueBrandList}
                 </select>
                 <button
                     className="btn btn-success"

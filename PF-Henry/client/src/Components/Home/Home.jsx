@@ -5,6 +5,7 @@ import { getProducts, getCategories } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CardGrid from "../CardGrid/CardGrid";
+import { orderBy } from "../Utils/Filters-Order/orderBy";
 
 //import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
 //let styleCard = { width: "18rem" };
@@ -30,12 +31,12 @@ export default function Home() {
         setLocalProducts(allProducts);
     }, [allProducts]);
 
-    /*
     useEffect(() => {
-        let arr = orderBy(localOrder, [...localPokemons]);
-        setLocalPokemons(arr);
+        let arr = orderBy(localOrder, [...localProducts]);
+        setLocalProducts(arr);
     }, [localOrder]);
-    */
+
+    console.log(allCategories);
 
     return (
         <div>
@@ -43,7 +44,7 @@ export default function Home() {
             <div className="container  tw-rounded-lg">
                 <SearchBar
                     localProducts={localProducts}
-                    setLocalproducts={setLocalProducts}
+                    setLocalProducts={setLocalProducts}
                     localOrder={localOrder}
                     setLocalOrder={setLocalOrder}
                     allProducts={allProducts}
