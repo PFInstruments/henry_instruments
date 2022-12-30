@@ -40,7 +40,6 @@ export default function Home() {
     return (
         <div>
             <Carousel />
-
             <div className="container  tw-rounded-lg">
                 <SearchBar
                     localProducts={localProducts}
