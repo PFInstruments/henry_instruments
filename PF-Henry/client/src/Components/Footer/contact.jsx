@@ -1,5 +1,4 @@
 import Carousel from "../Carousel/Carousel";
-
 import { useForm } from "../../hooks/useForm";
 
 
@@ -20,12 +19,13 @@ const validationsForm = (form) => {
     errors.email = "Email is required";
   } else if (!/\S+@\S+\.\S+/.test(form.email.trim())) {
     errors.email = "Email is invalid";
-    if (!form.message.trim()) {
-      errors.message = "Message is required";
-    } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.message.trim())) {
-      errors.message = "Message is invalid";
-    }
   }
+  if (!form.message.trim()) {
+    errors.message = "Message is required";
+  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.message.trim())) {
+    errors.message = "Message is invalid";
+  }
+
   return errors;
 };
 
@@ -35,7 +35,7 @@ export default function Contact() {
         form, 
         errors, 
         handleChange, 
-        handleblur, 
+        handleBlur, 
         handleSubmit 
       } = useForm(initialForm, validationsForm);
 
@@ -65,7 +65,7 @@ return (
                           <div className="col-md-6">
                             <div className="form-group">
                               <label className="label" htmlFor="name">Full Name</label>
-                              <input type="text" className="form-control" name="name" id="name" placeholder="Name" onBlur={handleblur} value={form.naame} onChange={handleChange} />
+                              <input type="text" className="form-control" name="name" id="name" placeholder="Name" onBlur={handleBlur} value={form.naame} onChange={handleChange} required/>
                             </div>
                           </div>
                           {errors.name && <p>{errors.name}</p>}
@@ -73,14 +73,14 @@ return (
                           <div className="col-md-6">
                             <div className="form-group">
                               <label className="label" htmlFor="email">Email Address</label>
-                              <input type="email" className="form-control" name="email" id="email" placeholder="Email" onBlur={handleblur} value={form.emmail} onChange={handleChange} />
+                              <input type="email" className="form-control" name="email" id="email" placeholder="Email" onBlur={handleBlur} value={form.emmail} onChange={handleChange} required/>
                             </div>
                           </div>
                           {errors.mail && <p>{errors.mail}</p>}
                           <div className="col-md-12">
                             <div className="form-group">
                               <label className="label" htmlFor="#">Message</label>
-                              <textarea name="message" className="form-control" id="message" cols="30" rows="4" placeholder="Message" onBlur={handleblur} value={form.menssage} onChange={handleChange}></textarea>
+                              <textarea name="message" className="form-control" id="message" cols="30" rows="4" placeholder="Message" onBlur={handleBlur} value={form.menssage} onChange={handleChange} required></textarea>
                             </div>
                           </div>
                           {errors.message && <p>{errors.message}</p>}
