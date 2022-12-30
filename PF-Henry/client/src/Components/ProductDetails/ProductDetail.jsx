@@ -28,7 +28,7 @@ const ProductDetail = () => {
     const handleAddToCart = () => {
         dispatch(addToCart(prDetail));
     };
-console.log(prDetail)
+    console.log(prDetail)
     let rating = prDetail.rating;
 
     return (
@@ -91,47 +91,42 @@ console.log(prDetail)
                                     <ul className="list-inline small float-start">
                                         <li className="list-inline-item m-0">
                                             <i
-                                                className={`bi bi-star${
-                                                    rating === 0
-                                                        ? " text-success fs-5"
-                                                        : "-fill text-success fs-5"
-                                                }`}
+                                                className={`bi bi-star${rating === 0
+                                                    ? " text-success fs-5"
+                                                    : "-fill text-success fs-5"
+                                                    }`}
                                             ></i>
                                         </li>
                                         <li className="list-inline-item m-0">
                                             <i
-                                                className={`bi bi-star${
-                                                    rating <= 1
-                                                        ? " text-success fs-5"
-                                                        : "-fill text-success fs-5"
-                                                }`}
+                                                className={`bi bi-star${rating <= 1
+                                                    ? " text-success fs-5"
+                                                    : "-fill text-success fs-5"
+                                                    }`}
                                             ></i>
                                         </li>
                                         <li className="list-inline-item m-0">
                                             <i
-                                                className={`bi bi-star${
-                                                    rating <= 2
-                                                        ? " text-success fs-5"
-                                                        : "-fill text-success fs-5"
-                                                }`}
+                                                className={`bi bi-star${rating <= 2
+                                                    ? " text-success fs-5"
+                                                    : "-fill text-success fs-5"
+                                                    }`}
                                             ></i>
                                         </li>
                                         <li className="list-inline-item m-0">
                                             <i
-                                                className={`bi bi-star${
-                                                    rating <= 3
-                                                        ? " text-success fs-5"
-                                                        : "-fill text-success fs-5"
-                                                }`}
+                                                className={`bi bi-star${rating <= 3
+                                                    ? " text-success fs-5"
+                                                    : "-fill text-success fs-5"
+                                                    }`}
                                             ></i>
                                         </li>
                                         <li className="list-inline-item m-0">
                                             <i
-                                                className={`bi bi-star${
-                                                    rating <= 4
-                                                        ? " text-success fs-5"
-                                                        : "-fill text-success fs-5"
-                                                }`}
+                                                className={`bi bi-star${rating <= 4
+                                                    ? " text-success fs-5"
+                                                    : "-fill text-success fs-5"
+                                                    }`}
                                             ></i>
                                         </li>
                                     </ul>
