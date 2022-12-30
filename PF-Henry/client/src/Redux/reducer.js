@@ -1,25 +1,41 @@
-import { GET_PRODUCT_DETAIL, CLEAR_PAGE_PRODUCT_DETAIL, GET_PRODUCTS, GET_CATEGORIES, GET_ORDERS, PUT_USER, GET_USERS } from "./actions";
-import { ADD_TO_CART,DELETE_FROM_CART } from "./constants";
+import {
+  GET_PRODUCT_DETAIL,
+  GET_REVIEWS,
+  CLEAR_PAGE_PRODUCT_DETAIL,
+  GET_PRODUCTS,
+  GET_CATEGORIES,
+  GET_ORDERS,
+  PUT_USER,
+  GET_USERS, POST_REVIEW,
+  MP_CHECKOUT,
+  ADD_TO_CART,
+  DELETE_FROM_CART,
+  ADD_FAV
+} from "./actions";
 
-const intialState = {
-  allBuyers: [],   // Administrativos
-  buyerDetail: {},  // Administrativos
+
+const initialState = {
+  allBuyers: [], // Administrativos
+  buyerDetail: {}, // Administrativos
   allProducts: [],
   productDetail: {},
+  reviews: [],
   allCategories: [],
   allOrders: [],
   orderDetail: {},
   allUsers: [],
   cart: [],
+  postReview: {},
+  ProductFav: []
 };
 
-if(localStorage.getItem("cart")) {
-    intialState.cart = JSON.parse(localStorage.getItem("cart"));
+if (localStorage.getItem("cart")) {
+  initialState.cart = JSON.parse(localStorage.getItem("cart"));
 } else {
-    intialState.cart = [];
+  initialState.cart = [];
 }
 
-export const rootReducer = (state = intialState, action) => {
+export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
@@ -33,38 +49,64 @@ export const rootReducer = (state = intialState, action) => {
         productDetail: action.payload,
       };
 
+    case GET_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload.reverse(),
+
+      };
+
     case CLEAR_PAGE_PRODUCT_DETAIL:
       return {
         ...state,
         productDetail: {},
+        reviews: []
       };
 
     case GET_CATEGORIES:
-      return{
+      return {
         ...state,
-        allCategories: action.payload
+        allCategories: action.payload,
       };
     case ADD_TO_CART:
-        return {
-            cart: [...action.payload]
-        };
+      return {
+        ...state,
+        cart: action.payload,
+      };
     case DELETE_FROM_CART:
-        return {
-            cart: [...action.payload]
-        }
+      return {
+        ...state,
+        cart: action.payload,
+      }
     case GET_ORDERS:
-      return{
+      return {
         ...state,
-        allOrders: action.payload
-      }
+        allOrders: action.payload,
+      };
     case GET_USERS:
-      return{
+      return {
         ...state,
-        allUsers: action.payload
-      }
+        allUsers: action.payload,
+      };
     case PUT_USER:
-      return{
-        ...state
+      return {
+        ...state,
+      };
+
+    case MP_CHECKOUT:
+      return {
+        ...state,
+        cart: [],
+      };
+    case POST_REVIEW:
+      return {
+        ...state,
+        postReview: action.payload
+      }
+    case ADD_FAV:
+      return {
+        ...state,
+        ProductFav: [...state.ProductFav, action.payload]
       }
 
     default:

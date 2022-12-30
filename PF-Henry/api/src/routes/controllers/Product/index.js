@@ -1,4 +1,4 @@
-const { Products, Categorie, Order, Trademarks } = require('../../../db');
+const { Products, Categorie, Order, Trademarks, Review } = require('../../../db');
 
 module.exports = {
     listProducts: async () => {
@@ -10,7 +10,9 @@ module.exports = {
                 {
                     model: Order
                 },
-                { model: Trademarks }
+                {
+                    model: Trademarks
+                },
             ]
         });
         return products;
@@ -21,7 +23,8 @@ module.exports = {
                 where: { id: id },
                 include: [
                     { model: Categorie },
-                    { model: Trademarks }
+                    { model: Trademarks },
+                    { model: Review }
                 ]
             }
         );
