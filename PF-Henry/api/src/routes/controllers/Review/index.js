@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const { Review, Products, Users } = require('../../../db');
 
-const getAllReview_Product = async(productId)=>{
+const getAllReview_Product = async (productId) => {
     const reviews = await Review.findAll({
         include: [
             {
@@ -13,21 +13,21 @@ const getAllReview_Product = async(productId)=>{
             },
             {
                 model: Users,
-                attributes: ['id','name',]
+                attributes: ['id', 'name',]
             }
         ]
     });
     return reviews;
 }
 
-const getScore_Product = async(productId)=>{
+const getScore_Product = async (productId) => {
     const reviews = await Review.findAll({
         include: {
             model: Products,
             where: {
                 id: productId
             },
-            //attributes: ['id']
+            attributes: ['id']
         },
         group: ['productId', 'product.id'],
         attributes: [[Sequelize.fn('AVG', Sequelize.col('score')), "rating"]],
@@ -35,14 +35,21 @@ const getScore_Product = async(productId)=>{
     return reviews;
 }
 
-const postReview = async(score,comment,productId,userId)=>{
-    const newReview = await Review.create({score: score,comment: comment});
-    await newReview.setProduct(productId);
-    await newReview.setUser(userId);
-    return newReview;
+const postReview = async (image, name, score, comment, productId) => {
+    const newReview = await Review.create({
+        image: image,
+        name: name,
+        score: score,
+        comment: comment
+    });
+    const findProduct = await Products.findOne({
+        where: { id: productId }
+    });
+    await findProduct.addReview(newReview);
+    return await newReview;
 }
 
-module.exports={
+module.exports = {
     postReview,
     getScore_Product,
     getAllReview_Product
