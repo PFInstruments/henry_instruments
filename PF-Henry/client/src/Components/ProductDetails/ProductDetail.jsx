@@ -26,9 +26,9 @@ const ProductDetail = () => {
     }, [dispatch, id]);
 
     const handleAddToCart = () => {
-        dispatch(addToCart(id));
+        dispatch(addToCart(prDetail));
     };
-
+console.log(prDetail)
     let rating = prDetail.rating;
 
     return (

@@ -67,12 +67,8 @@ const Cart = ({history}) => {
                                                     </Link>
                                                 </td>
                                                 <td>
-                                                    {" "}
-                                                    {props.price.toLocaleString("en-US",
-                                                    {
-                                                        style: "currency",
-                                                        currency: "USD"
-                                                    })}
+                                                   {props.price.toLocaleString("en-US", {style:"currency", currency:"USD"})}
+                                                    
                                                 </td>
                                                 <td>
                                                     <input 
