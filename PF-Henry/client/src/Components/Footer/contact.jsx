@@ -1,12 +1,31 @@
-import React from "react";
 import Carousel from "../Carousel/Carousel";
-import emailjs from "@emailjs/browser";
-import { useState } from "react";
 
+import { useForm } from "../../hooks/useForm";
+
+
+const initialForm = {
+  name: "",
+  email: "",
+  message: "",
+};
 
 export default function Contact() {
   const [form, setForm] = useState({});
 
+
+const validationsForm = (form) => {
+  let errors = {};
+  if (!form.name.trim()) {
+    errors.name = "Name is required";
+  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.name.trim())) {
+    errors.name = "Name is invalid";
+  }
+
+
+  if (!form.email.trim) {
+    errors.email = "Email is required";
+  } else if (!/\S+@\S+\.\S+/.test(form.email.trim())) {
+    errors.email = "Email is invalid";
 
   const handleChange = (e) => {
     setForm({
@@ -22,10 +41,79 @@ export default function Contact() {
       .catch(error => console.log(error))
     alert("Your message was sent, thank you");
     e.target.reset();
+
   }
+
+  if (!form.message.trim) {
+    errors.message = "Message is required";
+  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.message.trim())) {
+    errors.message = "Message is invalid";
+  }
+
+  return errors;
+};
+
+export default function Contact() {
+
+    const {
+      form,
+      errors,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+    } = useForm(initialForm, validationsForm);
 
   return (
     <>
+
+  <Carousel />
+<section className="ftco-section">
+<div className="container">
+  <div className="row justify-content-center">
+    <div className="col-md-6 text-center mb-5">
+      <h2 className="heading-section">Contact Form</h2>
+    </div>
+  </div>
+  <div className="row justify-content-center">
+    <div className="col-md-12">
+      <div className="wrapper">
+        <div className="row no-gutters mb-5">
+          <div className="col-md-7">
+            <div className="contact-wrap w-100 p-md-5 p-4">
+              <h3 className="mb-4">Contact Us</h3>
+              <div id="form-message-warning" className="mb-4"></div> 
+              <div id="form-message-success" className="mb-4">
+                
+              </div>
+              <form method="POST" onSubmit={handleSubmit} id="contactForm" name="contactForm" className="contactForm">
+                
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label className="label" htmlFor="name">Full Name</label>
+                      <input type="text" className="form-control" name="name" onBlur={handleBlur} id="name" placeholder="Name" value={form.naame} onChange={handleChange} required/>
+                    </div>
+                  </div>
+                  {errors.name && <p className="alert alert-danger" role="alert">{errors.name}</p>}
+                  <div className="col-md-6"> 
+                    <div className="form-group">
+                      <label className="label" htmlFor="email">Email Address</label>
+                      <input type="email" className="form-control" name="email" onBlur={handleBlur} id="email" placeholder="Email" value={form.emmail} onChange={handleChange} required/>
+                    </div>
+                  </div>
+                  {errors.email && <p className="alert alert-danger" role="alert">{errors.email}</p>}
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label className="label" htmlFor="#">Message</label>
+                      <textarea name="message" onBlur={handleBlur} className="form-control" id="message" cols="30" rows="4" placeholder="Message" value={form.menssage} onChange={handleChange} required></textarea>
+                    </div>
+                  </div>
+                  {errors.message && <p className="alert alert-danger" role="alert">{errors.message}</p>}
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <input type="submit" value="Send Message" className="btn btn-primary"/>
+                      <div className="submitting"></div>
+
       <Carousel />
       <section className="ftco-section">
         <div className="container">
@@ -133,6 +221,7 @@ export default function Contact() {
                       <div className="text">
                         <p><span>Website</span> <a href="...">henrymusic.com</a></p>
                       </div>
+
                     </div>
                   </div>
                 </div>
