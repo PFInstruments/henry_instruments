@@ -11,7 +11,7 @@ const ReviewCard = (props) => {
                     <div className="d-flex flex-row align-items-center">
                         <img className="tw-rounded-full" src={props.image} alt="avatar" width="25"
                             height="25" />
-                        <p className="small mb-0 ms-2">{props.name}</p>
+                        <p className="small mb-0 ms-2 fw-semibold">{props.name}</p>
                     </div>
                     <div className="d-flex flex-row align-items-center">
                         <ul className="list-inline small float-end">

@@ -57,6 +57,11 @@ const ReviewForm = () => {
     const handleSubmit = (ev) => {
         ev.preventDefault();
         dispatch(postReview(review));
+        setReview({
+            ...review,
+            score: 0,
+            comment: ''
+        })
         dispatch(getReviews(id));
         dispatch(getReviews(id));
         dispatch(getReviews(id));
