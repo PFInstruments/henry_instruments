@@ -1,8 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const controller = require('./controllers/Product');
+const controller = require("./controllers/Product");
+const { Category } = require("../db");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const products = await controller.listProducts();
         res.status(200).send(products);
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const product = await controller.product(id);
@@ -21,22 +22,63 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    const { name, image, description, price, stock, category, trademark, model } = req.body;
-    if (!name || !image || !description || !price || !stock || !category || !trademark || !model) {
-        return res.status(404).send('faltan datos por completar');
-    }
+router.post("/", async (req, res) => {
+    const {
+        name,
+        image,
+        description,
+        price,
+        stock,
+        category,
+        brand,
+        model,
+        active,
+    } = req.body;
+
+    const findCategory = await Category.findOne({
+        where: { name: category },
+    });
+    // if (
+    //     !name ||
+    //     !image ||
+    //     !description ||
+    //     !price ||
+    //     !stock ||
+    //     !category ||
+    //     !brand
+    // ) {
+    //     return res.status(404).send("faltan datos por completar");
+    // }
     try {
-        const createProduct = await controller.createProduct(name, image, description, price, stock, category, trademark, model);
-        res.status(200).send(createProduct);
+        const createProduct = await controller.createProduct(
+            name,
+            image,
+            description,
+            price,
+            stock,
+            brand,
+            model,
+            active
+        );
+        res.status(200).send(createProduct.setCategory(findCategory));
     } catch (error) {
         res.status(404).send(error.message);
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { name, image, description, price, stock, category, trademark, model } = req.body;
+    const {
+        name,
+        image,
+        description,
+        price,
+        stock,
+        category,
+        brand,
+        model,
+        active,
+    } = req.body;
     let update = {
         id,
         name,
@@ -45,9 +87,10 @@ router.put('/:id', async (req, res) => {
         price,
         stock,
         category,
-        trademark,
-        model
-    }
+        brand,
+        model,
+        active,
+    };
     try {
         let change = await controller.updateProduct(update);
         res.status(200).send(change);
@@ -56,7 +99,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const deleted = await controller.deleteProduct(id);
@@ -66,7 +109,7 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-router.post('/bulkcreate', async (req, res) => {
+router.post("/bulkcreate", async (req, res) => {
     try {
         res.status(201).send(await controller.createMultipleProducts());
     } catch (err) {
