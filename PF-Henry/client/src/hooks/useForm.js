@@ -26,8 +26,8 @@ export const useForm = (initialForm, validateForm) => {
     .catch(error => console.log(error))
     if(Object.keys(errors).length === 0) {
     alert("Your message was sent, thank you");
-    setForm(initialForm);
     e.target.reset();
+    setForm(initialForm);
     } else {
       return;
     }
