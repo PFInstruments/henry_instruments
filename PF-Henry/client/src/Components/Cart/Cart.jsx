@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteFromCart, ADD_TO_CART } from "../../Redux/actions";
+import { deleteFromCart, ADD_TO_CART, mpCheckout } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 
 const Cart = ({ history }) => {
@@ -25,6 +25,18 @@ const Cart = ({ history }) => {
       type: ADD_TO_CART,
       payload: cart,
     });
+  };
+
+  const handleCheckout = () => {
+    const price = cart
+      .reduce(
+        (currentSum, currentCartItem) =>
+          currentSum + currentCartItem.count * currentCartItem.price,
+        0
+      )
+      .toFixed(2);
+    console.log(price);
+    dispatch(mpCheckout({ name: "Total compra", price, quantity: "1" }));
   };
 
   return (
@@ -99,7 +111,10 @@ const Cart = ({ history }) => {
                   )
                   .toFixed(2)}
               </p>
-              <button className="btn btn-dark btn-large btn-block mb-5 py-2">
+              <button
+                onClick={handleCheckout}
+                className="btn btn-dark btn-large btn-block mb-5 py-2"
+              >
                 Proceed to Checkout
               </button>
             </div>
