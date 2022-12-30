@@ -18,6 +18,15 @@ export default function CardGrid({ localProducts }) {
 
     return (
         <div>
+            <br />
+
+            <div className="tw-flex tw-justify-center">
+                <Paginado
+                    productsPerPage={productsPerPage}
+                    paginado={paginado}
+                    localProducts={localProducts.length}
+                />
+            </div>
             <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-m-4">
                 {currentProducts &&
                     currentProducts.map((el) => {

@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
-// import Filters from "../Filters/Filters";
+import Filters from "../Filters/Filters";
 
 const SearchBar = ({
     localProducts,
-    setLocalproducts,
-    // localOrder,
-    //  setLocalOrder,
-    // allCategories,
+    setLocalProducts,
+    localOrder,
+    setLocalOrder,
+    allCategories,
     allProducts,
 }) => {
     const [content, setContent] = useState("");
@@ -15,15 +15,15 @@ const SearchBar = ({
     const handleInputChange = (ev) => {
         setContent(ev.target.value);
         if (!ev.target.value) {
-            setLocalproducts(allProducts);
+            setLocalProducts(allProducts);
         } else {
             // eslint-disable-next-line array-callback-return
-            let filter = localProducts.filter((product) => {
+            let search = localProducts.filter((product) => {
                 if (
                     product.name
                         .toLowerCase()
                         .indexOf(ev.target.value.toLowerCase()) > -1 ||
-                    product.trademark
+                    product.brand
                         .toLowerCase()
                         .indexOf(ev.target.value.toLowerCase()) > -1 ||
                     product.model
@@ -33,7 +33,7 @@ const SearchBar = ({
                     return product;
                 }
             });
-            setLocalproducts(filter);
+            setLocalProducts(search);
         }
     };
 
@@ -49,20 +49,21 @@ const SearchBar = ({
                                 value={content}
                                 placeholder="Search product"
                                 aria-label="Search"
-                                onChange={handleInputChange}
+                                onChange={(e) => handleInputChange(e)}
                             />
                         </form>
                     </div>
                 </nav>
-                {/* 
-                <Filters
-                    content={content}
-                    setLocalProducts={setLocalproducts}
-                    localOrder={localOrder}
-                    setLocalOrder={setLocalOrder}
-                    allProducts={allProducts}
-                    allCategories={allCategories}
-                /> */}
+                {
+                    <Filters
+                        content={content}
+                        setLocalProducts={setLocalProducts}
+                        localOrder={localOrder}
+                        setLocalOrder={setLocalOrder}
+                        allProducts={allProducts}
+                        allCategories={allCategories}
+                    />
+                }
             </div>
         </div>
     );

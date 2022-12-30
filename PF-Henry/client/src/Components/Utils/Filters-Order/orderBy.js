@@ -104,12 +104,12 @@ export function orderRatingDesc(array) {
     return result;
 }
 
-export function orderBy(e, array, localProducts) {
+export function orderBy(e, array) {
     let sorted = [];
-    if (localProducts === undefined) {
+    if (array === undefined) {
         sorted = [];
     }
-    if (localProducts[0] === "Product Not Found") {
+    if (array[0] === "Product Not Found") {
         sorted = array;
     }
     if (e === "-") {
