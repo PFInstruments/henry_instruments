@@ -9,10 +9,6 @@ const initialForm = {
   message: "",
 };
 
-export default function Contact() {
-  const [form, setForm] = useState({});
-
-
 const validationsForm = (form) => {
   let errors = {};
   if (!form.name.trim()) {
@@ -20,100 +16,31 @@ const validationsForm = (form) => {
   } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.name.trim())) {
     errors.name = "Name is invalid";
   }
-
-
-  if (!form.email.trim) {
+  if (!form.email.trim()) {
     errors.email = "Email is required";
   } else if (!/\S+@\S+\.\S+/.test(form.email.trim())) {
     errors.email = "Email is invalid";
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target]: e.target.value,
-    });
-  };
-
-  function sendMail(e) {
-    e.preventDefault();
-    emailjs.sendForm('service_x6w3gw3', 'template_ypwesae', e.target, 'bqIvzfBDGrlv2Ww24')
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
-    alert("Your message was sent, thank you");
-    e.target.reset();
-
+    if (!form.message.trim()) {
+      errors.message = "Message is required";
+    } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.message.trim())) {
+      errors.message = "Message is invalid";
+    }
   }
-
-  if (!form.message.trim) {
-    errors.message = "Message is required";
-  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.message.trim())) {
-    errors.message = "Message is invalid";
-  }
-
   return errors;
 };
 
 export default function Contact() {
+      
+      const { 
+        form, 
+        errors, 
+        handleChange, 
+        handleblur, 
+        handleSubmit 
+      } = useForm(initialForm, validationsForm);
 
-    const {
-      form,
-      errors,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-    } = useForm(initialForm, validationsForm);
-
-  return (
-    <>
-
-  <Carousel />
-<section className="ftco-section">
-<div className="container">
-  <div className="row justify-content-center">
-    <div className="col-md-6 text-center mb-5">
-      <h2 className="heading-section">Contact Form</h2>
-    </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-md-12">
-      <div className="wrapper">
-        <div className="row no-gutters mb-5">
-          <div className="col-md-7">
-            <div className="contact-wrap w-100 p-md-5 p-4">
-              <h3 className="mb-4">Contact Us</h3>
-              <div id="form-message-warning" className="mb-4"></div> 
-              <div id="form-message-success" className="mb-4">
-                
-              </div>
-              <form method="POST" onSubmit={handleSubmit} id="contactForm" name="contactForm" className="contactForm">
-                
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label className="label" htmlFor="name">Full Name</label>
-                      <input type="text" className="form-control" name="name" onBlur={handleBlur} id="name" placeholder="Name" value={form.naame} onChange={handleChange} required/>
-                    </div>
-                  </div>
-                  {errors.name && <p className="alert alert-danger" role="alert">{errors.name}</p>}
-                  <div className="col-md-6"> 
-                    <div className="form-group">
-                      <label className="label" htmlFor="email">Email Address</label>
-                      <input type="email" className="form-control" name="email" onBlur={handleBlur} id="email" placeholder="Email" value={form.emmail} onChange={handleChange} required/>
-                    </div>
-                  </div>
-                  {errors.email && <p className="alert alert-danger" role="alert">{errors.email}</p>}
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <label className="label" htmlFor="#">Message</label>
-                      <textarea name="message" onBlur={handleBlur} className="form-control" id="message" cols="30" rows="4" placeholder="Message" value={form.menssage} onChange={handleChange} required></textarea>
-                    </div>
-                  </div>
-                  {errors.message && <p className="alert alert-danger" role="alert">{errors.message}</p>}
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <input type="submit" value="Send Message" className="btn btn-primary"/>
-                      <div className="submitting"></div>
-
+return (
+<>
       <Carousel />
       <section className="ftco-section">
         <div className="container">
@@ -133,26 +60,30 @@ export default function Contact() {
                       <div id="form-message-success" className="mb-4">
 
                       </div>
-                      <form method="POST" onSubmit={sendMail} id="contactForm" name="contactForm" className="contactForm">
+                      <form method="POST" onSubmit={handleSubmit} id="contactForm" name="contactForm" className="contactForm">
                         <div className="row">
                           <div className="col-md-6">
                             <div className="form-group">
                               <label className="label" htmlFor="name">Full Name</label>
-                              <input type="text" className="form-control" name="user_name" id="name" placeholder="Name" value={form.user_nombre} onChange={handleChange} />
+                              <input type="text" className="form-control" name="name" id="name" placeholder="Name" onBlur={handleblur} value={form.naame} onChange={handleChange} />
                             </div>
                           </div>
+                          {errors.name && <p>{errors.name}</p>}
+                          
                           <div className="col-md-6">
                             <div className="form-group">
                               <label className="label" htmlFor="email">Email Address</label>
-                              <input type="email" className="form-control" name="user_email" id="email" placeholder="Email" value={form.user_email} onChange={handleChange} />
+                              <input type="email" className="form-control" name="email" id="email" placeholder="Email" onBlur={handleblur} value={form.emmail} onChange={handleChange} />
                             </div>
                           </div>
+                          {errors.mail && <p>{errors.mail}</p>}
                           <div className="col-md-12">
                             <div className="form-group">
                               <label className="label" htmlFor="#">Message</label>
-                              <textarea name="user_message" className="form-control" id="message" cols="30" rows="4" placeholder="Message" value={form.user_message} onChange={handleChange}></textarea>
+                              <textarea name="message" className="form-control" id="message" cols="30" rows="4" placeholder="Message" onBlur={handleblur} value={form.menssage} onChange={handleChange}></textarea>
                             </div>
                           </div>
+                          {errors.message && <p>{errors.message}</p>}
                           <div className="col-md-12">
                             <div className="form-group">
                               <input type="submit" value="Send Message" className="btn btn-primary" />

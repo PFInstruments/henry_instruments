@@ -26,6 +26,7 @@ export const useForm = (initialForm, validateForm) => {
     .catch(error => console.log(error))
     if(Object.keys(errors).length === 0) {
     alert("Your message was sent, thank you");
+    //deja ern blanco el formulario
     e.target.reset();
     setForm(initialForm);
     } else {
