@@ -68,7 +68,7 @@ return (
                               <input type="text" className="form-control" name="name" id="name" placeholder="Name" onBlur={handleBlur} value={form.naame} onChange={handleChange} required/>
                             </div>
                           </div>
-                          {errors.name && <p>{errors.name}</p>}
+                          {errors.name && <p className="alert alert-warning" role="alert" >{errors.name}</p>}
                           
                           <div className="col-md-6">
                             <div className="form-group">
@@ -76,14 +76,14 @@ return (
                               <input type="email" className="form-control" name="email" id="email" placeholder="Email" onBlur={handleBlur} value={form.emmail} onChange={handleChange} required/>
                             </div>
                           </div>
-                          {errors.mail && <p>{errors.mail}</p>}
+                          {errors.mail && <p className="alert alert-warning" role="alert">{errors.mail}</p>}
                           <div className="col-md-12">
                             <div className="form-group">
                               <label className="label" htmlFor="#">Message</label>
                               <textarea name="message" className="form-control" id="message" cols="30" rows="4" placeholder="Message" onBlur={handleBlur} value={form.menssage} onChange={handleChange} required></textarea>
                             </div>
                           </div>
-                          {errors.message && <p>{errors.message}</p>}
+                          {errors.message && <p className="alert alert-warning" role="alert">{errors.message}</p>}
                           <div className="col-md-12">
                             <div className="form-group">
                               <input type="submit" value="Send Message" className="btn btn-primary" />
