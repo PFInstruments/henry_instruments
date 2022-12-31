@@ -76,7 +76,7 @@ return (
                               <input type="email" className="form-control" name="email" id="email" placeholder="Email" onBlur={handleBlur} value={form.emmail} onChange={handleChange} required/>
                             </div>
                           </div>
-                          {errors.mail && <p className="alert alert-warning" role="alert">{errors.mail}</p>}
+                          {errors.email && <p className="alert alert-warning" role="alert">{errors.email}</p>}
                           <div className="col-md-12">
                             <div className="form-group">
                               <label className="label" htmlFor="#">Message</label>
