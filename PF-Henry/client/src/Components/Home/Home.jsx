@@ -37,8 +37,6 @@ export default function Home() {
         setLocalProducts(arr);
     }, [localOrder]);
 
-    console.log(allCategories);
-
     return (
         <div>
             <Carousel />
@@ -53,11 +51,11 @@ export default function Home() {
                 />
             </div>
             <div>
-                {!localProducts.length ?
+                {!localProducts.length ? (
                     <Loading />
-                    :
+                ) : (
                     <CardGrid localProducts={localProducts} />
-                }
+                )}
             </div>
         </div>
     );

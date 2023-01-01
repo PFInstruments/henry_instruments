@@ -53,7 +53,7 @@ export default function DeleteProductModal({ product }) {
                         <br />
                         <span>Name: {product.name} </span>
                         <br />
-                        <span>Category: {product.category} </span>
+                        <span>Category: {product.category.name} </span>
                         <br />
                         <span>Price: ${product.price} </span>
                         <br />
