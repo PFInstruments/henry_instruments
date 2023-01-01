@@ -35,6 +35,7 @@ export default function Home() {
     useEffect(() => {
         let arr = orderBy(localOrder, [...localProducts]);
         setLocalProducts(arr);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [localOrder]);
 
     return (

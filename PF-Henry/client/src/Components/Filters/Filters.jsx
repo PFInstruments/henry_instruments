@@ -165,6 +165,7 @@ export default function Filters({
                     {uniqueBrandList}
                 </select>
                 <button
+                    disabled={disabledState}
                     className="btn btn-success"
                     name="apply"
                     onClick={(e) => {
