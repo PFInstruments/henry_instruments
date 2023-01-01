@@ -1,15 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-    orderID,
-    orderAlphaAZ,
-    orderAlphaZA,
-    orderPriceAsc,
-    orderPriceDesc,
-    orderRatingAsc,
-    orderRatingDesc,
-    orderBy,
-} from "../Utils/Filters-Order/orderBy";
+import { orderBy } from "../Utils/Filters-Order/orderBy";
 
 export default function Filters({
     content,
@@ -50,22 +41,16 @@ export default function Filters({
 
     ///////Creo Array  de marcas por nombre unico ///////////
     function getUniqueBrands(array) {
-        // Create an empty array to store the unique brand names
         const uniqueBrands = [];
 
-        // Iterate over the array of product objects
         for (let i = 0; i < array.length; i++) {
-            // Get the current product object
             const product = array[i];
 
-            // Check if the brand name exists in the array of unique brand names
             if (!uniqueBrands.includes(product.brand)) {
-                // If it does not exist, add it to the array
                 uniqueBrands.push(product.brand);
             }
         }
 
-        // Return the array of unique brand names
         return uniqueBrands;
     }
     //// Creo lista de brands unicas //////
@@ -79,7 +64,7 @@ export default function Filters({
     let uniqueBrandList = [];
     for (let i = 0; i < brandList?.length; i++) {
         uniqueBrandList.push(
-            <option value={brandList[i]} key={i}>
+            <option value={brandList[i]} key={i + 50}>
                 {brandList[i].charAt(0).toUpperCase() + brandList[i].slice(1)}
             </option>
         );
@@ -89,6 +74,7 @@ export default function Filters({
 
     ///////FUNCIONES SETTERS ONCHANGE EL ESTADO LOCAL///////
     function setterCategory(e) {
+        console.log(e.target.value);
         setLocalCategory(e.target.value);
     }
 
@@ -99,14 +85,14 @@ export default function Filters({
     //////Funciones Filtro//////////
     function filterCategory(c, array) {
         let productByCategory = array.filter((product) => {
-            return product.category == c;
+            return product.category.name === c;
         });
         return productByCategory;
     }
 
     function filterBrand(b, array) {
         let productByBrand = array.filter((product) => {
-            return product.brand == b;
+            return product.brand === b;
         });
         return productByBrand;
     }

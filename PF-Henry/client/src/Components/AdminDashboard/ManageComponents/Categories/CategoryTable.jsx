@@ -1,27 +1,10 @@
-import React, { /*Fragment, useEffect   useState */} from "react";
+import React /*Fragment, useEffect   useState */ from "react";
 //import { useDispatch, useSelector } from "react-redux";
 import DeleteCategoryModal from "./DeleteCategoryModal";
 
 import EditCategoryModal from "./EditCategoryModal";
 
 export default function CategoryTable({ localCategories }) {
-    //DISPATCH //
-    //const dispatch = useDispatch();
-
-    //estalo Local//
-    //const [refresh, setRefresh] = useState(true);
-    //const [testState, setTestState] = useState([]);
-
-    ////ESTADO GLOBAL/////
-    //const { allCategories } = useSelector((state) => state);
-
-    /*
-    ///HOOKS///
-    useEffect(() => {
-        setRefresh(!refresh);
-    }, [allCategories]);
-    */
-
     return (
         <div className="table-responsive">
             <table className="table table-hover ">
@@ -34,7 +17,7 @@ export default function CategoryTable({ localCategories }) {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider ">
-                    {localCategories?.map((category) => {
+                    {localCategories.categories?.map((category) => {
                         return (
                             <tr key={category.id}>
                                 <td className="align-middle">{category.id}</td>

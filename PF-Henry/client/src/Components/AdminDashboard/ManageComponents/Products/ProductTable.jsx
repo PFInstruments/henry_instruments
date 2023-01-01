@@ -7,63 +7,61 @@ import DetailProductModal from "./DetailProductModal";
 import EditProductModal from "./EditProductModal";
 
 export default function ProductTable({ localProducts }) {
-    //DISPATCH //
-    //    const dispatch = useDispatch();
-
-    let lista = [
-        {
-            id: 165654646846546,
-            name: "Gibson SG",
-            brand: "Gibson",
-            model: "SG Standard",
-            image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
-            category: "Guitarras",
-            price: 1200,
-            description: "La guitarra de Angus Young",
-            stock: 50,
-            sales: 15,
-            active: true,
-        },
-        {
-            id: 165654646846546,
-            name: "Gibson SG",
-            brand: "Gibson",
-            model: "SG Standard",
-            image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
-            category: "Guitarras",
-            price: 1200,
-            description: "La guitarra de Angus Young",
-            stock: 50,
-            sales: 15,
-            active: false,
-        },
-        {
-            id: 165654646846546,
-            name: "Gibson SG",
-            brand: "Gibson",
-            model: "SG Standard",
-            image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
-            category: "Guitarras",
-            price: 1200,
-            description: "La guitarra de Angus Young",
-            stock: 50,
-            sales: 15,
-            active: true,
-        },
-        {
-            id: 165654646846546,
-            name: "Gibson SG",
-            brand: "Gibson",
-            model: "SG Standard",
-            image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
-            category: "Guitarras",
-            price: 1200,
-            description: "La guitarra de Angus Young",
-            stock: 50,
-            sales: 15,
-            active: true,
-        },
-    ];
+    //////    ARRAY DE PRUEBA ////////
+    // let lista = [
+    //     {
+    //         id: 165654646846546,
+    //         name: "Gibson SG",
+    //         brand: "Gibson",
+    //         model: "SG Standard",
+    //         image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
+    //         category: "Guitarras",
+    //         price: 1200,
+    //         description: "La guitarra de Angus Young",
+    //         stock: 50,
+    //         sales: 15,
+    //         active: true,
+    //     },
+    //     {
+    //         id: 165654646846546,
+    //         name: "Gibson SG",
+    //         brand: "Gibson",
+    //         model: "SG Standard",
+    //         image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
+    //         category: "Guitarras",
+    //         price: 1200,
+    //         description: "La guitarra de Angus Young",
+    //         stock: 50,
+    //         sales: 15,
+    //         active: false,
+    //     },
+    //     {
+    //         id: 165654646846546,
+    //         name: "Gibson SG",
+    //         brand: "Gibson",
+    //         model: "SG Standard",
+    //         image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
+    //         category: "Guitarras",
+    //         price: 1200,
+    //         description: "La guitarra de Angus Young",
+    //         stock: 50,
+    //         sales: 15,
+    //         active: true,
+    //     },
+    //     {
+    //         id: 165654646846546,
+    //         name: "Gibson SG",
+    //         brand: "Gibson",
+    //         model: "SG Standard",
+    //         image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
+    //         category: "Guitarras",
+    //         price: 1200,
+    //         description: "La guitarra de Angus Young",
+    //         stock: 50,
+    //         sales: 15,
+    //         active: true,
+    //     },
+    // ];
 
     return (
         <div className="table-responsive">
@@ -86,7 +84,7 @@ export default function ProductTable({ localProducts }) {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider ">
-                    {lista?.map((product) => {
+                    {localProducts?.map((product) => {
                         return (
                             <tr key={product.id}>
                                 <td className="align-middle" scope="row">
@@ -110,7 +108,7 @@ export default function ProductTable({ localProducts }) {
                                     />
                                 </td>
                                 <td className="align-middle ">
-                                    {product.category}
+                                    {product.category.name}
                                 </td>
                                 <td className="align-middle ">
                                     {product.model}
@@ -122,9 +120,9 @@ export default function ProductTable({ localProducts }) {
                                 <td className="align-middle">
                                     {product.stock}
                                 </td>
-                                <td className="align-middle">
+                                {/* <td className="align-middle">
                                     {product.sales}
-                                </td>
+                                </td> */}
                                 {product.active ? (
                                     <td className="align-middle">
                                         <svg
@@ -197,9 +195,15 @@ export default function ProductTable({ localProducts }) {
                                             ></path>
                                         </svg>
                                     </button>
-                                    <DeleteProductModal product={product} />
-                                    <EditProductModal />
-                                    <DetailProductModal product={product} />
+                                    <DeleteProductModal
+                                        product={product}
+                                        key={product.id + 10000}
+                                    />
+                                    <EditProductModal key={product.id + 50} />
+                                    <DetailProductModal
+                                        product={product}
+                                        key={product.id + 800000}
+                                    />
                                 </td>
                             </tr>
                         );

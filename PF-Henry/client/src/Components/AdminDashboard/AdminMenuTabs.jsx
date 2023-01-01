@@ -1,6 +1,7 @@
-import React /*useState*/ from "react";
-// import { useDispatch } from "react-redux";
-// import { Link } from "react-router-dom";
+import React from "react";
+import { getProducts, getCategories } from "../../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import AdminManageCategories from "./ManageComponents/Categories/AdminManageCategories";
 import AdminManageUsers from "./ManageComponents/Users/AdminManageUsers";
 import AdminManageOrders from "./ManageComponents/Orders/AdminManageOrders";
@@ -8,9 +9,24 @@ import AdminManageProducts from "./ManageComponents/Products/AdminManageProducts
 import AdminManageStore from "./ManageComponents/Store/AdminManageStore";
 
 export default function AdminMenuTabs() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     ////ESTADOS/////
+
+    const { allProducts, allCategories } = useSelector((state) => state);
+
+    //// ESTADOS LOCALES ////
+
+    ////HOOKS////
+
+    useEffect(() => {
+        dispatch(getProducts());
+        dispatch(getCategories());
+    }, [dispatch]);
+
+    // useEffect(() => {
+    //     setLocalProducts(allProducts);
+    // }, [allProducts]);
 
     ////RENDER////
     return (
@@ -120,7 +136,10 @@ export default function AdminMenuTabs() {
 
                     <hr />
 
-                    <AdminManageProducts />
+                    <AdminManageProducts
+                        allProducts={allProducts}
+                        allCategories={allCategories}
+                    />
                 </div>
                 <div
                     className="tab-pane fade"
@@ -133,7 +152,10 @@ export default function AdminMenuTabs() {
 
                     <hr />
                     <br />
-                    <AdminManageCategories />
+                    <AdminManageCategories
+                        allCategories={allCategories}
+                        allProducts={allProducts}
+                    />
                 </div>
                 <div
                     className="tab-pane fade justify"
