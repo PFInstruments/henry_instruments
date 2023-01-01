@@ -40,19 +40,20 @@ export default function CardGrid({ localProducts }) {
                                 productsPerPage
                         )
                         .map((el) => {
-                            return (
-                                <Card
-                                    key={el.id}
-                                    id={el.id}
-                                    name={el.name}
-                                    ratin={el.rating}
-                                    image={el.image}
-                                    category={el.category}
-                                    price={el.price}
-                                    brand={el.brand}
-                                    model={el.model}
-                                />
-                            );
+                            if (el.active)
+                                return (
+                                    <Card
+                                        key={el.id}
+                                        id={el.id}
+                                        name={el.name}
+                                        ratin={el.rating}
+                                        image={el.image}
+                                        category={el.category}
+                                        price={el.price}
+                                        brand={el.brand}
+                                        model={el.model}
+                                    />
+                                );
                         })
                 )}
             </div>
