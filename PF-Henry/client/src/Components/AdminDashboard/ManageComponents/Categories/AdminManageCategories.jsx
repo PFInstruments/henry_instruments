@@ -12,7 +12,7 @@ export default function SellerManageCategories({ allCategories, allProducts }) {
     const [localCategories, setLocalCategories] = useState([]);
 
     /// HOOKS //
-
+    console.log(allCategories);
     useEffect(() => {
         setLocalCategories(allCategories);
     }, [allCategories]);
@@ -25,12 +25,15 @@ export default function SellerManageCategories({ allCategories, allProducts }) {
                     localCategories={localCategories}
                     setLocalCategories={setLocalCategories}
                     allProducts={allProducts}
+                    allCategories={allCategories}
                 />
             </div>
             <div>
                 <CategoryTable
+                    allCategories={allCategories}
                     localCategories={localCategories}
                     allProducts={allProducts}
+                    setLocalCategories={setLocalCategories}
                 />
             </div>
         </div>
