@@ -43,16 +43,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
-    const allCategories = await controllers.listCategories();
     try {
-        if (id) {
-            const deleteCategory = allCategories.filter(
-                (category) => category.id === id
-            );
-            deleteCategory.length
-                ? res.status(200).send("Categoría Eliminada")
-                : res.status(404).send("Error al eliminar categoría");
-        }
+        res.status(200).json({details: await controllers.deleteCategory(id)});
     } catch (error) {
         res.status(404).send(error.message);
     }
