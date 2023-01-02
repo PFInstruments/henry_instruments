@@ -67,7 +67,7 @@ module.exports = {
         let product = await Product.findOne({
             where: { id: obj.id },
         });
-        await product.addCategory(findCategory);
+        await product.setCategory(findCategory);
         //    await product.setTrademark(findTrademark);
         product = await Product.update(
             {
