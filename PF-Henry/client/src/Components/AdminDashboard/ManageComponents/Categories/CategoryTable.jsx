@@ -26,7 +26,7 @@ export default function CategoryTable({ localCategories }) {
                                 </td>
 
                                 <td className="align-middle ">
-                                    {category.stock}
+                                    {category.products.length}
                                 </td>
 
                                 <td className="align-middle">

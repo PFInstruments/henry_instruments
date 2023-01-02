@@ -120,9 +120,9 @@ export default function ProductTable({ localProducts }) {
                                 <td className="align-middle">
                                     {product.stock}
                                 </td>
-                                {/* <td className="align-middle">
-                                    {product.sales}
-                                </td> */}
+                                <td className="align-middle">
+                                    {product.orders.length}
+                                </td>
                                 {product.active ? (
                                     <td className="align-middle">
                                         <svg
