@@ -13,15 +13,14 @@ import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
 export default function CreateProductModal({ localCategories }) {
     ///DISPATCH///
     const dispatch = useDispatch();
-    ///ESTADOS GLOBALES///
-    //   const { allcategories } = useSelector((state) => state);
+
     ///ESTADOS LOCALES///
     //    const [disabledSubmit, setDisabledSubmit] = useState(true);
     //    const [checkActive, setCheckActive] = useState([]);
     const [postSuccess, setPostSuccess] = useState(false);
 
     /////Creo una lista de categorias en orden ascendente y Creo el componente option list/////
-    let categoryList = localCategories?.map((c) => {
+    let categoryList = localCategories.categories?.map((c) => {
         return c.name;
     });
     categoryList?.sort();
@@ -35,7 +34,7 @@ export default function CreateProductModal({ localCategories }) {
         );
     }
 
-    /// variable///
+    ///Variables///
     //  const checkMarkGif = checkmark;
     const checkMarkGifInfinito = checkmarkInfinito;
     /////LOCAL REDUCER//////////
