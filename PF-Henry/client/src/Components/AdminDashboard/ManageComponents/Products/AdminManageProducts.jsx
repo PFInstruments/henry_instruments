@@ -10,6 +10,12 @@ export default function AdminManageProducts({ allProducts, allCategories }) {
 
     /// ESTADOS LOCAL ///
     const [localProducts, setLocalProducts] = useState([]);
+    const [localCategories, setLocalCategories] = useState([]);
+
+    console.log(allCategories);
+    useEffect(() => {
+        setLocalCategories(allCategories);
+    }, [allCategories]);
 
     /// HOOKS //
     useEffect(() => {
@@ -23,7 +29,7 @@ export default function AdminManageProducts({ allProducts, allCategories }) {
                 <ManageBarProducts
                     localProducts={localProducts}
                     setLocalProducts={setLocalProducts}
-                    allCategories={allCategories}
+                    localCategories={localCategories}
                 />
             </div>
             <div>
