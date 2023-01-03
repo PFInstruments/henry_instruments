@@ -120,14 +120,16 @@ export const postCategory = (category) => {
 };
 
 export const deleteCategory = (id) => {
-  return async (dispatch) => {
-    return await axios
-      .delete("/category", id)
-      .then((res) => {
-        dispatch({ type: DELETE_CATEGORY, payload: res.data });
-      })
-      .catch((error) => console.log(error));
-  };
+
+    return async (dispatch) => {
+        return await axios
+            .delete(`/category/${id}`)
+            .then((res) => {
+                dispatch({ type: DELETE_CATEGORY, payload: res.data });
+            })
+            .catch((error) => console.log(error));
+    };
+
 };
 
 export const getAllOrders = () => {

@@ -1,23 +1,35 @@
 import React, { useState } from "react";
-//import { deleteCategory, getAllCategories } from "../../../../Redux/actions";
-//import { useDispatch /*useSelector*/ } from "react-redux";
+import { deleteCategory, getCategories } from "../../../../Redux/actions";
+import { useDispatch /*useSelector*/ } from "react-redux";
+// import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
+import { prefixDelete } from "../../../Utils/variables";
 
 export default function DeleteCategoryModal({ category }) {
     ///DISPATCH///
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     ///ESTADO LOCAL////
     const [success, setSuccess] = useState(false);
-    const [refresh, setRefresh] = useState(true);
+
+    /// VARIABLE GIF///
+    //const checkMarkGif = checkmark;
+    //  const checkMarkGifInfinito = checkmarkInfinito;
+
+    ///Funciones////
+    function refresh() {
+        setSuccess(false);
+
+        dispatch(getCategories());
+    }
 
     /////Event Handler/////
 
     function handleDelete(e, id) {
         e.preventDefault();
-        //     dispatch(deleteCategory(id));
+        dispatch(deleteCategory(id));
         //   dispatch(getAllCategories());
         setSuccess(true);
-        setRefresh(!refresh);
+
         // alert("Category Deleted!");
         // dispatch(getAllCategorys());
     }
@@ -25,7 +37,7 @@ export default function DeleteCategoryModal({ category }) {
     return (
         <div
             className="modal fade "
-            id="deleteCategoryModal"
+            id={prefixDelete + category.id}
             tabIndex="-1"
             aria-labelledby="deleteCategoryModalLabel"
             aria-hidden="true"
@@ -87,18 +99,18 @@ export default function DeleteCategoryModal({ category }) {
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
-                                onClick={(e) => setSuccess(false)}
+                                onClick={(e) => refresh()}
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <h3>Product Deleted!</h3>
+                            <h3>Category Deleted!</h3>
                             <div></div>
                             <div className="modal-footer">
                                 <button
                                     type="button"
                                     className="btn btn-secondary"
                                     data-bs-dismiss="modal"
-                                    onClick={(e) => setSuccess(false)}
+                                    onClick={(e) => refresh()}
                                 >
                                     Close
                                 </button>

@@ -1,10 +1,10 @@
 import React /*useState*/ from "react";
-
-export default function EditCategoryModal() {
+import { prefixEdit } from "../../../Utils/variables";
+export default function EditCategoryModal({ category }) {
     return (
         <div
             className="modal fade "
-            id="editCategoryModal"
+            id={prefixEdit + category.id}
             tabIndex="-1"
             aria-labelledby="editCategoryModalLabel"
             aria-hidden="true"
