@@ -31,6 +31,27 @@ module.exports = (sequelize) => {
                 },
             },
         },
+        surname: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isAlpha: {
+                    args: true,
+                    msg: "El apellido solo puede contener letras",
+                },
+                notEmpty: {
+                    args: true,
+                    msg: "El campo apellido no puede ser caracteres vacios",
+                },
+                notNull: {
+                    msg: "El campo apellido no puede ser nulo",
+                },
+                len: {
+                    args: [3, 255],
+                    msg: "El apellido tiene que tener entre 3 y 255 caracteres",
+                },
+            },
+        },
         phone_num: {
             type: DataTypes.STRING,
             allowNull: false,
