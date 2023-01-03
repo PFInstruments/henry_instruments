@@ -15,7 +15,7 @@ export default function CardGrid({ localProducts }) {
     function paginado(pageNumber) {
         setCurrentPage(pageNumber);
     }
-    console.log(localProducts);
+
     return (
         <div>
             <br />
@@ -62,6 +62,7 @@ export default function CardGrid({ localProducts }) {
                     productsPerPage={productsPerPage}
                     paginado={paginado}
                     localProducts={localProducts.length}
+                    setProductsPerPage={setProductsPerPage}
                 />
             </div>
         </div>

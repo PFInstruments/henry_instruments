@@ -12,7 +12,6 @@ export default function AdminManageProducts({ allProducts, allCategories }) {
     const [localProducts, setLocalProducts] = useState([]);
     const [localCategories, setLocalCategories] = useState([]);
 
-    console.log(allCategories);
     useEffect(() => {
         setLocalCategories(allCategories);
     }, [allCategories]);
