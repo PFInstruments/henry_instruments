@@ -124,7 +124,7 @@ export const postCategory = (category) => {
 export const deleteCategory = (id) => {
     return async (dispatch) => {
         return await axios
-            .delete("/category", id)
+            .delete(`/category/${id}`)
             .then((res) => {
                 dispatch({ type: DELETE_CATEGORY, payload: res.data });
             })

@@ -7,12 +7,13 @@ import { getCategories, postCategory } from "../../../../Redux/actions";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
 // import { useEffect } from "react";
 
-export default function CreateCategoryModal() {
+export default function CreateCategoryModal({ localCategories }) {
     ///DISPATCH///
     const dispatch = useDispatch();
 
     ///ESTADOS LOCALES///
-    // const [disabledSubmit, setDisabledSubmit] = useState(true);
+    //  const [disabledSubmit, setDisabledSubmit] = useState(true);
+    // const [nameExists, setNameExists] = useState(false);
     //const [checkActive, setCheckActive] = useState([]);
     const [postSuccess, setPostSuccess] = useState(false);
 
@@ -54,6 +55,20 @@ export default function CreateCategoryModal() {
 
         dispatch(getCategories());
     }
+
+    // function findCategory(c) {
+    //     let exists = [];
+    //     localCategories?.categories.map((cat) => {
+    //         if (cat.name == c) {
+    //             exists.push(cat.name);
+    //         }
+    //     });
+    //     if (exists.length > 0) {
+    //     } else {
+    //         setNameExists(false);
+    //         setDisabledSubmit(false);
+    //     }
+    // }
 
     //EVENT HANDLERS///
 
@@ -110,12 +125,12 @@ export default function CreateCategoryModal() {
                                         className="form-control"
                                         id="category-name"
                                         value={categoryForm.name}
-                                        onChange={(e) =>
+                                        onChange={(e) => {
                                             setCategoryForm({
                                                 type: "SET_NAME",
                                                 payload: e.target.value,
-                                            })
-                                        }
+                                            });
+                                        }}
                                     />
                                 </div>
 
@@ -130,6 +145,7 @@ export default function CreateCategoryModal() {
                                     <button
                                         type="submit"
                                         className="btn btn-success"
+                                        // disabled={disabledSubmit}
                                     >
                                         Add Category +
                                     </button>

@@ -4,6 +4,7 @@ import CreateCategoryModal from "./CreateCategoryModal";
 export default function ManageCategoryNavabar({
     setLocalCategories,
     allCategories,
+    localCategories,
 }) {
     ////ESTADOS LOCALES//////
     //   const [localOrder, setLocalOrder] = useState();
@@ -42,7 +43,7 @@ export default function ManageCategoryNavabar({
                 >
                     Add Category +
                 </button>
-                <CreateCategoryModal />
+                <CreateCategoryModal localCategories={localCategories} />
             </div>
         </nav>
     );
