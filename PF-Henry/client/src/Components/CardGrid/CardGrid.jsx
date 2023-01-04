@@ -16,6 +16,8 @@ export default function CardGrid({ localProducts }) {
         setCurrentPage(pageNumber);
     }
 
+    console.log("Se actualiza bien Vercel!!");
+
     return (
         <div>
             <br />
