@@ -137,6 +137,7 @@ export default function CreateProductModal({
                     payload: reader.result,
                 });
             };
+            console.log(productForm);
         } else {
             setProductForm({
                 type: "SET_IMAGE",
