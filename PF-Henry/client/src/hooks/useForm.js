@@ -36,10 +36,11 @@ export const useForm = (initialForm, validateForm) => {
     .then(response => console.log(response))
     .catch(error => console.log(error))
     if(Object.keys(errors).length === 0) {
-    sendEmail();
-    //deja ern blanco el formulario
-    e.target.reset();
-    setForm(initialForm);
+      //message sent
+      sendEmail();
+      //deja ern blanco el formulario
+      e.target.reset();
+      setForm(initialForm);
     } else {
       return;
     }

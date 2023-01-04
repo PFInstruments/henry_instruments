@@ -8,10 +8,13 @@ import CardGrid from "../CardGrid/CardGrid";
 import { orderBy } from "../Utils/Filters-Order/orderBy";
 import Loading from "../Loading/Loading";
 
+
 //import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
 //let styleCard = { width: "18rem" };
 
 export default function Home() {
+
+
     //// DISPATCH ////
     const dispatch = useDispatch();
 
