@@ -240,7 +240,7 @@ export function deleteActivity(idCountry, id) {
       console.log(payment);
       return dispatch({
         type: MP_CHECKOUT,
-        payload: payment.data.body.init_point,
+        payload: payment.data,
       });
     } catch (e) {
       console.log(e.message);

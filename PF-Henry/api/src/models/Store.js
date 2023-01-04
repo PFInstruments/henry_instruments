@@ -9,11 +9,11 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
     },
-    banner: {
+    carrousel: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    logo: {
+    icon: {
       type: DataTypes.STRING,
       allowNull: false,
     },
