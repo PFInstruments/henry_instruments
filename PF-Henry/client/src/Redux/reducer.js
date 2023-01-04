@@ -27,13 +27,19 @@ const initialState = {
   allUsers: [],
   cart: [],
   postReview: {},
-  ProductFav: [],
+  fav: [],
 };
 
 if (localStorage.getItem("cart")) {
   initialState.cart = JSON.parse(localStorage.getItem("cart"));
 } else {
   initialState.cart = [];
+}
+
+if (localStorage.getItem("fav")) {
+  initialState.fav = JSON.parse(localStorage.getItem("fav"));
+} else {
+  initialState.fav = [];
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -106,7 +112,7 @@ export const rootReducer = (state = initialState, action) => {
     case ADD_FAV:
       return {
         ...state,
-        ProductFav: [...state.ProductFav, action.payload]
+        fav: [...state.fav, action.payload]
       }
     case DELETE_REVIEW:
       return {

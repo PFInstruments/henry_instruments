@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 
 const Card = (props) => {
     const dispatch = useDispatch();
-    const fav = useSelector((state) => state.ProductFav);
+    const fav = useSelector((state) => state.fav);
     const cart = useSelector((state) => state.cart);
 
     const handleAddToCart = () => {
