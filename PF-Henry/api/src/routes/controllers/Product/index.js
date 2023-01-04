@@ -30,11 +30,12 @@ module.exports = {
         name,
         image,
         description,
-        model,
-        brand,
         price,
         stock,
-        category
+        category,
+        brand,
+        model,
+        active
     ) => {
         try {
             const result = await cloudinary.uploader.upload(image, {
@@ -44,11 +45,12 @@ module.exports = {
                 name,
                 image: result.url,
                 description,
-                model,
-                brand,
                 price,
                 stock,
                 category,
+                brand,
+                model,
+                active,
             });
             console.log(product);
             res.send(product);
