@@ -8,10 +8,11 @@ import {
   PUT_USER,
   GET_USERS,
   POST_REVIEW,
-  MP_CHECKOUT,
+  // MP_CHECKOUT,
   ADD_TO_CART,
   DELETE_FROM_CART,
-  ADD_FAV
+  ADD_FAV,
+  DELETE_REVIEW,
 } from "./actions";
 
 const initialState = {
@@ -106,6 +107,11 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         ProductFav: [...state.ProductFav, action.payload]
+      }
+    case DELETE_REVIEW:
+      return {
+        ...state,
+        reviews: state.reviews.filter(r => r.id !== action.payload)
       }
 
     default:
