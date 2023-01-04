@@ -1,11 +1,6 @@
 const { Sequelize } = require("sequelize");
-const {
-    Product,
-    Category,
-    Order,
-    // Trademarks,
-    Review,
-} = require("../../../db");
+const { Product, Category, Order, Review } = require("../../../db");
+const cloudinary = require("../../../utils/cloudinary");
 
 module.exports = {
     listProducts: async () => {
@@ -35,44 +30,42 @@ module.exports = {
         name,
         image,
         description,
+        model,
+        brand,
         price,
         stock,
-        brand,
-        model,
-        active
+        category
     ) => {
-        // const findCategory = await Category.findOne({
-        //     where: { name: category },
-        // });
-        /*   const findTrademark = await Trademarks.findOne({
-            where: { name: trademark }
-        });*/
-        const productCreated = await Product.create({
-            name,
-            image,
-            description,
-            price,
-            stock,
-            brand,
-            model,
-            active,
-        });
-
-        //   await productCreated.setTrademark(findTrademark);
-        return productCreated;
+        try {
+            const result = await cloudinary.uploader.upload(image, {
+                folder: "Products",
+            });
+            const product = await Product.create({
+                name,
+                image: result.url,
+                description,
+                model,
+                brand,
+                price,
+                stock,
+                category,
+            });
+            console.log(product);
+            res.send(product);
+        } catch (error) {
+            console.log(error);
+        }
     },
     updateProduct: async (obj) => {
         const findCategory = await Category.findOne({
             where: { name: obj.category },
         });
-        /*     const findTrademark = await Trademarks.findOne({
-            where: { name: obj.trademark }
-        });*/
+
         let product = await Product.findOne({
             where: { id: obj.id },
         });
         await product.setCategory(findCategory);
-        //    await product.setTrademark(findTrademark);
+
         product = await Product.update(
             {
                 name: obj.name,
