@@ -11,7 +11,7 @@ import {
   MP_CHECKOUT,
   ADD_TO_CART,
   DELETE_FROM_CART,
-  ADD_FAV,
+  ADD_FAV
 } from "./actions";
 
 const initialState = {
@@ -105,8 +105,8 @@ export const rootReducer = (state = initialState, action) => {
     case ADD_FAV:
       return {
         ...state,
-        ProductFav: [...state.ProductFav, action.payload],
-      };
+        ProductFav: [...state.ProductFav, action.payload]
+      }
 
     default:
       return state;

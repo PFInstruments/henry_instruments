@@ -16,6 +16,7 @@ export const POST_CATEGORY = "POST_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 export const ADD_FAV = "ADD_FAV";
+export const DELETE_REVIEW = "DELETE_REVIEW";
 
 export const addToCart = (product) => async (dispatch) => {
   const cart = localStorage.getItem("cart")
@@ -253,3 +254,17 @@ export const addFavProduct = (product) => {
     payload: product,
   };
 };
+
+export const deleteReview = (id) => {
+    return async (dispatch) => {
+        try {
+            axios.delete(`/review/${id}`);
+            return dispatch({
+                type: DELETE_REVIEW,
+                payload: id,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}

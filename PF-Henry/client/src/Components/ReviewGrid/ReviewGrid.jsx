@@ -26,6 +26,7 @@ const ReviewGrid = ({ reviews }) => {
                 <React.Fragment key={e.id}>
                   <ReviewCard
                     key={e.id}
+                    id={e.id}
                     image={e.image}
                     name={e.name}
                     score={e.score}

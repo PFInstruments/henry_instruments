@@ -29,7 +29,6 @@ const ProductDetail = () => {
     const handleAddToCart = () => {
         dispatch(addToCart(prDetail));
     };
-    console.log(Object.keys(prDetail).length === 0)
     let rating = prDetail.rating;
 
     return (
