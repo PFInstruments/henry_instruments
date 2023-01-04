@@ -3,7 +3,7 @@ import React /*Fragment, useEffect   useState */ from "react";
 import DeleteCategoryModal from "./DeleteCategoryModal";
 import { prefixDelete, numeral, prefixEdit } from "../../../Utils/variables";
 import EditCategoryModal from "./EditCategoryModal";
-
+//a
 export default function CategoryTable({ localCategories }) {
     return (
         <div className="table-responsive">
