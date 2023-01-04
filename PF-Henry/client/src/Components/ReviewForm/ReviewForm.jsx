@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './ReviewForm.css';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,6 +6,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
 import { getReviews, postReview } from '../../Redux/actions';
 import ReviewGrid from '../ReviewGrid/ReviewGrid';
+import Swal from 'sweetalert2';
 
 const ReviewForm = () => {
 
@@ -47,6 +49,7 @@ const ReviewForm = () => {
         })
     };
 
+
     const rating = (ev) => {
         setReview({
             ...review,
@@ -66,6 +69,24 @@ const ReviewForm = () => {
         dispatch(getReviews(id));
         dispatch(getReviews(id));
     };
+
+    const alert = () => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-end',
+            showConfirmButton: false,
+            timer: 3000,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Review added'
+        })
+    }
 
     return (
         <div>
@@ -128,6 +149,7 @@ const ReviewForm = () => {
                                                     <button type={userComment.includes(true) ? "button" : "submit"}
                                                         className={review.comment === "" || review.score === 0 ?
                                                             "btn btn-success disabled" : "btn btn-success"}
+                                                        onClick={userComment.includes(true) || !isAuthenticated ? "" : () => alert()}
                                                         data-bs-toggle={!isAuthenticated || userComment.includes(true) ? "modal" : ""}
                                                         data-bs-target={!isAuthenticated ? "#Authenticate" : userComment ? "#Commented" : ""}>
                                                         Send <i className="fas fa-long-arrow-alt-right ms-1"></i>
