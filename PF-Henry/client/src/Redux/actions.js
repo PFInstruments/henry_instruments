@@ -17,6 +17,9 @@ export const DELETE_CATEGORY = "DELETE_CATEGORY";
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 export const ADD_FAV = "ADD_FAV";
 export const DELETE_REVIEW = "DELETE_REVIEW";
+export const POST_PRODUCT = "POST_PRODUCT";
+export const PUT_PRODUCT = "PUT_PRODUCT";
+export const PUT_CATEGORY = "PUT_CATEGORY";
 
 export const addToCart = (product) => async (dispatch) => {
   const cart = localStorage.getItem("cart")
@@ -122,14 +125,14 @@ export const postCategory = (category) => {
 
 export const deleteCategory = (id) => {
 
-    return async (dispatch) => {
-        return await axios
-            .delete(`/category/${id}`)
-            .then((res) => {
-                dispatch({ type: DELETE_CATEGORY, payload: res.data });
-            })
-            .catch((error) => console.log(error));
-    };
+  return async (dispatch) => {
+    return await axios
+      .delete(`/category/${id}`)
+      .then((res) => {
+        dispatch({ type: DELETE_CATEGORY, payload: res.data });
+      })
+      .catch((error) => console.log(error));
+  };
 
 };
 
@@ -256,15 +259,60 @@ export const addFavProduct = (product) => {
 };
 
 export const deleteReview = (id) => {
-    return async (dispatch) => {
-        try {
-            axios.delete(`/review/${id}`);
-            return dispatch({
-                type: DELETE_REVIEW,
-                payload: id,
-            });
-        } catch (error) {
-            console.log(error);
-        }
+  return async (dispatch) => {
+    try {
+      axios.delete(`/review/${id}`);
+      return dispatch({
+        type: DELETE_REVIEW,
+        payload: id,
+      });
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
+
+export const postProduct = (product) => {
+  return async (dispatch) => {
+    return await axios
+      .post("/products", product)
+      .then((res) => {
+        dispatch({
+          type: POST_PRODUCT,
+          payload: res.data
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const putProduct = (id, info) => {
+  return async (dispatch) => {
+    return await axios
+      .put(`/products/${id}`, info)
+      .then((res) => {
+        dispatch({
+          type: PUT_PRODUCT,
+          payload: res.data
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const putCategory = (id, info) => {
+  return async (dispatch) => {
+    return await axios
+      .put(`/category/${id}`, info)
+      .then((res) => {
+        dispatch({
+          type: PUT_CATEGORY,
+          payload: res.data
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+
+
