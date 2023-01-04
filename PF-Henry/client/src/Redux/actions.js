@@ -204,10 +204,10 @@ export const mpCheckout = (parametros) => {
   return async function (dispatch) {
     console.log(2);
     try {
-      const payment = await axios.post("/checkout", parametros);
+      const payment = await axios.post("/checkout",parametros);
       return dispatch({
         type: MP_CHECKOUT,
-        payload: payment.data.body.init_point,
+        payload: payment.data,
       });
     } catch (e) {
       console.log(e.message);
