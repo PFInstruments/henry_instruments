@@ -5,10 +5,10 @@ module.exports = {
         const stores = await Store.findAll();
         return stores;
     },
-    postStore: async (banner, logo, phoneNumber, email, adress, country, city, state, zip) => {
+    postStore: async (carrousel, icon, phoneNumber, email, adress, country, city, state, zip) => {
         const creatStore = Store.create({
-            banner: banner,
-            logo: logo,
+            carrousel: carrousel,
+            icon: icon,
             phoneNumber: phoneNumber,
             email: email,
             adress: adress,
