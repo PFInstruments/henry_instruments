@@ -5,64 +5,14 @@ import React /*useState, useEffect*/ from "react";
 import DeleteProductModal from "./DeleteProductModal";
 import DetailProductModal from "./DetailProductModal";
 import EditProductModal from "./EditProductModal";
+import {
+    prefixDelete,
+    prefixEdit,
+    prefixDetail,
+    numeral,
+} from "../../../Utils/variables";
 
 export default function ProductTable({ localProducts }) {
-    //////    ARRAY DE PRUEBA ////////
-    // let lista = [
-    //     {
-    //         id: 165654646846546,
-    //         name: "Gibson SG",
-    //         brand: "Gibson",
-    //         model: "SG Standard",
-    //         image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
-    //         category: "Guitarras",
-    //         price: 1200,
-    //         description: "La guitarra de Angus Young",
-    //         stock: 50,
-    //         sales: 15,
-    //         active: true,
-    //     },
-    //     {
-    //         id: 165654646846546,
-    //         name: "Gibson SG",
-    //         brand: "Gibson",
-    //         model: "SG Standard",
-    //         image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
-    //         category: "Guitarras",
-    //         price: 1200,
-    //         description: "La guitarra de Angus Young",
-    //         stock: 50,
-    //         sales: 15,
-    //         active: false,
-    //     },
-    //     {
-    //         id: 165654646846546,
-    //         name: "Gibson SG",
-    //         brand: "Gibson",
-    //         model: "SG Standard",
-    //         image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
-    //         category: "Guitarras",
-    //         price: 1200,
-    //         description: "La guitarra de Angus Young",
-    //         stock: 50,
-    //         sales: 15,
-    //         active: true,
-    //     },
-    //     {
-    //         id: 165654646846546,
-    //         name: "Gibson SG",
-    //         brand: "Gibson",
-    //         model: "SG Standard",
-    //         image: "https://http2.mlstatic.com/D_NQ_NP_626544-MLA47691080756_092021-W.jpg",
-    //         category: "Guitarras",
-    //         price: 1200,
-    //         description: "La guitarra de Angus Young",
-    //         stock: 50,
-    //         sales: 15,
-    //         active: true,
-    //     },
-    // ];
-
     return (
         <div className="table-responsive">
             <table className="table table-hover  ">
@@ -96,7 +46,9 @@ export default function ProductTable({ localProducts }) {
                                         type="button"
                                         className="btn btn-light"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#detailProductModal"
+                                        data-bs-target={
+                                            numeral + prefixDetail + product.id
+                                        }
                                     >
                                         {product.name}
                                     </button>
@@ -108,7 +60,7 @@ export default function ProductTable({ localProducts }) {
                                     />
                                 </td>
                                 <td className="align-middle ">
-                                    {product.category.name}
+                                    {product.category?.name}
                                 </td>
                                 <td className="align-middle ">
                                     {product.model}
@@ -155,7 +107,9 @@ export default function ProductTable({ localProducts }) {
                                         type="button"
                                         className="btn btn-success listButton"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#editProductModal"
+                                        data-bs-target={
+                                            numeral + prefixEdit + product.id
+                                        }
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +132,9 @@ export default function ProductTable({ localProducts }) {
                                         type="button"
                                         className="btn btn-danger listButton "
                                         data-bs-toggle="modal"
-                                        data-bs-target="#deleteProductModal"
+                                        data-bs-target={
+                                            numeral + prefixDelete + product.id
+                                        }
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +155,10 @@ export default function ProductTable({ localProducts }) {
                                         product={product}
                                         key={product.id + 10000}
                                     />
-                                    <EditProductModal key={product.id + 50} />
+                                    <EditProductModal
+                                        product={product}
+                                        key={product.id + 50}
+                                    />
                                     <DetailProductModal
                                         product={product}
                                         key={product.id + 800000}

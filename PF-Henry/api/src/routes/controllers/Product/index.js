@@ -1,3 +1,4 @@
+const { Sequelize } = require("sequelize");
 const {
     Product,
     Category,
@@ -15,6 +16,9 @@ module.exports = {
                 },
                 {
                     model: Order,
+                },
+                {
+                    model: Review,
                 },
             ],
         });
@@ -67,7 +71,7 @@ module.exports = {
         let product = await Product.findOne({
             where: { id: obj.id },
         });
-        await product.addCategory(findCategory);
+        await product.setCategory(findCategory);
         //    await product.setTrademark(findTrademark);
         product = await Product.update(
             {
@@ -106,6 +110,7 @@ module.exports = {
                 category: "Electro-Acoustic Guitars",
                 brand: "Taylor",
                 model: "255ce",
+                active: true,
             },
             {
                 name: "Electro-Acoustic Guitars",
@@ -117,6 +122,7 @@ module.exports = {
                 category: "Electro-Acoustic Guitars",
                 brand: "Taylor",
                 model: "214ce",
+                active: true,
             },
             {
                 name: "Electro-Acoustic Guitars",
@@ -128,6 +134,7 @@ module.exports = {
                 category: "Electro-Acoustic Guitars",
                 brand: "Taylor",
                 model: "GS Mini Rosewood",
+                active: true,
             },
             {
                 name: "Electric Guitars",
@@ -139,6 +146,7 @@ module.exports = {
                 category: "Electric Guitars",
                 brand: "Gibson",
                 model: "ES 335",
+                active: true,
             },
             {
                 name: "Electric Guitars",
@@ -150,6 +158,7 @@ module.exports = {
                 category: "Electric Guitars",
                 brand: "Gibson",
                 model: "Les Paul Standard '50s - Gold Top",
+                active: true,
             },
             {
                 name: "Electric Bass",
@@ -161,6 +170,7 @@ module.exports = {
                 category: "Electric Bass",
                 brand: "Music Man",
                 model: "StyngRay",
+                active: true,
             },
             {
                 name: "Digital Keyboards",
@@ -172,6 +182,7 @@ module.exports = {
                 category: "Digital Keyboards",
                 brand: "Yamaha",
                 model: "PSR-EW310",
+                active: true,
             },
             {
                 name: "Digital Drums",
@@ -183,6 +194,7 @@ module.exports = {
                 category: "Digital Drums",
                 brand: "Yamaha",
                 model: "DTX6K-X",
+                active: true,
             },
             {
                 name: "Acoustic Violin",
@@ -194,6 +206,7 @@ module.exports = {
                 category: "Acoustic Violin",
                 brand: "Yamaha",
                 model: "AV5-SKU",
+                active: true,
             },
             {
                 name: "Electric Violin",
@@ -205,6 +218,7 @@ module.exports = {
                 category: "Electric Violin",
                 brand: "Yamaha",
                 model: "YEV-105",
+                active: true,
             },
             {
                 name: "Electric Guitars",
@@ -216,6 +230,7 @@ module.exports = {
                 category: "Electric Guitars",
                 brand: "Fender",
                 model: "AMERICAN ORIGINAL '60S TELECASTER THINLINE",
+                active: true,
             },
             {
                 name: "Digital Keyboards",
@@ -227,6 +242,7 @@ module.exports = {
                 category: "Digital Keyboards",
                 brand: "Nord",
                 model: "Piano 5",
+                active: true,
             },
             {
                 name: "Digital Drums",
@@ -238,6 +254,7 @@ module.exports = {
                 category: "Digital Drums",
                 brand: "Nord",
                 model: "Drum 3p",
+                active: true,
             },
             {
                 name: "Electric Guitars",
@@ -249,6 +266,7 @@ module.exports = {
                 category: "Electric Guitars",
                 brand: "Taylor",
                 model: "T5 Classic",
+                active: true,
             },
             {
                 name: "Digital Keyboards",
@@ -260,9 +278,10 @@ module.exports = {
                 category: "Digital Keyboards",
                 brand: "Nord",
                 model: "Lead A1",
+                active: true,
             },
         ];
-        await Products.bulkCreate(products);
+        await Product.bulkCreate(products);
         return "Productos creados";
     },
 };

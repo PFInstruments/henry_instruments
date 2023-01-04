@@ -20,17 +20,19 @@ module.exports = {
         return user;
     },
     createUser: async (
-        name,
+        name, 
+        surname,
         phone_num,
         email,
         password,
         adress,
         isAdmin = false
     ) => {
-        if ((!name || !phone_num || !email || !password, !adress))
+        if ((!name || !phone_num || !email || !password || !adress || !surname))
             throw new Error("insufficient arguments to create User");
         await User.create({
             name,
+            surname,
             phone_num,
             email,
             password,
@@ -43,6 +45,7 @@ module.exports = {
     updateUser: async (
         id,
         name,
+        surname,
         phone_num,
         email,
         password,
@@ -54,6 +57,7 @@ module.exports = {
         });
 
         if (!name) name = user.name;
+        if (!surname) surname = user.surname;
         if (!phone_num) phone_num = user.phone_num;
         if (!email) email = user.email;
         if (!password) password = user.password;
@@ -63,6 +67,7 @@ module.exports = {
         await User.update(
             {
                 name,
+                surname,
                 phone_num,
                 email,
                 password,
@@ -82,6 +87,7 @@ module.exports = {
         const users = [
             {
                 name: "Benja",
+                surname: "Grupo",
                 email: "correoloco@benja.com",
                 phone_num: "123789",
                 adress: "este es mi adress loco",
@@ -90,6 +96,7 @@ module.exports = {
             },
             {
                 name: "Andy",
+                surname: "Grupo",
                 email: "correoloco@andy.com",
                 phone_num: "123789",
                 adress: "este es mi adress loco",
@@ -98,42 +105,8 @@ module.exports = {
             },
             {
                 name: "Antonio",
+                surname: "Grupo",
                 email: "correoloco@antonio.com",
-                phone_num: "123789",
-                adress: "este es mi adress loco",
-                password: "asdassd",
-            },
-            {
-                name: "Mari",
-                email: "correoloco@mari.com",
-                phone_num: "123789",
-                adress: "este es mi adress loco",
-                password: "asdassd",
-            },
-            {
-                name: "Henrique",
-                email: "correoloco@henrique.com",
-                phone_num: "123789",
-                adress: "este es mi adress loco",
-                password: "asdassd",
-            },
-            {
-                name: "Guille",
-                email: "correoloco@guille.com",
-                phone_num: "123789",
-                adress: "este es mi adress loco",
-                password: "asdassd",
-            },
-            {
-                name: "Santi",
-                email: "correoloco@santi.com",
-                phone_num: "123789",
-                adress: "este es mi adress loco",
-                password: "asdassd",
-            },
-            {
-                name: "Facu",
-                email: "correoloco@facu.com",
                 phone_num: "123789",
                 adress: "este es mi adress loco",
                 password: "asdassd",

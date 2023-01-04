@@ -19,7 +19,7 @@ export default function ManageBarUsers(/*{}*/) {
                     </button>
                 </form>
 
-                <label className="text-white">Role:</label>
+                <label className="text-white">ROLE:</label>
                 <form>
                     <select
                         className="form-select"
