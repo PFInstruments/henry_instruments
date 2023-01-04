@@ -3,17 +3,51 @@ import "./Card.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart, addFavProduct } from "../../Redux/actions";
+import Swal from 'sweetalert2'
 
 const Card = (props) => {
     const dispatch = useDispatch();
     const fav = useSelector((state) => state.ProductFav);
+    const cart = useSelector((state) => state.cart);
 
     const handleAddToCart = () => {
         dispatch(addToCart(props));
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Added to Cart'
+          })
     };
 
     const handleAddProductFav = () => {
         dispatch(addFavProduct(props));
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Added to Favorites'
+          })
     };
 
     return (
@@ -39,10 +73,12 @@ const Card = (props) => {
                         <div className="text-center  tw-grid tw-grid-cols-2">
                             <button
                                 type="button"
-                                className="btn btn-warning"
+                                className="btn btn-warning btn-sm"
                                 onClick={handleAddToCart}
+                                disabled={cart.find(({ id }) => id === props.id)}
                             >
-                                Add to cart
+                                <i className="bi bi-cart-plus-fill"></i>
+
                             </button>
                             <div className="clearfix mb-1">
                                 <div className="float-end">

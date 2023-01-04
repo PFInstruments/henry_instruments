@@ -8,15 +8,21 @@ import {
     getProductDetail,
     addToCart,
     getReviews,
+    addFavProduct,
 } from "../../Redux/actions";
 import ReviewForm from "../ReviewForm/ReviewForm";
 import "./productDetail.css";
 import Loading from "../Loading/Loading";
+import Swal from "sweetalert2";
 
 const ProductDetail = () => {
     const { id } = useParams();
 
     const prDetail = useSelector((state) => state.productDetail);
+    const cart = useSelector((state) => state.cart);
+    const fav = useSelector((state) => state.ProductFav);
+    
+
 
     const dispatch = useDispatch();
 
@@ -28,7 +34,43 @@ const ProductDetail = () => {
 
     const handleAddToCart = () => {
         dispatch(addToCart(prDetail));
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Added to Cart'
+          })
     };
+    const handleAddProductFav = () => {
+        dispatch(addFavProduct(prDetail));
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Added to Favorites'
+          })
+    };
+
     let rating = prDetail.rating;
 
     return (
@@ -171,13 +213,17 @@ const ProductDetail = () => {
                                         <button
                                             className="btn btn-success btn-lg"
                                             onClick={handleAddToCart}
+                                            disabled={cart.find((p) => p.id === prDetail.id)}
                                         >
                                             Add to cart
                                         </button>
                                     </div>
                                     <div className="col-sm-12 col-md-6 col-lg-6">
                                         <div className="btn-group pull-right">
-                                            <button className="btn btn-white btn-default">
+                                            <button className="btn btn-white btn-default" 
+                                            onClick={handleAddProductFav}
+                                            disabled={fav.find((p) => p.id === prDetail.id)}
+                                            >
                                                 <i className="fa fa-star"></i> Add
                                                 to wishlist
                                             </button>
