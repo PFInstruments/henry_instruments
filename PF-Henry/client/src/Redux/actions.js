@@ -12,8 +12,11 @@ export const MP_CHECKOUT = "MP_CHECKOUT";
 export const POST_REVIEW = "POST_REVIEW";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
+export const POST_CATEGORY = "POST_CATEGORY";
+export const DELETE_CATEGORY = "DELETE_CATEGORY";
 //export const GET_ORDERS_USER = ' GET_ORDERS_USER';
 export const ADD_FAV = "ADD_FAV";
+export const DELETE_REVIEW = "DELETE_REVIEW";
 
 export const addToCart = (product) => async (dispatch) => {
   const cart = localStorage.getItem("cart")
@@ -66,26 +69,6 @@ export const getProducts = () => {
   };
 };
 
-export const getReviews = (productoId) => {
-  return async function (dispatch) {
-    try {
-      const detail = await axios.get(`/products/${productoId}`);
-      // const rating = await axios.get(`/review/rating/${productoId}`);
-      // const coments = await axios.get(`/review/${productoId}`);
-      return dispatch({
-        type: GET_REVIEWS,
-        payload: [
-          ...detail.data.reviews,
-          // rating: rating.data[0].rating,
-          // coments: coments.data
-        ],
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
-
 export const getProductDetail = (productoId) => {
   return async function (dispatch) {
     try {
@@ -124,6 +107,30 @@ export const getCategories = () => {
       console.log(error.message);
     }
   };
+};
+
+export const postCategory = (category) => {
+  return async (dispatch) => {
+    return await axios
+      .post("/category", category)
+      .then((res) => {
+        dispatch({ type: POST_CATEGORY, payload: res.data });
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const deleteCategory = (id) => {
+
+    return async (dispatch) => {
+        return await axios
+            .delete(`/category/${id}`)
+            .then((res) => {
+                dispatch({ type: DELETE_CATEGORY, payload: res.data });
+            })
+            .catch((error) => console.log(error));
+    };
+
 };
 
 export const getAllOrders = () => {
@@ -178,6 +185,26 @@ export const deleteUser = (id) => {
   };
 };
 
+export const getReviews = (productoId) => {
+  return async function (dispatch) {
+    try {
+      const detail = await axios.get(`/products/${productoId}`);
+      // const rating = await axios.get(`/review/rating/${productoId}`);
+      // const coments = await axios.get(`/review/${productoId}`);
+      return dispatch({
+        type: GET_REVIEWS,
+        payload: [
+          ...detail.data.reviews,
+          // rating: rating.data[0].rating,
+          // coments: coments.data
+        ],
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 export const postReview = (review) => {
   return async (dispatch) => {
     return await axios
@@ -199,12 +226,18 @@ export function deleteActivity(idCountry, id) {
 }
 */
 
-export const mpCheckout = (parametros) => {
+/*export const mpCheckout = (cart) => {
   console.log(1);
   return async function (dispatch) {
     console.log(2);
     try {
-      const payment = await axios.post("/checkout",parametros);
+      const payment = await axios
+        .post("/checkout", cart)
+        .then(
+          (res) =>
+            (window.location.href = response.data.response.body.init_point)
+        );
+      console.log(payment);
       return dispatch({
         type: MP_CHECKOUT,
         payload: payment.data,
@@ -213,7 +246,7 @@ export const mpCheckout = (parametros) => {
       console.log(e.message);
     }
   };
-};
+};*/
 
 export const addFavProduct = (product) => {
   return {
@@ -221,3 +254,17 @@ export const addFavProduct = (product) => {
     payload: product,
   };
 };
+
+export const deleteReview = (id) => {
+    return async (dispatch) => {
+        try {
+            axios.delete(`/review/${id}`);
+            return dispatch({
+                type: DELETE_REVIEW,
+                payload: id,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}

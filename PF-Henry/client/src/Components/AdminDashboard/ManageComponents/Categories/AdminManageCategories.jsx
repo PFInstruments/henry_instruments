@@ -1,30 +1,21 @@
 // import { getAllCategories } from "../../../../Redux/actions";
-import React, { /*Fragment,, useEffect  */ useState } from "react";
-//import { useDispatch /* useSelector*/ } from "react-redux";
+import React, { useEffect, useState } from "react";
+// import { useDispatch /* useSelector*/ } from "react-redux";
 import ManageBarCategories from "./ManageBarCategories";
 import CategoryTable from "./CategoryTable";
 
-export default function SellerManageCategories() {
+export default function SellerManageCategories({ allCategories, allProducts }) {
     ///DISPATCH///
-    //const dispatch = useDispatch();
-
-    ///ESTADOS GLOBALES///
-
-    //   const { allCategories } = useSelector((state) => state);
+    // const dispatch = useDispatch();
 
     /// ESTADOS LOCALES ///
     const [localCategories, setLocalCategories] = useState([]);
 
     /// HOOKS //
-    /*
     useEffect(() => {
-        dispatch(getAllCategories());
-    }, []);
-
-    useEffect(() => {
-        setLocalCategories(allCategories);
+        setLocalCategories(allCategories.categories);
     }, [allCategories]);
-*/
+
     /// RENDER ///
     return (
         <div>
@@ -32,10 +23,17 @@ export default function SellerManageCategories() {
                 <ManageBarCategories
                     localCategories={localCategories}
                     setLocalCategories={setLocalCategories}
+                    allProducts={allProducts}
+                    allCategories={allCategories}
                 />
             </div>
             <div>
-                <CategoryTable localCategories={localCategories} />
+                <CategoryTable
+                    allCategories={allCategories}
+                    localCategories={localCategories}
+                    allProducts={allProducts}
+                    setLocalCategories={setLocalCategories}
+                />
             </div>
         </div>
     );

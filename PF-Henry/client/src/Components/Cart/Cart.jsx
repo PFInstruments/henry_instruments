@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteFromCart, ADD_TO_CART, mpCheckout } from "../../Redux/actions";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Cart = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -27,17 +28,18 @@ const Cart = ({ history }) => {
     });
   };
 
-  const handleCheckout = () => {
-    const price = cart
+  /*const handleCheckout = () => {
+    /*const price = cart
       .reduce(
         (currentSum, currentCartItem) =>
           currentSum + currentCartItem.count * currentCartItem.price,
         0
       )
       .toFixed(2);
-    console.log(price);
-    dispatch(mpCheckout({ name: "Total compra", price, quantity: "1" }));
-  };
+    console.log(cart); //array de items
+    console.log(price); */
+  /*dispatch(mpCheckout(cart));
+  };*/
 
   return (
     <section className="cart-page m4">
@@ -55,7 +57,6 @@ const Cart = ({ history }) => {
               <table className="table">
                 <thead>
                   <tr>
-                    <th scope="col"></th>
                     <th scope="col">Product</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
@@ -69,9 +70,7 @@ const Cart = ({ history }) => {
                         {" "}
                         <Link to={`/product/${props.id}`}>{props.name}</Link>
                       </td>
-                      <td>
-                        {/*} {props.price.toLocaleString("en-US", {style:"currency", currency:"USD"})}*/}
-                      </td>
+                      <td>$ {props.price}</td>
                       <td>
                         <input
                           type="number"
@@ -112,7 +111,15 @@ const Cart = ({ history }) => {
                   .toFixed(2)}
               </p>
               <button
-                onClick={handleCheckout}
+                onClick={() =>
+                  axios
+                    .post("/checkout", cart)
+                    .then(
+                      (res) =>
+                        (window.location.href =
+                          res.data.response.body.init_point)
+                    )
+                }
                 className="btn btn-dark btn-large btn-block mb-5 py-2"
               >
                 Proceed to Checkout

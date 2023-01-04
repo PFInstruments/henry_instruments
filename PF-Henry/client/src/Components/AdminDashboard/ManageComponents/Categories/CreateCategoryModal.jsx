@@ -1,21 +1,19 @@
 // import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 import React, { useState, useReducer /*useEffect */ } from "react";
-//import { useDispatch /* useSelector */ } from "react-redux";
-// import { getAllCategories, postCategory } from "../../../../Redux/actions";
-
+import { useDispatch /* useSelector */ } from "react-redux";
+import { getCategories, postCategory } from "../../../../Redux/actions";
 //import checkmark from "../../../../Images/checkmark.gif";
-// import { useDispatch /* useSelector */ } from "react-redux";
-// import { getAllCategories, postCategory } from "../../../../Redux/actions";
 // import checkmark from "../../../../Images/checkmark.gif";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
+// import { useEffect } from "react";
 
-export default function CreateCategoryModal() {
+export default function CreateCategoryModal({ localCategories }) {
     ///DISPATCH///
-    //const dispatch = useDispatch();
-    ///ESTADOS GLOBALES///
+    const dispatch = useDispatch();
 
     ///ESTADOS LOCALES///
-    //const [disabledSubmit, setDisabledSubmit] = useState(true);
+    //  const [disabledSubmit, setDisabledSubmit] = useState(true);
+    // const [nameExists, setNameExists] = useState(false);
     //const [checkActive, setCheckActive] = useState([]);
     const [postSuccess, setPostSuccess] = useState(false);
 
@@ -51,16 +49,34 @@ export default function CreateCategoryModal() {
     );
 
     ///HOOKS///
+    //FUnciones//
+    function refresh() {
+        setPostSuccess(false);
+
+        dispatch(getCategories());
+    }
+
+    // function findCategory(c) {
+    //     let exists = [];
+    //     localCategories?.categories.map((cat) => {
+    //         if (cat.name == c) {
+    //             exists.push(cat.name);
+    //         }
+    //     });
+    //     if (exists.length > 0) {
+    //     } else {
+    //         setNameExists(false);
+    //         setDisabledSubmit(false);
+    //     }
+    // }
 
     //EVENT HANDLERS///
 
     function handleSubmit(e) {
         e.preventDefault();
-        //   dispatch(postCategory(categoryForm));
-        // dispatch(getAllCategories());
-        setPostSuccess(true);
+        dispatch(postCategory(categoryForm));
 
-        console.log(categoryForm);
+        setPostSuccess(true);
 
         setCategoryForm({ type: "SUBMIT" });
     }
@@ -109,12 +125,12 @@ export default function CreateCategoryModal() {
                                         className="form-control"
                                         id="category-name"
                                         value={categoryForm.name}
-                                        onChange={(e) =>
+                                        onChange={(e) => {
                                             setCategoryForm({
                                                 type: "SET_NAME",
                                                 payload: e.target.value,
-                                            })
-                                        }
+                                            });
+                                        }}
                                     />
                                 </div>
 
@@ -129,6 +145,7 @@ export default function CreateCategoryModal() {
                                     <button
                                         type="submit"
                                         className="btn btn-success"
+                                        // disabled={disabledSubmit}
                                     >
                                         Add Category +
                                     </button>
@@ -150,7 +167,7 @@ export default function CreateCategoryModal() {
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
-                                onClick={(e) => setPostSuccess(false)}
+                                onClick={(e) => refresh()}
                             ></button>
                         </div>
                         <div className="modal-body">
@@ -168,14 +185,14 @@ export default function CreateCategoryModal() {
                                     type="button"
                                     className="btn btn-secondary"
                                     data-bs-dismiss="modal"
-                                    onClick={(e) => setPostSuccess(false)}
+                                    onClick={(e) => refresh()}
                                 >
                                     Close
                                 </button>
                                 <button
                                     type="button"
                                     className="btn btn-success"
-                                    onClick={(e) => setPostSuccess(false)}
+                                    onClick={(e) => refresh()}
                                 >
                                     Add another Category +
                                 </button>

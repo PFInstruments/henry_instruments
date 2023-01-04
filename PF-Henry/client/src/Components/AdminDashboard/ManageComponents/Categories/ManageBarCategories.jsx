@@ -1,7 +1,11 @@
 import React /*useState */ from "react";
 import CreateCategoryModal from "./CreateCategoryModal";
 
-export default function ManageCategoryNavabar() {
+export default function ManageCategoryNavabar({
+    setLocalCategories,
+    allCategories,
+    localCategories,
+}) {
     ////ESTADOS LOCALES//////
     //   const [localOrder, setLocalOrder] = useState();
     //   const [localCategories, setLocalCategories] = useState();
@@ -39,7 +43,7 @@ export default function ManageCategoryNavabar() {
                 >
                     Add Category +
                 </button>
-                <CreateCategoryModal />
+                <CreateCategoryModal localCategories={localCategories} />
             </div>
         </nav>
     );

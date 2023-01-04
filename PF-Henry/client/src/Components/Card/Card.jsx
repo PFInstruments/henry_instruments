@@ -28,7 +28,9 @@ const Card = (props) => {
                             alt="..."
                         />
                     </Link>
-                    <div className="label-top shadow-sm">{props.brand}</div>
+                    <div className="label-top shadow-sm">
+                        {props.category.name}
+                    </div>
                     <div className="card-body">
                         <div className="clearfix mb-3">
                             <span className="float-start badge rounded-pill bg-success">{`$ ${props.price}`}</span>

@@ -1,6 +1,7 @@
 import React from "react";
-//import { deleteProduct, getAllProducts } from "../../../../Redux/actions";
+// import { deleteProduct, getAllProducts } from "../../../../Redux/actions";
 // import { useDispatch /*useSelector*/ } from "react-redux";
+import { prefixDelete } from "../../../Utils/variables";
 
 export default function DeleteProductModal({ product }) {
     ///DISPATCH///
@@ -11,9 +12,9 @@ export default function DeleteProductModal({ product }) {
 
     /////Event Handler/////
 
-    function handleDelete(e) {
+    function handleDelete(e, id) {
         e.preventDefault();
-        //    dispatch(deleteProduct(product.id));
+        // dispatch(deleteProduct(id));
         alert("Product Deleted!");
         //        dispatch(getAllProducts());
     }
@@ -21,7 +22,7 @@ export default function DeleteProductModal({ product }) {
     return (
         <div
             className="modal fade "
-            id="deleteProductModal"
+            id={prefixDelete + product.id}
             tabIndex="-1"
             aria-labelledby="deleteProductModalLabel"
             aria-hidden="true"
@@ -33,7 +34,7 @@ export default function DeleteProductModal({ product }) {
                             className="modal-title fs-5"
                             id="deleteProductModalLabel"
                         >
-                            Eliminate Product Confirmation
+                            Delete Product Confirmation
                         </h1>
                         <button
                             type="button"
@@ -53,7 +54,7 @@ export default function DeleteProductModal({ product }) {
                         <br />
                         <span>Name: {product.name} </span>
                         <br />
-                        <span>Category: {product.category} </span>
+                        <span>Category: {product.category?.name} </span>
                         <br />
                         <span>Price: ${product.price} </span>
                         <br />
@@ -74,7 +75,7 @@ export default function DeleteProductModal({ product }) {
                             type="button"
                             className="btn btn-danger"
                             onClick={(e) => {
-                                handleDelete(e);
+                                handleDelete(e, product.id);
                             }}
                         >
                             Delete Product

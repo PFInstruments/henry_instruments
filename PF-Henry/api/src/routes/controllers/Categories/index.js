@@ -33,4 +33,18 @@ module.exports = {
         await Category.bulkCreate(categories);
         return "Categorias creadas";
     },
+    deleteCategory: async (id) => {
+        if(!id) throw new Error("Faltan argumentos para eliminar categoria.");
+        await Category.destroy({ where: { id } });
+        return "Categoria eliminada.";
+    }, 
+    modifyCategory: async (changeCategory) => {
+        if(!changeCategory.name) throw new Error("Faltan argumentos para actualizar categoria.");
+        await Category.update({
+            name: changeCategory.name
+        },{
+            where: { id: changeCategory.id }
+        });
+        return "Categoria actualizada.";
+    },
 };

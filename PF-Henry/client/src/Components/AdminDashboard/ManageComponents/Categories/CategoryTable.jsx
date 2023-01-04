@@ -1,27 +1,10 @@
-import React, { /*Fragment, useEffect   useState */} from "react";
+import React /*Fragment, useEffect   useState */ from "react";
 //import { useDispatch, useSelector } from "react-redux";
 import DeleteCategoryModal from "./DeleteCategoryModal";
-
+import { prefixDelete, numeral, prefixEdit } from "../../../Utils/variables";
 import EditCategoryModal from "./EditCategoryModal";
-
+//a
 export default function CategoryTable({ localCategories }) {
-    //DISPATCH //
-    //const dispatch = useDispatch();
-
-    //estalo Local//
-    //const [refresh, setRefresh] = useState(true);
-    //const [testState, setTestState] = useState([]);
-
-    ////ESTADO GLOBAL/////
-    //const { allCategories } = useSelector((state) => state);
-
-    /*
-    ///HOOKS///
-    useEffect(() => {
-        setRefresh(!refresh);
-    }, [allCategories]);
-    */
-
     return (
         <div className="table-responsive">
             <table className="table table-hover ">
@@ -43,7 +26,7 @@ export default function CategoryTable({ localCategories }) {
                                 </td>
 
                                 <td className="align-middle ">
-                                    {category.stock}
+                                    {category.products.length}
                                 </td>
 
                                 <td className="align-middle">
@@ -51,7 +34,9 @@ export default function CategoryTable({ localCategories }) {
                                         type="button"
                                         className="btn btn-success listButton"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#editCategoryModal"
+                                        data-bs-target={
+                                            numeral + prefixEdit + category.id
+                                        }
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -71,10 +56,17 @@ export default function CategoryTable({ localCategories }) {
                                     </button>
 
                                     <button
+                                        disabled={
+                                            category.products.length > 0
+                                                ? true
+                                                : false
+                                        }
                                         type="button"
                                         className="btn btn-danger listButton "
                                         data-bs-toggle="modal"
-                                        data-bs-target="#deleteCategoryModal"
+                                        data-bs-target={
+                                            numeral + prefixDelete + category.id
+                                        }
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +84,7 @@ export default function CategoryTable({ localCategories }) {
                                         </svg>
                                     </button>
                                     <DeleteCategoryModal category={category} />
-                                    <EditCategoryModal />
+                                    <EditCategoryModal category={category} />
                                 </td>
                             </tr>
                         );

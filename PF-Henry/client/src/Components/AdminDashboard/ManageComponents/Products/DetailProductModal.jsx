@@ -1,8 +1,10 @@
+import { prefixDetail } from "../../../Utils/variables";
+
 export default function DetailProductModal({ product }) {
     return (
         <div
             className="modal fade "
-            id="detailProductModal"
+            id={prefixDetail + product.id}
             tabIndex="-1"
             aria-labelledby="detailProductModalLabel"
             aria-hidden="true"
@@ -38,14 +40,14 @@ export default function DetailProductModal({ product }) {
                         <br />
                         <span>Brand: {product.brand} </span>
                         <br />
-                        <span>Category: {product.category} </span>
+                        <span>Category: {product.category?.name} </span>
                         <br />
                         <span>Price: ${product.price} </span>
                         <br />
                         <span>Stock: {product.stock} </span>
                         <br />
-                        <span>Sales: {product.sales} </span>
-                        <br />
+                        {/* <span>Sales: {product.sales} </span>
+                        <br /> */}
                         <span>Description: {product.description} </span>
                     </div>
                     <div className="modal-footer">

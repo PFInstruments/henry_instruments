@@ -49,8 +49,16 @@ const postReview = async (image, name, score, comment, productId) => {
     return await newReview;
 };
 
+const deleteReview = async (id) => {
+    await Review.destroy({
+        where: { id: id },
+    });
+    return "Review eliminado";
+}
+
 module.exports = {
     postReview,
     getScore_Product,
     getAllReview_Product,
+    deleteReview,
 };
