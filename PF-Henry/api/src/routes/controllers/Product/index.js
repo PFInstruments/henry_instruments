@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 const { Product, Category, Order, Review } = require("../../../db");
-const cloudinary = require("../../../utils/cloudinary");
+const cloudinary = require("../../../Utils/cloudinary");
 
 module.exports = {
     listProducts: async () => {
