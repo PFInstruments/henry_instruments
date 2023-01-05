@@ -3,14 +3,18 @@ import React, { useState, useReducer /* useEffect */ } from "react";
 import { useDispatch /* useSelector*/ } from "react-redux";
 import {
     getProducts,
-    // postProduct,
+    postProduct,
+
     //   getAllCategories,
 } from "../../../../Redux/actions";
 
 // import checkmark from "../../../../Images/checkmark.gif";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
 
-export default function CreateProductModal({ localCategories }) {
+export default function CreateProductModal({
+    localCategories,
+    setLocalProducts,
+}) {
     ///DISPATCH///
     const dispatch = useDispatch();
 
@@ -121,12 +125,6 @@ export default function CreateProductModal({ localCategories }) {
         initialState
     );
 
-    ///HOOKS///
-    /*
-    useEffect(() => {
-        dispatch(getAllCategories());
-    }, []);
-*/
     ////SETEO LA FOTO  A BASE 64////
 
     const setFileToBase = (file) => {
@@ -139,6 +137,7 @@ export default function CreateProductModal({ localCategories }) {
                     payload: reader.result,
                 });
             };
+            console.log(productForm);
         } else {
             setProductForm({
                 type: "SET_IMAGE",
@@ -164,6 +163,11 @@ export default function CreateProductModal({ localCategories }) {
     //     }
     // };
 
+    const refresh = (e) => {
+        setPostSuccess(false);
+        dispatch(getProducts());
+    };
+
     const handleImage = (e) => {
         const file = e.target.files[0];
         setFileToBase(file);
@@ -171,8 +175,8 @@ export default function CreateProductModal({ localCategories }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        //  dispatch(postProduct(productForm));
-        dispatch(getProducts());
+        dispatch(postProduct(productForm));
+
         setPostSuccess(true);
         console.log(productForm);
 
@@ -450,7 +454,7 @@ export default function CreateProductModal({ localCategories }) {
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
-                                onClick={(e) => setPostSuccess(false)}
+                                onClick={(e) => refresh()}
                             ></button>
                         </div>
                         <div className="modal-body">
@@ -468,14 +472,14 @@ export default function CreateProductModal({ localCategories }) {
                                     type="button"
                                     className="btn btn-secondary"
                                     data-bs-dismiss="modal"
-                                    onClick={(e) => setPostSuccess(false)}
+                                    onClick={(e) => refresh()}
                                 >
                                     Close
                                 </button>
                                 <button
                                     type="button"
                                     className="btn btn-success"
-                                    onClick={(e) => setPostSuccess(false)}
+                                    onClick={(e) => refresh()}
                                 >
                                     Add another Product +
                                 </button>

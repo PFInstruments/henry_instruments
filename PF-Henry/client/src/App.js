@@ -12,6 +12,7 @@ import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import Cart from "./Components/Cart/Cart";
 
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -19,7 +20,7 @@ function App() {
       <div>
         <Route path="/" render={() => <NavBar />} />
         <Route exact path="/" render={() => <Home />} />
-        <Route exact path="/admin" render={() => <AdminDashboard />} /> 
+        <Route exact path="/admin" render={() => <AdminDashboard />} />
         <Route
           exact
           path="/productdetail/:id"

@@ -6,13 +6,14 @@ import {
   GET_CATEGORIES,
   GET_ORDERS,
   PUT_USER,
-  GET_USERS, POST_REVIEW,
-  MP_CHECKOUT,
+  GET_USERS,
+  POST_REVIEW,
+  // MP_CHECKOUT,
   ADD_TO_CART,
   DELETE_FROM_CART,
-  ADD_FAV
+  ADD_FAV,
+  DELETE_REVIEW,
 } from "./actions";
-
 
 const initialState = {
   allBuyers: [], // Administrativos
@@ -26,13 +27,19 @@ const initialState = {
   allUsers: [],
   cart: [],
   postReview: {},
-  ProductFav: []
+  fav: [],
 };
 
 if (localStorage.getItem("cart")) {
   initialState.cart = JSON.parse(localStorage.getItem("cart"));
 } else {
   initialState.cart = [];
+}
+
+if (localStorage.getItem("fav")) {
+  initialState.fav = JSON.parse(localStorage.getItem("fav"));
+} else {
+  initialState.fav = [];
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -53,14 +60,13 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         reviews: action.payload.reverse(),
-
       };
 
     case CLEAR_PAGE_PRODUCT_DETAIL:
       return {
         ...state,
         productDetail: {},
-        reviews: []
+        reviews: [],
       };
 
     case GET_CATEGORIES:
@@ -77,7 +83,7 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: action.payload,
-      }
+      };
     case GET_ORDERS:
       return {
         ...state,
@@ -93,20 +99,25 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
       };
 
-    case MP_CHECKOUT:
+    /*case MP_CHECKOUT:
       return {
         ...state,
         cart: [],
-      };
+      };*/
     case POST_REVIEW:
       return {
         ...state,
-        postReview: action.payload
-      }
+        postReview: action.payload,
+      };
     case ADD_FAV:
       return {
         ...state,
-        ProductFav: [...state.ProductFav, action.payload]
+        fav: [...state.fav, action.payload]
+      }
+    case DELETE_REVIEW:
+      return {
+        ...state,
+        reviews: state.reviews.filter(r => r.id !== action.payload)
       }
 
     default:

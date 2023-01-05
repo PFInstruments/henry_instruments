@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
             model,
             active
         );
-        res.status(200).send(createProduct.setCategory(findCategory));
+        res.status(200).send(await createProduct.setCategory(findCategory));
     } catch (error) {
         res.status(404).send(error.message);
     }

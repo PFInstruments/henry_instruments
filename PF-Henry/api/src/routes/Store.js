@@ -8,26 +8,75 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res) => {
-    const { banner, logo, phoneNumber, email, adress, country, city, state, zip } = req.body;
-    if (!banner || !logo || !phoneNumber || !email || !adress || !country || !city || !state || !zip) {
+    const { carrousel, icon, phoneNumber, email, adress, country, city, state, zip } = req.body;
+    if (!carrousel || !icon || !phoneNumber || !email || !adress || !country || !city || !state || !zip) {
         res.status(400).json({ info: 'falta ingresar un dato' })
     }
     try {
-        controllers.postStore(banner, logo, phoneNumber, email, adress, country, city, state, zip);
+        controllers.postStore(carrousel, icon, phoneNumber, email, adress, country, city, state, zip);
         res.status(200).send('Tienda creada');
     } catch (error) {
         res.status(404).send(error.message);
     }
 });
 
-router.put('/product/:id', (req, res) => {
-    const { id } = req.params;
-    const { banner, logo, phoneNumber, email, adress, country, city, state, zip } = req.body;
+// router.put('/product/:id', (req, res) => {
+//     const { id } = req.params;
+//     const { carrousel, icon, phoneNumber, email, adress, country, city, state, zip } = req.body;
 
-    let changeStore = {
-        id: parseInt(id),
-        banner,
-        logo,
+//     let changeStore = {
+//         id: parseInt(id),
+//         carrousel,
+//         icon,
+//         phoneNumber,
+//         email,
+//         adress,
+//         country,
+//         city,
+//         state,
+//         zip
+//     }
+
+//     if (!changeStore.carrousel) {
+//         delete changeStore.carrousel
+//     }
+//     if (!changeStore.icon) {
+//         delete changeStore.icon
+//     }
+//     if (!changeStore.phoneNumber) {
+//         delete changeStore.phoneNumber
+//     }
+//     if (!changeStore.email) {
+//         delete changeStore.email
+//     }
+//     if (!changeStore.adress) {
+//         delete changeStore.adress
+//     }
+//     if (!changeStore.country) {
+//         delete changeStore.country
+//     }
+//     if (!changeStore.city) {
+//         delete changeStore.city
+//     }
+//     if (!changeStore.state) {
+//         delete changeStore.state
+//     }
+//     if (!changeStore.zip) {
+//         delete changeStore.zip
+//     }
+//     try {
+//         let store =
+//             controllers.listStores().modifyStore(changeStore);
+//         res.status(200).send(store)
+//     } catch (error) {
+//         res.status(404).send({ error: 'Store no cambiada' })
+//     }
+// })
+router.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const {
+        carrousel,
+        icon,
         phoneNumber,
         email,
         adress,
@@ -35,42 +84,25 @@ router.put('/product/:id', (req, res) => {
         city,
         state,
         zip
-    }
-
-    if (!changeStore.banner) {
-        delete changeStore.banner
-    }
-    if (!changeStore.logo) {
-        delete changeStore.logo
-    }
-    if (!changeStore.phoneNumber) {
-        delete changeStore.phoneNumber
-    }
-    if (!changeStore.email) {
-        delete changeStore.email
-    }
-    if (!changeStore.adress) {
-        delete changeStore.adress
-    }
-    if (!changeStore.country) {
-        delete changeStore.country
-    }
-    if (!changeStore.city) {
-        delete changeStore.city
-    }
-    if (!changeStore.state) {
-        delete changeStore.state
-    }
-    if (!changeStore.zip) {
-        delete changeStore.zip
-    }
+    } = req.body;
+    let update = {
+        id,
+        carrousel,
+        icon,
+        phoneNumber,
+        email,
+        adress,
+        country,
+        city,
+        state,
+        zip
+    };
     try {
-        let store =
-            controllers.listStores().modifyStore(changeStore);
-        res.status(200).send(store)
+        let change = await controllers.updateStore(update);
+        res.status(200).send(change);
     } catch (error) {
-        res.status(404).send({ error: 'Store no cambiada' })
+        res.status(404).send(error.message);
     }
-})
+});
 
 module.exports = router;
