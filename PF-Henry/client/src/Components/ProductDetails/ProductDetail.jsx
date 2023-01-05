@@ -84,7 +84,7 @@ const ProductDetail = () => {
                             <div className="col-md-5 col-sm-12 col-xs-12">
                                 <div>
                                     <img
-                                        className="card-img-top "
+                                        className="tw-inset-x-2"
                                         style={{
                                             maxWidth: "100%",
                                             maxHeight: "100%",
@@ -92,41 +92,8 @@ const ProductDetail = () => {
                                         src={prDetail.image}
                                         alt="imagen no encontrada"
                                     />
-                                    <div
-                                        className="accordion"
-                                        id="accordionExample"
-                                    >
-                                        <div className="accordion-item">
-                                            <h2
-                                                className="accordion-header"
-                                                id="headingThree"
-                                            >
-                                                <button
-                                                    className="accordion-button collapsed"
-                                                    type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseThree"
-                                                    aria-expanded="false"
-                                                    aria-controls="collapseThree"
-                                                >
-                                                    Description
-                                                </button>
-                                            </h2>
-                                            <div
-                                                id="collapseThree"
-                                                className="accordion-collapse collapse"
-                                                aria-labelledby="headingThree"
-                                                data-bs-parent="#accordionExample"
-                                            >
-                                                <div className="accordion-body">
-                                                    {prDetail.description}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-
                             <div className="col-md-6 col-md-offset-1 col-sm-12 col-xs-12">
                                 <h2 className="name">
                                     {`${prDetail.name} ${prDetail.brand} ${prDetail.model}`}
@@ -179,7 +146,25 @@ const ProductDetail = () => {
                                     <h6>({prDetail.reviews?.length}) Reviews </h6>
                                 </div>
                                 <hr />
-                                <h3>{`$ ${prDetail.price}`}</h3>
+                                <div className="tw-grid tw-grid-cols-3">
+                                         <h3>{`$ ${prDetail.price}`}</h3>
+                                        <button
+                                            className="btn btn-success "
+                                            onClick={handleAddToCart}
+                                            disabled={cart.find((p) => p.id === prDetail.id)}
+                                        >
+                                            Add to cart
+                                        </button>
+                                        <div className="btn-group pull-right">
+                                            <button className="btn btn-white btn-default" 
+                                            onClick={handleAddProductFav}
+                                            disabled={fav.find((p) => p.id === prDetail.id)}
+                                            >
+                                                <i className="fa fa-star"></i> Add
+                                                to wishlist
+                                            </button>
+                                    </div>
+                                </div>
                                 <hr />
                                 <ul className="list-group">
                                     <li className="hoverEffect list-group-item d-flex justify-content-between align-items-center">
@@ -207,30 +192,10 @@ const ProductDetail = () => {
                                         </span>
                                     </li>
                                 </ul>
-                                <hr />
-                                <div className="row">
-                                    <div className="col-sm-12 col-md-6 col-lg-6">
-                                        <button
-                                            className="btn btn-success btn-lg"
-                                            onClick={handleAddToCart}
-                                            disabled={cart.find((p) => p.id === prDetail.id)}
-                                        >
-                                            Add to cart
-                                        </button>
-                                    </div>
-                                    <div className="col-sm-12 col-md-6 col-lg-6">
-                                        <div className="btn-group pull-right">
-                                            <button className="btn btn-white btn-default" 
-                                            onClick={handleAddProductFav}
-                                            disabled={fav.find((p) => p.id === prDetail.id)}
-                                            >
-                                                <i className="fa fa-star"></i> Add
-                                                to wishlist
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <br />
                             </div>
+                            <h4 className="tw-flex tw-items-center tw-justify-center">Descriptions</h4>
+                            <p> {prDetail.description}</p>
                         </div>
                     </div>
                 }
