@@ -13,6 +13,7 @@ import {
   DELETE_FROM_CART,
   ADD_FAV,
   DELETE_REVIEW,
+  CHECKOUT_ADD
 } from "./actions";
 
 const initialState = {
@@ -118,6 +119,11 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         reviews: state.reviews.filter(r => r.id !== action.payload)
+      }
+    case CHECKOUT_ADD:
+      return {
+        ...state,
+        cart: [],
       }
 
     default:

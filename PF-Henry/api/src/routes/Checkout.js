@@ -16,7 +16,9 @@ mercadopago.configure({
 console.log("ACCESS_TOKEN:", ACCESS_TOKEN);
 
 // Establece un middleware para parsear el cuerpo de la solicitud como una URL codificada
-router.use(bodyParser.urlencoded({ extended: false }));
+// router.use(bodyParser.urlencoded({ extended: false }));
+router.use(express.urlencoded({extended: true}));
+router.use(express.json());
 
 // Establece una ruta POST para crear una preferencia de pago
 router.post("/", (req, res) => {

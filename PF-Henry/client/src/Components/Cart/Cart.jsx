@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteFromCart, ADD_TO_CART, mpCheckout } from "../../Redux/actions";
+import { deleteFromCart, ADD_TO_CART, checkoutadd } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -16,7 +16,7 @@ const Cart = ({ history }) => {
 
     cart.forEach((cartItem) => {
       if (cartItem.id === props.id) {
-        cartItem.count = e.target.value;
+        cartItem.quantity = e.target.value;
       }
     });
 
@@ -28,19 +28,21 @@ const Cart = ({ history }) => {
     });
   };
 
-  /*const handleCheckout = () => {
-    /*const price = cart
-      .reduce(
-        (currentSum, currentCartItem) =>
-          currentSum + currentCartItem.count * currentCartItem.price,
-        0
-      )
-      .toFixed(2);
-    console.log(cart); //array de items
-    console.log(price); */
-  /*dispatch(mpCheckout(cart));
-  };*/
-
+  const handleCheckout = (props) => {
+  // const price = cart
+  //     .reduce(
+  //       (currentSum, currentCartItem) =>
+  //         currentSum + currentCartItem.quantity * currentCartItem.price,
+  //       0
+  //     )
+  //     .toFixed(2);
+    // console.log(cart); //array de items
+    // console.log(price); 
+    // console.log(cart.quantity)
+  dispatch(checkoutadd(props));
+  };
+  console.log(cart)
+  // console.log(props)
   return (
     <section className="cart-page m4">
       {cart.length <= 0 ? (
@@ -76,7 +78,7 @@ const Cart = ({ history }) => {
                           type="number"
                           min="1"
                           max={props.stock}
-                          value={props.count}
+                          value={props.quantity}
                           onChange={(e) => handleQtyChange(e, props)}
                         />
                       </td>
@@ -89,42 +91,18 @@ const Cart = ({ history }) => {
                           <i className="far fa-trash-alt pr-1">Delete</i>
                         </button>
                       </td>
+                      <button
+                onClick={()=>{handleCheckout(props)} }
+                className="btn btn-dark btn-large btn-block mb-5 py-2"
+              >
+                Proceed to Checkout
+              </button>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <div className="col-md-4 border-left">
-              <h2>Cart Summary</h2>
-              <p className="font-weight-light text-muted border-bottom">
-                {cart.length === 1 ? "(1) Item" : `{${cart.length}} Items`}
-              </p>
-              <p className="font-weight-bold">
-                Total: $
-                {cart
-                  .reduce(
-                    (currentSum, currentCartItem) =>
-                      currentSum +
-                      currentCartItem.count * currentCartItem.price,
-                    0
-                  )
-                  .toFixed(2)}
-              </p>
-              <button
-                onClick={() =>
-                  axios
-                    .post("/checkout", cart)
-                    .then(
-                      (res) =>
-                        (window.location.href =
-                          res.data.response.body.init_point)
-                    )
-                }
-                className="btn btn-dark btn-large btn-block mb-5 py-2"
-              >
-                Proceed to Checkout
-              </button>
-            </div>
+           
           </div>
         </>
       )}
@@ -133,19 +111,3 @@ const Cart = ({ history }) => {
 };
 
 export default Cart;
-
-//Para la nav
-
-//const {cart} = useSelector(state => state.cart)
-
-//<li className="nav-item mr-2" style={{position: "relative"}}>
-//    <Link to="/cart" className="nav-link">
-//        <i className="fas fa-edit"></i>{" "}
-//        Cart{" "}
-//        <span
-//            className="badge badge-danger"
-//            style={{position: "absolute", top: "0px"}}>{cart.length}</span>
-//    </Link>
-//</li>
-
-//Anterior
