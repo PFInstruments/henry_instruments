@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart, addFavProduct } from "../../Redux/actions";
 
+
 const Card = (props) => {
     const dispatch = useDispatch();
     const fav = useSelector((state) => state.ProductFav);
@@ -41,6 +42,7 @@ const Card = (props) => {
                                 type="button"
                                 className="btn btn-warning"
                                 onClick={handleAddToCart}
+                                
                             >
                                 Add to cart
                             </button>
