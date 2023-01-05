@@ -8,7 +8,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
-            allowNull: false,
         },
         nickname: {
             type: DataTypes.STRING,
@@ -48,7 +47,7 @@ module.exports = (sequelize) => {
                 isEmail: {
                     args: true,
                     msg: "El campo email tiene que ser un correo valido",
-                }
+                },
             },
         },
         password: {
