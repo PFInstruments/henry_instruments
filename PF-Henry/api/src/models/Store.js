@@ -10,11 +10,11 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4
     },
     carrousel: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     icon: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     phoneNumber: {

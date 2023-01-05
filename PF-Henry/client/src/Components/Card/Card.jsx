@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 const Card = (props) => {
     const dispatch = useDispatch();
     const fav = useSelector((state) => state.fav);
-    const cart = useSelector((state) => state.cart);
+   // const cart = useSelector((state) => state.cart);
 
     const handleAddToCart = () => {
         dispatch(addToCart(props));
@@ -74,7 +74,6 @@ const Card = (props) => {
                                 type="button"
                                 className="btn btn-warning btn-sm"
                                 onClick={handleAddToCart}
-                                disabled={cart.find(({ id }) => id === props.id)}
                             >
                                 <i className="bi bi-cart-plus-fill"></i>
 
