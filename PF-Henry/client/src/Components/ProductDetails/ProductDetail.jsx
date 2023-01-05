@@ -202,7 +202,6 @@ const ProductDetail = () => {
             </div>
             <br />
             <hr />
-            <br />
             <ReviewForm />
         </div>
     );
