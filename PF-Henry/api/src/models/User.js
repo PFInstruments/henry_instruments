@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
-            allowNull: false,
+            primaryKey: true,
         },
         nickname: {
             type: DataTypes.STRING,
@@ -53,12 +53,6 @@ module.exports = (sequelize) => {
         password: {
             type: DataTypes.STRING,
             allowNull: true,
-            validate: {
-                len: {
-                    args: [7, 42],
-                    msg: "La contraseña debe tener entre 7 y 42 caracteres.",
-                },
-            },
         },
         email_Verified: {
             type: DataTypes.BOOLEAN,
@@ -68,5 +62,8 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
+    },
+    {
+        timestamps: false
     });
 };
