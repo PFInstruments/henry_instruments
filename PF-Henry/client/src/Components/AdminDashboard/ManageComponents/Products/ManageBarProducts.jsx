@@ -4,6 +4,7 @@ import CreateProductModal from "./CreateProductModal";
 export default function ManageBarProducts({
     localCategories,
     //  localProducts,
+    setLocalProducts,
 }) {
     ////ESTADOS LOCALES//////
     // const [localOrder, setLocalOrder] = useState();
@@ -59,7 +60,10 @@ export default function ManageBarProducts({
                 >
                     Add Product +
                 </button>
-                <CreateProductModal localCategories={localCategories} />
+                <CreateProductModal
+                    localCategories={localCategories}
+                    setLocalProducts={setLocalProducts}
+                />
             </div>
         </nav>
     );

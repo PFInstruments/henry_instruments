@@ -10,23 +10,17 @@ const initialForm = {
 
 const validationsForm = (form) => {
   let errors = {};
-  if (!form.name.trim()) {
-    errors.name = "Name is required";
-  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.name.trim())) {
-    errors.name = "Name is invalid";
-  }
-  if (!form.email.trim()) {
-    errors.email = "Email is required";
-  } else if (!/\S+@\S+\.\S+/.test(form.email.trim())) {
+ 
+  if (!/\S+@\S+\.\S+/.test(form.email.trim())) {
     errors.email = "Email is invalid";
   }
-  if (!form.message.trim()) {
-    errors.message = "Message is required";
-  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(form.message.trim())) {
-    errors.message = "Message is invalid";
-  }
-
   return errors;
+};
+
+let style = {
+  color: "red",
+  fontSize: "12px",
+  fontWeight: "bold",
 };
 
 export default function Contact() {
@@ -58,32 +52,30 @@ return (
                       <h3 className="mb-4">Contact Us</h3>
                       <div id="form-message-warning" className="mb-4"></div>
                       <div id="form-message-success" className="mb-4">
-
                       </div>
                       <form method="POST" onSubmit={handleSubmit} id="contactForm" name="contactForm" className="contactForm">
                         <div className="row">
                           <div className="col-md-6">
                             <div className="form-group">
                               <label className="label" htmlFor="name">Full Name</label>
-                              <input type="text" className="form-control" name="name" id="name" placeholder="Name" onBlur={handleBlur} value={form.naame} onChange={handleChange} required/>
+                              <input type="text" className="form-control" name="name" id="name" placeholder="Name" onBlur={handleBlur} onChange={handleChange} value={form.naame}  required/>
                             </div>
                           </div>
-                          {errors.name && <p className="alert alert-warning" role="alert" >{errors.name}</p>}
-                          
+                      
                           <div className="col-md-6">
                             <div className="form-group">
                               <label className="label" htmlFor="email">Email Address</label>
-                              <input type="email" className="form-control" name="email" id="email" placeholder="Email" onBlur={handleBlur} value={form.emmail} onChange={handleChange} required/>
+                              <input type="email" className="form-control" name="email" id="email" placeholder="Email" onBlur={handleBlur} onChange={handleChange} value={form.emmail}  required/>
                             </div>
                           </div>
-                          {errors.email && <p className="alert alert-warning" role="alert">{errors.email}</p>}
+                          {errors.email && <p style={style}>{errors.email}</p>}
                           <div className="col-md-12">
                             <div className="form-group">
                               <label className="label" htmlFor="#">Message</label>
-                              <textarea name="message" className="form-control" id="message" cols="30" rows="4" placeholder="Message" onBlur={handleBlur} value={form.menssage} onChange={handleChange} required></textarea>
+                              <textarea name="message" className="form-control" id="message" cols="30" rows="4" placeholder="Message" onBlur={handleBlur} onChange={handleChange} value={form.menssage}  required></textarea>
                             </div>
                           </div>
-                          {errors.message && <p className="alert alert-warning" role="alert">{errors.message}</p>}
+                     
                           <div className="col-md-12">
                             <div className="form-group">
                               <input type="submit" value="Send Message" className="btn btn-primary" />

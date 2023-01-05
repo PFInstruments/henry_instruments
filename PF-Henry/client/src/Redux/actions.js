@@ -20,6 +20,7 @@ export const DELETE_REVIEW = "DELETE_REVIEW";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const PUT_PRODUCT = "PUT_PRODUCT";
 export const PUT_CATEGORY = "PUT_CATEGORY";
+export const CHECKOUT_ADD = "CHECKOUT_ADD";
 
 export const addToCart = (product) => async (dispatch) => {
   const cart = localStorage.getItem("cart")
@@ -31,7 +32,7 @@ export const addToCart = (product) => async (dispatch) => {
   if (duplicates.length === 0) {
     const productToAdd = {
       ...product,
-      count: 1,
+      quantity: 1,
     };
 
     cart.push(productToAdd);
@@ -124,7 +125,6 @@ export const postCategory = (category) => {
 };
 
 export const deleteCategory = (id) => {
-
   return async (dispatch) => {
     return await axios
       .delete(`/category/${id}`)
@@ -133,7 +133,6 @@ export const deleteCategory = (id) => {
       })
       .catch((error) => console.log(error));
   };
-
 };
 
 export const getAllOrders = () => {
@@ -229,33 +228,46 @@ export function deleteActivity(idCountry, id) {
 }
 */
 
-/*export const mpCheckout = (cart) => {
-  console.log(1);
-  return async function (dispatch) {
-    console.log(2);
-    try {
-      const payment = await axios
-        .post("/checkout", cart)
-        .then(
-          (res) =>
-            (window.location.href = response.data.response.body.init_point)
-        );
-      console.log(payment);
-      return dispatch({
-        type: MP_CHECKOUT,
-        payload: payment.data,
-      });
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-};*/
+// export const mpCheckout = (cart) => {
+//   console.log(1);
+//   return async function (dispatch) {
+//     console.log(2);
+//     try {
+//       const payment = await axios
+//         .post("/checkout", cart)
+//         .then(
+//           (res) =>
+//             (window.location.href = response.data.response.body.init_point)
+//         );
+//       console.log(payment);
+//       return dispatch({
+//         type: MP_CHECKOUT,
+//         payload: payment.data,
+//       });
+//     } catch (e) {
+//       console.log(e.message);
+//     }
+//   };
+// };
 
-export const addFavProduct = (product) => {
-  return {
-    type: ADD_FAV,
-    payload: product,
-  };
+export const addFavProduct = (product) => async (dispatch) => {
+  const fav = localStorage.getItem("fav")
+    ? JSON.parse(localStorage.getItem("fav"))
+    : [];
+  const duplicates = fav.filter((cartItem) => cartItem.id === product.id);
+
+  if (duplicates.length === 0) {
+    const productToAdd = {
+      ...product,
+      count: 1,
+    };
+    fav.push(productToAdd);
+    localStorage.setItem("fav", JSON.stringify(fav));
+    dispatch({
+      type: ADD_FAV,
+      payload: product,
+    });
+  }
 };
 
 export const deleteReview = (id) => {
@@ -272,16 +284,21 @@ export const deleteReview = (id) => {
   };
 };
 
-export const postProduct = (product) => {
-  return async (dispatch) => {
-    return await axios
-      .post("/products", product)
-      .then((res) => {
-        dispatch({
-          type: POST_PRODUCT,
-          payload: res.data
-        });
+export const postProduct = (newProduct) => {
+  return async function (dispatch) {
+    return axios
+      .post("/products", {
+        name: newProduct.name,
+        image: newProduct.image,
+        category: newProduct.category,
+        model: newProduct.model,
+        brand: newProduct.brand,
+        price: newProduct.price,
+        description: newProduct.description,
+        stock: newProduct.stock,
+        active: newProduct.active,
       })
+      .then((json) => dispatch({ type: "POST_PRODUCT", payload: json.data }))
       .catch((error) => console.log(error));
   };
 };
@@ -293,7 +310,7 @@ export const putProduct = (id, info) => {
       .then((res) => {
         dispatch({
           type: PUT_PRODUCT,
-          payload: res.data
+          payload: res.data,
         });
       })
       .catch((error) => console.log(error));
@@ -307,12 +324,24 @@ export const putCategory = (id, info) => {
       .then((res) => {
         dispatch({
           type: PUT_CATEGORY,
-          payload: res.data
+          payload: res.data,
         });
       })
       .catch((error) => console.log(error));
   };
 };
 
-
-
+export const checkoutadd = (cart) => {
+  return async function (dispatch) {
+    try {
+      const payment = await axios.post("/checkout", cart);
+      window.location.href = payment.data.response.body.init_point;
+      dispatch({
+        type: CHECKOUT_ADD,
+        payload: payment.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
