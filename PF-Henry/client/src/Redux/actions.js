@@ -251,13 +251,26 @@ export function deleteActivity(idCountry, id) {
   };
 };*/
 
-export const addFavProduct = (product) => {
-    return {
+export const addFavProduct = (product) => async (dispatch) => {
+    const fav = localStorage.getItem("fav")
+      ? JSON.parse(localStorage.getItem("fav"))
+      : [];
+    const duplicates = fav.filter((cartItem) => cartItem.id === product.id);
+  
+    if (duplicates.length === 0) {
+      const productToAdd = {
+        ...product,
+        count: 1,
+      };
+      fav.push(productToAdd);
+      localStorage.setItem("fav", JSON.stringify(fav));
+      dispatch({
         type: ADD_FAV,
         payload: product,
-    };
-};
-
+      });
+    }
+  };
+  
 export const deleteReview = (id) => {
     return async (dispatch) => {
         try {
