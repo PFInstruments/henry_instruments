@@ -20,6 +20,7 @@ export const DELETE_REVIEW = "DELETE_REVIEW";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const PUT_PRODUCT = "PUT_PRODUCT";
 export const PUT_CATEGORY = "PUT_CATEGORY";
+export const CHECKOUT_ADD = "CHECKOUT_ADD";
 
 export const addToCart = (product) => async (dispatch) => {
     const cart = localStorage.getItem("cart")
@@ -31,7 +32,7 @@ export const addToCart = (product) => async (dispatch) => {
     if (duplicates.length === 0) {
         const productToAdd = {
             ...product,
-            count: 1,
+            quantity: 1,
         };
 
         cart.push(productToAdd);
@@ -229,27 +230,27 @@ export function deleteActivity(idCountry, id) {
 }
 */
 
-/*export const mpCheckout = (cart) => {
-  console.log(1);
-  return async function (dispatch) {
-    console.log(2);
-    try {
-      const payment = await axios
-        .post("/checkout", cart)
-        .then(
-          (res) =>
-            (window.location.href = response.data.response.body.init_point)
-        );
-      console.log(payment);
-      return dispatch({
-        type: MP_CHECKOUT,
-        payload: payment.data,
-      });
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-};*/
+// export const mpCheckout = (cart) => {
+//   console.log(1);
+//   return async function (dispatch) {
+//     console.log(2);
+//     try {
+//       const payment = await axios
+//         .post("/checkout", cart)
+//         .then(
+//           (res) =>
+//             (window.location.href = response.data.response.body.init_point)
+//         );
+//       console.log(payment);
+//       return dispatch({
+//         type: MP_CHECKOUT,
+//         payload: payment.data,
+//       });
+//     } catch (e) {
+//       console.log(e.message);
+//     }
+//   };
+// };
 
 export const addFavProduct = (product) => async (dispatch) => {
     const fav = localStorage.getItem("fav")
@@ -333,3 +334,18 @@ export const putCategory = (id, info) => {
             .catch((error) => console.log(error));
     };
 };
+
+export const checkoutadd = (cart) => {
+    return async function (dispatch) {
+        try {
+            const payment = await axios.post("http://localhost:3001/checkout", cart);
+           window.location.href = payment.data.response.body.init_point
+            dispatch({
+                type: CHECKOUT_ADD,
+                payload: payment.data,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+}
