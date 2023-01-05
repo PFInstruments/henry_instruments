@@ -30,6 +30,7 @@ const ReviewForm = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
+            console.log(user)
             setReview({
                 ...review,
                 image: user.picture,

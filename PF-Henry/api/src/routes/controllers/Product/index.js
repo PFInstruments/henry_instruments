@@ -38,6 +38,9 @@ module.exports = {
         active
     ) => {
         try {
+            const findCategory = await Category.findOne({
+                where: { name: category },
+            });
             const result = await cloudinary.uploader.upload(image, {
                 folder: "Products",
             });
@@ -47,11 +50,11 @@ module.exports = {
                 description,
                 price,
                 stock,
-                category,
                 brand,
                 model,
                 active,
             });
+            await product.setCategory(findCategory)
             console.log(product);
             res.send(product);
         } catch (error) {
