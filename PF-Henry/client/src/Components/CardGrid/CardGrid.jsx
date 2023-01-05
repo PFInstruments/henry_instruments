@@ -29,7 +29,7 @@ export default function CardGrid({ localProducts }) {
                     localProducts={localProducts.length}
                 />
             </div>
-            <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-m-4">
+            <div className="tw-grid tw-grid-flow-row tw-gap-2 tw-text-neutral-600 sm:tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 xl:tw-grid-cols-3">
                 {!localProducts ? (
                     <div></div>
                 ) : localProducts[0] === "Product Not Found" ? (

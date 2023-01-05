@@ -51,13 +51,12 @@ const Card = (props) => {
     };
 
     return (
-        <div className="container-fluid bg-trasparent my-4 p-3">
+        <div className="container-fluid bg-trasparent my-4 p-3 tw-duration-300 hover:tw--translate-y-1">
             <div className="col">
                 <div className="card h-100 shadow p-3 mb-5 bg-body rounded">
                     <Link to={`/productdetail/${props.id}`}>
                         <img
                             src={props.image}
-                            width="500"
                             className="card-img-top imageClass"
                             alt="..."
                         />
