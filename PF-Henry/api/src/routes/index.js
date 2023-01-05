@@ -1,6 +1,7 @@
 const { Router } = require("express");
 // Importar todos los routers;
 
+const auth0Middleware = require("./Auth0.js");
 const storeMiddleware = require("./Store");
 const mailMiddleware = require("./Mail");
 const productMiddleware = require("./Product");
@@ -18,6 +19,7 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use("/auth0", auth0Middleware);
 router.use("/store", storeMiddleware);
 router.use("/mail", mailMiddleware);
 router.use("/products", productMiddleware);
