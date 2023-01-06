@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { deleteCategory, getCategories } from "../../../../Redux/actions";
-import { useDispatch /*useSelector*/ } from "react-redux";
-// import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
+import { useDispatch } from "react-redux";
 import { prefixDelete } from "../../../Utils/variables";
+import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
 
 export default function DeleteCategoryModal({ category }) {
     ///DISPATCH///
@@ -12,8 +12,8 @@ export default function DeleteCategoryModal({ category }) {
     const [success, setSuccess] = useState(false);
 
     /// VARIABLE GIF///
-    //const checkMarkGif = checkmark;
-    //  const checkMarkGifInfinito = checkmarkInfinito;
+
+    const checkMarkGifInfinito = checkmarkInfinito;
 
     ///Funciones////
     function refresh() {
@@ -104,7 +104,14 @@ export default function DeleteCategoryModal({ category }) {
                         </div>
                         <div className="modal-body">
                             <h3>Category Deleted!</h3>
-                            <div></div>
+                            <div>
+                                <img
+                                    className="img-fluid"
+                                    alt="success!"
+                                    src={checkMarkGifInfinito}
+                                    loop={true}
+                                ></img>
+                            </div>
                             <div className="modal-footer">
                                 <button
                                     type="button"

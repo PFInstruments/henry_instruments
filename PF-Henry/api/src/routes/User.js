@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const controllers = require('./controllers/User');
 
+router.post('/auth0/:id', async (req, res) => {
+    const {id} = req.params;
+    try {
+        const userLogIn = await controllers.getLogIn(id)
+        res.status(200).json(userLogIn);
+    } catch (error) {
+        res.status(404).send(error.message);
+    };
+});
+
 router.get('/', async (req, res, next) => {
     try{
         const users = await controllers.getUsers();
