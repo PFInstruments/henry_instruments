@@ -7,6 +7,7 @@ export const CLEAR_PAGE_PRODUCT_DETAIL = "CLEAR_PAGE_PRODUCT_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_ORDERS = "GET_ORDERS";
 export const GET_USERS = "GET_USERS";
+export const GET_USER = "GET_USER";
 export const PUT_USER = "PUT_USER";
 export const MP_CHECKOUT = "MP_CHECKOUT";
 export const POST_REVIEW = "POST_REVIEW";
@@ -335,6 +336,20 @@ export const putCategory = (id, info) => {
                 });
             })
             .catch((error) => console.log(error));
+    };
+};
+
+export const getUser = (id) => {
+    return async (dispatch) => {
+        return await axios 
+        .post(`/users/auth0/${id}`)
+        .then((res) => {
+            dispatch({
+                type: GET_USER,
+                payload: res.data, 
+            });
+        })
+        .catch((error) => console.log(error));
     };
 };
 

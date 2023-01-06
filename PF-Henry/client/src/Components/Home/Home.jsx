@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import CardGrid from "../CardGrid/CardGrid";
 import { orderBy } from "../Utils/Filters-Order/orderBy";
 import Loading from "../Loading/Loading";
+import { getUser } from "../../../../api/src/routes/controllers/User";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 //import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
@@ -25,11 +27,19 @@ export default function Home() {
     const [localProducts, setLocalProducts] = useState([]);
     const [localOrder, setLocalOrder] = useState("-");
 
+    const { user, isAuthenticated } = useAuth0();
+
     ////HOOKS////
     useEffect(() => {
         dispatch(getProducts());
         dispatch(getCategories());
     }, [dispatch]);
+
+    useEffect(() => {
+        if(isAuthenticated) {
+        dispatch(getUser(user.sub))
+        }        
+    }, [isAuthenticated, dispatch, user])
 
     useEffect(() => {
         setLocalProducts(allProducts);
