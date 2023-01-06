@@ -28,20 +28,20 @@ const Cart = ({ history }) => {
     });
   };
 
-  const handleCheckout = (props) => {
-  // const price = cart
-  //     .reduce(
-  //       (currentSum, currentCartItem) =>
-  //         currentSum + currentCartItem.quantity * currentCartItem.price,
-  //       0
-  //     )
-  //     .toFixed(2);
-    // console.log(cart); //array de items
-    // console.log(price); 
-    // console.log(cart.quantity)
-  dispatch(checkoutadd(props));
+  const handleCheckout = () => {
+    const order = {
+      items: cart.map((item) => ({
+        id: item.id,
+        title: item.name,
+        image: item.image,
+        unit_price: parseInt(item.price), // Convierte el precio a un entero
+        quantity: parseInt(item.quantity),
+        currency_id: "ARG",
+      })),
+    };
+    dispatch(checkoutadd(order));
   };
-  console.log(cart)
+  console.log("este es el carrito", cart);
   // console.log(props)
   return (
     <section className="cart-page m4">
@@ -91,18 +91,19 @@ const Cart = ({ history }) => {
                           <i className="far fa-trash-alt pr-1">Delete</i>
                         </button>
                       </td>
-                      <button
-                onClick={()=>{handleCheckout(props)} }
-                className="btn btn-dark btn-large btn-block mb-5 py-2"
-              >
-                Proceed to Checkout
-              </button>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              <button
+                onClick={() => {
+                  handleCheckout();
+                }}
+                className="btn btn-dark btn-large btn-block mb-5 py-2"
+              >
+                Proceed to Checkout
+              </button>
             </div>
-           
           </div>
         </>
       )}
