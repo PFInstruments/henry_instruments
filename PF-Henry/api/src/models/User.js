@@ -4,66 +4,49 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
     // defino el modelo
     sequelize.define("user", {
-        id: {
+        user_id: {
             type: DataTypes.STRING,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true,
         },
-        nickname: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isAlpha: {
-                    args: true,
-                    msg: "El nombre solo puede contener letras",
-                },
-                len: {
-                    args: [3, 255],
-                    msg: "El nombre tiene que tener entre 3 y 255 caracteres",
-                },
-            },
-        },
         name: {
             type: DataTypes.STRING,
             allowNull: true,
-            validate: {
-                isAlpha: {
-                    args: true,
-                    msg: "El nombre solo puede contener letras",
-                },
-                len: {
-                    args: [3, 255],
-                    msg: "El nombre tiene que tener entre 3 y 255 caracteres",
-                },
-            },
+        },
+        nickname: {
+            type: DataTypes.STRING,
+            allownull: true,
         },
         email: {
             type: DataTypes.STRING,
             allowNull: true,
-            unique: {
-                msg: "El email ingresado ya esta registrado",
-            },
-            validate: {
-                isEmail: {
-                    args: true,
-                    msg: "El campo email tiene que ser un correo valido",
-                },
-            },
         },
-        password: {
+        picture: {
+            type: DataTypes.STRING,
+            allownull: true,
+        },
+        connection: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        email_Verified: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+        created_at: {
+            type: DataTypes.DATE,
+            allowNull: true,
         },
-        created_auth0: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+        updated_at: {
+            type: DataTypes.DATE,
+            allownull: true,
         },
-    },
+        last_login: {
+            type: DataTypes.DATE,
+            allownull: true,
+        },
+        logins_count: {
+            type: DataTypes.INTEGER,
+            allownull: true,
+        }
+     },
     {
         timestamps: false
     });
