@@ -15,7 +15,8 @@ const sequelize = new Sequelize(URL_DATABASE, {
 
 ///////////////////////////////////////////////////////
 
-//// DEPLOY LOCAL //////
+//// DEPLOY LOCAL /////
+
 // const sequelize = new Sequelize(
 //     `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
 //     {

@@ -14,7 +14,7 @@ module.exports = {
         });
         const [user] = await User.findOrCreate({
             where: {
-                user_id: auth0User.data.user_id,
+                id: auth0User.data.user_id,
                 name: auth0User.data.name,
                 nickname: auth0User.data.nickname,
                 email: auth0User.data.email,
