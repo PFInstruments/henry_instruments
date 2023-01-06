@@ -1,7 +1,34 @@
+require('dotenv').config();
 const e = require("express");
+const axios = require('axios');
 const { User, Order } = require("../../../db");
 
+const { TOKEN, AUTH0_DOMAIN } = process.env;
+
 module.exports = {
+    getLogIn: async (id) => {
+        const auth0User =  await axios.get(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`, {
+            headers: {
+                Authorization: `Bearer ${TOKEN}`,
+            },
+        });
+        const [user] = await User.findOrCreate({
+            where: {
+                user_id: auth0User.data.user_id,
+                name: auth0User.data.name,
+                nickname: auth0User.data.nickname,
+                email: auth0User.data.email,
+                picture: auth0User.data.picture,
+                connection: auth0User.data.identities[0].connection,
+                created_at: auth0User.data.created_at,
+                updated_at: auth0User.data.updated_at,
+                last_login: auth0User.data.last_login,
+                logins_count: auth0User.data.logins_count,
+            }
+        });
+        return user
+    }, 
+
     getUsers: async () => {
         const users = await User.findAll({
             include: [{ model: Order }],
