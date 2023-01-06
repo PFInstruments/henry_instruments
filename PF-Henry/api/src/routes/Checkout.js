@@ -17,26 +17,19 @@ console.log("ACCESS_TOKEN:", ACCESS_TOKEN);
 
 // Establece un middleware para parsear el cuerpo de la solicitud como una URL codificada
 // router.use(bodyParser.urlencoded({ extended: false }));
-router.use(express.urlencoded({extended: true}));
+router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 // Establece una ruta POST para crear una preferencia de pago
 router.post("/", (req, res) => {
   // Obtiene la información del carrito de compras del cuerpo de la solicitud
-  const cart = req.body;
+  const { items } = req.body;
 
   // Crea un objeto de preferencia con la información del carrito
   let preference = {
-    items: [
-      {
-        title: cart.name,
-        unit_price: parseInt(cart.price), // Convierte el precio a un entero
-        quantity: cart.quantity,
-        currency_id: "ARG",
-      },
-    ],
+    items,
     back_urls: {
-      success: "/home",
+      success: "http://localhost:3000/",
       failure: "",
       pending: "",
     },
