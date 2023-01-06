@@ -21,6 +21,7 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const PUT_PRODUCT = "PUT_PRODUCT";
 export const PUT_CATEGORY = "PUT_CATEGORY";
 export const CHECKOUT_ADD = "CHECKOUT_ADD";
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
 export const addToCart = (product) => async (dispatch) => {
     const cart = localStorage.getItem("cart")
@@ -98,6 +99,17 @@ export const getProductDetail = (productoId) => {
 export const clearPageProductDetail = () => {
     return {
         type: CLEAR_PAGE_PRODUCT_DETAIL,
+    };
+};
+
+export const deleteProduct = (id) => {
+    return async (dispatch) => {
+        return await axios
+            .delete(`/products/${id}`)
+            .then((res) => {
+                dispatch({ type: DELETE_PRODUCT, payload: res.data });
+            })
+            .catch((error) => console.log(error));
     };
 };
 
