@@ -32,24 +32,10 @@ export default function AdminMenuTabs() {
     return (
         <div>
             <ul
-                className="nav nav-tabs justify-content-center"
+                className="nav nav-tabs justify-content-center nav-fill "
                 id="myTab"
                 role="tablist"
             >
-                <li className="nav-item" role="presentation">
-                    <button
-                        className="nav-link active"
-                        id="store-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#store-tab-pane"
-                        type="button"
-                        role="tab"
-                        aria-controls="store-tab-pane"
-                        aria-selected="true"
-                    >
-                        Store
-                    </button>
-                </li>
                 <li className="nav-item" role="presentation">
                     <button
                         className="nav-link"
@@ -106,25 +92,25 @@ export default function AdminMenuTabs() {
                         Orders
                     </button>
                 </li>
+                <li className="nav-item" role="presentation">
+                    <button
+                        className="nav-link active "
+                        id="store-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#store-tab-pane"
+                        type="button"
+                        role="tab"
+                        aria-controls="store-tab-pane"
+                        aria-selected="true"
+                    >
+                        Store
+                    </button>
+                </li>
             </ul>
             <div
                 className="tab-content  justify-content-center"
                 id="myTabContent"
             >
-                <div
-                    className="tab-pane fade show active  justify-content-center"
-                    id="store-tab-pane"
-                    role="tabpanel"
-                    aria-labelledby="store-tab"
-                    tabIndex={0}
-                >
-                    <div className="">
-                        <h2 className="text-center">EDIT STORE</h2>
-                        <hr />
-                        <br />
-                        <AdminManageStore />
-                    </div>
-                </div>
                 <div
                     className="tab-pane fade justify-content-center"
                     id="products-tab-pane"
@@ -182,6 +168,20 @@ export default function AdminMenuTabs() {
                     <hr />
                     <br />
                     <AdminManageOrders />
+                </div>
+                <div
+                    className="tab-pane fade show active  justify-content-center"
+                    id="store-tab-pane"
+                    role="tabpanel"
+                    aria-labelledby="store-tab"
+                    tabIndex={0}
+                >
+                    <div className="">
+                        <h2 className="text-center">EDIT STORE</h2>
+                        <hr />
+                        <br />
+                        <AdminManageStore />
+                    </div>
                 </div>
             </div>
         </div>
