@@ -68,7 +68,6 @@ export default function CreateCategoryModal({ localCategories }) {
         let search = localCategories.filter((category) => {
             return category.name.toLowerCase() === e.target.value.toLowerCase();
         });
-        console.log(search);
         if (search.length === 1) {
             setNameExists(true);
         }
