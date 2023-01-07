@@ -12,21 +12,24 @@ module.exports = {
                 Authorization: `Bearer ${TOKEN}`,
             },
         });
-        const [user] = await User.findOrCreate({
+        const find = await User.findOne({
             where: {
+                id: auth0User.data.user_id,
+            }
+        });
+         const create = find? find : await User.create({
                 id: auth0User.data.user_id,
                 name: auth0User.data.name,
                 nickname: auth0User.data.nickname,
-                email: auth0User.data.email,
+                email: auth0User.data.email? auth0User.data.email : 'Unknown email',
                 picture: auth0User.data.picture,
                 connection: auth0User.data.identities[0].connection,
                 created_at: auth0User.data.created_at,
                 updated_at: auth0User.data.updated_at,
                 last_login: auth0User.data.last_login,
                 logins_count: auth0User.data.logins_count,
-            }
-        });
-        return user
+        })
+        return create;
     }, 
 
     getUsers: async () => {

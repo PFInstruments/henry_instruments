@@ -1,13 +1,12 @@
 import React from "react";
 import Carousel from "../Carousel/Carousel";
 import SearchBar from "../SearchBar/SearchBar.jsx";
-import { getProducts, getCategories } from "../../Redux/actions";
+import { getProducts, getCategories, getUser } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CardGrid from "../CardGrid/CardGrid";
 import { orderBy } from "../Utils/Filters-Order/orderBy";
 import Loading from "../Loading/Loading";
-import { getUser } from "../../../../api/src/routes/controllers/User";
 import { useAuth0 } from "@auth0/auth0-react";
 
 

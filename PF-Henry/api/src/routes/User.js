@@ -8,6 +8,7 @@ router.post('/auth0/:id', async (req, res) => {
         const userLogIn = await controllers.getLogIn(id)
         res.status(200).json(userLogIn);
     } catch (error) {
+        console.log(error)
         res.status(404).send(error.message);
     };
 });
