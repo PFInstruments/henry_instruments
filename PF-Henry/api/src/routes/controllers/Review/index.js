@@ -35,8 +35,9 @@ const getScore_Product = async (productId) => {
     return reviews;
 };
 
-const postReview = async (image, name, score, comment, productId) => {
+const postReview = async (id, image, name, score, comment, productId) => {
     const newReview = await Review.create({
+        id: id,
         image: image,
         name: name,
         score: score,

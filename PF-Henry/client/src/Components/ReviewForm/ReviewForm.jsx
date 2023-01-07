@@ -4,35 +4,48 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useParams } from 'react-router-dom';
-import { getReviews, postReview } from '../../Redux/actions';
+import { getReviews, getUser, postReview } from '../../Redux/actions';
 import ReviewGrid from '../ReviewGrid/ReviewGrid';
 import Swal from 'sweetalert2';
 
 const ReviewForm = () => {
 
+    const {user, isAuthenticated, loginWithRedirect } = useAuth0();
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(isAuthenticated) {
+            console.log(isAuthenticated)
+        dispatch(getUser(user.sub))
+        }        
+    }, [isAuthenticated, dispatch, user])
+
+    // const localUser = useSelector((state) => state.user);
 
     const reviews = useSelector((state) => state.reviews);
 
     const { id } = useParams();
 
-    const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
-    const userComment = user ? reviews.map((el) => el.name === user.name) : "";
+    const userComment = user ? reviews.map((el) => el.id === user.id) : "";
 
     const [review, setReview] = useState({
         productId: id,
+        id: '',
         image: '',
         name: '',
         score: 0,
         comment: ''
     });
+    console.log(review)
 
     useEffect(() => {
         if (isAuthenticated) {
             console.log(user)
             setReview({
                 ...review,
+                id: user.sub,
                 image: user.picture,
                 name: user.name
             })

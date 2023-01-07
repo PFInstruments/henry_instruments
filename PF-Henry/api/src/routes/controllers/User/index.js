@@ -7,7 +7,7 @@ const { TOKEN, AUTH0_DOMAIN } = process.env;
 
 module.exports = {
     getLogIn: async (id) => {
-        const auth0User =  await axios.get(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`, {
+        const auth0User =  await axios.get(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`,  {
             headers: {
                 Authorization: `Bearer ${TOKEN}`,
             },
