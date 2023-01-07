@@ -32,6 +32,15 @@ module.exports = {
         return create;
     }, 
 
+    deleteUserAuth0: async (id) => {
+        const auth0User =  await axios.delete(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`, {
+            headers: {
+                Authorization: `Bearer ${TOKEN}`,
+            },
+        });
+        return auth0User.data;
+    },
+
     getUsers: async () => {
         const users = await User.findAll({
             include: [{ model: Order }],
@@ -73,36 +82,30 @@ module.exports = {
     },
 
     updateUser: async (
-        id,
-        name,
-        surname,
-        phone_num,
-        email,
-        password,
-        adress,
-        isAdmin = false
+        id, name, picture, nickname, email, connection, created_at, updated_at,last_login
     ) => {
         let user = await User.findOne({
             where: { id },
         });
-
+        if(!user) throw new Error("Not found.");
         if (!name) name = user.name;
-        if (!surname) surname = user.surname;
-        if (!phone_num) phone_num = user.phone_num;
+        if (!picture) picture = user.picture;
+        if (!nickname) nickname = user.nickname;
         if (!email) email = user.email;
-        if (!password) password = user.password;
-        if (!adress) adress = user.adress;
-        if (!isAdmin) isAdmin = user.isAdmin;
+        if (!connection) connection = user.connection;
+        if (!created_at) created_at = user.created_at;
+        if (!updated_at) updated_at = user.updated_at;
+        if (!last_login) last_login = user.last_login;
 
         await User.update(
             {
-                name,
-                surname,
-                phone_num,
-                email,
-                password,
-                adress,
-                isAdmin,
+                name, 
+                picture, 
+                nickname, 
+                email, 
+                connection, 
+                created_at, 
+                updated_at,last_login
             },
             {
                 where: {
