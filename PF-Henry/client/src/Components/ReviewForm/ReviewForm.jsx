@@ -16,19 +16,16 @@ const ReviewForm = () => {
 
     useEffect(() => {
         if(isAuthenticated) {
-            console.log(isAuthenticated)
         dispatch(getUser(user.sub))
         }        
-    }, [isAuthenticated, dispatch, user])
-
-    // const localUser = useSelector((state) => state.user);
+    }, [])
 
     const reviews = useSelector((state) => state.reviews);
 
     const { id } = useParams();
 
 
-    const userComment = user ? reviews.map((el) => el.id === user.id) : "";
+    const userComment = user ? reviews.map((el) => el.id === user.sub) : "";
 
     const [review, setReview] = useState({
         productId: id,
@@ -46,11 +43,12 @@ const ReviewForm = () => {
             setReview({
                 ...review,
                 id: user.sub,
-                image: user.picture,
-                name: user.name
+                image:user.picture,
+                name:user.name
             })
         } else {
             setReview(review)
+            console.log(user)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated]);
@@ -67,7 +65,7 @@ const ReviewForm = () => {
     const rating = (ev) => {
         setReview({
             ...review,
-            [ev.target.name]: ev.target.value
+            [ev.target.name]: ev.target.value,
         })
     };
 
@@ -79,6 +77,7 @@ const ReviewForm = () => {
             score: 0,
             comment: ''
         })
+        ev.target.reset();
         dispatch(getReviews(id));
         dispatch(getReviews(id));
         dispatch(getReviews(id));
@@ -120,31 +119,31 @@ const ReviewForm = () => {
                                                             id="star5"
                                                             name="score"
                                                             value="5"
-                                                            onChange={(ev) => { rating(ev) }}
+                                                            onChange={(ev) => rating(ev)}
                                                         /><label htmlFor="star5" title="perfect">5 stars</label>
                                                         <input type="radio"
                                                             id="star4"
                                                             name="score"
                                                             value="4"
-                                                            onChange={(ev) => { rating(ev) }}
+                                                            onChange={(ev) => rating(ev)}
                                                         /><label htmlFor="star4" title="good">4 stars</label>
                                                         <input type="radio"
                                                             id="star3"
                                                             name="score"
                                                             value="3"
-                                                            onChange={(ev) => { rating(ev) }}
+                                                            onChange={(ev) => rating(ev)}
                                                         /><label htmlFor="star3" title="nice">3 stars</label>
                                                         <input type="radio"
                                                             id="star2"
                                                             name="score"
                                                             value="2"
-                                                            onChange={(ev) => { rating(ev) }}
+                                                            onChange={(ev) => rating(ev)}
                                                         /><label htmlFor="star2" title="meh">2 stars</label>
                                                         <input type="radio"
                                                             id="star1"
                                                             name="score"
                                                             value="1"
-                                                            onChange={(ev) => { rating(ev) }}
+                                                            onChange={(ev) => rating(ev)}
                                                         /><label htmlFor="star1" title="bad">1 star</label>
                                                     </div>
                                                 </div>

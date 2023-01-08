@@ -2,8 +2,9 @@ require('dotenv').config();
 const e = require("express");
 const axios = require('axios');
 const { User, Order } = require("../../../db");
+// const User = require('../../../models/User');
 
-const { TOKEN, AUTH0_DOMAIN } = process.env;
+const { TOKEN, AUTH0_DOMAIN, REACT_APP_BASEURL } = process.env;
 
 module.exports = {
     getLogIn: async (id) => {
@@ -21,14 +22,16 @@ module.exports = {
                 id: auth0User.data.user_id,
                 name: auth0User.data.name,
                 nickname: auth0User.data.nickname,
-                email: auth0User.data.email? auth0User.data.email : 'Unknown email',
+                email: auth0User.data.email,
                 picture: auth0User.data.picture,
-                connection: auth0User.data.identities[0].connection,
+                connection: auth0User.data.identities[0].provider,
+                role: 'user',
                 created_at: auth0User.data.created_at,
                 updated_at: auth0User.data.updated_at,
                 last_login: auth0User.data.last_login,
                 logins_count: auth0User.data.logins_count,
-        })
+        });
+        await axios.post(`${REACT_APP_BASEURL}/mail/welcome`, {username: auth0User.data.email});
         return create;
     }, 
 
@@ -80,42 +83,49 @@ module.exports = {
         });
         return "User created successfully";
     },
-
-    updateUser: async (
-        id, name, picture, nickname, email, connection, created_at, updated_at,last_login
-    ) => {
-        let user = await User.findOne({
-            where: { id },
+    updateUser: async (id, obj) => {
+        let auth0User = await axios.patch(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`, obj,
+         {
+            headers: {
+                Authorization: `Bearer ${TOKEN}`,
+            },
         });
-        if(!user) throw new Error("Not found.");
-        if (!name) name = user.name;
-        if (!picture) picture = user.picture;
-        if (!nickname) nickname = user.nickname;
-        if (!email) email = user.email;
-        if (!connection) connection = user.connection;
-        if (!created_at) created_at = user.created_at;
-        if (!updated_at) updated_at = user.updated_at;
-        if (!last_login) last_login = user.last_login;
-
         await User.update(
             {
-                name, 
-                picture, 
-                nickname, 
-                email, 
-                connection, 
-                created_at, 
-                updated_at,last_login
+                name: auth0User.data.name , 
+                picture: auth0User.data.picture, 
+                nickname: auth0User.data.nickname, 
+                email: auth0User.data.email, 
+                connection: auth0User.data.connection, 
+                created_at: auth0User.data.created_at, 
+                updated_at: auth0User.data.created_at,
+                last_login: auth0User.data.last_login,
             },
             {
                 where: {
                     id,
                 },
             }
-        );
-        return "Usuario modificado";
+            );
+            let user = await User.findOne({
+                where: { id },
+            });
+        return await user
     },
-
+    changeRole: async (id, role) => {
+        await User.update(
+            {
+                role: role
+            },
+            {
+                where: {id}
+            }
+        );
+        let user = await User.findOne({
+            where: {id}
+        });
+        return await user;
+    },
     createMultipleUsers: async () => {
         const users = [
             {
