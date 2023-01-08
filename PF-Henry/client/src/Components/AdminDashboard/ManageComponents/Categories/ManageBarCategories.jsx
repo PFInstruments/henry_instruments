@@ -28,7 +28,9 @@ export default function ManageCategoryNavabar({
                 <label className="text-white">ORDER BY:</label>
                 <form onChange={(e) => setLocalOrder(e.target.value)}>
                     <select className="form-select d-flex" aria-label="-">
-                        <option>Open this select menu</option>
+                        <option key="-" value="-">
+                            ID
+                        </option>
                         <option key="alphaAsc" value="A-Z">
                             A-Z
                         </option>
