@@ -182,7 +182,7 @@ export default function EditCategoryModal({ category, localCategories }) {
                         </div>
                         <div className="modal-body">
                             <h3>Category Edited Successfuly!</h3>
-                            <span>New Category Name :{category.name}`</span>
+                            <span>New Category Name :{categoryForm.name}</span>
                             <div>
                                 <img
                                     className="img-fluid"

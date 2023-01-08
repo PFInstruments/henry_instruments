@@ -328,7 +328,7 @@ export const putProduct = (id, info) => {
 export const putCategory = (category) => {
     return async (dispatch) => {
         return await axios
-            .put(`/category/${category.id}`, category.name)
+            .put(`/category/${category.id}`, category)
             .then((res) => {
                 dispatch({
                     type: PUT_CATEGORY,
