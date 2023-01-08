@@ -84,7 +84,10 @@ export default function CategoryTable({ localCategories }) {
                                         </svg>
                                     </button>
                                     <DeleteCategoryModal category={category} />
-                                    <EditCategoryModal category={category} />
+                                    <EditCategoryModal
+                                        category={category}
+                                        localCategories={localCategories}
+                                    />
                                 </td>
                             </tr>
                         );
