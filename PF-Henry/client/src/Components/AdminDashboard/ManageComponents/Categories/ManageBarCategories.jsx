@@ -3,12 +3,12 @@ import CreateCategoryModal from "./CreateCategoryModal";
 
 export default function ManageCategoryNavabar({
     setLocalCategories,
-    allCategories,
     localCategories,
+    localOrder,
+    setLocalOrder,
 }) {
     ////ESTADOS LOCALES//////
     //   const [localOrder, setLocalOrder] = useState();
-    //   const [localCategories, setLocalCategories] = useState();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-dark">
