@@ -1,4 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateStore } from "../../../../Redux/actions";
 // import { useDispatch /* useSelector*/ } from "react-redux";
 
 export default function AdminManageStore() {
@@ -21,7 +23,7 @@ export default function AdminManageStore() {
     */
 
     //  const [disabledSubmit, setDisabledSubmit] = useState(true);
-
+/*
     /////LOCAL REDUCER//////////
     let initialState = {
         email: "henryinstruments@gmail.com",
@@ -90,17 +92,35 @@ export default function AdminManageStore() {
         contactFormReducer,
         initialState
     );
-
+*/
     ///HOOKS///
 
     //EVENT HANDLERS///
-
+/*
     function handleSubmit(e) {
         e.preventDefault();
 
         alert("Changes Saved!");
         setContactForm({ type: "SUBMIT" });
     }
+*/
+
+    const dispatch=useDispatch();
+
+    useEffect(()=>{
+        dispatch(updateStore());
+    },[dispatch]);
+
+    const storeDB = useSelector((state)=>state.store);
+
+        //EVENT HANDLERS///
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        
+    }
+
+    ///PAGINA///
 
     return (
         <div className="position-relative ">
@@ -119,7 +139,7 @@ export default function AdminManageStore() {
                         required
                         className="form-control "
                         id="inputEmail"
-                        value={contactForm.email}
+                        value={storeDB.email}
                         onChange={(e) => {
                             setContactForm({
                                 type: "SET_EMAIL",
@@ -136,7 +156,7 @@ export default function AdminManageStore() {
                         type="text"
                         className="form-control"
                         id="inputPhoneNumber"
-                        value={contactForm.phoneNum}
+                        value={storeDB.phoneNum}
                         onChange={(e) => {
                             setContactForm({
                                 type: "SET_PHONENUM",
@@ -152,7 +172,7 @@ export default function AdminManageStore() {
                     </label>
                     <textarea
                         className="form-control"
-                        value={contactForm.address}
+                        value={storeDB.address}
                         onChange={(e) => {
                             setContactForm({
                                 type: "SET_ADDRESS",
@@ -170,7 +190,7 @@ export default function AdminManageStore() {
                         type="text"
                         className="form-control"
                         id="inputCity"
-                        value={contactForm.city}
+                        value={storeDB.city}
                         onChange={(e) => {
                             setContactForm({
                                 type: "SET_CITY",
@@ -187,7 +207,7 @@ export default function AdminManageStore() {
                         type="text"
                         className="form-control"
                         id="inputState"
-                        value={contactForm.state}
+                        value={storeDB.state}
                         onChange={(e) => {
                             setContactForm({
                                 type: "SET_STATE",
@@ -204,7 +224,7 @@ export default function AdminManageStore() {
                         type="text"
                         className="form-control"
                         id="inputZip"
-                        value={contactForm.zip}
+                        value={storeDB.zip}
                         onChange={(e) => {
                             setContactForm({
                                 type: "SET_ZIP",
@@ -221,7 +241,7 @@ export default function AdminManageStore() {
                         type="text"
                         className="form-control"
                         id="inputCountry"
-                        value={contactForm.country}
+                        value={storeDB.country}
                         onChange={(e) => {
                             setContactForm({
                                 type: "SET_COUNTRY",

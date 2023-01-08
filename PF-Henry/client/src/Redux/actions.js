@@ -23,6 +23,7 @@ export const PUT_PRODUCT = "PUT_PRODUCT";
 export const PUT_CATEGORY = "PUT_CATEGORY";
 export const CHECKOUT_ADD = "CHECKOUT_ADD";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const STORE_UPDATE = "STORE_UPDATE";
 
 export const addToCart = (product) => async (dispatch) => {
     const cart = localStorage.getItem("cart")
@@ -367,3 +368,17 @@ export const checkoutadd = (cart) => {
         }
     };
 };
+
+export const updateStore = () =>{
+    return async function(dispatch){
+        try {
+            const store = await axios.get(`/store`);
+            return dispatch({
+                type: STORE_UPDATE,
+                payload: store.data,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+}
