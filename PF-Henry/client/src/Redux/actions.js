@@ -325,10 +325,10 @@ export const putProduct = (id, info) => {
     };
 };
 
-export const putCategory = (id, info) => {
+export const putCategory = (category) => {
     return async (dispatch) => {
         return await axios
-            .put(`/category/${id}`, info)
+            .put(`/category/${category.id}`, category)
             .then((res) => {
                 dispatch({
                     type: PUT_CATEGORY,
@@ -341,15 +341,15 @@ export const putCategory = (id, info) => {
 
 export const getUser = (id) => {
     return async (dispatch) => {
-        return await axios 
-        .post(`/users/auth0/${id}`)
-        .then((res) => {
-            dispatch({
-                type: GET_USER,
-                payload: res.data, 
-            });
-        })
-        .catch((error) => console.log(error));
+        return await axios
+            .post(`/users/auth0/${id}`)
+            .then((res) => {
+                dispatch({
+                    type: GET_USER,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
     };
 };
 

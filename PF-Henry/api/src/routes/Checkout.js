@@ -35,6 +35,9 @@ router.post("/", (req, res) => {
     },
     auto_return: "approved",
     binary_mode: true,
+    payment_methods: {
+      excluded_payment_types: [{ id: "ticket" }],
+    },
   };
 
   console.log("Preferencia:", preference);
