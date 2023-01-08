@@ -1,3 +1,4 @@
+require('dotenv').config();
 const nodemailer = require("nodemailer");
 const express = require('express');
 const router = express.Router();
@@ -27,7 +28,7 @@ router.post('/welcome', async (req, res) => {
 
     await transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            res.status(404).send(error.message);
+            res.status(404).send(error);
         } else {
             console.log('mail enviado');
             res.status(200).jsonp(req.body);
