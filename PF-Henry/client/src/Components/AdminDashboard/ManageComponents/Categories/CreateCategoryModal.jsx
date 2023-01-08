@@ -13,7 +13,7 @@ export default function CreateCategoryModal({ localCategories }) {
 
     ///ESTADOS LOCALES///
     //  const [disabledSubmit, setDisabledSubmit] = useState(true);
-    // const [nameExists, setNameExists] = useState(false);
+    const [nameExists, setNameExists] = useState(false);
     //const [checkActive, setCheckActive] = useState([]);
     const [postSuccess, setPostSuccess] = useState(false);
 
@@ -56,19 +56,25 @@ export default function CreateCategoryModal({ localCategories }) {
         dispatch(getCategories());
     }
 
-    // function findCategory(c) {
-    //     let exists = [];
-    //     localCategories?.categories.map((cat) => {
-    //         if (cat.name == c) {
-    //             exists.push(cat.name);
-    //         }
-    //     });
-    //     if (exists.length > 0) {
-    //     } else {
-    //         setNameExists(false);
-    //         setDisabledSubmit(false);
-    //     }
-    // }
+    ///Find Category///
+
+    const handleInputChange = (e) => {
+        setCategoryForm({
+            type: "SET_NAME",
+            payload: e.target.value,
+        });
+
+        // eslint-disable-next-line array-callback-return
+        let search = localCategories.filter((category) => {
+            return category.name.toLowerCase() === e.target.value.toLowerCase();
+        });
+        if (search.length === 1) {
+            setNameExists(true);
+        }
+        if (search.length > 1 || search.length < 1) {
+            setNameExists(false);
+        }
+    };
 
     //EVENT HANDLERS///
 
@@ -122,16 +128,26 @@ export default function CreateCategoryModal({ localCategories }) {
                                     <input
                                         required
                                         type="text"
-                                        className="form-control"
+                                        className={
+                                            nameExists
+                                                ? "tw-bg-red-300 tw-border tw-border-red-500 tw-text-red-900 tw-placeholder-red-700 tw-text-sm tw-rounded-lg tw-focus:ring-red-500 tw-dark:bg-gray-700 tw-focus:border-red-500 tw-block tw-w-full tw-p-2.5 tw-dark:text-red-500 tw-dark:placeholder-red-500 tw-dark:border-red-500"
+                                                : "form-control"
+                                        }
                                         id="category-name"
                                         value={categoryForm.name}
                                         onChange={(e) => {
-                                            setCategoryForm({
-                                                type: "SET_NAME",
-                                                payload: e.target.value,
-                                            });
+                                            handleInputChange(e);
                                         }}
                                     />
+                                    <p className="tw-mt-2 tw-text-sm tw-text-red-600 tw-dark:text-red-500">
+                                        {nameExists ? (
+                                            <span classNam="tw-font-medium">
+                                                Oops! Category alredy exists.
+                                            </span>
+                                        ) : (
+                                            <br />
+                                        )}
+                                    </p>
                                 </div>
 
                                 <div className="modal-footer">
@@ -145,7 +161,7 @@ export default function CreateCategoryModal({ localCategories }) {
                                     <button
                                         type="submit"
                                         className="btn btn-success"
-                                        // disabled={disabledSubmit}
+                                        disabled={nameExists}
                                     >
                                         Add Category +
                                     </button>

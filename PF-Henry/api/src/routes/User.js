@@ -8,6 +8,7 @@ router.post('/auth0/:id', async (req, res) => {
         const userLogIn = await controllers.getLogIn(id)
         res.status(200).json(userLogIn);
     } catch (error) {
+        console.log(error)
         res.status(404).send(error.message);
     };
 });
@@ -42,9 +43,9 @@ router.post('/', async(req, res, next) => {
 
 router.put('/:id', async(req, res, next) => {
     const { id } = req.params;
-    const { name, surname, phone_num, email, password, adress, isAdmin } = req.body;
+    const { name, picture, nickname, email, connection, created_at, updated_at,last_login } = req.body;
     try{
-        const request = await controllers.updateUser(id, name, surname, phone_num, email, password, adress, isAdmin);
+        const request = await controllers.updateUser(id,  name, picture, nickname, email, connection, created_at, updated_at,last_login);
         res.status(201).json({details: request});
     } catch(err){
         res.status(404).json({error: err.message});
@@ -55,10 +56,11 @@ router.delete('/:id', async(req,res)=>{
     try{
         const { id } = req.params;
         const user = await controllers.getUser(id);
+        const userAuth0 = await controllers.deleteUserAuth0(id);
         if(user){
             user.destroy();
             res.status(200).send(user);
-        }else throw Error("No se proporsiono Id de usuario")
+        }else throw Error("Not found.")
     } catch(err){
         res.status(404).send(err.message);
     }
