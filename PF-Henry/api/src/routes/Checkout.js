@@ -29,12 +29,15 @@ router.post("/", (req, res) => {
   let preference = {
     items,
     back_urls: {
-      success: "https://henry-instruments-nu.vercel.app/",
+      success: "https://henry-instruments-pfinstruments.vercel.app/",
       failure: "",
       pending: "",
     },
     auto_return: "approved",
     binary_mode: true,
+    payment_methods: {
+      excluded_payment_types: [{ id: "ticket" }],
+    },
   };
 
   console.log("Preferencia:", preference);
