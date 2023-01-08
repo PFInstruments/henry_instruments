@@ -1,11 +1,7 @@
-// import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 import React, { useState, useReducer /*useEffect */ } from "react";
 import { useDispatch /* useSelector */ } from "react-redux";
 import { getCategories, postCategory } from "../../../../Redux/actions";
-//import checkmark from "../../../../Images/checkmark.gif";
-// import checkmark from "../../../../Images/checkmark.gif";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
-// import { useEffect } from "react";
 
 export default function CreateCategoryModal({ localCategories }) {
     ///DISPATCH///
@@ -18,8 +14,8 @@ export default function CreateCategoryModal({ localCategories }) {
     const [postSuccess, setPostSuccess] = useState(false);
 
     /// VARIABLE GIF///
-    //const checkMarkGif = checkmark;
     const checkMarkGifInfinito = checkmarkInfinito;
+
     /////LOCAL REDUCER//////////
     const initialState = {
         name: "",
@@ -141,7 +137,7 @@ export default function CreateCategoryModal({ localCategories }) {
                                     />
                                     <p className="tw-mt-2 tw-text-sm tw-text-red-600 tw-dark:text-red-500">
                                         {nameExists ? (
-                                            <span classNam="tw-font-medium">
+                                            <span className="tw-font-medium">
                                                 Oops! Category alredy exists.
                                             </span>
                                         ) : (
