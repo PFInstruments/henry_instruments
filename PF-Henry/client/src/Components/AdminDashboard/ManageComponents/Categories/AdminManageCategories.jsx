@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // import { useDispatch /* useSelector*/ } from "react-redux";
 import ManageBarCategories from "./ManageBarCategories";
 import CategoryTable from "./CategoryTable";
-import { orderBy } from "../Utils/Filters-Order/orderBy";
+import { orderBy } from "../../../Utils/Filters-Order/orderBy";
 
 export default function SellerManageCategories({ allCategories, allProducts }) {
     ///DISPATCH///

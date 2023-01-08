@@ -26,13 +26,22 @@ export default function ManageCategoryNavabar({
                 </form>
 
                 <label className="text-white">ORDER BY:</label>
-                <form>
+                <form onChange={(e) => setLocalOrder(e.target.value)}>
                     <select className="form-select d-flex" aria-label="-">
                         <option>Open this select menu</option>
-                        <option value="1">A-Z</option>
-                        <option value="2">Z-A</option>s
-                        <option value="3">Stock Asc</option>
-                        <option value="3">Stock Desc</option>
+                        <option key="alphaAsc" value="A-Z">
+                            A-Z
+                        </option>
+                        <option key="alphaDesc" value="Z-A">
+                            Z-A
+                        </option>
+                        s
+                        <option key="stockAsc" value="stockCatAsc">
+                            Stock ↟
+                        </option>
+                        <option key="stockDesc" value="stockCatDesc">
+                            Stock ↡
+                        </option>
                     </select>
                 </form>
                 <button
