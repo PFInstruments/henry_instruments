@@ -2,7 +2,6 @@ require('dotenv').config();
 const e = require("express");
 const axios = require('axios');
 const { User, Order } = require("../../../db");
-// const User = require('../../../models/User');
 
 const { TOKEN, AUTH0_DOMAIN, REACT_APP_BASEURL } = process.env;
 
