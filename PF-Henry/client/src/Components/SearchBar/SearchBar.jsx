@@ -3,7 +3,7 @@ import { useState } from "react";
 import Filters from "../Filters/Filters";
 
 const SearchBar = ({
-    localProducts,
+    // localProducts,
     setLocalProducts,
     localOrder,
     setLocalOrder,
@@ -18,7 +18,7 @@ const SearchBar = ({
             setLocalProducts(allProducts);
         } else {
             // eslint-disable-next-line array-callback-return
-            let search = localProducts.filter((product) => {
+            let search = allProducts.filter((product) => {
                 if (
                     product.name
                         .toLowerCase()
