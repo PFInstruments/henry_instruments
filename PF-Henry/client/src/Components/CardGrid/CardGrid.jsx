@@ -33,7 +33,11 @@ export default function CardGrid({ localProducts }) {
                 {!localProducts ? (
                     <div></div>
                 ) : localProducts[0] === "Product Not Found" ? (
-                    <h1>Poduct Not Found</h1>
+                    <div className="position-relative m-5">
+                     <div className="position-absolute top-50 start-50 translate-middle">
+                         <h3>This instrument does not exist</h3>
+                     </div>
+                    </div>
                 ) : (
                     localProducts
                         .slice(
