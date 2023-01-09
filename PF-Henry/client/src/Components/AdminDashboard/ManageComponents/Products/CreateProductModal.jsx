@@ -24,7 +24,7 @@ export default function CreateProductModal({
     const [postSuccess, setPostSuccess] = useState(false);
 
     /////Creo una lista de categorias en orden ascendente y Creo el componente option list/////
-    let categoryList = localCategories.categories?.map((c) => {
+    let categoryList = localCategories?.map((c) => {
         return c.name;
     });
     categoryList?.sort();
