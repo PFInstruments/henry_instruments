@@ -35,11 +35,9 @@ const ReviewForm = () => {
         score: 0,
         comment: ''
     });
-    console.log(review)
 
     useEffect(() => {
         if (isAuthenticated) {
-            console.log(user)
             setReview({
                 ...review,
                 id: user.sub,
@@ -47,8 +45,7 @@ const ReviewForm = () => {
                 name:user.name
             })
         } else {
-            setReview(review)
-            console.log(user)
+            setReview(review);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated]);
