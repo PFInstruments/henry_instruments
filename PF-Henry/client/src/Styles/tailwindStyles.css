@@ -1,3 +1,19 @@
+.tw-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0
+}
+
+.tw-pointer-events-none {
+  pointer-events: none
+}
+
 .tw-absolute {
   position: absolute
 }
@@ -11,6 +27,11 @@
   right: 0.5rem
 }
 
+.tw-inset-y-0 {
+  top: 0px;
+  bottom: 0px
+}
+
 .tw-right-0 {
   right: 0px
 }
@@ -19,12 +40,30 @@
   top: 0px
 }
 
+.tw-left-0 {
+  left: 0px
+}
+
 .tw-m-0 {
   margin: 0px
 }
 
+.tw-mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem
+}
+
+.tw-mx-5 {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem
+}
+
 .tw-mt-2 {
   margin-top: 0.5rem
+}
+
+.tw-mb-2 {
+  margin-bottom: 0.5rem
 }
 
 .tw-block {
@@ -47,6 +86,10 @@
   height: 1rem
 }
 
+.tw-h-5 {
+  height: 1.25rem
+}
+
 .tw-w-10 {
   width: 2.5rem
 }
@@ -57,6 +100,10 @@
 
 .tw-w-full {
   width: 100%
+}
+
+.tw-w-5 {
+  width: 1.25rem
 }
 
 .tw-grid-flow-row {
@@ -121,6 +168,11 @@
   background-color: rgb(252 165 165 / var(--tw-bg-opacity))
 }
 
+.tw-bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
 .tw-fill-current {
   fill: currentColor
 }
@@ -137,6 +189,14 @@
   padding: 0.625rem
 }
 
+.tw-pl-3 {
+  padding-left: 0.75rem
+}
+
+.tw-pl-10 {
+  padding-left: 2.5rem
+}
+
 .tw-text-center {
   text-align: center
 }
@@ -148,6 +208,11 @@
 .tw-text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem
+}
+
+.tw-text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
 .tw-font-medium {
@@ -181,6 +246,11 @@
 .tw-text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity))
+}
+
+.tw-text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .tw-placeholder-red-700::-webkit-input-placeholder {
