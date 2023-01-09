@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteFromCart, ADD_TO_CART, checkoutadd } from "../../Redux/actions";
-import { Link } from "react-router-dom";
-import axios from "axios";
+
+//import axios from "axios";
 
 const Cart = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -59,6 +59,7 @@ const Cart = ({ history }) => {
               <table className="table">
                 <thead>
                   <tr>
+                    <th scope="col">Image</th>
                     <th scope="col">Product</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
@@ -69,8 +70,14 @@ const Cart = ({ history }) => {
                   {cart.map((props) => (
                     <tr key={props.id}>
                       <td>
-                        {" "}
-                        <Link to={`/product/${props.id}`}>{props.name}</Link>
+                      <img
+                            src={props.image}
+                            className="listImg img-thumbnail"
+                            alt="..."
+                        />
+                      </td>
+                      <td>
+                        {props.name}
                       </td>
                       <td>$ {props.price}</td>
                       <td>
@@ -91,16 +98,17 @@ const Cart = ({ history }) => {
                           <i className="far fa-trash-alt pr-1">Delete</i>
                         </button>
                       </td>
-                      <button
-                onClick={()=>{handleCheckout(props)} }
-                className="btn btn-dark btn-large btn-block mb-5 py-2"
-              >
-                Proceed to Checkout
-              </button>
-                    </tr>
+                      
+                      </tr>
                   ))}
                 </tbody>
               </table>
+              <button
+                onClick={()=>{handleCheckout()} }
+                className="btn btn-dark btn-large btn-block mb-5 py-2"
+              >
+                 Proceed to Checkout
+              </button>
             </div>
            
           </div>
@@ -111,3 +119,5 @@ const Cart = ({ history }) => {
 };
 
 export default Cart;
+
+
