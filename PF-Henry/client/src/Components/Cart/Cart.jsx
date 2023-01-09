@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteFromCart, ADD_TO_CART, checkoutadd } from "../../Redux/actions";
-import axios from "axios";
+
+//import axios from "axios";
 
 const Cart = ({ history }) => {
     const cart = useSelector((state) => state.cart);
@@ -71,6 +72,7 @@ const Cart = ({ history }) => {
                                             <img
                                                 src={props.image}
                                                 className="listImg img-thumbnail "
+                                                alt="..."
                                             />
                                             <td>{props.name}</td>
                                             <td>$ {props.price}</td>
@@ -126,3 +128,5 @@ const Cart = ({ history }) => {
 };
 
 export default Cart;
+
+
