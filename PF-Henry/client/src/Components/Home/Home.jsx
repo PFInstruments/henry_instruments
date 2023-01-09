@@ -64,8 +64,17 @@ export default function Home() {
                 />
             </div>
             <div>
-                {!localProducts.length ? (
+                {
+                !allProducts.length? (
                     <Loading />
+                )
+                :
+                !localProducts.length ? (
+                    <div className="position-relative m-5">
+                     <div className="position-absolute top-50 start-50 translate-middle">
+                         <h3>This instrument does not exist</h3>
+                     </div>
+                    </div>
                 ) : (
                     <CardGrid localProducts={localProducts} />
                 )}

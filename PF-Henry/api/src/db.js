@@ -5,7 +5,6 @@ const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, URL_DATABASE } = process.env;
 
 // const sequelize = new Sequelize(`${URL_DATABASE}`, {
-
 //// DEPLOY RAILWAY /////
 /*
 const sequelize = new Sequelize(URL_DATABASE, {
