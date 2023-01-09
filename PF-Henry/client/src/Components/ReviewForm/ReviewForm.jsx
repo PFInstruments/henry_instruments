@@ -11,17 +11,17 @@ import Swal from 'sweetalert2';
 const ReviewForm = () => {
 
     const {user, isAuthenticated, loginWithRedirect } = useAuth0();
-
+    
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         if(isAuthenticated) {
-        dispatch(getUser(user.sub))
+            dispatch(getUser(user.sub))
         }        
     }, [])
-
+    
     const reviews = useSelector((state) => state.reviews);
-
+    
     const { id } = useParams();
 
 
@@ -159,7 +159,7 @@ const ReviewForm = () => {
                                                     <button type={userComment.includes(true) ? "button" : "submit"}
                                                         className={review.comment === "" || review.score === 0 ?
                                                             "btn btn-success disabled" : "btn btn-success"}
-                                                        onClick={userComment.includes(true) || !isAuthenticated ? "" : () => alert()}
+                                                        onClick={userComment.includes(true) || !isAuthenticated ? null : () => alert()}
                                                         data-bs-toggle={!isAuthenticated || userComment.includes(true) ? "modal" : ""}
                                                         data-bs-target={!isAuthenticated ? "#Authenticate" : userComment ? "#Commented" : ""}>
                                                         Send <i className="fas fa-long-arrow-alt-right ms-1"></i>
