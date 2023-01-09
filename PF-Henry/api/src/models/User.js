@@ -3,70 +3,58 @@ const { DataTypes } = require("sequelize");
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
     // defino el modelo
-    sequelize.define("user", {
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            allowNull: false,
-        },
-        nickname: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isAlpha: {
-                    args: true,
-                    msg: "El nombre solo puede contener letras",
-                },
-                len: {
-                    args: [3, 255],
-                    msg: "El nombre tiene que tener entre 3 y 255 caracteres",
-                },
+    sequelize.define(
+        "user",
+        {
+            id: {
+                type: DataTypes.STRING,
+                defaultValue: DataTypes.UUIDV4,
+                allowNull: false,
+                primaryKey: true,
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            nickname: {
+                type: DataTypes.STRING,
+                allownull: true,
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            picture: {
+                type: DataTypes.STRING,
+                allownull: true,
+            },
+            connection: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            role: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            created_at: {
+                type: DataTypes.DATE,
+                allowNull: true,
+            },
+            updated_at: {
+                type: DataTypes.DATE,
+                allownull: true,
+            },
+            last_login: {
+                type: DataTypes.DATE,
+                allownull: true,
+            },
+            logins_count: {
+                type: DataTypes.INTEGER,
+                allownull: true,
             },
         },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isAlpha: {
-                    args: true,
-                    msg: "El nombre solo puede contener letras",
-                },
-                len: {
-                    args: [3, 255],
-                    msg: "El nombre tiene que tener entre 3 y 255 caracteres",
-                },
-            },
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            unique: {
-                msg: "El email ingresado ya esta registrado",
-            },
-            validate: {
-                isEmail: {
-                    args: true,
-                    msg: "El campo email tiene que ser un correo valido",
-                },
-            },
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                len: {
-                    args: [7, 42],
-                    msg: "La contraseña debe tener entre 7 y 42 caracteres.",
-                },
-            },
-        },
-        email_Verified: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
-        created_auth0: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
-    });
+        {
+            timestamps: false,
+        }
+    );
 };

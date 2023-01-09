@@ -14,6 +14,8 @@
     "npm": ">=6.14.6"
   },
   "dependencies": {
+    "auth0": "^3.0.1",
+    "auth0-spa-js": "^1.6.5",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.33.0",
     "cookie-parser": "^1.4.5",
