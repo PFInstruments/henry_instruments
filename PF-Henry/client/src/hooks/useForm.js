@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 
 export const useForm = (initialForm, validateForm) => {
   const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
 
 
   const handleChance = (e) => {
@@ -17,7 +16,6 @@ export const useForm = (initialForm, validateForm) => {
 
   const handleBlur = (e) => {
     handleChance(e);
-    setErrors(validateForm(form));
   };
 
   const sendEmail = (e) => {
@@ -32,23 +30,19 @@ export const useForm = (initialForm, validateForm) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    emailjs.sendForm('service_x6w3gw3', 'template_ypwesae', e.target, 'bqIvzfBDGrlv2Ww24' )
+    emailjs.sendForm('service_0fauzpr', 'template_27hql7l', e.target, 'GlQimBUHT4Tmbhg5O' )
     .then(response => console.log(response))
     .catch(error => console.log(error))
-    if(Object.keys(errors).length === 0) {
       //message sent
       sendEmail();
       //deja ern blanco el formulario
       e.target.reset();
       setForm(initialForm);
-    } else {
-      return;
-    }
+
   };
 
   return {
     form, 
-    errors, 
     handleChance, 
     handleBlur, 
     handleSubmit
