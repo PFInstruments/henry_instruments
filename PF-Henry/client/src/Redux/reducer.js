@@ -7,6 +7,7 @@ import {
   GET_ORDERS,
   PUT_USER,
   GET_USERS,
+  GET_USER,
   POST_REVIEW,
   // MP_CHECKOUT,
   ADD_TO_CART,
@@ -26,6 +27,7 @@ const initialState = {
   allOrders: [],
   orderDetail: {},
   allUsers: [],
+  user: {},
   cart: [],
   postReview: {},
   fav: [],
@@ -95,6 +97,11 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         allUsers: action.payload,
       };
+      case GET_USER:
+        return {
+          ...state,
+          user: action.payload,
+        }
     case PUT_USER:
       return {
         ...state,

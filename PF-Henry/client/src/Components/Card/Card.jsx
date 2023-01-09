@@ -54,21 +54,21 @@ const Card = (props) => {
         <div className="container-fluid bg-trasparent my-4 p-3 tw-duration-300 hover:tw--translate-y-1">
             <div className="col">
                 <div className="card h-100 shadow p-3 mb-5 bg-body rounded">
-                    <Link to={`/productdetail/${props.id}`}>
+                    <Link to={`/productdetail/${props?.id}`}>
                         <img
-                            src={props.image}
+                            src={props?.image}
                             className="card-img-top imageClass"
                             alt="..."
                         />
                     </Link>
                     <div className="label-top shadow-sm">
-                        {props.category.name}
+                        {props?.category.name}
                     </div>
                     <div className="card-body">
                         <div className="clearfix mb-3">
-                            <span className="float-start badge rounded-pill bg-success">{`$ ${props.price}`}</span>
+                            <span className="float-start badge rounded-pill bg-success">{`$ ${props?.price}`}</span>
                         </div>
-                        <h5 className="card-title">{`${props.name} ${props.brand} ${props.model}`}</h5>
+                        <h5 className="card-title">{`${props?.name} ${props?.brand} ${props?.model}`}</h5>
                         <div className="text-center  tw-grid tw-grid-cols-2">
                             <button
                                 type="button"
@@ -85,7 +85,7 @@ const Card = (props) => {
                                         className="btn btn-outline-danger btn-sm"
                                         onClick={handleAddProductFav}
                                         disabled={fav.find(
-                                            ({ id }) => id === props.id
+                                            ({ id }) => id === props?.id
                                         )}
                                     >
                                         <i className="bi bi-heart-fill"></i>

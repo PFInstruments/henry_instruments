@@ -20,9 +20,7 @@ const ProductDetail = () => {
 
     const prDetail = useSelector((state) => state.productDetail);
     const cart = useSelector((state) => state.cart);
-    const fav = useSelector((state) => state.fav);
-    
-
+    const fav = useSelector((state) => state.fav); 
 
     const dispatch = useDispatch();
 

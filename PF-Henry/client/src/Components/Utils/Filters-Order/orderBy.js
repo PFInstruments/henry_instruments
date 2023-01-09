@@ -104,6 +104,35 @@ export function orderRatingDesc(array) {
     return result;
 }
 
+////ORDER RATING////
+export function orderStockCatAsc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.products.length) > parseFloat(b.products.length)) {
+            return 1;
+        }
+        if (parseFloat(a.products.length) < parseFloat(b.products.length)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function orderStockCatDesc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.products.length) < parseFloat(b.products.length)) {
+            return 1;
+        }
+        if (parseFloat(a.products.length) > parseFloat(b.products.length)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
 export function orderBy(e, array) {
     let sorted = [];
     if (array === undefined) {
@@ -132,6 +161,12 @@ export function orderBy(e, array) {
     }
     if (e === "ratingDesc") {
         sorted = orderRatingDesc(array);
+    }
+    if (e === "stockCatAsc") {
+        sorted = orderStockCatAsc(array);
+    }
+    if (e === "stockCatDesc") {
+        sorted = orderStockCatDesc(array);
     }
 
     return sorted;
