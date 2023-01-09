@@ -32,9 +32,10 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
-            role: {
-                type: DataTypes.STRING,
+            admin: {
+                type: DataTypes.BOOLEAN,
                 allowNull: true,
+                defaultValue: false,
             },
             created_at: {
                 type: DataTypes.DATE,
@@ -52,6 +53,34 @@ module.exports = (sequelize) => {
                 type: DataTypes.INTEGER,
                 allownull: true,
             },
+            phone_number: {
+                type: DataTypes.STRING,
+                allownull: true,
+            },
+            zip: {
+                type: DataTypes.STRING,
+                allownull: true,
+            },
+            country: {
+                type: DataTypes.STRING,
+                allownull: true,
+            },
+            province: {
+                type: DataTypes.STRING,
+                allownull: true,
+            },
+            city: {
+                type: DataTypes.STRING,
+                allownull: true,
+            },
+            adress: {
+                type: DataTypes.STRING,
+                allownull: true,
+            },
+            wishlist: {
+                type: DataTypes.ARRAY(DataTypes.JSONB),
+                allownull: true,
+            }
         },
         {
             timestamps: false,

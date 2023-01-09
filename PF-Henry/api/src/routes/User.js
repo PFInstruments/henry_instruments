@@ -54,12 +54,39 @@ router.put('/:id', async(req, res) => {
 
 router.put('/changeRole/:id', async(req, res) => {
     const {id} = req.params;
-    const {role} = req.body;
+    const {admin} = req.body;
     try {
-        const request = await controllers.changeRole(id, role);
+        const request = await controllers.changeRole(id, admin);
         res.status(200).json({details: request});
     } catch (error) {
         res.status(404).json({error: error.message});        
+    }
+});
+
+router.put('/db/:id', async(req, res) => {
+    const { id } = req.params;
+    const { 
+        phone_number,
+        zip,
+        country,
+        province,
+        city,
+        adress,
+        wishlist 
+    } = req.body;
+    try {
+        const updatedUser = await controllers.updateDBUser(
+            id,
+            phone_number,
+            zip,
+            country,
+            province,
+            city,
+            adress,
+            wishlist );
+        res.status(200).json(updatedUser);
+    }catch(err) {
+        res.status(404).send(err.message);
     }
 });
 
@@ -67,7 +94,7 @@ router.delete('/:id', async(req,res)=>{
     try{
         const { id } = req.params;
         const user = await controllers.getUser(id);
-        const userAuth0 = await controllers.deleteUserAuth0(id);
+        await controllers.deleteUserAuth0(id);
         if(user){
             user.destroy();
             res.status(200).send(user);
