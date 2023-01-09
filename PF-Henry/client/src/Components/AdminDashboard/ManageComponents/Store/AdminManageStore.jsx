@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStore } from "../../../../Redux/actions";
 // import { useDispatch /* useSelector*/ } from "react-redux";
@@ -113,7 +113,26 @@ export default function AdminManageStore() {
 
     const storeDB = useSelector((state)=>state.store);
 
+    const [storeInfo,setStoreInfo]=useState({
+        email: storeDB[0].email,
+        phoneNum: storeDB[0].phoneNum,
+        adress: storeDB[0].adress,
+        city: storeDB[0].city,
+        state: storeDB[0].state,
+        zip: storeDB[0].zip,
+        country: storeDB[0].country,
+    });
+
         //EVENT HANDLERS///
+
+    const changeHandlerStore=(event)=>{
+        if(event.target.value!=="none"){
+            setStoreInfo({
+                ...storeInfo,
+                paisId: [...storeInfo.paisId, event.target.value]
+            })
+        }
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -123,140 +142,105 @@ export default function AdminManageStore() {
     ///PAGINA///
 
     return (
-        <div className="position-relative ">
-            <form
-                className="row g-2 w-25 p-2 position-absolute top-50 start-40 text-bg-dark p-3"
-                onSubmit={(e) => {
-                    handleSubmit(e);
-                }}
-            >
-                <div className="col-md-10">
-                    <label htmlFor="inputEmail4" className="form-label">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        required
-                        className="form-control "
-                        id="inputEmail"
-                        value={storeDB.email}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_EMAIL",
-                                payload: e.target.value,
-                            });
-                        }}
-                    />
-                </div>
-                <div className="col-12">
-                    <label htmlFor="inputAddress" className="form-label">
-                        Phone Number
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputPhoneNumber"
-                        value={storeDB.phoneNum}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_PHONENUM",
-                                payload: e.target.value,
-                            });
-                        }}
-                    />
-                </div>
+        <div>
+            <div className="position-relative ">
+                <form
+                    className="row g-2 w-25 p-2 position-absolute top-50 start-40 text-bg-dark p-3"
+                    onSubmit={(e) => {
+                        handleSubmit(e);
+                    }}
+                >
+                    <div className="col-md-10">
+                        <label htmlFor="inputEmail4" className="form-label">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            required
+                            className="form-control "
+                            id="inputEmail"
+                            value={storeDB.email}
+                            onChange={changeHandlerStore}
+                        />
+                    </div>
+                    <div className="col-12">
+                        <label htmlFor="inputAddress" className="form-label">
+                            Phone Number
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="inputPhoneNumber"
+                            value={storeDB.phoneNum}
+                            onChange={changeHandlerStore}
+                        />
+                    </div>
+                    <div className="col-12">
+                        <label htmlFor="inputAddress" className="form-label">
+                            Address
+                        </label>
+                        <textarea
+                            className="form-control"
+                            value={storeDB.address}
+                            onChange={changeHandlerStore}
+                        ></textarea>
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="inputCity" className="form-label">
+                            City
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="inputCity"
+                            value={storeDB.city}
+                            onChange={changeHandlerStore}
+                        />
+                    </div>
+                    <div className="col-md-7">
+                        <label htmlFor="inputState" className="form-label">
+                            State
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="inputState"
+                            value={storeDB.state}
+                            onChange={changeHandlerStore}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <label htmlFor="inputZip" className="form-label">
+                            Zip
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="inputZip"
+                            value={storeDB.zip}
+                            onChange={changeHandlerStore}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="inputCity" className="form-label">
+                            Country
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="inputCountry"
+                            value={storeDB.country}
+                            onChange={changeHandlerStore}
+                        />
+                    </div>
 
-                <div className="col-12">
-                    <label htmlFor="inputAddress" className="form-label">
-                        Address
-                    </label>
-                    <textarea
-                        className="form-control"
-                        value={storeDB.address}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_ADDRESS",
-                                payload: e.target.value,
-                            });
-                        }}
-                    ></textarea>
-                </div>
-
-                <div className="col-md-6">
-                    <label htmlFor="inputCity" className="form-label">
-                        City
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputCity"
-                        value={storeDB.city}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_CITY",
-                                payload: e.target.value,
-                            });
-                        }}
-                    />
-                </div>
-                <div className="col-md-7">
-                    <label htmlFor="inputState" className="form-label">
-                        State
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputState"
-                        value={storeDB.state}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_STATE",
-                                payload: e.target.value,
-                            });
-                        }}
-                    />
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="inputZip" className="form-label">
-                        Zip
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputZip"
-                        value={storeDB.zip}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_ZIP",
-                                payload: e.target.value,
-                            });
-                        }}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <label htmlFor="inputCity" className="form-label">
-                        Country
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputCountry"
-                        value={storeDB.country}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_COUNTRY",
-                                payload: e.target.value,
-                            });
-                        }}
-                    />
-                </div>
-
-                <div className="col-12">
-                    <button type="submit" className="btn  btn-success btn-lg">
-                        Save
-                    </button>
-                </div>
-            </form>
+                    <div className="col-12">
+                        <button type="submit" className="btn  btn-success btn-lg">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

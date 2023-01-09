@@ -32,7 +32,7 @@ const initialState = {
   cart: [],
   postReview: {},
   fav: [],
-  store: {},
+  store: []
 };
 
 if (localStorage.getItem("cart")) {
