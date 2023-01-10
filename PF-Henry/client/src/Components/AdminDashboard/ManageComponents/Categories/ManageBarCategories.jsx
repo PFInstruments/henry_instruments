@@ -1,12 +1,12 @@
 import React /*useState */ from "react";
 import CreateCategoryModal from "./CreateCategoryModal";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 export default function ManageCategoryNavabar({
     setLocalCategories,
     localCategories,
-    localOrder,
+    // localOrder,
     setLocalOrder,
     allCategories,
 }) {
@@ -16,10 +16,10 @@ export default function ManageCategoryNavabar({
     ////ESTADOS LOCALES//////
     //   const [localOrder, setLocalOrder] = useState();
 
-    const [content, setContent] = useState("");
+    //   const [content, setContent] = useState("");
 
     function handleChange(e) {
-        setContent(e.target.value);
+        //  setContent(e.target.value);
         if (!e.target.value) {
             setLocalCategories(allCategories.categories);
         } else {

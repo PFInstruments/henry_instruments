@@ -20,19 +20,15 @@ export default function AdminDashboard() {
         }
     }, [isAuthenticated, dispatch, user]);
 
-    console.log(localUser.admin);
-
     return (
         <div>
-            {/* { 
-        !Object.keys(localUser).length?
-        <Loading /> 
-        :
-        localUser.admin? */}
-            <AdminMenuTabs />
-            {/* : 
-        <Error404 />
-        } */}
+            {!Object.keys(localUser).length ? (
+                <Loading />
+            ) : localUser.admin ? (
+                <AdminMenuTabs />
+            ) : (
+                <Error404 />
+            )}
         </div>
     );
 }
