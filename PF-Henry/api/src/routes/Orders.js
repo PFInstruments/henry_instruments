@@ -27,9 +27,9 @@ router.get("/",async (req,res)=>{
 
 router.post("/",async (req,res)=>{
     try {
-        const { totalAmount, state, productId, userId }=req.body
-        if(totalAmount&&state&&productId&&userId){
-            const newOrder=await postOrder(totalAmount,state,productId,userId);
+        const { totalAmount, state, productId, userId, totalProducts }=req.body
+        if(totalAmount&&state&&productId&&userId&&totalProducts){
+            const newOrder=await postOrder(totalAmount,state,productId,userId,totalProducts);
             res.status(200).json(newOrder);
         }else throw Error("Faltan datos por introducir")
     } catch (error) {

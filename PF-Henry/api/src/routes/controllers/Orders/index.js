@@ -48,8 +48,8 @@ const getAllOrders = async () => {
     return orders;
 };
 
-const postOrder = async (totalAmount, state, productId, userId) => {
-    const newOrder = await Order.create({ totalAmount, state });
+const postOrder = async (totalAmount, state, productId, userId, totalProducts) => {
+    const newOrder = await Order.create({ totalAmount, state, totalProducts });
     await newOrder.setProducts(productId);
     await newOrder.setUser(userId);
     return newOrder;
