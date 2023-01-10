@@ -12,12 +12,15 @@ module.exports = {
                 Authorization: `Bearer ${TOKEN}`,
             },
         });
+        
         const find = await User.findOne({
             where: {
                 id: auth0User.data.user_id,
             }
         });
-        const create = find ? find : await User.create({
+        !find? await axios.post(`${REACT_APP_BASEURL}/mail/welcome`, {username: auth0User.data.email}) : null;
+        
+        const user = find ? find : await User.create({
             id: auth0User.data.user_id,
             name: auth0User.data.name,
             nickname: auth0User.data.nickname,
@@ -29,8 +32,7 @@ module.exports = {
             last_login: auth0User.data.last_login,
             logins_count: auth0User.data.logins_count,
         });
-        await axios.post(`${REACT_APP_BASEURL}/mail/welcome`, { username: auth0User.data.email });
-        return create;
+        return user;
     },
 
     deleteUserAuth0: async (id) => {
