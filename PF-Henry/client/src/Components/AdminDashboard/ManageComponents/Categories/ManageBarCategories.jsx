@@ -1,12 +1,12 @@
 import React /*useState */ from "react";
 import CreateCategoryModal from "./CreateCategoryModal";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 export default function ManageCategoryNavabar({
     setLocalCategories,
     localCategories,
-    localOrder,
+    // localOrder,
     setLocalOrder,
     allCategories,
 }) {
@@ -16,10 +16,10 @@ export default function ManageCategoryNavabar({
     ////ESTADOS LOCALES//////
     //   const [localOrder, setLocalOrder] = useState();
 
-    const [content, setContent] = useState("");
+    //   const [content, setContent] = useState("");
 
     function handleChange(e) {
-        setContent(e.target.value);
+        //  setContent(e.target.value);
         if (!e.target.value) {
             setLocalCategories(allCategories.categories);
         } else {
@@ -41,31 +41,7 @@ export default function ManageCategoryNavabar({
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-dark">
             <div className="container-fluid">
-                {/* <form className="d-flex" role="search">
-                    <input
-                        className="form-control me-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                    />
-                    <button className="btn btn-outline-success" type="submit">
-                        Search
-                    </button>
-                </form> */}
-                {/* <form className="flex items-center" role="search">
-                    <div>
-                        <input
-                            type="text"
-                            id="search"
-                            autoComplete="off"
-                            value={content}
-                            placeholder="Search..."
-                            onChange={(e) => handleChange(e)}
-                            className="form-control me-2"
-                        />
-                    </div>
-                </form> */}
-                <form className="tw-flex tw-items-center">
+                <form className="tw-flex tw-items-center" role="search">
                     <label htmlFor="simple-search" className="tw-sr-only">
                         Search
                     </label>

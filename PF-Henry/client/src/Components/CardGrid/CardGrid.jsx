@@ -57,6 +57,7 @@ export default function CardGrid({ localProducts }) {
                                         price={el.price}
                                         brand={el.brand}
                                         model={el.model}
+                                        reviews={el.reviews}
                                     />
                                 );
                         })

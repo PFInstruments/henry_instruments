@@ -7,7 +7,8 @@ module.exports = (sequelize) => {
     id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        //defaultValue: DataTypes.UUIDV4
+        defaultValue: 1
     },
     carrousel: {
       type: DataTypes.TEXT,
@@ -44,6 +45,21 @@ module.exports = (sequelize) => {
     zip: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    instagram: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "https://www.instagram.com/"
+    },
+    twitter: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "https://twitter.com/home"
+    },
+    facebook: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "https://www.facebook.com/"
     },
   },
   {

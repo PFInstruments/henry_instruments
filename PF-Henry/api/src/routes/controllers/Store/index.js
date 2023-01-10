@@ -5,8 +5,8 @@ module.exports = {
         const stores = await Store.findAll();
         return stores;
     },
-    postStore: async (carrousel, icon, phoneNumber, email, adress, country, city, state, zip) => {
-        const creatStore = Store.create({
+    postStore: async (carrousel, icon, phoneNumber, email, adress, country, city, state, zip, instagram, twitter, facebook) => {
+        const creatStore = await Store.create({
             carrousel: carrousel,
             icon: icon,
             phoneNumber: phoneNumber,
@@ -15,7 +15,17 @@ module.exports = {
             country: country,
             city: city,
             state: state,
-            zip: zip
+            zip: zip,
+            instagram: instagram,
+            twitter: twitter,
+            facebook: facebook,
         });
+        return creatStore;
+    },
+    deleteStore: async () => {
+        await Store.destroy({
+            where: { id: 1 }
+        });
+        return "Store eliminada";
     }
 }
