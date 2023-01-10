@@ -90,7 +90,7 @@ export const getProductDetail = (productoId) => {
                     ...detail.data,
                     rating: rating.data[0]
                         ? Math.round(rating.data[0].rating)
-                        : "0",
+                        : 0,
                     // coments: coments.data
                 },
             });
