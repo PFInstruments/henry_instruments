@@ -25,22 +25,23 @@ const ReviewForm = () => {
     const { id } = useParams();
 
 
-    const userComment = user ? reviews.map((el) => el.id === user.sub) : "";
+    const userComment = user ? reviews.map((el) => el.user_id === user.sub) : "";
 
     const [review, setReview] = useState({
         productId: id,
-        id: '',
+        user_id: '',
         image: '',
         name: '',
         score: 0,
         comment: ''
     });
+    console.log(review)
 
     useEffect(() => {
         if (isAuthenticated) {
             setReview({
                 ...review,
-                id: user.sub,
+                user_id: user.sub,
                 image:user.picture,
                 name:user.name
             })
@@ -66,15 +67,15 @@ const ReviewForm = () => {
         })
     };
 
-    const handleSubmit = (ev) => {
+    const handleSubmit = async (ev) => {
         ev.preventDefault();
-        dispatch(postReview(review));
+        await dispatch(postReview(review));
+        ev.target.reset();
         setReview({
             ...review,
             score: 0,
             comment: ''
         })
-        ev.target.reset();
         dispatch(getReviews(id));
         dispatch(getReviews(id));
         dispatch(getReviews(id));

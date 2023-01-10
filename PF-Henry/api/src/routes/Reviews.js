@@ -3,12 +3,12 @@ const router = express.Router();
 const { postReview, getScore_Product, getAllReview_Product, deleteReview } = require('./controllers/Review');
 
 router.post("/", async (req, res) => {
-    const { id, image, name, score, comment, productId } = req.body;
-    if (!id || !image || !name || !score || !comment || !productId) {
+    const { user_id, image, name, score, comment, productId } = req.body;
+    if (!user_id || !image || !name || !score || !comment || !productId) {
         return res.status(404).send("Faltan datos por completar");
     }
     try {
-        const newReview = await postReview(id, image, name, score, comment, productId);
+        const newReview = await postReview(user_id, image, name, score, comment, productId);
         res.status(200).send(newReview);
     } catch (error) {
         res.status(404).send(error.message);

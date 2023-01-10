@@ -50,6 +50,13 @@ const Card = (props) => {
           })
     };
 
+    // let rating = () => {
+    //     let allRatings = props.reviews?.map((el) => el.score);
+    //     let sum = allRatings.reduce((a, b) => a + b, 1);
+    //     return sum / props.reviews?.length 
+    // }
+    // console.log(rating());
+
     return (
         <div className="container-fluid bg-trasparent my-4 p-3 tw-duration-300 hover:tw--translate-y-1">
             <div className="col">
