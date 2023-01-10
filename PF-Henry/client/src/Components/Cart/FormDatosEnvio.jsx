@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, {  useReducer } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { checkoutadd } from "../../Redux/actions";
 
@@ -124,10 +124,10 @@ const FormularioEnvio = () => {
   );
 
   return (
-    <div className="position-relative ">
+    <div className="tw-flex tw-items-center tw-justify-center  tw-border">
       <form
         onSubmit={handleSubmit}
-        className="row g-2 w-25 p-2 position-absolute top-50 start-40 text-bg-dark p-3"
+        className="row g-2 w-25 p-2  top-50 start-40 text-bg-dark p-3"
       >
         <div className="col-md-10">
           <label htmlFor="inputName" className="form-label">

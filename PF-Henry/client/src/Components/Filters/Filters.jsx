@@ -22,7 +22,7 @@ export default function Filters({
         } else setDisabledState(false);
     }, [content]);
 
-    console.log(allCategories);
+    // console.log(allCategories);
     /////Creo una lista de tipos en orden ascendente y Creo el componente option list/////
 
     let categoryList = allCategories.categories?.map((t) => {
@@ -55,7 +55,7 @@ export default function Filters({
     }
     //// Creo lista de brands unicas //////
     const uniqueBrands = getUniqueBrands(allProducts);
-    console.log(uniqueBrands);
+    // console.log(uniqueBrands);
 
     let brandList = uniqueBrands?.map((t) => {
         return t;

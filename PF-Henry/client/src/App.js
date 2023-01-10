@@ -11,6 +11,7 @@ import "./App.css";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import Cart from "./Components/Cart/Cart";
 import FormularioEnvio from "./Components/Cart/FormDatosEnvio";
+import UserPofile from "./Components/Login/UserProfile";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/privacy" render={() => <Privacy />} />
         <Route exact path="/contact" render={() => <Contact />} />
         <Route exact path="/about" render={() => <About />} />
+        <Route exact path="/userprofile/:id" render={() => <UserPofile />} />
         <Route path="/" render={() => <Footer />} />
       </div>
     </BrowserRouter>
