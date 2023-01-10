@@ -14,10 +14,10 @@ const Card = (props) => {
         dispatch(addToCart(props));
         const Toast = Swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: 'top',
             showConfirmButton: false,
             timer: 2000,
-            timerProgressBar: true,
+            // timerProgressBar: true,
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -34,10 +34,10 @@ const Card = (props) => {
         dispatch(addFavProduct(props));
         const Toast = Swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: 'top',
             showConfirmButton: false,
             timer: 2000,
-            timerProgressBar: true,
+            // timerProgressBar: true,
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)

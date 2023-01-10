@@ -10,6 +10,7 @@ import About from "./Components/Footer/about";
 import "./App.css";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import Cart from "./Components/Cart/Cart";
+import FormularioEnvio from "./Components/Cart/FormDatosEnvio";
 
 
 
@@ -26,6 +27,7 @@ function App() {
           path="/productdetail/:id"
           render={() => <ProductDetail />}
         />
+        <Route exact path="/data" render={() => <FormularioEnvio />} />
         <Route exact path="/cart" render={() => <Cart />} />
         <Route exact path="/privacy" render={() => <Privacy />} />
         <Route exact path="/contact" render={() => <Contact />} />
