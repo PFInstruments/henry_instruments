@@ -34,10 +34,10 @@ const ProductDetail = () => {
         dispatch(addToCart(prDetail));
         const Toast = Swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: 'top',
             showConfirmButton: false,
             timer: 2000,
-            timerProgressBar: true,
+            // timerProgressBar: true,
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -53,10 +53,10 @@ const ProductDetail = () => {
         dispatch(addFavProduct(prDetail));
         const Toast = Swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: 'top',
             showConfirmButton: false,
             timer: 2000,
-            timerProgressBar: true,
+            // timerProgressBar: true,
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)

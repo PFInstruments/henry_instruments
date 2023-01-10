@@ -15,7 +15,9 @@ import {
   ADD_FAV,
   DELETE_REVIEW,
   CHECKOUT_ADD,
-  STORE_UPDATE
+  STORE_UPDATE,
+  GET_USER_ID
+
 } from "./actions";
 
 const initialState = {
@@ -32,7 +34,8 @@ const initialState = {
   cart: [],
   postReview: {},
   fav: [],
-  globalStore: []
+  globalStore: [],
+  userId: []
 };
 
 if (localStorage.getItem("cart")) {
@@ -107,6 +110,11 @@ export const rootReducer = (state = initialState, action) => {
     case PUT_USER:
       return {
         ...state,
+      };
+      case GET_USER_ID:
+      return {
+        ...state,
+        userId: action.payload,
       };
 
     /*case MP_CHECKOUT:

@@ -10,7 +10,13 @@ function Profile() {
   return (
     isAuthenticated && (
       <>
-        <img className="tw-rounded-full" src={user.picture} alt={user.name} width={37} height={37} />
+        <img
+          className="tw-rounded-full"
+          src={user.picture}
+          alt={user.name}
+          width={37}
+          height={37}
+        />
       </>
     )
   );

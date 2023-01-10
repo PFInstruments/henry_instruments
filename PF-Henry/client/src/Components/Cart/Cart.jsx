@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteFromCart, ADD_TO_CART, checkoutadd } from "../../Redux/actions";
+import { Link } from "react-router-dom";
+import { deleteFromCart, ADD_TO_CART } from "../../Redux/actions";
 
 //import axios from "axios";
 
@@ -28,20 +29,8 @@ const Cart = ({ history }) => {
         });
     };
 
-    const handleCheckout = () => {
-        const order = {
-            items: cart.map((item) => ({
-                id: item.id,
-                title: item.name,
-                image: item.image,
-                unit_price: parseInt(item.price), // Convierte el precio a un entero
-                quantity: parseInt(item.quantity),
-                currency_id: "ARG",
-            })),
-        };
-        dispatch(checkoutadd(order));
-    };
-    console.log("este es el carrito", cart);
+  
+    // console.log("este es el carrito", cart);
     // console.log(props)
     return (
         <section className="cart-page m4">
@@ -111,14 +100,16 @@ const Cart = ({ history }) => {
                                     ))}
                                 </tbody>
                             </table>
+                            <Link to={"/data"} >
                             <button
-                                onClick={() => {
-                                    handleCheckout();
-                                }}
+                                // onClick={() => {
+                                //     handleCheckout();
+                                // }}
                                 className="btn btn-dark btn-large btn-block mb-5 py-2"
                             >
-                                Proceed to Checkout
+                                Ir datos de envio
                             </button>
+                            </Link>
                         </div>
                     </div>
                 </>

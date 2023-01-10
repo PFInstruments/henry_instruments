@@ -8,30 +8,16 @@ const initialForm = {
   message: "",
 };
 
-const validationsForm = (form) => {
-  let errors = {};
- 
-  if (!/\S+@\S+\.\S+/.test(form.email.trim())) {
-    errors.email = "Email is invalid";
-  }
-  return errors;
-};
 
-let style = {
-  color: "red",
-  fontSize: "12px",
-  fontWeight: "bold",
-};
 
 export default function Contact() {
       
       const { 
         form, 
-        errors, 
         handleChange, 
         handleBlur, 
         handleSubmit 
-      } = useForm(initialForm, validationsForm);
+      } = useForm(initialForm);
 
 return (
 <>
@@ -68,7 +54,6 @@ return (
                               <input type="email" className="form-control" name="email" id="email" placeholder="Email" onBlur={handleBlur} onChange={handleChange} value={form.emmail}  required/>
                             </div>
                           </div>
-                          {errors.email && <p style={style}>{errors.email}</p>}
                           <div className="col-md-12">
                             <div className="form-group">
                               <label className="label" htmlFor="#">Message</label>

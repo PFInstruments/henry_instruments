@@ -7,35 +7,36 @@ const { TOKEN, AUTH0_DOMAIN, REACT_APP_BASEURL } = process.env;
 
 module.exports = {
     getLogIn: async (id) => {
-        const auth0User =  await axios.get(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`,  {
+        const auth0User = await axios.get(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`, {
             headers: {
                 Authorization: `Bearer ${TOKEN}`,
             },
         });
+        
         const find = await User.findOne({
             where: {
                 id: auth0User.data.user_id,
             }
         });
-         const create = find? find : await User.create({
-                id: auth0User.data.user_id,
-                name: auth0User.data.name,
-                nickname: auth0User.data.nickname,
-                email: auth0User.data.email,
-                picture: auth0User.data.picture,
-                connection: auth0User.data.identities[0].provider,
-                role: 'user',
-                created_at: auth0User.data.created_at,
-                updated_at: auth0User.data.updated_at,
-                last_login: auth0User.data.last_login,
-                logins_count: auth0User.data.logins_count,
+        !find? await axios.post(`${REACT_APP_BASEURL}/mail/welcome`, {username: auth0User.data.email}) : null;
+        
+        const user = find ? find : await User.create({
+            id: auth0User.data.user_id,
+            name: auth0User.data.name,
+            nickname: auth0User.data.nickname,
+            email: auth0User.data.email,
+            picture: auth0User.data.picture,
+            connection: auth0User.data.identities[0].provider,
+            created_at: auth0User.data.created_at,
+            updated_at: auth0User.data.updated_at,
+            last_login: auth0User.data.last_login,
+            logins_count: auth0User.data.logins_count,
         });
-        await axios.post(`${REACT_APP_BASEURL}/mail/welcome`, {username: auth0User.data.email});
-        return create;
-    }, 
+        return user;
+    },
 
     deleteUserAuth0: async (id) => {
-        const auth0User =  await axios.delete(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`, {
+        const auth0User = await axios.delete(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`, {
             headers: {
                 Authorization: `Bearer ${TOKEN}`,
             },
@@ -61,7 +62,7 @@ module.exports = {
         return user;
     },
     createUser: async (
-        name, 
+        name,
         surname,
         phone_num,
         email,
@@ -84,19 +85,19 @@ module.exports = {
     },
     updateUser: async (id, obj) => {
         let auth0User = await axios.patch(`https://${AUTH0_DOMAIN}/api/v2/users/${id}`, obj,
-         {
-            headers: {
-                Authorization: `Bearer ${TOKEN}`,
-            },
-        });
+            {
+                headers: {
+                    Authorization: `Bearer ${TOKEN}`,
+                },
+            });
         await User.update(
             {
-                name: auth0User.data.name , 
-                picture: auth0User.data.picture, 
-                nickname: auth0User.data.nickname, 
-                email: auth0User.data.email, 
-                connection: auth0User.data.connection, 
-                created_at: auth0User.data.created_at, 
+                name: auth0User.data.name,
+                picture: auth0User.data.picture,
+                nickname: auth0User.data.nickname,
+                email: auth0User.data.email,
+                connection: auth0User.data.connection,
+                created_at: auth0User.data.created_at,
                 updated_at: auth0User.data.created_at,
                 last_login: auth0User.data.last_login,
             },
@@ -105,25 +106,51 @@ module.exports = {
                     id,
                 },
             }
-            );
-            let user = await User.findOne({
-                where: { id },
-            });
+        );
+        let user = await User.findOne({
+            where: { id },
+        });
         return await user
     },
-    changeRole: async (id, role) => {
+    changeRole: async (id, admin) => {
         await User.update(
             {
-                role: role
+                admin: admin
             },
             {
-                where: {id}
+                where: { id }
             }
         );
         let user = await User.findOne({
-            where: {id}
+            where: { id }
         });
         return await user;
+    },
+    updateDBUser: async (
+        id,
+        phone_number,
+        zip,
+        country,
+        province,
+        city,
+        adress,
+        wishlist
+    ) => {
+        await User.update({
+            phone_number,
+            zip,
+            country,
+            province,
+            city,
+            adress,
+            wishlist
+        }, {
+            where: { id }
+        });
+        const user = await User.findOne({
+            where: { id },
+        });
+        return user;
     },
     createMultipleUsers: async () => {
         const users = [
