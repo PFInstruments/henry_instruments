@@ -23,145 +23,148 @@ export const PUT_PRODUCT = "PUT_PRODUCT";
 export const PUT_CATEGORY = "PUT_CATEGORY";
 export const CHECKOUT_ADD = "CHECKOUT_ADD";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const STORE_UPDATE = "STORE_UPDATE";
 export const GET_USER_ALL = "GET_USER_ALL";
 export const GET_USER_ID = "GET_USER_ID";
 
 export const addToCart = (product) => async (dispatch) => {
-  const cart = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+    const cart = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : [];
 
-  const duplicates = cart.filter((cartItem) => cartItem.id === product.id);
+    const duplicates = cart.filter((cartItem) => cartItem.id === product.id);
 
-  if (duplicates.length === 0) {
-    const productToAdd = {
-      ...product,
-      quantity: 1,
-    };
+    if (duplicates.length === 0) {
+        const productToAdd = {
+            ...product,
+            quantity: 1,
+        };
 
-    cart.push(productToAdd);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    dispatch({
-      type: ADD_TO_CART,
-      payload: cart,
-    });
-  }
+        cart.push(productToAdd);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        dispatch({
+            type: ADD_TO_CART,
+            payload: cart,
+        });
+    }
 };
 
 export const deleteFromCart = (product) => async (dispatch) => {
-  const cart = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+    const cart = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : [];
 
-  const updatedCart = cart.filter((cartItem) => cartItem.id !== product.id);
+    const updatedCart = cart.filter((cartItem) => cartItem.id !== product.id);
 
-  localStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
 
-  dispatch({
-    type: DELETE_FROM_CART,
-    payload: updatedCart,
-  });
+    dispatch({
+        type: DELETE_FROM_CART,
+        payload: updatedCart,
+    });
 };
 
 export const getProducts = () => {
-  return async function (dispatch) {
-    try {
-      const instruments = await axios.get("/products/");
-      return dispatch({
-        type: GET_PRODUCTS,
-        payload: instruments.data,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    return async function (dispatch) {
+        try {
+            const instruments = await axios.get("/products/");
+            return dispatch({
+                type: GET_PRODUCTS,
+                payload: instruments.data,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 };
 
 export const getProductDetail = (productoId) => {
-  return async function (dispatch) {
-    try {
-      const detail = await axios.get(`/products/${productoId}`);
-      const rating = await axios.get(`/review/rating/${productoId}`);
-      // const coments = await axios.get(`/review/${productoId}`);
-      return dispatch({
-        type: GET_PRODUCT_DETAIL,
-        payload: {
-          ...detail.data,
-          rating: rating.data[0] ? Math.round(rating.data[0].rating) : "0",
-          // coments: coments.data
-        },
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    return async function (dispatch) {
+        try {
+            const detail = await axios.get(`/products/${productoId}`);
+            const rating = await axios.get(`/review/rating/${productoId}`);
+            // const coments = await axios.get(`/review/${productoId}`);
+            return dispatch({
+                type: GET_PRODUCT_DETAIL,
+                payload: {
+                    ...detail.data,
+                    rating: rating.data[0]
+                        ? Math.round(rating.data[0].rating)
+                        : "0",
+                    // coments: coments.data
+                },
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 };
 
 export const clearPageProductDetail = () => {
-  return {
-    type: CLEAR_PAGE_PRODUCT_DETAIL,
-  };
+    return {
+        type: CLEAR_PAGE_PRODUCT_DETAIL,
+    };
 };
 
 export const deleteProduct = (id) => {
-  return async (dispatch) => {
-    return await axios
-      .delete(`/products/${id}`)
-      .then((res) => {
-        dispatch({ type: DELETE_PRODUCT, payload: res.data });
-      })
-      .catch((error) => console.log(error));
-  };
+    return async (dispatch) => {
+        return await axios
+            .delete(`/products/${id}`)
+            .then((res) => {
+                dispatch({ type: DELETE_PRODUCT, payload: res.data });
+            })
+            .catch((error) => console.log(error));
+    };
 };
 
 export const getCategories = () => {
-  return async function (dispatch) {
-    try {
-      const categories = await axios.get(`/category`);
-      return dispatch({
-        type: GET_CATEGORIES,
-        payload: categories.data,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    return async function (dispatch) {
+        try {
+            const categories = await axios.get(`/category`);
+            return dispatch({
+                type: GET_CATEGORIES,
+                payload: categories.data,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 };
 
 export const postCategory = (category) => {
-  return async (dispatch) => {
-    return await axios
-      .post("/category", category)
-      .then((res) => {
-        dispatch({ type: POST_CATEGORY, payload: res.data });
-      })
-      .catch((error) => console.log(error));
-  };
+    return async (dispatch) => {
+        return await axios
+            .post("/category", category)
+            .then((res) => {
+                dispatch({ type: POST_CATEGORY, payload: res.data });
+            })
+            .catch((error) => console.log(error));
+    };
 };
 
 export const deleteCategory = (id) => {
-  return async (dispatch) => {
-    return await axios
-      .delete(`/category/${id}`)
-      .then((res) => {
-        dispatch({ type: DELETE_CATEGORY, payload: res.data });
-      })
-      .catch((error) => console.log(error));
-  };
+    return async (dispatch) => {
+        return await axios
+            .delete(`/category/${id}`)
+            .then((res) => {
+                dispatch({ type: DELETE_CATEGORY, payload: res.data });
+            })
+            .catch((error) => console.log(error));
+    };
 };
 
 export const getAllOrders = () => {
-  return async function (dispatch) {
-    try {
-      const orders = await axios.get(`/orders/`);
-      return dispatch({
-        type: GET_ORDERS,
-        payload: orders.data,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    return async function (dispatch) {
+        try {
+            const orders = await axios.get(`/orders/`);
+            return dispatch({
+                type: GET_ORDERS,
+                payload: orders.data,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 };
 
 /*export const getOrderByUser = (userId) =>{
@@ -179,58 +182,58 @@ export const getAllOrders = () => {
 }*/
 
 export const getAllUsers = () => {
-  return async function (dispatch) {
-    try {
-      const users = await axios.get("/users");
-      return dispatch({
-        type: GET_USERS,
-        payload: users.data.results,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    return async function (dispatch) {
+        try {
+            const users = await axios.get("/users");
+            return dispatch({
+                type: GET_USERS,
+                payload: users.data.results,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 };
 
 export const deleteUser = (id) => {
-  return async function () {
-    try {
-      return axios.delete(`/users/${id}`);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    return async function () {
+        try {
+            return axios.delete(`/users/${id}`);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 };
 
 export const getReviews = (productoId) => {
-  return async function (dispatch) {
-    try {
-      const detail = await axios.get(`/products/${productoId}`);
-      // const rating = await axios.get(`/review/rating/${productoId}`);
-      // const coments = await axios.get(`/review/${productoId}`);
-      return dispatch({
-        type: GET_REVIEWS,
-        payload: [
-          ...detail.data.reviews,
-          // rating: rating.data[0].rating,
-          // coments: coments.data
-        ],
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    return async function (dispatch) {
+        try {
+            const detail = await axios.get(`/products/${productoId}`);
+            // const rating = await axios.get(`/review/rating/${productoId}`);
+            // const coments = await axios.get(`/review/${productoId}`);
+            return dispatch({
+                type: GET_REVIEWS,
+                payload: [
+                    ...detail.data.reviews,
+                    // rating: rating.data[0].rating,
+                    // coments: coments.data
+                ],
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 };
 
 export const postReview = (review) => {
-  return async (dispatch) => {
-    return await axios
-      .post("/review", review)
-      .then((res) => {
-        dispatch({ type: POST_REVIEW, payload: res.data });
-      })
-      .catch((error) => console.log(error));
-  };
+    return async (dispatch) => {
+        return await axios
+            .post("/review", review)
+            .then((res) => {
+                dispatch({ type: POST_REVIEW, payload: res.data });
+            })
+            .catch((error) => console.log(error));
+    };
 };
 
 /* 
@@ -266,89 +269,91 @@ export function deleteActivity(idCountry, id) {
 // };
 
 export const addFavProduct = (product) => async (dispatch) => {
-  const fav = localStorage.getItem("fav")
-    ? JSON.parse(localStorage.getItem("fav"))
-    : [];
-  const duplicates = fav.filter((cartItem) => cartItem.id === product.id);
+    const fav = localStorage.getItem("fav")
+        ? JSON.parse(localStorage.getItem("fav"))
+        : [];
+    const duplicates = fav.filter((cartItem) => cartItem.id === product.id);
 
-  if (duplicates.length === 0) {
-    const productToAdd = {
-      ...product,
-      count: 1,
-    };
-    fav.push(productToAdd);
-    localStorage.setItem("fav", JSON.stringify(fav));
-    dispatch({
-      type: ADD_FAV,
-      payload: product,
-    });
-  }
+    if (duplicates.length === 0) {
+        const productToAdd = {
+            ...product,
+            count: 1,
+        };
+        fav.push(productToAdd);
+        localStorage.setItem("fav", JSON.stringify(fav));
+        dispatch({
+            type: ADD_FAV,
+            payload: product,
+        });
+    }
 };
 
 export const deleteReview = (id) => {
-  return async (dispatch) => {
-    try {
-      axios.delete(`/review/${id}`);
-      return dispatch({
-        type: DELETE_REVIEW,
-        payload: id,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    return async (dispatch) => {
+        try {
+            axios.delete(`/review/${id}`);
+            return dispatch({
+                type: DELETE_REVIEW,
+                payload: id,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 };
 
 export const postProduct = (newProduct) => {
-  console.log(newProduct);
-  return async function (dispatch) {
-    return axios
-      .post("/products", newProduct)
-      .then((json) => dispatch({ type: "POST_PRODUCT", payload: json.data }))
-      .catch((error) => console.log(error));
-  };
+    console.log(newProduct);
+    return async function (dispatch) {
+        return axios
+            .post("/products", newProduct)
+            .then((json) =>
+                dispatch({ type: "POST_PRODUCT", payload: json.data })
+            )
+            .catch((error) => console.log(error));
+    };
 };
 
-export const putProduct = (id, info) => {
-  return async (dispatch) => {
-    return await axios
-      .put(`/products/${id}`, info)
-      .then((res) => {
-        dispatch({
-          type: PUT_PRODUCT,
-          payload: res.data,
-        });
-      })
-      .catch((error) => console.log(error));
-  };
+export const putProduct = (product) => {
+    return async (dispatch) => {
+        return await axios
+            .put(`/products/${product.id}`, product)
+            .then((res) => {
+                dispatch({
+                    type: PUT_PRODUCT,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
+    };
 };
 
 export const putCategory = (category) => {
-  return async (dispatch) => {
-    return await axios
-      .put(`/category/${category.id}`, category)
-      .then((res) => {
-        dispatch({
-          type: PUT_CATEGORY,
-          payload: res.data,
-        });
-      })
-      .catch((error) => console.log(error));
-  };
+    return async (dispatch) => {
+        return await axios
+            .put(`/category/${category.id}`, category)
+            .then((res) => {
+                dispatch({
+                    type: PUT_CATEGORY,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
+    };
 };
 
 export const getUser = (id) => {
-  return async (dispatch) => {
-    return await axios
-      .post(`/users/auth0/${id}`)
-      .then((res) => {
-        dispatch({
-          type: GET_USER,
-          payload: res.data,
-        });
-      })
-      .catch((error) => console.log(error));
-  };
+    return async (dispatch) => {
+        return await axios
+            .post(`/users/auth0/${id}`)
+            .then((res) => {
+                dispatch({
+                    type: GET_USER,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
+    };
 };
 
 export const getUserId = (id) => {
@@ -372,16 +377,30 @@ export const getUserId = (id) => {
 };
 
 export const checkoutadd = (cart) => {
-  return async function (dispatch) {
-    try {
-      const payment = await axios.post("/checkout", cart);
-      window.location.href = payment.data.response.body.init_point;
-      dispatch({
-        type: CHECKOUT_ADD,
-        payload: payment.data,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+    return async function (dispatch) {
+        try {
+            const payment = await axios.post("/checkout", cart);
+            window.location.href = payment.data.response.body.init_point;
+            dispatch({
+                type: CHECKOUT_ADD,
+                payload: payment.data,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+};
+
+export const updateStore = () => {
+    return async function (dispatch) {
+        try {
+            const store = await axios.get(`/store`);
+            return dispatch({
+                type: STORE_UPDATE,
+                payload: store.data,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 };

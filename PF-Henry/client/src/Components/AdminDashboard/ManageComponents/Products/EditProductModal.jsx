@@ -31,9 +31,10 @@ export default function EditProductModal({ product, localCategories }) {
 
     /////LOCAL REDUCER//////////
     const initialState = {
+        id: product.id,
         name: product.name,
         image: product.image,
-        category: product.category,
+        category: product.category.name,
         model: product.model,
         brand: product.brand,
         price: product.price,
@@ -115,8 +116,7 @@ export default function EditProductModal({ product, localCategories }) {
     //FUnciones//
     function refresh() {
         setEditSuccess(false);
-        console.log(editProductForm);
-        dispatch();
+        dispatch(getProducts());
     }
 
     const handleImage = (e) => {
@@ -126,7 +126,7 @@ export default function EditProductModal({ product, localCategories }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(getProducts(editProductForm));
+        dispatch(putProduct(editProductForm));
 
         setEditSuccess(true);
         console.log(editProductForm);
@@ -321,9 +321,9 @@ export default function EditProductModal({ product, localCategories }) {
                                     >
                                         <option
                                             key="keyAllCategories"
-                                            value="-"
+                                            value={initialState.category.name}
                                         >
-                                            -
+                                            {initialState.category.name}
                                         </option>
                                         {optionsList}
                                     </select>

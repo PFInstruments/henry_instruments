@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 // import { useDispatch /*,useSelector*/ } from "react-redux";
 import ManageBarProducts from "./ManageBarProducts";
 import ProductTable from "./ProductTable";
+import { orderBy } from "../../../Utils/Filters-Order/orderBy";
 
 export default function AdminManageProducts({ allProducts, allCategories }) {
     ///DISPATCH///
@@ -11,6 +12,7 @@ export default function AdminManageProducts({ allProducts, allCategories }) {
     /// ESTADOS LOCAL ///
     const [localProducts, setLocalProducts] = useState([]);
     const [localCategories, setLocalCategories] = useState([]);
+    const [localOrder, setLocalOrder] = useState("-");
 
     useEffect(() => {
         setLocalCategories(allCategories.categories);
@@ -21,6 +23,12 @@ export default function AdminManageProducts({ allProducts, allCategories }) {
         setLocalProducts(allProducts);
     }, [allProducts]);
 
+    useEffect(() => {
+        let arr = orderBy(localOrder, [...localProducts]);
+        setLocalProducts(arr);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [localOrder]);
+
     /// RENDER ///
     return (
         <div>
@@ -29,6 +37,10 @@ export default function AdminManageProducts({ allProducts, allCategories }) {
                     localProducts={localProducts}
                     setLocalProducts={setLocalProducts}
                     localCategories={localCategories}
+                    allProducts={allProducts}
+                    allCategories={allCategories}
+                    localOrder={localOrder}
+                    setLocalOrder={setLocalOrder}
                 />
             </div>
             <div>
