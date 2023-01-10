@@ -12,8 +12,6 @@ import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import Cart from "./Components/Cart/Cart";
 import FormularioEnvio from "./Components/Cart/FormDatosEnvio";
 
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -37,5 +35,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
