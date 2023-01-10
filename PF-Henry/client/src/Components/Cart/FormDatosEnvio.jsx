@@ -7,6 +7,7 @@ const FormularioEnvio = () => {
   const dispatch = useDispatch();
 
   const handleCheckout = () => {
+    
     const order = {
       items: cart.map((item) => ({
         id: item.id,
