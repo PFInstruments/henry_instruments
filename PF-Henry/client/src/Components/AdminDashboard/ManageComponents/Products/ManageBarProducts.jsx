@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CreateProductModal from "./CreateProductModal";
 
 export default function ManageBarProducts({
@@ -10,6 +10,9 @@ export default function ManageBarProducts({
     localOrder,
     setLocalOrder,
 }) {
+    //ESTADO LOCAL///
+
+    const [content, setContent] = useState("");
     /////Creo una lista de categorias en orden ascendente y Creo el componente option list/////
     let categoryList = localCategories?.map((c) => {
         return c.name;
@@ -24,6 +27,34 @@ export default function ManageBarProducts({
             </option>
         );
     }
+
+    const handleInputChange = (e) => {
+        console.log(localProducts);
+        setContent(e.target.value);
+        if (!e.target.value) {
+            setLocalProducts(allProducts);
+        } else {
+            // eslint-disable-next-line array-callback-return
+            let search = allProducts.filter((product) => {
+                if (
+                    product.name
+                        .toLowerCase()
+                        .indexOf(e.target.value.toLowerCase()) > -1 ||
+                    product.brand
+                        .toLowerCase()
+                        .indexOf(e.target.value.toLowerCase()) > -1 ||
+                    product.model
+                        .toLowerCase()
+                        .indexOf(e.target.value.toLowerCase()) > -1 ||
+                    product.id.indexOf(e.target.value) > -1
+                ) {
+                    console.log(product);
+                    return product;
+                }
+            });
+            setLocalProducts(search);
+        }
+    };
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-dark">
@@ -50,7 +81,8 @@ export default function ManageBarProducts({
                         </div>
                         <input
                             autoComplete="off"
-                            // onChange={(e) => handleChange(e)}
+                            value={content}
+                            onChange={(e) => handleInputChange(e)}
                             type="text"
                             id="simple-search"
                             className="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg tw-focus:ring-blue-500 tw-focus:border-blue-500 tw-block tw-w-full tw-pl-10 tw-p-2.5  tw-dark:bg-gray-700 tw-dark:border-gray-600 tw-dark:placeholder-gray-400 tw-dark:text-white tw-dark:focus:ring-blue-500 tw-dark:focus:border-blue-500"
