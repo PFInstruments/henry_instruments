@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
             admin: {
                 type: DataTypes.BOOLEAN,
                 allowNull: true,
-                defaultValue: false,
+                defaultValue: true,
             },
             created_at: {
                 type: DataTypes.DATE,
@@ -80,7 +80,7 @@ module.exports = (sequelize) => {
             wishlist: {
                 type: DataTypes.ARRAY(DataTypes.JSONB),
                 allownull: true,
-            }
+            },
         },
         {
             timestamps: false,
