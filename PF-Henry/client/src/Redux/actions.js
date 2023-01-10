@@ -357,25 +357,23 @@ export const getUser = (id) => {
 };
 
 export const getUserId = (id) => {
-    return async (dispatch) => {
-        try {
-            const user = await axios.get(`/users`);
-            const usuariosresultado = [];
-            for (let i = 0; i < user.data.results.length; i++) {
-                usuariosresultado.push(user.data.results[i]);
-            }
-            //   console.log(
-            //     "usuariossssssssssssssssssssssssssssssssssssss",
-            //     usuariosresultado
-            //   );
-            return dispatch({
-                type: GET_USER_ID,
-                payload: usuariosresultado,
-            });
-        } catch (error) {
-            console.log(error);
+  return async (dispatch) => {
+    try {
+      const user = await axios.get(`/users`);
+      const usuariosresultado = [];
+      for(let i = 0; i < user.data.results.length; i++){
+          if(user.data.results[i].id === id){
+            usuariosresultado.push(user.data.results[i])
+          }
         }
-    };
+      return dispatch({
+        type: GET_USER_ID,
+        payload: usuariosresultado,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 
 export const checkoutadd = (cart) => {

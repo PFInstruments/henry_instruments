@@ -6,20 +6,20 @@ import { getUserId} from '../../Redux/actions'
 function UserProfile() {
     const dispatch = useDispatch()
     const fav = useSelector(state => state.fav)
+    const userId = useSelector(state => state.userId)
     const {id} = useParams()
 
    useEffect(() => {
         dispatch(getUserId(id))
     }, [dispatch, id])
 
-
     return (
         <div>
            {fav.map((f) => (
                <div key={f.id}>
-                     <h1>{f.name}</h1>
+                     <h6>{f.name}</h6>
                         <p>{f.descriptions}</p>
-                        <p>{f.price}</p>
+                        <p>$ {f.price}</p>
                         </div>
                         ))
                         }
