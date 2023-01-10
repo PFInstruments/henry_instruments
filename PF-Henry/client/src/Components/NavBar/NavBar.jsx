@@ -16,6 +16,7 @@ export default function NavBar() {
   /// ESTADO GLOBAL ////
   const { allcategories } = useSelector((state) => state);
   const cart = useSelector((state) => state.cart);
+  const {user} = useSelector((state) => state);
 
   /// LISTA DE CATEGORIAS POR ORDEN ALPHABETICO///
   let categoryList = allcategories?.map((c) => {
@@ -85,6 +86,15 @@ export default function NavBar() {
               </li> */}
             </ul>
             <div className="d-flex tw-space-x-4 ">
+              {user.admin?
+              <Link to="admin">
+                <button type="button" className="btn btn-outline" style={{backgroundColor: "#6610f2", color: "white"}} >
+                  admin
+                </button>
+              </Link>
+               : 
+               null
+               }
               <Link to="/cart">
                 <button
                   type="button"
