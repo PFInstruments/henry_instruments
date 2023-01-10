@@ -12,7 +12,7 @@ import {
     numeral,
 } from "../../../Utils/variables";
 
-export default function ProductTable({ localProducts }) {
+export default function ProductTable({ localProducts, localCategories }) {
     return (
         <div className="table-responsive">
             <table className="table table-hover  ">
@@ -158,6 +158,7 @@ export default function ProductTable({ localProducts }) {
                                     <EditProductModal
                                         product={product}
                                         key={product.id + 50}
+                                        localCategories={localCategories}
                                     />
                                     <DetailProductModal
                                         product={product}
