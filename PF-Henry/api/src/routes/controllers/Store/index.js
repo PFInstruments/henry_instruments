@@ -6,7 +6,7 @@ module.exports = {
         return stores;
     },
     postStore: async (carrousel, icon, phoneNumber, email, adress, country, city, state, zip, instagram, twitter, facebook) => {
-        const creatStore = Store.create({
+        const creatStore = await Store.create({
             carrousel: carrousel,
             icon: icon,
             phoneNumber: phoneNumber,

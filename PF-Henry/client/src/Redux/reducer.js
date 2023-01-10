@@ -32,7 +32,7 @@ const initialState = {
   cart: [],
   postReview: {},
   fav: [],
-  store: []
+  globalStore: []
 };
 
 if (localStorage.getItem("cart")) {
@@ -137,7 +137,7 @@ export const rootReducer = (state = initialState, action) => {
     case STORE_UPDATE:
       return {
         ...state,
-        store: action.payload
+        globalStore: action.payload
       }
 
     default:
