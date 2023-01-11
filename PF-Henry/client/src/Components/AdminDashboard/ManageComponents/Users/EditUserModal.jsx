@@ -1,15 +1,33 @@
-import React /*useState*/ from "react";
+import React, { useState, useReducer } from "react";
+import { prefixEdit } from "../../../Utils/variables";
+import { useDispatch } from "react-redux";
+import { putUser, getAllUsers } from "../../../../Redux/actions";
+import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
 
-export default function EditUserModal() {
+export default function EditUserModal({ user }) {
+    ////Dispatch///
+    const dispatch = useDispatch();
+    ///Estado Local ///
+    const [editSuccess, setEditSuccess] = useState(false);
+
+    /// VARIABLE GIF///
+    const checkMarkGifInfinito = checkmarkInfinito;
+
+    //FUnciones//
+    function refresh() {
+        setEditSuccess(false);
+        dispatch(getAllUsers());
+    }
+
     return (
         <div
-            className="modal fade "
-            id="editUserModal"
+            className="modal fade"
+            id={prefixEdit + user.nickname}
             tabIndex="-1"
             aria-labelledby="editUserModalLabel"
             aria-hidden="true"
         >
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-dialog-scrollable">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h1
