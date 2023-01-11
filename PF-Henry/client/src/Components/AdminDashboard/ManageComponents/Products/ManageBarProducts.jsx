@@ -3,10 +3,8 @@ import CreateProductModal from "./CreateProductModal";
 import { orderBy } from "../../../Utils/Filters-Order/orderBy";
 export default function ManageBarProducts({
     localCategories,
-    localProducts,
     setLocalProducts,
     allProducts,
-    allCategories,
     localOrder,
     setLocalOrder,
 }) {
@@ -53,7 +51,6 @@ export default function ManageBarProducts({
     }
     //// Creo lista de brands unicas //////
     const uniqueBrands = getUniqueBrands(allProducts);
-    // console.log(uniqueBrands);
 
     let brandList = uniqueBrands?.map((t) => {
         return t;
@@ -136,7 +133,6 @@ export default function ManageBarProducts({
     }
 
     const handleInputChange = (e) => {
-        console.log(localProducts);
         setContent(e.target.value);
         if (!e.target.value) {
             setLocalProducts(allProducts);
@@ -155,7 +151,6 @@ export default function ManageBarProducts({
                         .indexOf(e.target.value.toLowerCase()) > -1 ||
                     product.id.indexOf(e.target.value) > -1
                 ) {
-                    console.log(product);
                     return product;
                 }
             });
@@ -276,8 +271,8 @@ export default function ManageBarProducts({
                             <option value="stockProdAsc">Stock ↟</option>
                             <option value="salesDesc">Sales ↡</option>
                             <option value="salesAsc">Sales ↟</option>
-                            <option value="3">Reviews ↡</option>
-                            <option value="3">Reviews ↟</option>
+                            <option value="ratingDesc">Rating ↡</option>
+                            <option value="ratingAsc">Rating ↟</option>
                             <option value="brandDesc">Brand ↡</option>
                             <option value="brandAsc">Brand ↟</option>
                         </select>
