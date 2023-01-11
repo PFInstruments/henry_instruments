@@ -19,14 +19,14 @@ const ReviewGrid = ({ reviews }) => {
   return (
     <div className="row d-flex justify-content-center">
       <div className="col-md-8 col-lg-6">
-        <div className="shadow-0 border">
+        <div className="shadow-0 border-invisible">
           <div className="card-body p-4">
             {segmentedReviews?.map((e) => {
               return (
                 <React.Fragment key={e.id}>
                   <ReviewCard
                     key={e.id}
-                    id={e.id}
+                    user_id={e.user_id}
                     image={e.image}
                     name={e.name}
                     score={e.score}

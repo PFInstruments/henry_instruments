@@ -135,7 +135,7 @@ export const rootReducer = (state = initialState, action) => {
     case DELETE_REVIEW:
       return {
         ...state,
-        reviews: state.reviews.filter(r => r.id !== action.payload)
+        reviews: state.reviews.filter(r => r.user_id !== action.payload)
       }
     case CHECKOUT_ADD:
       return {
