@@ -17,6 +17,10 @@ module.exports = (sequelize) => {
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
+        totalProducts:{
+            type: DataTypes.ARRAY(DataTypes.JSONB),
+            allowNull: false,
+        },
         state: {
             type: DataTypes.STRING,
             allowNull: false,

@@ -1,45 +1,38 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/scope */
 import React /*useState, useEffect*/ from "react";
-// import { useDispatch, useSelector } from "react-redux";
-import DeleteProductModal from "./DeleteProductModal";
-import DetailProductModal from "./DetailProductModal";
-import EditProductModal from "./EditProductModal";
 import {
     prefixDelete,
     prefixEdit,
     prefixDetail,
     numeral,
 } from "../../../Utils/variables";
+import EditUserModal from "./EditUserModal";
 
-export default function ProductTable({ localProducts, localCategories }) {
+export default function UsersTable({ localUsers }) {
     return (
         <div className="table-responsive">
             <table className="table table-hover  ">
                 <thead className="table-dark">
                     <tr>
                         <th scope="col">#id</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Name</th>
                         <th scope="col"></th>
-                        <th scope="col">Category</th>
-                        <th scope="col" className="align-middle">
-                            Model
-                        </th>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Sales</th>
-                        <th scope="col">Active</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Created at</th>
+                        <th scope="col">Orders</th>
+                        <th scope="col">Admin</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody className="table-group-divider ">
-                    {localProducts?.map((product) => {
+                    {localUsers?.map((user) => {
                         return (
-                            <tr key={product.id}>
+                            <tr key={user.id}>
                                 <td className="align-middle" scope="row">
-                                    <span className="fs-6">{product.id}</span>
+                                    <span className="tw-text-xs">
+                                        {user.id}
+                                    </span>
                                 </td>
                                 <td className="align-middle">
                                     {" "}
@@ -48,35 +41,29 @@ export default function ProductTable({ localProducts, localCategories }) {
                                         className="btn btn-light tw-px-3 tw-py-2 tw-text-sm tw-font-medium"
                                         data-bs-toggle="modal"
                                         data-bs-target={
-                                            numeral + prefixDetail + product.id
+                                            numeral + prefixDetail + user.id
                                         }
                                     >
-                                        {product.name}
+                                        {user.nickname}
                                     </button>
                                 </td>
+                                <td className="align-middle ">{user.name}</td>
                                 <td className="align-middle">
                                     <img
-                                        src={product.image}
+                                        src={user.picture}
                                         className="listImg img-thumbnail "
                                     />
                                 </td>
-                                <td className="align-middle ">
-                                    {product.category?.name}
+                                <td className="align-middle text-sm ">
+                                    {user.email}
                                 </td>
                                 <td className="align-middle ">
-                                    {product.model}
+                                    {user.created_at}
                                 </td>
                                 <td className="align-middle ">
-                                    {product.brand}
+                                    {user.orders.length}
                                 </td>
-                                <td className="align-middle">{`$${product.price}`}</td>
-                                <td className="align-middle">
-                                    {product.stock}
-                                </td>
-                                <td className="align-middle">
-                                    {product.orders.length}
-                                </td>
-                                {product.active ? (
+                                {user.admin ? (
                                     <td className="align-middle">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -103,13 +90,18 @@ export default function ProductTable({ localProducts, localCategories }) {
                                         </svg>
                                     </td>
                                 )}
+
+                                <td className="align-middle text-center">
+                                    {user.orders.length}
+                                </td>
+
                                 <td className="align-middle">
                                     <button
                                         type="button"
                                         className="btn btn-success listButton"
                                         data-bs-toggle="modal"
                                         data-bs-target={
-                                            numeral + prefixEdit + product.id
+                                            numeral + prefixEdit + user.nickname
                                         }
                                     >
                                         <svg
@@ -129,43 +121,10 @@ export default function ProductTable({ localProducts, localCategories }) {
                                         Edit
                                     </button>
                                 </td>
-                                <td className="align-middle">
-                                    <button
-                                        type="button"
-                                        className="btn btn-danger listButton "
-                                        data-bs-toggle="modal"
-                                        data-bs-target={
-                                            numeral + prefixDelete + product.id
-                                        }
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            className="bi bi-trash"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                                            ></path>
-                                        </svg>
-                                    </button>
-                                </td>
-                                <DeleteProductModal
-                                    product={product}
-                                    key={product.id + 10000}
-                                />
-                                <EditProductModal
-                                    product={product}
-                                    key={product.id + 50}
-                                    localCategories={localCategories}
-                                />
-                                <DetailProductModal
-                                    product={product}
-                                    key={product.id + 800000}
+
+                                <EditUserModal
+                                    user={user}
+                                    key={user.id + "a"}
                                 />
                             </tr>
                         );

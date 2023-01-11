@@ -1,12 +1,16 @@
-import React, {  useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { checkoutadd } from "../../Redux/actions";
+import { checkoutadd, getUser} from "../../Redux/actions";
+import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const FormularioEnvio = () => {
+  const { user } = useAuth0();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
+  const userDB = useSelector(state => state.user)
   const handleCheckout = () => {
+    
     const order = {
       items: cart.map((item) => ({
         id: item.id,
@@ -19,33 +23,32 @@ const FormularioEnvio = () => {
     };
     dispatch(checkoutadd(order));
   };
-
-  // Establecer el estado inicial del formulario
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   phone_number: "",
-  //   adress: "",
-  //   city: "",
-  //   province: "",
-  //   country: "",
-  //   zip: "",
-  // });
-
-  // Método para manejar los cambios en cada campo del formulario
-  // const handleChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
+  useEffect(()=>{
+    dispatch(getUser(user.sub));
+  },[dispatch, user.sub]);
   // Método para manejar el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    let totalProducts = cart.map(prod => { 
+      return { 
+        id: prod.id, 
+        category: prod.category.name,
+        brand: prod.brand,
+        model: prod.model,
+        quantity: prod.quantity
+      }; 
+    });
+    let totalAmount = cart.map(prod => parseInt(prod.quantity) * parseInt(prod.price))
+      .reduce((a,b)=> a+b,0);
     e.preventDefault();
     // Enviar los datos del formulario a tu servidor o realizar cualquier otra acción
+    await axios.put("/users/db/"+userDB.id, contactForm);
+    await axios.post("/orders", {
+      totalProducts,
+      totalAmount,
+      userId: userDB.id
+    });
     handleCheckout();
     setContactForm({ type: "SUBMIT" });
-  
   };
 
   let initialState = {
@@ -122,145 +125,232 @@ const FormularioEnvio = () => {
     dataEnvioFormReducer,
     initialState
   );
-
   return (
-    <div className="tw-flex tw-items-center tw-justify-center  tw-border">
-      <form
-        onSubmit={handleSubmit}
-        className="row g-2 w-25 p-2  top-50 start-40 text-bg-dark p-3"
-      >
-        <div className="col-md-10">
-          <label htmlFor="inputName" className="form-label">
-            Nombre Completo:
-          </label>
-          <input
-            required
-            type="name"
-            name="name"
-            id="inputName"
-            className="form-control "
-            value={contactForm.name}
-            onChange={(e) => {
-              setContactForm({
-                type: "SET_NAME",
-                payload: e.target.value,
-              });
-            }}
-          />
-        </div>
-        
-        <div className="col-12">
-                    <label htmlFor="inputAddress" className="form-label">
-                    Dirección:
-                    </label>
-          <input
-            required
-            type="text"
-            name="adress"
-            value={contactForm.adress}
-            className="form-control"
-            onChange={(e) => {
-              setContactForm({
-                  type: "SET_ADDRESS",
-                  payload: e.target.value,
-              });
-          }}
-          />
-        </div>
-        <div className="col-md-6">
-                    <label htmlFor="inputCity" className="form-label">
+    <div className="tw-container tw-p-12 tw-mx-auto">
+      <div className="tw-grid tw-grid-cols-2">
+        <div class="tw-flex tw-flex-col md:tw-w-full">
+          <h2 class="tw-mb-4 tw-font-bold md:tw-text-xl tw-text-heading ">
+            Shipping Address
+          </h2>
+          <form
+            onSubmit={handleSubmit}
+            className="tw-justify-center tw-w-full tw-mx-auto"
+          >
+            <div>
+              <div className="tw-mt-4">
+                <div className="tw-w-full">
+                  <label
+                    htmlFor="inputName"
+                    className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
+                  >
+                    Nombre Completo:
+                  </label>
+                  <input
+                    placeholder="Your Name"
+                    required
+                    type="name"
+                    name="name"
+                    id="inputName"
+                    className="tw-w-full tw-px-4 tw-py-3 tw-text-sm tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600 "
+                    value={contactForm.name}
+                    onChange={(e) => {
+                      setContactForm({
+                        type: "SET_NAME",
+                        payload: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="tw-w-full">
+                <div className="tw-w-full">
+                  <div className="tw-space-x-0 lg:tw-flex lg:tw-space-x-4">
+                    <div class="tw-w-full lg:tw-w-1/2">
+                      <label
+                        htmlFor="inputCity"
+                        className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
+                      >
                         Pais:
-                    </label>
-                    <input
+                      </label>
+                      <input
+                        placeholder="Country"
                         type="text"
-                        className="form-control"
+                        className="tw-w-full tw-px-4 tw-py-3 tw-text-xs tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
                         id="inputCountry"
                         value={contactForm.country}
                         onChange={(e) => {
-                            setContactForm({
-                                type: "SET_COUNTRY",
-                                payload: e.target.value,
-                            });
+                          setContactForm({
+                            type: "SET_COUNTRY",
+                            payload: e.target.value,
+                          });
                         }}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <label htmlFor="inputProvince" className="form-label">
+                      />
+                    </div>
+                    <div className="tw-w-full lg:tw-w-1/2">
+                      <label
+                        htmlFor="inputProvince"
+                        className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
+                      >
                         Provincia:
-                    </label>
-                    <input
+                      </label>
+                      <input
+                        placeholder="Province"
                         type="text"
-                        className="form-control"
-                        id="inputCountry"
-                        value={contactForm.country}
+                        className="tw-w-full tw-px-4 tw-py-3 tw-text-xs tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
+                        id="inputProvince"
+                        value={contactForm.province}
                         onChange={(e) => {
-                            setContactForm({
-                                type: "SET_PROVINCE",
-                                payload: e.target.value,
-                            });
+                          setContactForm({
+                            type: "SET_PROVINCE",
+                            payload: e.target.value,
+                          });
                         }}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <label htmlFor="inputCity" className="form-label">
-                        Ciudad:
-                    </label>
-                    <input
+                      />
+                    </div>
+                  </div>
+                  <div className="tw-mt-4">
+                    <div className="tw-w-full">
+                      <label
+                        htmlFor="inputAddress"
+                        className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
+                      >
+                        Dirección:
+                      </label>
+                      <input
+                        placeholder="adress"
+                        required
                         type="text"
-                        className="form-control"
-                        id="inputCity"
-                        value={contactForm.city}
+                        name="adress"
+                        value={contactForm.adress}
+                        className="tw-w-full tw-px-4 tw-py-3 tw-text-xs tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
                         onChange={(e) => {
-                            setContactForm({
-                                type: "SET_CITY",
-                                payload: e.target.value,
-                            });
+                          setContactForm({
+                            type: "SET_ADDRESS",
+                            payload: e.target.value,
+                          });
                         }}
-                    />
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="col-md-4">
-                    <label htmlFor="inputZip" className="form-label">
-                        Codigo Postal:
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputZip"
-                        value={contactForm.zip}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_ZIP",
-                                payload: e.target.value,
-                            });
-                        }}
-                    />
+              </div>
+              <div className="tw-space-x-0 lg:tw-flex lg:tw-space-x-4">
+                <div class="tw-w-full lg:tw-w-1/2">
+                  <label
+                    htmlFor="inputCity"
+                    className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
+                  >
+                    Ciudad:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="City"
+                    className="tw-w-full tw-px-4 tw-py-3 tw-text-sm tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
+                    id="inputCity"
+                    value={contactForm.city}
+                    onChange={(e) => {
+                      setContactForm({
+                        type: "SET_CITY",
+                        payload: e.target.value,
+                      });
+                    }}
+                  />
                 </div>
-                <div className="col-12">
-                    <label htmlFor="inputAddress" className="form-label">
-                        Numero de Telefono:
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputPhoneNumber"
-                        value={contactForm.phone_number}
-                        onChange={(e) => {
-                            setContactForm({
-                                type: "SET_PHONENUM",
-                                payload: e.target.value,
-                            });
-                        }}
-                    />
+                <div className="tw-w-full lg:tw-w-1/2">
+                  <label
+                    htmlFor="inputZip"
+                    className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
+                  >
+                    Cp:
+                  </label>
+                  <input
+                    placeholder="zip"
+                    type="text"
+                    className="tw-w-full tw-px-4 tw-py-3 tw-text-sm tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
+                    id="inputZip"
+                    value={contactForm.zip}
+                    onChange={(e) => {
+                      setContactForm({
+                        type: "SET_ZIP",
+                        payload: e.target.value,
+                      });
+                    }}
+                  />
                 </div>
-        <button type="submit" className="btn  btn-success btn-lg">Pagar</button>
-      </form>
-    </div>
+              </div>
+              <div className="tw-mt-4">
+                <div className="tw-w-full">
+                  <label
+                    htmlFor="inputAddress"
+                    className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
+                  >
+                    Numero de Telefono:
+                  </label>
+                  <input
+                    placeholder="phone number"
+                    type="text"
+                    className="tw-w-full tw-px-4 tw-py-3 tw-text-xs tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
+                    id="inputPhoneNumber"
+                    value={contactForm.phone_number}
+                    onChange={(e) => {
+                      setContactForm({
+                        type: "SET_PHONENUM",
+                        payload: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="tw-mt-4">
+                <button
+                  type="submit"
+                  class="tw-w-full tw-px-6 tw-py-2 tw-text-blue-200 tw-bg-blue-600 hover:tw-bg-blue-900 tw-border-none"
+                >
+                  Process
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div className="tw-m-5">
+        <h2 class="tw-mb-4 tw-font-bold md:tw-text-xl tw-text-heading ">Order Summary </h2>
+         <h4>Total Products : {cart.length}</h4>
+         <hr/>
+         {cart.map((item) => ( 
+          <>
+          <div className="tw-grid tw-grid-cols-3 tw-m-4 ">
+            <div>
+            <img src={item.image} alt="" className="tw-w-20 tw-h-20"/>
+            </div>
+            <div className="tw-m-2" >
+              <span>
+              Quantity: {item.quantity}  <h5 className="text-xl font-bold">{item.name}</h5>
+              </span>
+            
+            </div>
+            <div className="tw-m-2">
+              <span>price</span>
+            <h6 >${item.price}</h6>
+            </div>
+          </div>
+           <hr />
+          </>
+         
+        ))}
+        <h4>Total Price : ${cart.reduce((currentSum, currentCardItem) =>  currentSum + currentCardItem.price * currentCardItem.quantity, 0 ) .toFixed(2)}
+        </h4>
+        </div>
+        </div>
+      </div>
+   
   );
 };
 
 export default FormularioEnvio;
 
-{/* <form onSubmit={handleSubmit}>
+
+  /* <form onSubmit={handleSubmit}>
 <label>
   Nombre Completo:
   <input
@@ -339,4 +429,5 @@ export default FormularioEnvio;
 </label>
 <br />
 <button type="submit">Pagar</button>
-</form> */}
+</form> */
+
