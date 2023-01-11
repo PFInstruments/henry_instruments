@@ -97,7 +97,7 @@ export default function NavBar() {
                                 <Link to="admin">
                                     <button
                                         type="button"
-                                        className="tw-text-purple-700 tw-hover:text-white tw-border tw-border-purple-700 tw-hover:bg-purple-800 tw-focus:tw-ring-4 tw-focus:tw-outline-none tw-focus:tw-ring-purple-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 mb-2 tw-dark:tw-border-purple-400 tw-dark:tw-text-purple-400 tw-dark:tw-hover:tw-text-white tw-dark:tw-hover:tw-bg-purple-500 tw-dark:focus:tw-ring-purple-900"
+                                        className="tw-text-purple-700 tw-hover:text-white tw-border tw-border-purple-700 tw-hover:bg-purple-800 tw-focus:tw-ring-4 tw-focus:tw-outline-none tw-focus:tw-ring-purple-300 tw-font-medium tw-rounded-lg tw-text-md tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 mb-2 tw-dark:tw-border-purple-400 tw-dark:tw-text-purple-400 tw-dark:tw-hover:tw-text-white tw-dark:tw-hover:tw-bg-purple-500 tw-dark:focus:tw-ring-purple-900"
                                     >
                                         Admin Dashboard
                                     </button>
