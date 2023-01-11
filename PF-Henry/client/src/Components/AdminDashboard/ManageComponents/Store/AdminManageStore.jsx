@@ -390,5 +390,5 @@ export default function AdminManageStore({globalStore}) {
             </div>
         </div>
     );
+    */
 }
-*/
