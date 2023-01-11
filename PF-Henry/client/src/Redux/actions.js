@@ -26,6 +26,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const STORE_UPDATE = "STORE_UPDATE";
 export const GET_USER_ALL = "GET_USER_ALL";
 export const GET_USER_ID = "GET_USER_ID";
+export const PUT_STORE = "PUT_STORE"; 
 
 export const addToCart = (product) => async (dispatch) => {
     const cart = localStorage.getItem("cart")
@@ -416,5 +417,19 @@ export const getStore = () => {
         } catch (error) {
             console.log(error.message);
         }
+    };
+};
+
+export const putStore = (store) => {
+    return async (dispatch) => {
+        return await axios
+            .put(`/store/${store.id}`, store)
+            .then((res) => {
+                dispatch({
+                    type: PUT_STORE,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
     };
 };
