@@ -220,6 +220,99 @@ export function orderSalesDesc(array) {
     return result;
 }
 
+////ORDEN POR USERNAME////
+
+export function orderUsernameAZ(array) {
+    let result = array?.sort((a, b) => {
+        if (a.nickname > b.nickname) {
+            return 1;
+        }
+        if (a.nickname < b.nickname) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function orderUsernameZA(array) {
+    let result = array
+        .sort((a, b) => {
+            if (a.nickname > b.nickname) {
+                return 1;
+            }
+            if (a.nickname < b.nickname) {
+                return -1;
+            }
+
+            return 0;
+        })
+        .reverse();
+    return result;
+}
+
+////ORDEN POR Email////
+
+export function orderEmailAZ(array) {
+    let result = array?.sort((a, b) => {
+        if (a.email > b.email) {
+            return 1;
+        }
+        if (a.email < b.email) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function orderEmailZA(array) {
+    let result = array
+        .sort((a, b) => {
+            if (a.email > b.email) {
+                return 1;
+            }
+            if (a.nickname < b.nickname) {
+                return -1;
+            }
+
+            return 0;
+        })
+        .reverse();
+    return result;
+}
+
+/////por orders /////
+
+export function orderUserAsc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.orders.length) > parseFloat(b.orders.length)) {
+            return 1;
+        }
+        if (parseFloat(a.orders.length) < parseFloat(b.orders.length)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function orderUserDesc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.orders.length) < parseFloat(b.orders.length)) {
+            return 1;
+        }
+        if (parseFloat(a.orders.length) > parseFloat(b.orders.length)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
 //// FUNCION ORDER BY ////
 
 export function orderBy(e, array) {
@@ -274,6 +367,24 @@ export function orderBy(e, array) {
     }
     if (e === "salesDesc") {
         sorted = orderSalesDesc(array);
+    }
+    if (e === "userNameAsc") {
+        sorted = orderUsernameZA(array);
+    }
+    if (e === "userNameDesc") {
+        sorted = orderUsernameAZ(array);
+    }
+    if (e === "userEmailAsc") {
+        sorted = orderEmailZA(array);
+    }
+    if (e === "userEmailDesc") {
+        sorted = orderUsernameAZ(array);
+    }
+    if (e === "orderAsc") {
+        sorted = orderUserAsc(array);
+    }
+    if (e === "orderDesc") {
+        sorted = orderUserDesc(array);
     }
 
     return sorted;
