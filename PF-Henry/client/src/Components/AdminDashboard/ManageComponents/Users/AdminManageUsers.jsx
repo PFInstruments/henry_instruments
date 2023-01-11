@@ -20,6 +20,7 @@ export default function AdminManageUsers({ allUsers }) {
     useEffect(() => {
         setLocalUsers(allUsers);
     }, [allUsers]);
+
     console.log(localUsers);
 
     useEffect(() => {
@@ -31,7 +32,12 @@ export default function AdminManageUsers({ allUsers }) {
     return (
         <div>
             <div>
-                <ManageBarUsers allUsers={allUsers} />
+                <ManageBarUsers
+                    allUsers={allUsers}
+                    setLocalUsers={setLocalUsers}
+                    localOrder={localOrder}
+                    setLocalOrder={setLocalOrder}
+                />
             </div>
             <UsersTable localUsers={localUsers} setLocalUsers={setLocalUsers} />
         </div>
