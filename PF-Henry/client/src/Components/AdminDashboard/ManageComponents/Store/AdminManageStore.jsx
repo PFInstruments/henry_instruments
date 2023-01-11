@@ -1,24 +1,37 @@
 //import axios from "axios";
 import React, { useReducer, useEffect, useState } from "react";
-//import { useDispatch, useSelector } from "react-redux";
-//import { updateStore } from "../../../../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getStore, putStore } from "../../../../Redux/actions";
 // import { useDispatch /* useSelector*/ } from "react-redux";
 
 export default function AdminManageStore({globalStore}) {
     ///DISPATCH///
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     ///ESTADOS LOCALES///
 
     //HOOKS
     
-    const [localStore, setLocalStore] = useState({});
-    useEffect(()=>{
-        setLocalStore(
-            globalStore
-        )
-    },[globalStore, localStore])
-    console.log(localStore)
+    //const [localStore, setLocalStore] = useState({});
+    
+    /*useEffect(()=>{
+        setLocalStore({
+            //globalStore
+            carrousel: globalStore?.carrousel,
+            email: globalStore?.email,
+            phoneNumber: globalStore?.phoneNumber,
+            adress: globalStore?.adress,
+            city: globalStore?.city,
+            state: globalStore?.state,
+            zip: globalStore?.zip,
+            country: globalStore?.country,
+            instagram: globalStore?.instagram,
+            twitter: globalStore?.twitter,
+            facebook: globalStore?.facebook,
+        })
+
+    },[globalStore, localStore, setLocalStore])*/
+    //console.log(localStore)
     //   const { store } = useSelector((state) => state);
 
     ///ESTALOS LOCALES///
@@ -31,34 +44,51 @@ export default function AdminManageStore({globalStore}) {
         zip: "6579",
         country: "USA",
     });*/
-    
+    /*
+    const [editSuccess,setEditSuccess] = useState(false);
 
-     /* const [disabledSubmit, setDisabledSubmit] = useState(true);
+    const [editStoreForm,setEditStoreForm] = useState();
+
+    const [disabledSubmit, setDisabledSubmit] = useState(true);
 
     /////LOCAL REDUCER//////////
     let initialState = {
-        carrousel: "globalState?.carrousel",
-        email: "globalState?.email",
-        phoneNumber: "globalState?.phoneNumber",
-        adress: "globalState?.adress",
-        city: "globalState?.city",
-        state: "globalState?.state",
-        zip: "globalState?.zip",
-        country: "globalState?.country",
-        instagram: "globalState?.instagram",
-        twitter: "globalState?.twitter",
-        facebook: "globalState?.facebook",
+        id: globalStore?.id,
+        carrousel: globalStore?.carrousel,
+        icon: globalStore?.icon,
+        email: globalStore?.email,
+        phoneNumber: globalStore?.phoneNumber,
+        adress: globalStore?.adress,
+        city: globalStore?.city,
+        state: globalStore?.state,
+        zip: globalStore?.zip,
+        country: globalStore?.country,
+        instagram: globalStore?.instagram,
+        twitter: globalStore?.twitter,
+        facebook: globalStore?.facebook,
     };
     const contactFormReducer = (state, action) => {
         // eslint-disable-next-line default-case
         switch (action.type) {
+            case "SET_CARROUSEL": {
+                return {
+                    ...state,
+                    country: action.payload,
+                };
+            }
+            case "SET_ICON": {
+                return {
+                    ...state,
+                    country: action.payload,
+                };
+            }
             case "SET_EMAIL": {
                 return {
                     ...state,
                     email: action.payload,
                 };
             }
-            case "SET_PHONENUMber": {
+            case "SET_PHONENUMBER": {
                 return {
                     ...state,
                     phoneNumber: action.payload,
@@ -94,6 +124,24 @@ export default function AdminManageStore({globalStore}) {
                     country: action.payload,
                 };
             }
+            case "SET_INSTAGRAM": {
+                return {
+                    ...state,
+                    country: action.payload,
+                };
+            }
+            case "SET_TWITTER": {
+                return {
+                    ...state,
+                    country: action.payload,
+                };
+            }
+            case "SET_FACEBOOK": {
+                return {
+                    ...state,
+                    country: action.payload,
+                };
+            }
 
             case "SUBMIT": {
                 console.log(initialState);
@@ -101,6 +149,7 @@ export default function AdminManageStore({globalStore}) {
                     ...state,
                 };
             }
+
         }
     };
     const [contactForm, setContactForm] = useReducer(
@@ -112,22 +161,54 @@ export default function AdminManageStore({globalStore}) {
 
     //EVENT HANDLERS///
 
-    function handleSubmit(e) {
-        e.preventDefault();
-
-        alert("Changes Saved!");
-        setContactForm({ type: "SUBMIT" });
+    function refresh() {
+        setEditSuccess(false);
+        dispatch(getStore());
     }
 
-    const dispatch=useDispatch();
+    const handleImage = (e) => {
+        const file = e.target.files[0];
+        setFileToBase(file);
+    };
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        dispatch(putStore(editStoreForm));
+
+        setEditSuccess(true);
+        console.log(editStoreForm);
+
+        setEditStoreForm({ type: "SUBMIT" });
+    }
+
+    ////SETEO LA FOTO  A BASE 64////
+
+    const setFileToBase = (file) => {
+        const reader = new FileReader();
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setEditStoreForm({
+                    type: "SET_IMAGE",
+                    payload: reader.result,
+                });
+            };
+            console.log(editStoreForm);
+        } else {
+            setEditStoreForm({
+                type: "SET_IMAGE",
+                payload: "",
+            });
+        }
+    };
+/*
     useEffect(()=>{
-        dispatch(updateStore());
-    },[dispatch]);*/
-
+        dispatch(getStore());
+    },[dispatch]);
+*/
     //const stores = useSelector((state)=>state.store);
 
-    const [storeInfo,setStoreInfo]=useState({
+    /*const [storeInfo,setStoreInfo]=useState({
         carrousel: localStore?.carrousel,
         email: localStore?.email,
         phoneNumber: localStore?.phoneNumber,
@@ -140,22 +221,22 @@ export default function AdminManageStore({globalStore}) {
         twitter: localStore?.twitter,
         facebook: localStore?.facebook,
     });
-    //console.log(localStore)
-    console.log(storeInfo)
+    console.log(localStore)
+    console.log(storeInfo)*/
 
         //EVENT HANDLERS///
 
-    const changeHandlerStore=(event)=>{
-        setStoreInfo({
-            ...storeInfo,
-            [event.target.id]: event.target.value
+    /*const changeHandlerStore=(event)=>{
+        setLocalStore({
+            ...localStore,
+            [event.target.name]: event.target.value
         })
     }
 
     function handleSubmit(e) {
         e.preventDefault();
         
-    }
+    }*
 
     ///PAGINA///
 
@@ -177,9 +258,9 @@ export default function AdminManageStore({globalStore}) {
                             required
                             className="form-control "
                             id="email"
-                            name="inputEmail"
-                            value={storeInfo.email}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="email"
+                            value={contactForm.email}
+                            onChange={changeHandlerStore}
                         />
                     </div>
                     <div className="col-12">
@@ -190,8 +271,9 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="phoneNumber"
-                            value={storeInfo.phoneNumber}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="phoneNumber"
+                            value={contactForm.phoneNumber}
+                            onChange={changeHandlerStore}
                         />
                     </div>
                     <div className="col-12">
@@ -200,9 +282,10 @@ export default function AdminManageStore({globalStore}) {
                         </label>
                         <textarea
                             className="form-control"
-                            value={storeInfo.adress}
+                            value={contactForm.adress}
                             id="adress"
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="adress"
+                            onChange={changeHandlerStore}
                         ></textarea>
                     </div>
                     <div className="col-md-6">
@@ -213,8 +296,9 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="city"
-                            value={storeInfo.city}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="city"
+                            value={contactForm.city}
+                            onChange={changeHandlerStore}
                         />
                     </div>
                     <div className="col-md-7">
@@ -225,8 +309,9 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="state"
-                            value={storeInfo.state}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="state"
+                            value={contactForm.state}
+                            onChange={changeHandlerStore}
                         />
                     </div>
                     <div className="col-md-4">
@@ -237,8 +322,9 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="zip"
-                            value={storeInfo.zip}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="zip"
+                            value={contactForm.zip}
+                            onChange={changeHandlerStore}
                         />
                     </div>
                     <div className="col-12">
@@ -249,8 +335,9 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="country"
-                            value={storeInfo.country}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="country"
+                            value={contactForm.country}
+                            onChange={changeHandlerStore}
                         />
                     </div>
                     <h3>Redes Sociales</h3>
@@ -262,8 +349,9 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="instagram"
-                            value={storeInfo.instagram}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="instagram"
+                            value={contactForm.instagram}
+                            onChange={changeHandlerStore}
                         />
                     </div>
                     <div className="col-12">
@@ -274,8 +362,9 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="twitter"
-                            value={storeInfo.twitter}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="twitter"
+                            value={contactForm.twitter}
+                            onChange={changeHandlerStore}
                         />
                     </div>
                     <div className="col-12">
@@ -286,8 +375,9 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="facebook"
-                            value={storeInfo.facebook}
-                            onChange={(event)=>{changeHandlerStore(event)}}
+                            name="facebook"
+                            value={contactForm.facebook}
+                            onChange={changeHandlerStore}
                         />
                     </div>
 
@@ -301,3 +391,4 @@ export default function AdminManageStore({globalStore}) {
         </div>
     );
 }
+*/

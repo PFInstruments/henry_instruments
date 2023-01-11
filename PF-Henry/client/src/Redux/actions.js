@@ -391,7 +391,7 @@ export const checkoutadd = (cart) => {
     };
 };
 
-export const updateStore = () => {
+export const getStore = () => {
     return async function (dispatch) {
         try {
             const store = await axios.get(`/store`);
