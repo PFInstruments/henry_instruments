@@ -158,7 +158,9 @@ export default function EditUserModal({ user }) {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <h3>Category Edited Successfuly!</h3>
+                            <h3>User Name Edited Successfuly!</h3>
+                            <span>Username :{`  ${user.name}`}</span>
+                            <br />
                             <span>
                                 New Role :{userForm.admin ? " Admin" : " User"}
                             </span>
