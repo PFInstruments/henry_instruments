@@ -7,6 +7,12 @@ import {
 } from "../../../Utils/variables";
 import EditUserModal from "./EditUserModal";
 
+function decodeHtmlCharCodes(str) {
+    return str.replace(/(&#(\d+);.@)/g, function (match, capture, charCode) {
+        return String.fromCharCode(charCode);
+    });
+}
+
 export default function UsersTable({ localUsers }) {
     return (
         <div className="table-responsive">
@@ -91,17 +97,15 @@ export default function UsersTable({ localUsers }) {
                                     </td>
                                 )}
 
-                                <td className="align-middle text-center">
-                                    {user.orders.length}
-                                </td>
-
                                 <td className="align-middle">
                                     <button
                                         type="button"
                                         className="btn btn-success listButton"
                                         data-bs-toggle="modal"
                                         data-bs-target={
-                                            numeral + prefixEdit + user.nickname
+                                            numeral +
+                                            prefixEdit +
+                                            user.nickname.split(".").join("")
                                         }
                                     >
                                         <svg
@@ -120,12 +124,12 @@ export default function UsersTable({ localUsers }) {
                                         </svg>
                                         Edit
                                     </button>
-                                </td>
 
-                                <EditUserModal
-                                    user={user}
-                                    key={user.id + "a"}
-                                />
+                                    <EditUserModal
+                                        user={user}
+                                        key={user.id + "a"}
+                                    />
+                                </td>
                             </tr>
                         );
                     })}

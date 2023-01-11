@@ -52,7 +52,7 @@ const postReview = async (user_id, image, name, score, comment, productId) => {
 
 const deleteReview = async (id) => {
     await Review.destroy({
-        where: { id: id },
+        where: { user_id: id },
     });
     return "Review eliminado";
 }

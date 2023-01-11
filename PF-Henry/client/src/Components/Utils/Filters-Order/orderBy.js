@@ -162,6 +162,64 @@ export function orderStockProdDesc(array) {
     return result;
 }
 
+export function orderBrandAZ(array) {
+    let result = array?.sort((a, b) => {
+        if (a.brand > b.brand) {
+            return 1;
+        }
+        if (a.brand < b.brand) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function orderBrandZA(array) {
+    let result = array
+        .sort((a, b) => {
+            if (a.brand > b.brand) {
+                return 1;
+            }
+            if (a.brand < b.brand) {
+                return -1;
+            }
+
+            return 0;
+        })
+        .reverse();
+    return result;
+}
+
+export function orderSalesAsc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.orders.length) > parseFloat(b.orders.length)) {
+            return 1;
+        }
+        if (parseFloat(a.orders.length) < parseFloat(b.orders.length)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function orderSalesDesc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.orders.length) < parseFloat(b.orders.length)) {
+            return 1;
+        }
+        if (parseFloat(a.orders.length) > parseFloat(b.orders.length)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
 //// FUNCION ORDER BY ////
 
 export function orderBy(e, array) {
@@ -204,6 +262,18 @@ export function orderBy(e, array) {
     }
     if (e === "stockProdDesc") {
         sorted = orderStockProdDesc(array);
+    }
+    if (e === "brandDesc") {
+        sorted = orderBrandAZ(array);
+    }
+    if (e === "brandAsc") {
+        sorted = orderBrandZA(array);
+    }
+    if (e === "salesAsc") {
+        sorted = orderSalesAsc(array);
+    }
+    if (e === "salesDesc") {
+        sorted = orderSalesDesc(array);
     }
 
     return sorted;
