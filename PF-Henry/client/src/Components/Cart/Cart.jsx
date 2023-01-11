@@ -36,12 +36,12 @@ const Cart = ({ history }) => {
         <section className="cart-page m4">
             {cart.length <= 0 ? (
                 <div className="jumbotron bg-secondary text-white text-center py-2">
-                    <h4 className="display-4">Tu carrito de compras está vacio</h4>
+                    <h4 className="display-4">Your Cart is Empty</h4>
                 </div>
             ) : (
                 <>
                     <div className="jumbotron bg-secondary text-white text-center py-2">
-                        <h4 className="display-4">Tu Carrito:</h4>
+                        <h4 className="display-4">Cart:</h4>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-10">
@@ -103,6 +103,16 @@ const Cart = ({ history }) => {
                             </table>
                             <div className="row">
                                 <div className="col-12 d-flex justify-content-center">
+                                    <h4>
+                                    Total: $
+                                    {cart.reduce((currentSum, currentCardItem) =>  
+                                    currentSum + currentCardItem.price * currentCardItem.quantity, 0 ) 
+                                    .toFixed(2)}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-12 d-flex justify-content-center">
                                     <Link to={"/data"} >
                                         <button
                                         // onClick={() => {
@@ -110,7 +120,7 @@ const Cart = ({ history }) => {
                                             // }}
                                             className="btn btn-dark btn-large btn-block mx-auto"
                                         >
-                                            INICIAR COMPRA
+                                            PROCEED TO CHECKOUT
                                         </button>
                                     </Link>
                                 </div>
