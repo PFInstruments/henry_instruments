@@ -368,7 +368,7 @@ export const getUserId = (id) => {
             }
             return dispatch({
                 type: GET_USER_ID,
-                payload: usuariosresultado,
+                payload: usuariosresultado[0],
             });
         } catch (error) {
             console.log(error);

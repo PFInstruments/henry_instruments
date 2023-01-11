@@ -52,13 +52,13 @@ const FormularioEnvio = () => {
   };
 
   let initialState = {
-    name: "",
-    phone_number: "",
-    adress: "",
-    city: "",
-    province: "",
-    country: "",
-    zip: "",
+    name: userDB.name,
+    phone_number: userDB.phone_number,
+    adress: userDB.adress,
+    city: userDB.city,
+    province: userDB.province,
+    country: userDB.country,
+    zip: userDB.zip,
   };
 
   const dataEnvioFormReducer = (state, action) => {
@@ -130,7 +130,7 @@ const FormularioEnvio = () => {
       <div className="tw-grid tw-grid-cols-2">
         <div class="tw-flex tw-flex-col md:tw-w-full">
           <h2 class="tw-mb-4 tw-font-bold md:tw-text-xl tw-text-heading ">
-            Shipping Address
+          Modify address
           </h2>
           <form
             onSubmit={handleSubmit}
