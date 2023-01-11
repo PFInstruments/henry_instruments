@@ -321,9 +321,9 @@ export default function EditProductModal({ product, localCategories }) {
                                     >
                                         <option
                                             key="keyAllCategories"
-                                            value={initialState.category.name}
+                                            value={editProductForm.category}
                                         >
-                                            {initialState.category.name}
+                                            {editProductForm.category}
                                         </option>
                                         {optionsList}
                                     </select>
