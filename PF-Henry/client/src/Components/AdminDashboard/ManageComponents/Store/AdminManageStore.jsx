@@ -17,7 +17,7 @@ export default function AdminManageStore({globalStore}) {
         setLocalStore(
             globalStore
         )
-    },[globalStore])
+    },[globalStore, localStore])
     console.log(localStore)
     //   const { store } = useSelector((state) => state);
 
