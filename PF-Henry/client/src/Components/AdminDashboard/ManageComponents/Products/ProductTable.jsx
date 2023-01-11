@@ -12,6 +12,15 @@ import {
     numeral,
 } from "../../../Utils/variables";
 
+let rating = (p) => {
+    let sum = !p.reviews.length
+        ? 0
+        : p.reviews.map((el) => el.score).reduce((a, b) => a + b, 0) /
+          p.reviews?.length;
+    return sum;
+    // return allRatings.reduce((a, b) => a + b, 0) / p.reviews?.length;
+};
+
 export default function ProductTable({ localProducts, localCategories }) {
     return (
         <div className="table-responsive">
@@ -29,6 +38,7 @@ export default function ProductTable({ localProducts, localCategories }) {
                         <th scope="col">Price</th>
                         <th scope="col">Stock</th>
                         <th scope="col">Sales</th>
+                        <th scope="col">Rating</th>
                         <th scope="col">Active</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -75,6 +85,9 @@ export default function ProductTable({ localProducts, localCategories }) {
                                 </td>
                                 <td className="align-middle">
                                     {product.orders.length}
+                                </td>
+                                <td className="align-middle">
+                                    {rating(product)}
                                 </td>
                                 {product.active ? (
                                     <td className="align-middle">

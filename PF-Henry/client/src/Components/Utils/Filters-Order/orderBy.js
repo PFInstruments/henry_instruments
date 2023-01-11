@@ -1,3 +1,14 @@
+///Functino calc rating////
+
+let rating = (p) => {
+    let sum = !p.reviews.length
+        ? 0
+        : p.reviews.map((el) => el.score).reduce((a, b) => a + b, 0) /
+          p.reviews?.length;
+    return sum;
+    // return allRatings.reduce((a, b) => a + b, 0) / p.reviews?.length;
+};
+
 ////Orden por ID////
 
 export function orderID(array) {
@@ -78,10 +89,10 @@ export function orderPriceDesc(array) {
 ////ORDER RATING////
 export function orderRatingAsc(array) {
     let result = array.sort((a, b) => {
-        if (parseFloat(a.rating) > parseFloat(b.rating)) {
+        if (parseFloat(rating(a)) > parseFloat(rating(b))) {
             return 1;
         }
-        if (parseFloat(a.rating) < parseFloat(b.rating)) {
+        if (parseFloat(rating(a)) < parseFloat(rating(b))) {
             return -1;
         }
 
@@ -92,10 +103,10 @@ export function orderRatingAsc(array) {
 
 export function orderRatingDesc(array) {
     let result = array.sort((a, b) => {
-        if (parseFloat(a.rating) < parseFloat(b.rating)) {
+        if (parseFloat(rating(a)) < parseFloat(rating(b))) {
             return 1;
         }
-        if (parseFloat(a.rating) > parseFloat(b.rating)) {
+        if (parseFloat(rating(a)) > parseFloat(rating(b))) {
             return -1;
         }
 
