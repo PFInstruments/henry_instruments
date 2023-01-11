@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getOrders_Products, getOrders_Users, getAllOrders, postOrder } = require('./controllers/Orders');
+const { getOrders_Products, getOrders_Users, getAllOrders, postOrder,putOrderState } = require('./controllers/Orders');
 
 
 router.get("/",async (req,res)=>{
@@ -35,6 +35,17 @@ router.post("/",async (req,res)=>{
     } catch (error) {
         res.status(404).send(error.message)
     }
-})
+});
+
+router.put("/:id",async (req,res)=>{
+    const { id } = req.params;
+    const { state } = req.body;
+    try {
+        const order = await putOrderState(id,state);
+        res.status(200).json(order);
+    } catch(error) {
+        res.status(404).send(error.message);
+    }
+});
 
 module.exports=router;
