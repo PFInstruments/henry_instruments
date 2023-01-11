@@ -192,6 +192,34 @@ export function orderBrandZA(array) {
     return result;
 }
 
+export function orderSalesAsc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.orders.length) > parseFloat(b.orders.length)) {
+            return 1;
+        }
+        if (parseFloat(a.orders.length) < parseFloat(b.orders.length)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function orderSalesDesc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.orders.length) < parseFloat(b.orders.length)) {
+            return 1;
+        }
+        if (parseFloat(a.orders.length) > parseFloat(b.orders.length)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
 //// FUNCION ORDER BY ////
 
 export function orderBy(e, array) {
@@ -240,6 +268,12 @@ export function orderBy(e, array) {
     }
     if (e === "brandAsc") {
         sorted = orderBrandZA(array);
+    }
+    if (e === "salesAsc") {
+        sorted = orderSalesAsc(array);
+    }
+    if (e === "salesDesc") {
+        sorted = orderSalesDesc(array);
     }
 
     return sorted;
