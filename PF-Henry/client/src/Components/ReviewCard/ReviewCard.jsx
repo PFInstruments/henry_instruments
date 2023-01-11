@@ -31,7 +31,7 @@ const ReviewCard = (props) => {
             denyButtonText: `No`,
         }).then((result) => {
             if (result.isConfirmed) {
-                deleteRev(props.id)
+                deleteRev(user.sub)
                 Swal.fire('Review deleted!', '', 'success')
             }
         })
@@ -82,7 +82,7 @@ const ReviewCard = (props) => {
                             </li>
                         </ul>
                         <p className="small text-muted mb-0" >{props.score}</p>
-                        {isAuthenticated && user.sub === props.id ?
+                        {isAuthenticated && user.sub === props.user_id ?
                             <i className="bi bi-trash3-fill rgb(blue)"
                                 style={{ marginTop: "-0.16rem", marginLeft: "10px", cursor: "pointer", hover: "blue" }}
                                 data-bs-toggle="tooltip"
