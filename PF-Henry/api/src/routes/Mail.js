@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const express = require('express');
 const router = express.Router();
 const { HENRY_INSTRUMENT_USERNAME, HENRY_INSTRUMENT_PASS } = process.env;
+const { getHtmlForOrder } = require('./controllers/Mail');
 
 router.post('/welcome', async (req, res) => {
     const { username } = req.body;
@@ -37,7 +38,7 @@ router.post('/welcome', async (req, res) => {
 });
 
 router.post('/neworder', async (req, res) => {
-    const { username } = req.body;
+    const { username, idOrder, date, products } = req.body;
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -55,7 +56,7 @@ router.post('/neworder', async (req, res) => {
         from: `<${HENRY_INSTRUMENT_USERNAME}>`,
         to: `${username}`,
         subject: 'New Order',
-        html: '<H1>New order</h1>',
+        html: getHtmlForOrder(idOrder, date, products),
     };
 
     await transporter.sendMail(mailOptions, (error, info) => {
