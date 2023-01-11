@@ -31,6 +31,7 @@ export default function ProductTable({ localProducts, localCategories }) {
                         <th scope="col">Sales</th>
                         <th scope="col">Active</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody className="table-group-divider ">
@@ -44,7 +45,7 @@ export default function ProductTable({ localProducts, localCategories }) {
                                     {" "}
                                     <button
                                         type="button"
-                                        className="btn btn-light"
+                                        className="btn btn-light tw-px-3 tw-py-2 tw-text-sm tw-font-medium"
                                         data-bs-toggle="modal"
                                         data-bs-target={
                                             numeral + prefixDetail + product.id
@@ -127,7 +128,8 @@ export default function ProductTable({ localProducts, localCategories }) {
                                         </svg>
                                         Edit
                                     </button>
-
+                                </td>
+                                <td className="align-middle">
                                     <button
                                         type="button"
                                         className="btn btn-danger listButton "
@@ -151,20 +153,20 @@ export default function ProductTable({ localProducts, localCategories }) {
                                             ></path>
                                         </svg>
                                     </button>
-                                    <DeleteProductModal
-                                        product={product}
-                                        key={product.id + 10000}
-                                    />
-                                    <EditProductModal
-                                        product={product}
-                                        key={product.id + 50}
-                                        localCategories={localCategories}
-                                    />
-                                    <DetailProductModal
-                                        product={product}
-                                        key={product.id + 800000}
-                                    />
                                 </td>
+                                <DeleteProductModal
+                                    product={product}
+                                    key={product.id + 10000}
+                                />
+                                <EditProductModal
+                                    product={product}
+                                    key={product.id + 50}
+                                    localCategories={localCategories}
+                                />
+                                <DetailProductModal
+                                    product={product}
+                                    key={product.id + 800000}
+                                />
                             </tr>
                         );
                     })}
