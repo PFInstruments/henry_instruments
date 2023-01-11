@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         defaultValue: 1
     },
     carrousel: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
     icon: {
