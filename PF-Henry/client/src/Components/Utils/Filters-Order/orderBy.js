@@ -162,6 +162,36 @@ export function orderStockProdDesc(array) {
     return result;
 }
 
+export function orderBrandAZ(array) {
+    let result = array?.sort((a, b) => {
+        if (a.brand > b.brand) {
+            return 1;
+        }
+        if (a.brand < b.brand) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function orderBrandZA(array) {
+    let result = array
+        .sort((a, b) => {
+            if (a.brand > b.brand) {
+                return 1;
+            }
+            if (a.brand < b.brand) {
+                return -1;
+            }
+
+            return 0;
+        })
+        .reverse();
+    return result;
+}
+
 //// FUNCION ORDER BY ////
 
 export function orderBy(e, array) {
@@ -204,6 +234,12 @@ export function orderBy(e, array) {
     }
     if (e === "stockProdDesc") {
         sorted = orderStockProdDesc(array);
+    }
+    if (e === "brandDesc") {
+        sorted = orderBrandAZ(array);
+    }
+    if (e === "brandAsc") {
+        sorted = orderBrandZA(array);
     }
 
     return sorted;
