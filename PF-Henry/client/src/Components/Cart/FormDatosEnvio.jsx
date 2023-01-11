@@ -338,8 +338,7 @@ const FormularioEnvio = () => {
           </>
          
         ))}
-        <h4>Total Price : ${cart.reduce(
-          (currentSum, currentCardItem) =>  currentSum + currentCardItem.price * currentCardItem.quantity, 0 ) .toFixed(2)}
+        <h4>Total Price : ${cart.reduce((currentSum, currentCardItem) =>  currentSum + currentCardItem.price * currentCardItem.quantity, 0 ) .toFixed(2)}
         </h4>
         </div>
         </div>
@@ -350,7 +349,7 @@ const FormularioEnvio = () => {
 
 export default FormularioEnvio;
 
-{
+
   /* <form onSubmit={handleSubmit}>
 <label>
   Nombre Completo:
@@ -431,4 +430,4 @@ export default FormularioEnvio;
 <br />
 <button type="submit">Pagar</button>
 </form> */
-}
+
