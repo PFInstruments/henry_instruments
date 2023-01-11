@@ -11,10 +11,10 @@ import axios from "axios";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 /////AXIOS DB LOCAL/////
-// axios.defaults.baseURL = "http://localhost:5699";
+axios.defaults.baseURL = "http://localhost:5699";
 
 ////AXIOS DB RAILWAY////
-axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
+// axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
 
 ReactDOM.render(
     <React.StrictMode>
