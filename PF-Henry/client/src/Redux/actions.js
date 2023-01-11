@@ -357,23 +357,37 @@ export const getUser = (id) => {
 };
 
 export const getUserId = (id) => {
-  return async (dispatch) => {
-    try {
-      const user = await axios.get(`/users`);
-      const usuariosresultado = [];
-      for(let i = 0; i < user.data.results.length; i++){
-          if(user.data.results[i].id === id){
-            usuariosresultado.push(user.data.results[i])
-          }
+    return async (dispatch) => {
+        try {
+            const user = await axios.get(`/users`);
+            const usuariosresultado = [];
+            for (let i = 0; i < user.data.results.length; i++) {
+                if (user.data.results[i].id === id) {
+                    usuariosresultado.push(user.data.results[i]);
+                }
+            }
+            return dispatch({
+                type: GET_USER_ID,
+                payload: usuariosresultado,
+            });
+        } catch (error) {
+            console.log(error);
         }
-      return dispatch({
-        type: GET_USER_ID,
-        payload: usuariosresultado,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+};
+
+export const putUser = (user) => {
+    return async (dispatch) => {
+        return await axios
+            .put(`/users/changeRole/${user.id}`, user)
+            .then((res) => {
+                dispatch({
+                    type: PUT_USER,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
+    };
 };
 
 export const checkoutadd = (cart) => {
