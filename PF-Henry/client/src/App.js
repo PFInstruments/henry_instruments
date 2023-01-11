@@ -12,6 +12,7 @@ import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import Cart from "./Components/Cart/Cart";
 import FormularioEnvio from "./Components/Cart/FormDatosEnvio";
 import UserPofile from "./Components/Login/UserProfile";
+import SuccessMp from "./Components/Cart/SuccessMp";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         />
         <Route exact path="/data" render={() => <FormularioEnvio />} />
         <Route exact path="/cart" render={() => <Cart />} />
+        <Route exact path="/success" render={() => <  SuccessMp />} />
         <Route exact path="/privacy" render={() => <Privacy />} />
         <Route exact path="/contact" render={() => <Contact />} />
         <Route exact path="/about" render={() => <About />} />
