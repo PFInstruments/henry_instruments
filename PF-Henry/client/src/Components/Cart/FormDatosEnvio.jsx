@@ -1,11 +1,14 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { checkoutadd } from "../../Redux/actions";
+import { checkoutadd, getUser} from "../../Redux/actions";
+import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const FormularioEnvio = () => {
+  const { user } = useAuth0();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
+  const userDB = useSelector(state => state.user)
   const handleCheckout = () => {
     
     const order = {
@@ -20,12 +23,30 @@ const FormularioEnvio = () => {
     };
     dispatch(checkoutadd(order));
   };
-
+  useEffect(()=>{
+    dispatch(getUser(user.sub));
+  },[dispatch, user.sub]);
   // Método para manejar el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    let totalProducts = cart.map(prod => { 
+      return { 
+        id: prod.id, 
+        category: prod.category.name,
+        brand: prod.brand,
+        model: prod.model,
+        quantity: prod.quantity
+      }; 
+    });
+    let totalAmount = cart.map(prod => parseInt(prod.quantity) * parseInt(prod.price))
+      .reduce((a,b)=> a+b,0);
     e.preventDefault();
     // Enviar los datos del formulario a tu servidor o realizar cualquier otra acción
-
+    await axios.put("/users/db/"+userDB.id, contactForm);
+    await axios.post("/orders", {
+      totalProducts,
+      totalAmount,
+      userId: userDB.id
+    });
     handleCheckout();
     setContactForm({ type: "SUBMIT" });
   };
@@ -104,7 +125,6 @@ const FormularioEnvio = () => {
     dataEnvioFormReducer,
     initialState
   );
-
   return (
     <div className="tw-container tw-p-12 tw-mx-auto">
       <div className="tw-grid tw-grid-cols-2">
