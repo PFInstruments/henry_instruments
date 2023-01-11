@@ -278,6 +278,8 @@ export default function ManageBarProducts({
                             <option value="3">Sales ↟</option>
                             <option value="3">Reviews ↡</option>
                             <option value="3">Reviews ↟</option>
+                            <option value="brandDesc">Brand ↡</option>
+                            <option value="brandAsc">Brand ↟</option>
                         </select>
                     </form>
                 </div>

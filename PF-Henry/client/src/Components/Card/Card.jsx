@@ -1,13 +1,12 @@
 import React from "react";
 import "./Card.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart, addFavProduct } from "../../Redux/actions";
+import { addToCart } from "../../Redux/actions";
 import Swal from 'sweetalert2'
 
 const Card = (props) => {
     const dispatch = useDispatch();
-    const fav = useSelector((state) => state.fav);
    // const cart = useSelector((state) => state.cart);
 
     const handleAddToCart = () => {
@@ -27,26 +26,6 @@ const Card = (props) => {
           Toast.fire({
             icon: 'success',
             title: 'Added to Cart'
-          })
-    };
-
-    const handleAddProductFav = () => {
-        dispatch(addFavProduct(props));
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 2000,
-            // timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-          
-          Toast.fire({
-            icon: 'success',
-            title: 'Added to Favorites'
           })
     };
 
@@ -115,23 +94,8 @@ const Card = (props) => {
                                 className="btn btn-warning btn-sm"
                                 onClick={handleAddToCart}
                             >
-                                <i className="bi bi-cart-plus-fill"></i>
-
+                                ADD TO CART
                             </button>
-                            <div className="clearfix mb-1">
-                                <div className="float-end">
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-danger btn-sm"
-                                        onClick={handleAddProductFav}
-                                        disabled={fav.find(
-                                            ({ id }) => id === props?.id
-                                        )}
-                                    >
-                                        <i className="bi bi-heart-fill"></i>
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

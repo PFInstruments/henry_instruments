@@ -97,10 +97,6 @@ export default function UsersTable({ localUsers }) {
                                     </td>
                                 )}
 
-                                <td className="align-middle text-center">
-                                    {user.orders.length}
-                                </td>
-
                                 <td className="align-middle">
                                     <button
                                         type="button"
