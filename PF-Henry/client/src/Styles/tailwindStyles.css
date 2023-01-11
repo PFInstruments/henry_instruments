@@ -160,6 +160,10 @@
   height: 5rem
 }
 
+.tw-h-11 {
+  height: 2.75rem
+}
+
 .tw-h-10 {
   height: 2.5rem
 }
@@ -170,18 +174,6 @@
 
 .tw-h-5 {
   height: 1.25rem
-}
-
-.tw-h-12 {
-  height: 3rem
-}
-
-.tw-h-11 {
-  height: 2.75rem
-}
-
-.tw-h-8 {
-  height: 2rem
 }
 
 .tw-w-full {

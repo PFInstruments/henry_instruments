@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
   let preference = {
     items,
     back_urls: {
-      success: "https://henry-instruments-nu.vercel.app/",
+      success: "https://henry-instruments-nu.vercel.app/success",
       failure: "",
       pending: "",
     },

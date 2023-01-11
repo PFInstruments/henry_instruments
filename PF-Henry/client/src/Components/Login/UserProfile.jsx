@@ -21,7 +21,7 @@ function UserProfile() {
       };
     
   let initialState = {
-    name: userId.name,
+    name: userId.nickname,
     phone_number: userId.phone_number,
     adress: userId.adress,
     city: userId.city,
@@ -94,11 +94,14 @@ function UserProfile() {
     dataEnvioFormReducer,
     initialState
   );
-
+  console.log(userId)
     return (
         <div className="tw-container tw-p-12 tw-mx-auto">
         <div className="tw-grid tw-grid-cols-2">
-       
+       <div className='tw-container '>
+        <img src={userId.picture} alt="" className=''/>
+        <p>Email:{userId.email}</p>
+       </div>
         <div class="tw-flex tw-flex-col md:tw-w-full">
         <h2 class="tw-mb-4 tw-font-bold md:tw-text-xl tw-text-heading ">
         Shipping Address
