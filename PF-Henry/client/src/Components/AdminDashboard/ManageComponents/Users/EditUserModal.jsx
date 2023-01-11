@@ -4,6 +4,12 @@ import { useDispatch } from "react-redux";
 import { putUser, getAllUsers } from "../../../../Redux/actions";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
 
+function decodeHtmlCharCodes(str) {
+    return str.replace(/(&#(\d+);.@)/g, function (match, capture, charCode) {
+        return String.fromCharCode(charCode);
+    });
+}
+
 export default function EditUserModal({ user }) {
     ////Dispatch///
     const dispatch = useDispatch();
@@ -16,7 +22,7 @@ export default function EditUserModal({ user }) {
     /////LOCAL REDUCER//////////
     const initialState = {
         id: user.id,
-        admin: user.name,
+        admin: user.admin,
     };
 
     const editUserReducer = (state, action) => {
@@ -47,14 +53,14 @@ export default function EditUserModal({ user }) {
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(putUser(userForm));
-
+        console.log(userForm);
         setEditSuccess(true);
 
-        setCategoryForm({ type: "SUBMIT" });
+        setUserForm({ type: "SUBMIT" });
     }
 
     const handleInputChange = (e) => {
-        setCategoryForm({
+        setUserForm({
             type: "SET_NAME",
             payload: e.target.value,
         });
@@ -63,7 +69,7 @@ export default function EditUserModal({ user }) {
     return (
         <div
             className="modal fade"
-            id={prefixEdit + user.nickname}
+            id={prefixEdit + user.nickname.split(".").join("")}
             tabIndex="-1"
             aria-labelledby="editUserModalLabel"
             aria-hidden="true"
@@ -96,7 +102,7 @@ export default function EditUserModal({ user }) {
                                         className="col-form-label"
                                         htmlFor="flexSwitchCheckChecked"
                                     >
-                                        Active
+                                        Admin
                                     </label>
                                     <div className="form-check form-switch">
                                         <input
@@ -108,7 +114,7 @@ export default function EditUserModal({ user }) {
                                             checked={userForm.admin}
                                             onChange={(e) => {
                                                 setUserForm({
-                                                    type: "SET_ACTIVE",
+                                                    type: "SET_ROLE",
                                                     payload: e.target.checked,
                                                 });
                                             }}
@@ -127,9 +133,8 @@ export default function EditUserModal({ user }) {
                                     <button
                                         type="submit"
                                         className="btn btn-success"
-                                        disabled={nameExists}
                                     >
-                                        Edit Category
+                                        Edit User Role
                                     </button>
                                 </div>
                             </form>
@@ -155,8 +160,7 @@ export default function EditUserModal({ user }) {
                         <div className="modal-body">
                             <h3>Category Edited Successfuly!</h3>
                             <span>
-                                New Role :
-                                {categoryForm.admin ? " Admin" : " User"}
+                                New Role :{userForm.admin ? " Admin" : " User"}
                             </span>
                             <div>
                                 <img
