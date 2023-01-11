@@ -35,18 +35,18 @@ const Cart = ({ history }) => {
     return (
         <section className="cart-page m4">
             {cart.length <= 0 ? (
-                <div className="jumbotron">
-                    <h1 className="display-4">Your cart is empty </h1>
+                <div className="jumbotron bg-secondary text-white text-center py-2">
+                    <h4 className="display-4">Tu carrito de compras está vacio</h4>
                 </div>
             ) : (
                 <>
-                    <div className="jumbotron">
-                        <h1 className="display-4">Cart</h1>
+                    <div className="jumbotron bg-secondary text-white text-center py-2">
+                        <h4 className="display-4">Tu Carrito:</h4>
                     </div>
-                    <div className="row">
-                        <div className="col-md-8">
-                            <table className="table">
-                                <thead>
+                    <div className="row justify-content-center">
+                        <div className="col-10">
+                            <table className="table table-striped">
+                                <thead className="thead-light">
                                     <tr>
                                         <th scope="col"></th>
                                         <th scope="col">Product</th>
@@ -68,6 +68,7 @@ const Cart = ({ history }) => {
                                             <td>
                                                 <input
                                                     type="number"
+                                                    className="form-control-sm"
                                                     min="1"
                                                     max={props.stock}
                                                     value={props.quantity}
@@ -82,7 +83,7 @@ const Cart = ({ history }) => {
                                             <td>
                                                 <button
                                                     type="button"
-                                                    className="btn-btn-danger btn-sm"
+                                                    className="btn btn-danger btn-sm"
                                                     onClick={() =>
                                                         dispatch(
                                                             deleteFromCart(
@@ -91,7 +92,7 @@ const Cart = ({ history }) => {
                                                         )
                                                     }
                                                 >
-                                                    <i className="far fa-trash-alt pr-1">
+                                                    <i className="fas fa-trash-alt">
                                                         Delete
                                                     </i>
                                                 </button>
@@ -100,16 +101,20 @@ const Cart = ({ history }) => {
                                     ))}
                                 </tbody>
                             </table>
-                            <Link to={"/data"} >
-                            <button
-                                // onClick={() => {
-                                //     handleCheckout();
-                                // }}
-                                className="btn btn-dark btn-large btn-block mb-5 py-2"
-                            >
-                                Ir datos de envio
-                            </button>
-                            </Link>
+                            <div className="row">
+                                <div className="col-12 d-flex justify-content-center">
+                                    <Link to={"/data"} >
+                                        <button
+                                        // onClick={() => {
+                                            //     handleCheckout();
+                                            // }}
+                                            className="btn btn-dark btn-large btn-block mx-auto"
+                                        >
+                                            INICIAR COMPRA
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </>
