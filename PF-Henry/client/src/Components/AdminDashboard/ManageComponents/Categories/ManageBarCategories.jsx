@@ -71,7 +71,7 @@ export default function ManageCategoryNavabar({
                         />
                     </div>
                 </form>
-                <div className="tw-flex">
+                <div className="tw-flex tw-mr-10">
                     <label
                         htmlFor="orderCategories"
                         className="tw-block tw-mb-2 tw-text-lg tw-font-medium tw-text-white tw-mx-5 tw-text-center"
@@ -105,7 +105,7 @@ export default function ManageCategoryNavabar({
                 </div>
                 <button
                     type="button"
-                    className="btn btn-success"
+                    className="btn btn-success position-absolute top-50 end-0 translate-middle-y tw-mr-10 tw-ml-20 "
                     data-bs-toggle="modal"
                     data-bs-target="#createCategoryModal"
                 >
