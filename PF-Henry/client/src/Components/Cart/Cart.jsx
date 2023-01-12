@@ -113,7 +113,7 @@ const Cart = ({ history }) => {
                             </div>
                             <div className="row">
                                 <div className="col-12 d-flex justify-content-center">
-                                    <Link to={"/data"} >
+                                    <Link to={"/checkout"} >
                                         <button
                                         // onClick={() => {
                                             //     handleCheckout();

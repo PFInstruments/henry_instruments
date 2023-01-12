@@ -147,7 +147,7 @@ export const rootReducer = (state = initialState, action) => {
     case CHECKOUT_ADD:
       return {
         ...state,
-        cart: [],
+        
       }
     case STORE_UPDATE:
       return {

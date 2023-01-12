@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getUserId} from '../../Redux/actions'
 import axios from 'axios'
 import { useReducer } from 'react';
+import Swal from 'sweetalert2'
 
 function UserProfile() {
     const dispatch = useDispatch()
@@ -14,8 +15,27 @@ function UserProfile() {
         dispatch(getUserId(id))
     }, [dispatch, id])
 
+    const alert = () => {
+      const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
+
+      Toast.fire({
+          icon: 'success',
+          title: 'save information'
+      })
+  }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        alert()
         await axios.put("/users/db/"+id, contactForm);
         setContactForm({ type: "SUBMIT" });
       };
@@ -96,28 +116,26 @@ function UserProfile() {
   );
   console.log(userId)
     return (
-        <div className="tw-container tw-p-12 tw-mx-auto">
+    
+        <div className="tw-container  tw-mx-auto tw-p-4">
+          <hr />
         <div className="tw-grid tw-grid-cols-2">
-       <div className='tw-container '>
-        <img src={userId.picture} alt="" className=''/>
-        <p>Email:{userId.email}</p>
-       </div>
+          <div class="">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src={userId.picture}/>{userId.name}<span class="text-black-50">{userId.email}</span><span> </span></div>
+        </div>
         <div class="tw-flex tw-flex-col md:tw-w-full">
-        <h2 class="tw-mb-4 tw-font-bold md:tw-text-xl tw-text-heading ">
-        Shipping Address
-      </h2>
+      
         <form
         onSubmit={handleSubmit}
         className="tw-justify-center tw-w-full tw-mx-auto"
       >
-        <div>
           <div className="tw-mt-4">
                 <div className="tw-w-full">
                   <label
                     htmlFor="inputName"
                     className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
                   >
-                    Nombre Completo:
+                   Full name:
                   </label>
                   <input
                     placeholder="Your Name"
@@ -145,7 +163,7 @@ function UserProfile() {
                         htmlFor="inputCity"
                         className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
                       >
-                        Pais:
+                        Country:
                       </label>
                       <input
                         placeholder="Country"
@@ -166,7 +184,7 @@ function UserProfile() {
                         htmlFor="inputProvince"
                         className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
                       >
-                        Provincia:
+                        Province:
                       </label>
                       <input
                         placeholder="Province"
@@ -189,7 +207,7 @@ function UserProfile() {
                         htmlFor="inputAddress"
                         className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
                       >
-                        Dirección:
+                        Adress:
                       </label>
                       <input
                         placeholder="adress"
@@ -215,7 +233,7 @@ function UserProfile() {
                     htmlFor="inputCity"
                     className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
                   >
-                    Ciudad:
+                    City:
                   </label>
                   <input
                     type="text"
@@ -236,11 +254,11 @@ function UserProfile() {
                     htmlFor="inputZip"
                     className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
                   >
-                    Cp:
+                    Postal Code:
                   </label>
                   <input
                     placeholder="zip"
-                    type="text"
+                    type="number"
                     className="tw-w-full tw-px-4 tw-py-3 tw-text-sm tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
                     id="inputZip"
                     value={contactForm.zip}
@@ -259,11 +277,11 @@ function UserProfile() {
                     htmlFor="inputAddress"
                     className="tw-block tw-mb-3 tw-text-sm tw-font-semibold tw-text-gray-500"
                   >
-                    Numero de Telefono:
+                    Phone number:
                   </label>
                   <input
                     placeholder="phone number"
-                    type="text"
+                    type="number"
                     className="tw-w-full tw-px-4 tw-py-3 tw-text-xs tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
                     id="inputPhoneNumber"
                     value={contactForm.phone_number}
@@ -281,14 +299,17 @@ function UserProfile() {
                   type="submit"
                   class="tw-w-full tw-px-6 tw-py-2 tw-text-blue-200 tw-bg-blue-600 hover:tw-bg-blue-900 tw-border-none"
                 >
-                  save information
+                  save
                 </button>
               </div>
-        </div>
         </form>
+        
         </div>
+        
         </div>
+        <hr />
         </div>
+      
     )
 }
 

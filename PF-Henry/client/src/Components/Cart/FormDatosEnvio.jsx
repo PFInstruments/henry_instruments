@@ -321,7 +321,7 @@ const FormularioEnvio = () => {
           <>
           <div className="tw-grid tw-grid-cols-3 tw-m-4 ">
             <div>
-            <img src={item.image} alt="" className="tw-w-20 tw-h-20"/>
+            <img src={item.image} alt=""   className="listImg img-thumbnail "/>
             </div>
             <div className="tw-m-2" >
               <span>
@@ -338,7 +338,7 @@ const FormularioEnvio = () => {
           </>
          
         ))}
-        <h4>Total Price : ${cart.reduce((currentSum, currentCardItem) =>  currentSum + currentCardItem.price * currentCardItem.quantity, 0 ) .toFixed(2)}
+        <h4>Total amount : ${cart.reduce((currentSum, currentCardItem) =>  currentSum + currentCardItem.price * currentCardItem.quantity, 0 ) .toFixed(2)}
         </h4>
         </div>
         </div>
