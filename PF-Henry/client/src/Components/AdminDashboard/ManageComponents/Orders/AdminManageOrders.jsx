@@ -19,7 +19,7 @@ export default function AdminManageOrders({ allOrders }) {
         let arr = orderBy(localOrders, [...localOrders]);
         setLocalOrders(arr);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [localOrders]);
+    }, [localOrdenamiento]);
 
     return (
         <div>
