@@ -117,7 +117,7 @@ return (
                         <span className="bi bi-envelope-at"></span>
                       </div>
                       <div className="text">
-                        <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@henrymusic.com</a></p>
+                        <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@henrymusi.com</a></p>
                       </div>
                     </div>
                   </div>

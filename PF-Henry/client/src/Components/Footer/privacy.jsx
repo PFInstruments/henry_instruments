@@ -80,7 +80,7 @@ export default function Privacy() {
         <p className="text-justify text-muted mt-2">
           we use your Personal Information to provide you with advertisements
           targeted or marketing communications that we believe may be
-          of your interest.
+          of your interest
         </p>
       </div>
     </div>

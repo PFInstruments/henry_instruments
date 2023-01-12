@@ -28,7 +28,7 @@ export default function Footer() {
             <Link to="/about">About us</Link>
           </li>
           <li className="list-inline-item">
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact">Contacts</Link>
           </li>
           <li className="list-inline-item">
             <Link to="/privacy">Privacy policies</Link>

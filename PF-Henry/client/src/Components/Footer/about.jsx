@@ -46,7 +46,7 @@ export default function About() {
                 <p className="card-text text-muted">
                   Honesty, transparency, respect. They are the key to guide
                   our conduct day by day. And they express who we are and in
-                  what do we believe
+                  what do we believe.
                 </p>
               </div>
             </div>
