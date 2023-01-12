@@ -13,7 +13,7 @@ export default function AdminManageOrders({ allOrders }) {
         setLocalOrders(allOrders);
     }, [allOrders]);
 
-    //  console.log(localOrders);
+    console.log(localOrders);
 
     useEffect(() => {
         let arr = orderBy(localOrders, [...localOrders]);
