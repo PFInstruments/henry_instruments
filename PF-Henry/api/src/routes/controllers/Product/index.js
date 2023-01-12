@@ -91,6 +91,17 @@ module.exports = {
         );
         return "Producto modificado";
     },
+    updateStock: async (id, quantity) => {
+        if(!id || !quantity) throw new Error("insufficient arguments");
+        const product = await Product.findOne({where: { id }});
+        let stock = product.stock - quantity;
+        const productStock = await Product.update({
+            stock
+        },{
+            where: { id }
+        });
+        return productStock;
+    },
     deleteProduct: async (id) => {
         await Product.destroy({
             where: { id: id },
