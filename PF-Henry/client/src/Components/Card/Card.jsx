@@ -3,7 +3,7 @@ import "./Card.css";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart } from "../../Redux/actions";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 const Card = (props) => {
     const dispatch = useDispatch();
@@ -43,9 +43,10 @@ const Card = (props) => {
                 <div className="card h-100 shadow p-3 mb-5 bg-body rounded">
                     <Link to={`/productdetail/${props?.id}`}>
                         <img
-                            src={props?.image}
                             className="card-img-top imageClass"
+                            src={props?.image}
                             alt="..."
+                            onError={(ev) => {ev.target.src = "https://res.cloudinary.com/dcjo8kgee/image/upload/v1673467547/Products/instrumento-musical-de-guitarra_t3kceq.png"}}
                         />
                     </Link>
                     <div className="label-top shadow-sm">

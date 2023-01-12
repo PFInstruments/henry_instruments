@@ -68,6 +68,7 @@ const ProductDetail = () => {
                                         }}
                                         src={prDetail.image}
                                         alt="imagen no encontrada"
+                                        onError={(ev) => {ev.target.src = "https://res.cloudinary.com/dcjo8kgee/image/upload/v1673467547/Products/instrumento-musical-de-guitarra_t3kceq.png"}}
                                     />
                                 </div>
                             </div>

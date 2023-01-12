@@ -4,6 +4,7 @@ import {
     getCategories,
     updateStore,
     getAllUsers,
+    getAllOrders,
 } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -18,9 +19,8 @@ export default function AdminMenuTabs() {
 
     ////ESTADOS/////
 
-    const { allProducts, allCategories, globalStore, allUsers } = useSelector(
-        (state) => state
-    );
+    const { allProducts, allCategories, globalStore, allUsers, allOrders } =
+        useSelector((state) => state);
 
     //// ESTADOS LOCALES ////
 
@@ -31,6 +31,7 @@ export default function AdminMenuTabs() {
         dispatch(getCategories());
         dispatch(updateStore());
         dispatch(getAllUsers());
+        dispatch(getAllOrders());
     }, [dispatch]);
 
     // useEffect(() => {
@@ -176,7 +177,7 @@ export default function AdminMenuTabs() {
 
                     <hr />
 
-                    <AdminManageOrders />
+                    <AdminManageOrders allOrders={allOrders} />
                 </div>
                 <div
                     className="tab-pane fade justify-content-center"
