@@ -13,6 +13,7 @@
         "bootstrap": "^5.2.3",
         "bootstrap-icons": "^1.10.2",
         "dotenv": "^16.0.3",
+        "eslint-plugin-import": "^2.27.0",
         "js-cookie": "^3.0.1",
         "mercadopago": "^1.5.14",
         "react": "^17.0.2",
