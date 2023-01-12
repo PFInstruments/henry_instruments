@@ -5,82 +5,82 @@ export default function Privacy() {
     <div className="container bg-grey ">
       <div className="row">
         <h1 className="display-5 text-muted justify-content mt-5 ">
-          Política de privacidad
+          Privacy policies
         </h1>
         <p className="text-justify text-muted mt-5">
-          Cuando visitas el Sitio, recopilamos automáticamente cierta
-          información sobre tu dispositivo, incluida información sobre tu
-          navegador web, dirección IP, zona horaria y algunas de las cookies que
-          están instaladas en tu dispositivo.
+          When you visit the Site, we automatically collect certain
+          information about your device, including information about your
+          web browser, IP address, time zone and some of the cookies that
+          are installed on your device.
         </p>
         <p className="text-justify text-muted mt-1">
-          Además, a medida que navegas por el Sitio, recopilamos información
-          sobre las páginas web individuales o los productos que ves, qué sitios
-          web o términos de búsqueda te remiten al Sitio, e información sobre
-          cómo interactúas con el Sitio. Nos referimos a esta información
-          recopilada automáticamente como Información del Dispositivo.
+          In addition, as you navigate through the Site, we collect information
+          about the individual web pages or products you view, which sites
+          web or search terms refer you to the Site, and information about
+          how you interact with the Site. We refer to this information
+          automatically collected as Device Information.
         </p>
         <p className="text-justify text-muted mt-1">
-          Recopilamos información del dispositivo utilizando las siguientes
-          tecnologías:{" "}
+          We collect device information using the following
+          technologies:{" "}
         </p>
         <p className="text-justify text-muted">
-          Cookies: son archivos de datos que se colocan en tu dispositivo o
-          computadora y con frecuencia incluyen un identificador único anónimo.{" "}
+          Cookies: are data files that are placed on your device or
+          computer and often include an anonymous unique identifier.{" "}
         </p>
         <p className="text-justify text-muted">
-          Archivos de registro: rastrean las acciones que ocurren en el Sitio y
-          recopilan datos, incluida tu dirección IP, el tipo de navegador, el
-          proveedor de servicios de Internet, las páginas de referencia/salida y
-          las marcas de fecha y hora. Menciona todas las demás herramientas de
-          seguimiento y/o tecnologías que usa tu sitio web.{" "}
+          Log Files: Track actions that occur on the Site and
+          collect data, including your IP address, browser type,
+          Internet service provider, referring/exit pages and
+          date and time stamps. Mention all the other tools
+          tracking and/or technologies used by your website.{" "}
         </p>
         <p className="text-justify text-muted mt-1">
-          Además, cuando efectúas una compra o intentas realizar una compra a
-          través del Sitio, recopilamos cierta información tuya, como tu nombre,
-          dirección de facturación, dirección de envío, información de pago,
-          incluidos números de tarjetas de crédito (Visa, MasterCard, Amex),
-          dirección de email y el número de teléfono. Esto se denomina
-          Información del Pedido.{" "}
+          In addition, when you make a purchase or attempt to make a purchase from
+          Through the Site, we collect certain information from you, such as your name,
+          billing address, shipping address, payment information,
+          including credit card numbers (Visa, MasterCard, Amex),
+          email address and phone number. This is called
+          Order Information.{" "}
         </p>
         <p className="text-justify text-muted mt-1">
-          Al referirnos a Información Personal en esta Política de Privacidad,
-          estamos hablando tanto de la Información del Dispositivo como de la
-          Información del Pedido.{" "}
+          When referring to Personal Information in this Privacy Policy,
+          we are talking about both the Device Information and the
+          Order Information.{" "}
         </p>
         <p className="text-justify text-muted mt-2">
-          CÓMO USAMOS TU INFORMACIÓN PERSONAL
+          HOW WE USE YOUR PERSONAL INFORMATION
         </p>
         <p className="text-justify text-muted mt-2">
-          Utilizamos la Información de Pedido que recopilamos por lo general
-          para cumplir con los pedidos realizados a través del Sitio (incluido
-          el procesamiento de tu información de pago, la organización del envío
-          y el envío de facturas y/o confirmaciones de pedidos).{" "}
+          We use the Order Information we collect generally
+          to fulfill orders placed through the Site (included
+          the processing of your payment information, the organization of the shipment
+          and sending invoices and/or order confirmations).{" "}
         </p>
         <p className="text-justify text-muted">
-          Además, usamos esta Información del Pedido para: comunicarnos contigo,
-          examinar nuestros pedidos para detectar posibles riesgos o fraudes,
-          para (en línea con las preferencias que has compartido con nosotros)
-          ofrecerte información o publicidad relacionada con nuestros productos
-          o servicios. Utilizamos la Información del Dispositivo que recopilamos
-          para ayudarnos a detectar posibles riesgos y fraudes (en particular,
-          tu dirección IP) y, en general, para mejorar y optimizar nuestro
-          sitio.{" "}
+          In addition, we use this Order Information to: communicate with you,
+          examine our orders to detect possible risks or fraud,
+          to (in line with the preferences you have shared with us)
+          offer you information or advertising related to our products
+          or services. We use the Device Information we collect
+          to help us detect potential risk and fraud (in particular,
+          your IP address) and, in general, to improve and optimize our
+          place.{" "}
         </p>
         <p className="text-justify text-muted mt-2">
-          COMPARTIENDO TU INFORMACIÓN PERSONAL
+          SHARING YOUR PERSONAL INFORMATION
         </p>
         <p className="text-justify text-muted mt-2">
-          Compartimos tu Información Personal con terceros para ayudarnos a
-          utilizarla como se describió anteriormente.{" "}
+          We share your Personal Information with third parties to help us
+          use it as described above.{" "}
         </p>
         <p className="text-justify text-muted mt-2">
-          PUBLICIDAD DE COMPORTAMIENTO{" "}
+          BEHAVIORAL ADVERTISING{" "}
         </p>
         <p className="text-justify text-muted mt-2">
-          Utilizamos tu Información Personal para proporcionarte anuncios
-          específicos o comunicaciones de marketing que creemos que pueden ser
-          de tu interés.
+          we use your Personal Information to provide you with advertisements
+          targeted or marketing communications that we believe may be
+          of your interest.
         </p>
       </div>
     </div>
