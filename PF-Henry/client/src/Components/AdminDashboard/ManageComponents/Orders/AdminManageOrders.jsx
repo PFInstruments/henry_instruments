@@ -16,7 +16,7 @@ export default function AdminManageOrders({ allOrders }) {
     console.log(localOrders);
 
     useEffect(() => {
-        let arr = orderBy(localOrders, [...localOrders]);
+        let arr = orderBy(localOrdenamiento, [...localOrders]);
         setLocalOrders(arr);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [localOrdenamiento]);
