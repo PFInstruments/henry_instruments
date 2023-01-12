@@ -16,7 +16,7 @@ import AdminManageStore from "./ManageComponents/Store/AdminManageStore";
 
 export default function AdminMenuTabs() {
     const dispatch = useDispatch();
-
+    console.log("hola");
     ////ESTADOS/////
 
     const { allProducts, allCategories, globalStore, allUsers, allOrders } =
