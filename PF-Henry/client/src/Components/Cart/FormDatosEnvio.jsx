@@ -34,8 +34,6 @@ const FormularioEnvio = () => {
                 brand: prod.brand,
                 model: prod.model,
                 quantity: prod.quantity,
-                image: prod.image,
-                price: prod.price,
             };
         });
         let totalAmount = cart
@@ -328,7 +326,7 @@ const FormularioEnvio = () => {
                                     <img
                                         src={item.image}
                                         alt=""
-                                        className="tw-w-20 tw-h-20"
+                                        className="listImg img-thumbnail "
                                     />
                                 </div>
                                 <div className="tw-m-2">
@@ -348,7 +346,7 @@ const FormularioEnvio = () => {
                         </>
                     ))}
                     <h4>
-                        Total Price : $
+                        Total amount : $
                         {cart
                             .reduce(
                                 (currentSum, currentCardItem) =>
@@ -366,84 +364,3 @@ const FormularioEnvio = () => {
 };
 
 export default FormularioEnvio;
-
-/* <form onSubmit={handleSubmit}>
-<label>
-  Nombre Completo:
-  <input
-    required
-    type="text"
-    name="name"
-    value={formData.name}
-    onChange={handleChange}
-  />
-</label>
-<br />
-<label>
-  Dirección:
-  <input
-    required
-    type="text"
-    name="adress"
-    value={formData.adress}
-    onChange={handleChange}
-  />
-</label>
-<br />
-<label>
-  País:
-  <input
-    required
-    type="text"
-    name="country"
-    value={formData.country}
-    onChange={handleChange}
-  />
-</label>
-<br />
-<label>
-  Provincia:
-  <input
-    required
-    type="text"
-    name="province"
-    value={formData.province}
-    onChange={handleChange}
-  />
-</label>
-<br />
-<label>
-  Ciudad:
-  <input
-    required
-    type="text"
-    name="city"
-    value={formData.city}
-    onChange={handleChange}
-  />
-</label>
-<br />
-<label>
-  Código postal:
-  <input
-    required
-    type="text"
-    name="zip"
-    value={formData.zip}
-    onChange={handleChange}
-  />
-</label>
-<br />
-<label>
-  Número telefónico:
-  <input
-    required
-    type="text"
-    name="phone_number"
-    value={formData.phone_number}
-    onChange={handleChange}
-  />
-</label>
-<br />
-<button type="submit">Pagar</button>
-</form> */

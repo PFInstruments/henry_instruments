@@ -25,6 +25,7 @@ export const PUT_CATEGORY = "PUT_CATEGORY";
 export const CHECKOUT_ADD = "CHECKOUT_ADD";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const STORE_UPDATE = "STORE_UPDATE";
+export const PUT_STORE = "PUT_STORE"
 export const GET_USER_ALL = "GET_USER_ALL";
 export const GET_USER_ID = "GET_USER_ID";
 
@@ -420,10 +421,10 @@ export const checkoutadd = (cart) => {
     };
 };
 
-export const updateStore = () => {
+export const getStore = () => {
     return async function (dispatch) {
         try {
-            const store = await axios.get(`/store`);
+            const store = await axios.get("/store");
             return dispatch({
                 type: STORE_UPDATE,
                 payload: store.data,
@@ -431,5 +432,19 @@ export const updateStore = () => {
         } catch (error) {
             console.log(error.message);
         }
+    };
+};
+
+export const putStore = (store) => {
+    return async (dispatch) => {
+        return await axios
+            .put(`/store/${store.id}`, store)
+            .then((res) => {
+                dispatch({
+                    type: PUT_STORE,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
     };
 };

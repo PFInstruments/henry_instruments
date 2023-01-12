@@ -2,7 +2,7 @@ import React from "react";
 import {
     getProducts,
     getCategories,
-    updateStore,
+    getStore,
     getAllUsers,
     getAllOrders,
 } from "../../Redux/actions";
@@ -29,7 +29,7 @@ export default function AdminMenuTabs() {
     useEffect(() => {
         dispatch(getProducts());
         dispatch(getCategories());
-        dispatch(updateStore());
+        dispatch(getStore());
         dispatch(getAllUsers());
         dispatch(getAllOrders());
     }, [dispatch]);
