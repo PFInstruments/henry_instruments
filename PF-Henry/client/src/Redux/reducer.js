@@ -1,3 +1,4 @@
+
 import {
   GET_PRODUCT_DETAIL,
   GET_REVIEWS,
@@ -152,5 +153,3 @@ export const rootReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default rootReducer;

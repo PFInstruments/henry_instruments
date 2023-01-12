@@ -24,6 +24,7 @@ export const PUT_CATEGORY = "PUT_CATEGORY";
 export const CHECKOUT_ADD = "CHECKOUT_ADD";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const STORE_UPDATE = "STORE_UPDATE";
+export const PUT_STORE = "PUT_STORE";
 export const GET_USER_ALL = "GET_USER_ALL";
 export const GET_USER_ID = "GET_USER_ID";
 
@@ -390,22 +391,7 @@ export const putUser = (user) => {
     };
 };
 
-export const checkoutadd = (cart) => {
-    return async function (dispatch) {
-        try {
-            const payment = await axios.post("/checkout", cart);
-            window.location.href = payment.data.response.body.init_point;
-            dispatch({
-                type: CHECKOUT_ADD,
-                payload: payment.data,
-            });
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-};
-
-export const updateStore = () => {
+export const getStore = () => {
     return async function (dispatch) {
         try {
             const store = await axios.get(`/store`);
@@ -416,5 +402,19 @@ export const updateStore = () => {
         } catch (error) {
             console.log(error.message);
         }
+    };
+};
+
+export const putStore = (store) => {
+    return async (dispatch) => {
+        return await axios
+            .put(`/store/${store.id}`, store)
+            .then((res) => {
+                dispatch({
+                    type: PUT_STORE,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
     };
 };
