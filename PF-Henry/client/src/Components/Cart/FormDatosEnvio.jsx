@@ -35,7 +35,7 @@ const FormularioEnvio = () => {
                 model: prod.model,
                 quantity: prod.quantity,
                 image: prod.image,
-                price: prod.pice,
+                price: prod.price,
             };
         });
         let totalAmount = cart
