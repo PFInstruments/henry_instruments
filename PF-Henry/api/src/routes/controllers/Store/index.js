@@ -63,7 +63,7 @@ module.exports = {
                 }
             );
         } catch (error) {
-            res.send(error);
+            res.send(error.message);
         }
     },
 };

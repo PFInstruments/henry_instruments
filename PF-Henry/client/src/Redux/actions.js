@@ -423,7 +423,7 @@ export const getStore = () => {
 export const putStore = (store) => {
     return async (dispatch) => {
         return await axios
-            .put(`/store/${store.id}`, store)
+            .put(`/store/1`, store)
             .then((res) => {
                 dispatch({
                     type: PUT_STORE,

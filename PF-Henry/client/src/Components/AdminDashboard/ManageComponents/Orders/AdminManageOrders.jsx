@@ -9,17 +9,17 @@ export default function AdminManageOrders({ allOrders }) {
     const [localOrders, setLocalOrders] = useState([]);
     const [localOrdenamiento, setLocalOrdenamiento] = useState("-");
 
-    useEffect(() => {
+    /*useEffect(() => {
         setLocalOrders(allOrders);
     }, [allOrders]);
 
-    console.log(localOrders);
+    //console.log(localOrders);
 
     useEffect(() => {
         let arr = orderBy(localOrders, [...localOrders]);
         setLocalOrders(arr);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [localOrders]);
+    }, [localOrders]);*/
 
     return (
         <div>
