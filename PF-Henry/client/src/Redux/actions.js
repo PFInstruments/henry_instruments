@@ -15,11 +15,12 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const POST_CATEGORY = "POST_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
-//export const GET_ORDERS_USER = ' GET_ORDERS_USER';
+export const GET_ORDERS_BY_USER = 'GET_ORDERS_USER';
 export const ADD_FAV = "ADD_FAV";
 export const DELETE_REVIEW = "DELETE_REVIEW";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const PUT_PRODUCT = "PUT_PRODUCT";
+export const PUT_PRODUCT_STOCK = "PUT_PRODUCT_STOCK";
 export const PUT_CATEGORY = "PUT_CATEGORY";
 export const CHECKOUT_ADD = "CHECKOUT_ADD";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
@@ -168,19 +169,19 @@ export const getAllOrders = () => {
     };
 };
 
-/*export const getOrderByUser = (userId) =>{
+export const getOrderByUser = (userId) =>{
     return async function(dispatch) {
         try {
             const orders = await axios.get(`/orders/?userId=${userId}`);
             return dispatch({
-                type: GET_ORDERS_USER,
+                type: GET_ORDERS_BY_USER,
                 payload: orders.data
             })
         } catch (error) {
             console.log(error.message);
         }
     }
-}*/
+}
 
 export const getAllUsers = () => {
     return async function (dispatch) {
@@ -322,6 +323,20 @@ export const putProduct = (product) => {
             .then((res) => {
                 dispatch({
                     type: PUT_PRODUCT,
+                    payload: res.data,
+                });
+            })
+            .catch((error) => console.log(error));
+    };
+};
+
+export const putProductStock = (id,quantity) => {
+    return async (dispatch) => {
+        return await axios
+            .put(`/products/stock/${id}`, {quantity})
+            .then((res) => {
+                dispatch({
+                    type: PUT_PRODUCT_STOCK,
                     payload: res.data,
                 });
             })

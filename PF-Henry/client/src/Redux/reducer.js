@@ -6,6 +6,7 @@ import {
   GET_PRODUCTS,
   GET_CATEGORIES,
   GET_ORDERS,
+  GET_ORDERS_BY_USER,
   PUT_USER,
   GET_USERS,
   GET_USER,
@@ -36,7 +37,8 @@ const initialState = {
   postReview: {},
   fav: [],
   globalStore: [],
-  userId: []
+  userId: [],
+  ordersByUser: []
 };
 
 if (localStorage.getItem("cart")) {
@@ -97,6 +99,11 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allOrders: action.payload,
+      };
+    case GET_ORDERS_BY_USER:
+      return {
+        ...state,
+        ordersByUser: action.payload
       };
     case GET_USERS:
       return {
