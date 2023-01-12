@@ -16,7 +16,7 @@ import {
   ADD_FAV,
   DELETE_REVIEW,
   CHECKOUT_ADD,
-  STORE_UPDATE,
+  STORE_UPDATE,  
   GET_USER_ID
 
 } from "./actions";

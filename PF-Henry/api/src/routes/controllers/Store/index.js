@@ -43,7 +43,7 @@ module.exports = {
     },
     updateStore: async (storeUpdate) => {
         try {
-            await Category.update(
+             await Store.update(
                 {
                     carrousel: storeUpdate.carrousel,
                     icon: storeUpdate.icon,
