@@ -68,7 +68,7 @@ const Cart = ({ history }) => {
                                             <td>
                                                 <input
                                                     type="number"
-                                                    className="form-control-sm"
+                                                    className="form-control form-control-sm"
                                                     min="1"
                                                     max={props.stock}
                                                     value={props.quantity}

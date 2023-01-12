@@ -38,7 +38,7 @@ router.post('/welcome', async (req, res) => {
 });
 
 router.post('/neworder', async (req, res) => {
-    const { username, idOrder, date, products } = req.body;
+    const { username, idOrder, date, products, totalAmount } = req.body;
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -56,7 +56,7 @@ router.post('/neworder', async (req, res) => {
         from: `<${HENRY_INSTRUMENT_USERNAME}>`,
         to: `${username}`,
         subject: 'New Order',
-        html: getHtmlForOrder(idOrder, date, products),
+        html: getHtmlForOrder(idOrder, date, products, totalAmount),
     };
 
     await transporter.sendMail(mailOptions, (error, info) => {

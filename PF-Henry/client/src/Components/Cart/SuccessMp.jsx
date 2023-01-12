@@ -2,33 +2,45 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getProducts } from "../../Redux/actions";
+import { getProducts, getOrderByUser, putProductStock } from "../../Redux/actions";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function SuccessMp() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const allProducts = useSelector((state) => state.allProducts);
+  const { user } = useAuth0();
 
+  function clearCart(){
+    localStorage.removeItem("cart")
+  };
+  
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
-
+    clearCart();
+    cart.map(prod => { 
+      dispatch(putProductStock(prod.id, prod.quantity));
+    });
+    
+    if(user) dispatch(getOrderByUser(user.sub))
+  }, [dispatch, cart, user]);
+  const allOrders = useSelector(state => state.ordersByUser);
   console.log("productossssssssssssssssssssssssssssss", allProducts);
 
-  const result = [];
-  for (let i = 0; i < cart.length; i++) {
-    for (let j = 0; j < allProducts.length; j++) {
-      if (cart[i].name === allProducts[j].name) {
-        console.log("cart[i].quantity", cart[i].quantity);
-        console.log("allProducts[j].stock", allProducts[j].stock);
-        allProducts[j].stock = allProducts[j].stock - cart[i].quantity;
-        console.log("allProducts[j].stock", allProducts[j].stock);
-        result.push(allProducts[j]);
-      }
-    }
-  }
-  console.log("result", result);
+  // const result = [];
+  // for (let i = 0; i < cart.length; i++) {
+  //   for (let j = 0; j < allProducts.length; j++) {
+  //     if (cart[i].name === allProducts[j].name) {
+  //       console.log("cart[i].quantity", cart[i].quantity);
+  //       console.log("allProducts[j].stock", allProducts[j].stock);
+  //       allProducts[j].stock = allProducts[j].stock - cart[i].quantity;
+  //       console.log("allProducts[j].stock", allProducts[j].stock);
+  //       result.push(allProducts[j]);
+  //     }
+  //   }
+  // }
+  // console.log("result", result);
 
   return (
     <div className="  container-fluid d-flex flex-column justify-content-center align-items-center  ">

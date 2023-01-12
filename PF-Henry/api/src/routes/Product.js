@@ -100,6 +100,16 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+router.put("/stock/:id", async (req, res) => {
+    const { id } = req.params;
+    const { quantity } = req.body;
+    try {
+       res.status(200).json(await controller.updateStock(id, quantity)); 
+    } catch(error) {
+        res.status(404).send(error.message);
+    }
+});
+
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     try {
