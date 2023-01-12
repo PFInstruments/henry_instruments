@@ -203,7 +203,29 @@ export default function EditProductModal({ product, localCategories }) {
                                         htmlFor="product-name"
                                         className="col-form-label"
                                     >
-                                        Name:
+                                        Name{" "}
+                                        {editProductForm.name !== "" &&
+                                        editProductForm.name[0] !== " " &&
+                                        editProductForm.name !== " " &&
+                                        editProductForm.name !== "  " &&
+                                        editProductForm.name !== "   " &&
+                                        editProductForm.name !== "    " &&
+                                        editProductForm.name !== "     " &&
+                                        editProductForm.name !== "      " &&
+                                        editProductForm.name !== "       " &&
+                                        editProductForm.name !== "        " &&
+                                        editProductForm.name !== "         " &&
+                                        editProductForm.name !== "          " &&
+                                        editProductForm.name !==
+                                            "           " &&
+                                        editProductForm.name !==
+                                            "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <input
                                         type="text"
@@ -223,7 +245,30 @@ export default function EditProductModal({ product, localCategories }) {
                                         htmlFor="product-model"
                                         className="col-form-label"
                                     >
-                                        Model:
+                                        Model{" "}
+                                        {editProductForm.model !== "" &&
+                                        editProductForm.model[0] !== " " &&
+                                        editProductForm.model !== " " &&
+                                        editProductForm.model !== "  " &&
+                                        editProductForm.model !== "   " &&
+                                        editProductForm.model !== "    " &&
+                                        editProductForm.model !== "     " &&
+                                        editProductForm.model !== "      " &&
+                                        editProductForm.model !== "       " &&
+                                        editProductForm.model !== "        " &&
+                                        editProductForm.model !== "         " &&
+                                        editProductForm.model !==
+                                            "          " &&
+                                        editProductForm.model !==
+                                            "           " &&
+                                        editProductForm.model !==
+                                            "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <input
                                         type="text"
@@ -243,20 +288,31 @@ export default function EditProductModal({ product, localCategories }) {
                                         htmlFor="product-brand"
                                         className="col-form-label"
                                     >
-                                        Brand:
+                                        Brand{" "}
+                                        {editProductForm.brand !== "" &&
+                                        editProductForm.brand[0] !== " " &&
+                                        editProductForm.brand !== " " &&
+                                        editProductForm.brand !== "  " &&
+                                        editProductForm.brand !== "   " &&
+                                        editProductForm.brand !== "    " &&
+                                        editProductForm.brand !== "     " &&
+                                        editProductForm.brand !== "      " &&
+                                        editProductForm.brand !== "       " &&
+                                        editProductForm.brand !== "        " &&
+                                        editProductForm.brand !== "         " &&
+                                        editProductForm.brand !==
+                                            "          " &&
+                                        editProductForm.brand !==
+                                            "           " &&
+                                        editProductForm.brand !==
+                                            "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="product-brand"
-                                        value={editProductForm.brand}
-                                        onChange={(e) =>
-                                            setEditProductForm({
-                                                type: "SET_BRAND",
-                                                payload: e.target.value,
-                                            })
-                                        }
-                                    />
                                 </div>
                                 <div className="input-group mb-3">
                                     <label
@@ -320,7 +376,14 @@ export default function EditProductModal({ product, localCategories }) {
                                         className="col-form-label"
                                         htmlFor="inputGroupFile01"
                                     >
-                                        Category
+                                        Category{" "}
+                                        {editProductForm.category !== "-" ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <select
                                         name="selectType"
@@ -346,7 +409,37 @@ export default function EditProductModal({ product, localCategories }) {
                                         htmlFor="message-text"
                                         className="col-form-label"
                                     >
-                                        Description:
+                                        Description{" "}
+                                        {editProductForm.description !== "" &&
+                                        editProductForm.description[0] !==
+                                            " " &&
+                                        editProductForm.description !== " " &&
+                                        editProductForm.description !== "  " &&
+                                        editProductForm.description !== "   " &&
+                                        editProductForm.description !==
+                                            "    " &&
+                                        editProductForm.description !==
+                                            "     " &&
+                                        editProductForm.description !==
+                                            "      " &&
+                                        editProductForm.description !==
+                                            "       " &&
+                                        editProductForm.description !==
+                                            "        " &&
+                                        editProductForm.description !==
+                                            "         " &&
+                                        editProductForm.description !==
+                                            "          " &&
+                                        editProductForm.description !==
+                                            "           " &&
+                                        editProductForm.description !==
+                                            "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <textarea
                                         className="form-control"
