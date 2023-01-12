@@ -14,6 +14,8 @@ function UserProfile() {
         dispatch(getUserId(id))
     }, [dispatch, id])
 
+    console.log(".")
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         await axios.put("/users/db/"+id, contactForm);
