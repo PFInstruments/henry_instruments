@@ -10,6 +10,7 @@ import Loading from "../Loading/Loading";
 export default function AdminDashboard() {
     const dispatch = useDispatch();
 
+    console.log("hola");
     const { isAuthenticated, user } = useAuth0();
 
     const localUser = useSelector((state) => state.user);
