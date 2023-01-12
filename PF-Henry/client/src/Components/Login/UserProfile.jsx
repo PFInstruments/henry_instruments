@@ -7,7 +7,7 @@ import { useReducer } from 'react';
 
 function UserProfile() {
     const dispatch = useDispatch()
-    const userId = useSelector(state => state.userId)
+    const {userId} = useSelector(state => state)
     const {id} = useParams()
 
    useEffect(() => {
@@ -99,8 +99,8 @@ function UserProfile() {
         <div className="tw-container tw-p-12 tw-mx-auto">
         <div className="tw-grid tw-grid-cols-2">
        <div className='tw-container '>
-        <img src={userId.picture} alt="" className=''/>
-        <p>Email:{userId.email}</p>
+        <img src={userId.picture} alt="" className='rounded-circle mt-5'/>
+        <p>{userId.email}</p>
        </div>
         <div class="tw-flex tw-flex-col md:tw-w-full">
         <h2 class="tw-mb-4 tw-font-bold md:tw-text-xl tw-text-heading ">
@@ -263,7 +263,7 @@ function UserProfile() {
                   </label>
                   <input
                     placeholder="phone number"
-                    type="text"
+                    type="number"
                     className="tw-w-full tw-px-4 tw-py-3 tw-text-xs tw-border tw-border-gray-300 tw-rounded lg:tw-text-sm focus:tw-outline-none focus:tw-ring-1 focus:tw-ring-blue-600"
                     id="inputPhoneNumber"
                     value={contactForm.phone_number}
