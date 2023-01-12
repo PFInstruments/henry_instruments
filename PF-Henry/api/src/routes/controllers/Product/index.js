@@ -92,14 +92,17 @@ module.exports = {
         return "Producto modificado";
     },
     updateStock: async (id, quantity) => {
-        if(!id || !quantity) throw new Error("insufficient arguments");
-        const product = await Product.findOne({where: { id }});
+        if (!id || !quantity) throw new Error("insufficient arguments");
+        const product = await Product.findOne({ where: { id } });
         let stock = product.stock - quantity;
-        const productStock = await Product.update({
-            stock
-        },{
-            where: { id }
-        });
+        const productStock = await Product.update(
+            {
+                stock,
+            },
+            {
+                where: { id },
+            }
+        );
         return productStock;
     },
     deleteProduct: async (id) => {
@@ -114,12 +117,12 @@ module.exports = {
                 const findCategory = await Category.findOne({
                     where: { name: p.category },
                 });
-                // const result = await cloudinary.uploader.upload(p.image, {
-                //     folder: "Products",
-                // });
+                const result = await cloudinary.uploader.upload(p.image, {
+                    folder: "Products",
+                });
                 const product = await Product.create({
                     name: p.name,
-                    image: p.image,
+                    image: result.url,
                     description: p.description,
                     price: p.price,
                     stock: p.stock,
