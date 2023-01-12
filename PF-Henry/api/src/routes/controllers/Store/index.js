@@ -1,4 +1,5 @@
 const { Store } = require("../../../db");
+const cloudinary = require("../../../Utils/cloudinary");
 
 module.exports = {
     listStores: async () => {
@@ -43,10 +44,13 @@ module.exports = {
     },
     updateStore: async (storeUpdate) => {
         try {
-             await Store.update(
+            const result = await cloudinary.uploader.upload(storeUpdate.icon, {
+                folder: "Products",
+            });
+            await Store.update(
                 {
                     carrousel: storeUpdate.carrousel,
-                    icon: storeUpdate.icon,
+                    icon: result.url,
                     phoneNumber: storeUpdate.phoneNumber,
                     email: storeUpdate.email,
                     adress: storeUpdate.adress,
