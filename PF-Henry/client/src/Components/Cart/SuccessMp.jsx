@@ -11,8 +11,14 @@ function SuccessMp() {
   const cart = useSelector((state) => state.cart);
   const allProducts = useSelector((state) => state.allProducts);
   const { user } = useAuth0();
+
+  function clearCart(){
+    localStorage.removeItem("cart")
+  };
+  
   useEffect(() => {
     dispatch(getProducts());
+    clearCart();
     cart.map(prod => { 
       dispatch(putProductStock(prod.id, prod.quantity));
     });
