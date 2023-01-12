@@ -148,6 +148,10 @@
   display: block
 }
 
+.tw-inline-block {
+  display: inline-block
+}
+
 .tw-flex {
   display: flex
 }
@@ -297,6 +301,11 @@
 .tw-bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
+.tw-bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity))
 }
 
 .tw-fill-current {

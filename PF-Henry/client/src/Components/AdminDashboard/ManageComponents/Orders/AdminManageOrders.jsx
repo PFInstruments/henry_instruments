@@ -13,13 +13,11 @@ export default function AdminManageOrders({ allOrders }) {
         setLocalOrders(allOrders);
     }, [allOrders]);
 
-    console.log(localOrders);
-
     useEffect(() => {
         let arr = orderBy(localOrders, [...localOrders]);
         setLocalOrders(arr);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [localOrders]);
+    }, [localOrdenamiento]);
 
     return (
         <div>
