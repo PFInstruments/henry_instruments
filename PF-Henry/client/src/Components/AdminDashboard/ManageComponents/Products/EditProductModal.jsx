@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { prefixEdit } from "../../../Utils/variables";
 import { useDispatch } from "react-redux";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
@@ -8,8 +8,8 @@ export default function EditProductModal({ product, localCategories }) {
     const dispatch = useDispatch();
 
     ///Estado local///
+    const [disabledSubmit, setDisabledSubmit] = useState(true);
     const [editSuccess, setEditSuccess] = useState(false);
-    const [nameExists, setNameExists] = useState(false);
 
     /// VARIABLE GIF///
     const checkMarkGifInfinito = checkmarkInfinito;
@@ -112,7 +112,20 @@ export default function EditProductModal({ product, localCategories }) {
         editProductReducer,
         initialState
     );
+    /// HOOKS ///
 
+    useEffect(() => {
+        let arr = editProductForm;
+        if (
+            arr.name !== "" &&
+            arr.model !== "" &&
+            arr.brand !== "" &&
+            arr.category !== "-" &&
+            arr.description !== ""
+        ) {
+            setDisabledSubmit(false);
+        } else setDisabledSubmit(true);
+    }, [editProductForm]);
     //FUnciones//
     function refresh() {
         setEditSuccess(false);
@@ -403,6 +416,7 @@ export default function EditProductModal({ product, localCategories }) {
                                         Close
                                     </button>
                                     <button
+                                        disabled={disabledSubmit}
                                         type="submit"
                                         className="btn btn-success"
                                     >

@@ -48,7 +48,7 @@ export default function CardGrid({ localProducts }) {
                                 productsPerPage
                         )
                         .map((el) => {
-                            if (el.active || el.stock > 0)
+                            if (el.active && el.stock > 0)
                                 return (
                                     <Card
                                         key={el.id}
