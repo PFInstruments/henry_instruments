@@ -324,6 +324,66 @@ export function orderUserDesc(array) {
     });
     return result;
 }
+
+///ORDER TOTAL AMOUNT ////
+
+export function totalAsc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.totalAmount) < parseFloat(b.totalAmount)) {
+            return 1;
+        }
+        if (parseFloat(a.totalAmount) > parseFloat(b.totalAmount)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+export function totalDesc(array) {
+    let result = array.sort((a, b) => {
+        if (parseFloat(a.totalAmount) > parseFloat(b.totalAmount)) {
+            return 1;
+        }
+        if (parseFloat(a.totalAmount) < parseFloat(b.totalAmount)) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+}
+
+////ORDER TIME///
+
+export const timeAsc = (array) => {
+    let result = array.sort((a, b) => {
+        if (a.createdAt > b.createdAt) {
+            return 1;
+        }
+        if (a.createdAt < b.createdAt) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+};
+
+export const timeDesc = (array) => {
+    let result = array.sort((a, b) => {
+        if (a.createdAt < b.createdAt) {
+            return 1;
+        }
+        if (a.createdAt > b.createdAt) {
+            return -1;
+        }
+
+        return 0;
+    });
+    return result;
+};
 //// FUNCION ORDER BY ////
 
 export function orderBy(e, array) {
@@ -396,6 +456,18 @@ export function orderBy(e, array) {
     }
     if (e === "orderDesc") {
         sorted = orderUserDesc(array);
+    }
+    if (e === "totalAsc") {
+        sorted = totalAsc(array);
+    }
+    if (e === "totalDesc") {
+        sorted = totalDesc(array);
+    }
+    if (e === "timeAsc") {
+        sorted = timeAsc(array);
+    }
+    if (e === "timeDesc") {
+        sorted = timeDesc(array);
     }
 
     return sorted;
