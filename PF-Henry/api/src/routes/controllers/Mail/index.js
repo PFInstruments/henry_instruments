@@ -1,13 +1,15 @@
 module.exports = {
-    getHtmlForOrder: (idOrder, date, products) => {
+    getHtmlForOrder: (idOrder, date, products, totalAmount) => {
         products = products.map(prod => {
             return `<tr>
-                <th>${prod.name}</th>
+                <th>${prod.category}</th>
+                <th>${prod.quantity}</th>
                 <td>${prod.brand}</td>
                 <td>${prod.model}</td>
                 <td>$${prod.price}</td>
             </tr>`;
         });
+        const ip = "https://henry-instruments-nu.vercel.app/success";
         const html = `<!DOCTYPE html>
             <html>
                 <head>
@@ -41,18 +43,20 @@ module.exports = {
                         <h2>Payment summary</h2>
                         <p>Order ID: ${idOrder}</p>
                         <p>Payment date: ${date}</p>
-                        <p>Payment method: Credit card</p>
+                        <p>Total Amount: $${totalAmount}</p>
                         <table class="main-content">
                             <tr>
-                                <th scope="col">Product</th>
+                                <th scope="col">Category</th>
+                                <th>Quantity</th> 
                                 <th>Brand</th> 
                                 <th>Model</th>
                                 <th>Price</th>
                             </tr>
                             ${products}
                         </table>
+
                         <br>
-                        <a href="#" class="btn">View order details</a>
+                        <a href="${ip}" class="btn">View order details</a>
                     </div>
                         
                 </body>
