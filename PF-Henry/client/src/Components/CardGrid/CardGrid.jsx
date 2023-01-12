@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
 import { useState } from "react";
@@ -16,6 +16,9 @@ export default function CardGrid({ localProducts }) {
         setCurrentPage(pageNumber);
     }
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [localProducts]);
 
     return (
         <div>
@@ -33,9 +36,9 @@ export default function CardGrid({ localProducts }) {
                     <div></div>
                 ) : localProducts[0] === "Product Not Found" ? (
                     <div className="position-relative m-5">
-                     <div className="position-absolute top-50 start-50 translate-middle">
-                         <h3>This instrument does not exist</h3>
-                     </div>
+                        <div className="position-absolute top-50 start-50 translate-middle">
+                            <h3>This instrument does not exist</h3>
+                        </div>
                     </div>
                 ) : (
                     localProducts
@@ -45,7 +48,7 @@ export default function CardGrid({ localProducts }) {
                                 productsPerPage
                         )
                         .map((el) => {
-                            if (el.active)
+                            if (el.active || el.stock > 0)
                                 return (
                                     <Card
                                         key={el.id}
