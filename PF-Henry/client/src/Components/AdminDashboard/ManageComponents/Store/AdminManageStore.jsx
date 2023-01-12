@@ -152,9 +152,9 @@ export default function AdminManageStore({globalStore}) {
         })
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        await dispatch(putStore(localStore))
+        dispatch(putStore(localStore));
     }
 
     ///PAGINA///
