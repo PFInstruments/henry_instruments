@@ -27,7 +27,7 @@ function App() {
           path="/productdetail/:id"
           render={() => <ProductDetail />}
         />
-        <Route exact path="/data" render={() => <FormularioEnvio />} />
+        <Route exact path="/checkout" render={() => <FormularioEnvio />} />
         <Route exact path="/cart" render={() => <Cart />} />
         <Route exact path="/success" render={() => <  SuccessMp />} />
         <Route exact path="/privacy" render={() => <Privacy />} />
