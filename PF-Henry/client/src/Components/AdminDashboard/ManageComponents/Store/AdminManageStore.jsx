@@ -1,12 +1,12 @@
 //import axios from "axios";
-import React, { useReducer, useEffect, useState } from "react";
-//import { useDispatch, useSelector } from "react-redux";
-//import { updateStore } from "../../../../Redux/actions";
-// import { useDispatch /* useSelector*/ } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { putStore } from "../../../../Redux/actions";
+import { useDispatch } from "react-redux";
 
 export default function AdminManageStore({globalStore}) {
     ///DISPATCH///
-    // const dispatch = useDispatch();
+
+    const dispatch = useDispatch();
 
     ///ESTADOS LOCALES///
 
@@ -15,7 +15,7 @@ export default function AdminManageStore({globalStore}) {
     const [localStore, setLocalStore] = useState({});
     useEffect(()=>{
         setLocalStore(
-            globalStore
+            {...globalStore}
         )
     },[globalStore])
     console.log(localStore)
@@ -127,7 +127,7 @@ export default function AdminManageStore({globalStore}) {
 
     //const stores = useSelector((state)=>state.store);
 
-    const [storeInfo,setStoreInfo]=useState({
+    /*const [storeInfo,setStoreInfo]=useState({
         carrousel: localStore?.carrousel,
         email: localStore?.email,
         phoneNumber: localStore?.phoneNumber,
@@ -139,22 +139,22 @@ export default function AdminManageStore({globalStore}) {
         instagram: localStore?.instagram,
         twitter: localStore?.twitter,
         facebook: localStore?.facebook,
-    });
+    });*/
     //console.log(localStore)
-    console.log(storeInfo)
+    //console.log(storeInfo)
 
         //EVENT HANDLERS///
 
     const changeHandlerStore=(event)=>{
-        setStoreInfo({
-            ...storeInfo,
+        setLocalStore({
+            ...localStore,
             [event.target.id]: event.target.value
         })
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(putStore(localStore));
     }
 
     ///PAGINA///
@@ -178,7 +178,7 @@ export default function AdminManageStore({globalStore}) {
                             className="form-control "
                             id="email"
                             name="inputEmail"
-                            value={storeInfo.email}
+                            value={localStore.email}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
@@ -190,7 +190,7 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="phoneNumber"
-                            value={storeInfo.phoneNumber}
+                            value={localStore.phoneNumber}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
@@ -200,7 +200,7 @@ export default function AdminManageStore({globalStore}) {
                         </label>
                         <textarea
                             className="form-control"
-                            value={storeInfo.adress}
+                            value={localStore.adress}
                             id="adress"
                             onChange={(event)=>{changeHandlerStore(event)}}
                         ></textarea>
@@ -213,7 +213,7 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="city"
-                            value={storeInfo.city}
+                            value={localStore.city}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
@@ -225,7 +225,7 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="state"
-                            value={storeInfo.state}
+                            value={localStore.state}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
@@ -237,7 +237,7 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="zip"
-                            value={storeInfo.zip}
+                            value={localStore.zip}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
@@ -249,7 +249,7 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="country"
-                            value={storeInfo.country}
+                            value={localStore.country}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
@@ -262,7 +262,7 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="instagram"
-                            value={storeInfo.instagram}
+                            value={localStore.instagram}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
@@ -274,7 +274,7 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="twitter"
-                            value={storeInfo.twitter}
+                            value={localStore.twitter}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
@@ -286,7 +286,7 @@ export default function AdminManageStore({globalStore}) {
                             type="text"
                             className="form-control"
                             id="facebook"
-                            value={storeInfo.facebook}
+                            value={localStore.facebook}
                             onChange={(event)=>{changeHandlerStore(event)}}
                         />
                     </div>
