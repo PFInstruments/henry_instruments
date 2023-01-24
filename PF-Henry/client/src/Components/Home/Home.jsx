@@ -9,13 +9,10 @@ import { orderBy } from "../Utils/Filters-Order/orderBy";
 import Loading from "../Loading/Loading";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 //import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
 //let styleCard = { width: "18rem" };
 
 export default function Home() {
-
-
     //// DISPATCH ////
     const dispatch = useDispatch();
 
@@ -28,17 +25,19 @@ export default function Home() {
 
     const { user, isAuthenticated } = useAuth0();
 
+    console.log(user?.sub, isAuthenticated);
+
     ////HOOKS////
     useEffect(() => {
         dispatch(getProducts());
         dispatch(getCategories());
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
-        if(isAuthenticated) {
-        dispatch(getUser(user.sub))
-        }        
-    }, [isAuthenticated, dispatch, user])
+        if (isAuthenticated) {
+            dispatch(getUser(user?.sub));
+        }
+    }, [isAuthenticated, user]);
 
     useEffect(() => {
         setLocalProducts(allProducts);
@@ -64,16 +63,13 @@ export default function Home() {
                 />
             </div>
             <div>
-                {
-                !allProducts.length? (
+                {!allProducts.length ? (
                     <Loading />
-                )
-                :
-                !localProducts.length ? (
+                ) : !localProducts.length ? (
                     <div className="position-relative m-5">
-                     <div className="position-absolute top-50 start-50 translate-middle">
-                         <h3>This instrument does not exist</h3>
-                     </div>
+                        <div className="position-absolute top-50 start-50 translate-middle">
+                            <h3>This instrument does not exist</h3>
+                        </div>
                     </div>
                 ) : (
                     <CardGrid localProducts={localProducts} />
