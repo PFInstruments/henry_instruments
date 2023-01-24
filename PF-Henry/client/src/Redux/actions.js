@@ -15,7 +15,7 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const POST_CATEGORY = "POST_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
-export const GET_ORDERS_BY_USER = 'GET_ORDERS_USER';
+export const GET_ORDERS_BY_USER = "GET_ORDERS_USER";
 export const ADD_FAV = "ADD_FAV";
 export const DELETE_REVIEW = "DELETE_REVIEW";
 export const POST_PRODUCT = "POST_PRODUCT";
@@ -25,7 +25,7 @@ export const PUT_CATEGORY = "PUT_CATEGORY";
 export const CHECKOUT_ADD = "CHECKOUT_ADD";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const STORE_UPDATE = "STORE_UPDATE";
-export const PUT_STORE = "PUT_STORE"
+export const PUT_STORE = "PUT_STORE";
 export const GET_USER_ALL = "GET_USER_ALL";
 export const GET_USER_ID = "GET_USER_ID";
 
@@ -169,19 +169,19 @@ export const getAllOrders = () => {
     };
 };
 
-export const getOrderByUser = (userId) =>{
-    return async function(dispatch) {
+export const getOrderByUser = (userId) => {
+    return async function (dispatch) {
         try {
             const orders = await axios.get(`/orders/?userId=${userId}`);
             return dispatch({
                 type: GET_ORDERS_BY_USER,
-                payload: orders.data
-            })
+                payload: orders.data,
+            });
         } catch (error) {
             console.log(error.message);
         }
-    }
-}
+    };
+};
 
 export const getAllUsers = () => {
     return async function (dispatch) {
@@ -330,10 +330,10 @@ export const putProduct = (product) => {
     };
 };
 
-export const putProductStock = (id,quantity) => {
+export const putProductStock = (id, quantity) => {
     return async (dispatch) => {
         return await axios
-            .put(`/products/stock/${id}`, {quantity})
+            .put(`/products/stock/${id}`, { quantity })
             .then((res) => {
                 dispatch({
                     type: PUT_PRODUCT_STOCK,
@@ -361,7 +361,7 @@ export const putCategory = (category) => {
 export const getUser = (id) => {
     return async (dispatch) => {
         return await axios
-            .post(`/users/auth0/${id}`)
+            .get(`/users/${id}`)
             .then((res) => {
                 dispatch({
                     type: GET_USER,
