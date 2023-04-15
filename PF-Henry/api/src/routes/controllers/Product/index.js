@@ -128,6 +128,7 @@ module.exports = {
                     stock: p.stock,
                     model: p.model,
                     brand: p.brand,
+                    catehory: p.category,
                     active: p.active,
                 });
                 await product.setCategory(findCategory);
