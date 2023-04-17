@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { prefixEdit } from "../../../Utils/variables";
 import { useDispatch } from "react-redux";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
@@ -134,6 +134,178 @@ export default function EditProductModal({ product, localCategories }) {
   }
 
   ////SETEO LA FOTO  A BASE 64////
+    const setFileToBase = (file) => {
+        const reader = new FileReader();
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setEditProductForm({
+                    type: "SET_IMAGE",
+                    payload: reader.result,
+                });
+            };
+            console.log(editProductForm);
+        } else {
+            setEditProductForm({
+                type: "SET_IMAGE",
+                payload: "",
+            });
+        }
+    };
+    return (
+        <div
+            className="modal fade "
+            id={prefixEdit + product.id}
+            tabIndex="-1"
+            aria-labelledby="editProductModalLabel"
+            aria-hidden="true"
+        >
+            <div className="modal-dialog modal-dialog-scrollable">
+                {!editSuccess ? (
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1
+                                className="modal-title fs-5"
+                                id="editProductModalLabel"
+                            >
+                                Edit Product
+                            </h1>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+                            <form
+                                onSubmit={(e) => {
+                                    handleSubmit(e);
+                                }}
+                            >
+                                <div className="mb-3">
+                                    <label
+                                        htmlFor="product-name"
+                                        className="col-form-label"
+                                    >
+                                        Name{" "}
+                                        {editProductForm.name !== "" &&
+                                        editProductForm.name[0] !== " " &&
+                                        editProductForm.name !== " " &&
+                                        editProductForm.name !== "  " &&
+                                        editProductForm.name !== "   " &&
+                                        editProductForm.name !== "    " &&
+                                        editProductForm.name !== "     " &&
+                                        editProductForm.name !== "      " &&
+                                        editProductForm.name !== "       " &&
+                                        editProductForm.name !== "        " &&
+                                        editProductForm.name !== "         " &&
+                                        editProductForm.name !== "          " &&
+                                        editProductForm.name !==
+                                            "           " &&
+                                        editProductForm.name !==
+                                            "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-name"
+                                        value={editProductForm.name}
+                                        onChange={(e) =>
+                                            setEditProductForm({
+                                                type: "SET_NAME",
+                                                payload: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label
+                                        htmlFor="product-model"
+                                        className="col-form-label"
+                                    >
+                                        Model{" "}
+                                        {editProductForm.model !== "" &&
+                                        editProductForm.model[0] !== " " &&
+                                        editProductForm.model !== " " &&
+                                        editProductForm.model !== "  " &&
+                                        editProductForm.model !== "   " &&
+                                        editProductForm.model !== "    " &&
+                                        editProductForm.model !== "     " &&
+                                        editProductForm.model !== "      " &&
+                                        editProductForm.model !== "       " &&
+                                        editProductForm.model !== "        " &&
+                                        editProductForm.model !== "         " &&
+                                        editProductForm.model !==
+                                            "          " &&
+                                        editProductForm.model !==
+                                            "           " &&
+                                        editProductForm.model !==
+                                            "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="product-model"
+                                        value={editProductForm.model}
+                                        onChange={(e) =>
+                                            setEditProductForm({
+                                                type: "SET_MODEL",
+                                                payload: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label
+                                        htmlFor="product-brand"
+                                        className="col-form-label"
+                                    >
+                                        Brand{" "}
+                                        {editProductForm.brand !== "" &&
+                                        editProductForm.brand[0] !== " " &&
+                                        editProductForm.brand !== " " &&
+                                        editProductForm.brand !== "  " &&
+                                        editProductForm.brand !== "   " &&
+                                        editProductForm.brand !== "    " &&
+                                        editProductForm.brand !== "     " &&
+                                        editProductForm.brand !== "      " &&
+                                        editProductForm.brand !== "       " &&
+                                        editProductForm.brand !== "        " &&
+                                        editProductForm.brand !== "         " &&
+                                        editProductForm.brand !==
+                                            "          " &&
+                                        editProductForm.brand !==
+                                            "           " &&
+                                        editProductForm.brand !==
+                                            "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
+                                    </label>
+                                </div>
+                                <div className="input-group mb-3">
+                                    <label
+                                        htmlFor="product-brand"
+                                        className="col-form-label"
+                                    >
+                                        {"Price: "}
+                                    </label>
 
   const setFileToBase = (file) => {
     const reader = new FileReader();
@@ -257,7 +429,6 @@ export default function EditProductModal({ product, localCategories }) {
                     }}
                   />
                 </div>
-
                 <div className="mb-3">
                   <label className="col-form-label" htmlFor="inputGroupFile01">
                     Image
@@ -376,6 +547,7 @@ export default function EditProductModal({ product, localCategories }) {
                   </button>
                 </div>
               </form>
+
             </div>
           </div>
         ) : (

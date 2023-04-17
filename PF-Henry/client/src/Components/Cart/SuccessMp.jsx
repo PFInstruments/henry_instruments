@@ -6,6 +6,7 @@ import {
     getProducts,
     getOrderByUser,
     putProductStock,
+    deleteFromCart,
 } from "../../Redux/actions";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -18,8 +19,11 @@ function SuccessMp() {
     const { user } = useAuth0();
 
     const ordersByUser = useSelector((state) => state.ordersByUser);
+
     function clearCart() {
-        localStorage.removeItem("cart");
+      cart.map((prod) => {
+       dispatch(deleteFromCart(prod));
+      });
     }
 
     async function sendMail(order) {
@@ -50,17 +54,7 @@ function SuccessMp() {
 
     return (
         <div className="  container-fluid d-flex flex-column justify-content-center align-items-center  ">
-            <Link to={"/"}>
-                <button
-                    onClick={() => {
-                        sendMail(ordersByUser);
-                        clearCart();
-                    }}
-                    className=""
-                >
-                    Back to Home
-                </button>
-            </Link>
+          
             <h1
                 className=" 
             text-center first-letter:uppercase  "
@@ -117,6 +111,18 @@ function SuccessMp() {
                     );
                 })}
             </div>
+            <Link to={"/"}>
+                <button
+                    onClick={() => {
+                        sendMail(ordersByUser);
+                        clearCart();
+                    }}
+                    className=" 
+                    btn btn-primary mt-5 mb-5"
+                >
+                    Back to Home
+                </button>
+            </Link>
         </div>
     );
 }

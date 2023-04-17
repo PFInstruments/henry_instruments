@@ -17,7 +17,7 @@ let rating = (p) => {
         ? 0
         : p.reviews.map((el) => el.score).reduce((a, b) => a + b, 0) /
           p.reviews?.length;
-    return sum;
+    return Math.round(sum * 10) / 10;
     // return allRatings.reduce((a, b) => a + b, 0) / p.reviews?.length;
 };
 
@@ -68,7 +68,10 @@ export default function ProductTable({ localProducts, localCategories }) {
                                     <img
                                         src={product.image}
                                         className="listImg img-thumbnail "
-                                        onError={(ev) => {ev.target.src = "https://res.cloudinary.com/dcjo8kgee/image/upload/v1673467547/Products/instrumento-musical-de-guitarra_t3kceq.png"}}
+                                        onError={(ev) => {
+                                            ev.target.src =
+                                                "https://res.cloudinary.com/dcjo8kgee/image/upload/v1673467547/Products/instrumento-musical-de-guitarra_t3kceq.png";
+                                        }}
                                     />
                                 </td>
                                 <td className="align-middle ">

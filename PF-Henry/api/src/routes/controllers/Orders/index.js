@@ -1,4 +1,8 @@
+require('dotenv').config();
 const { Product, User, Order } = require("../../../db");
+const axios = require('axios');
+const {REACT_APP_BASEURL} = process.env;
+
 
 const getOrders_Products = async (productId) => {
     const orders = await Order.findAll({
@@ -31,6 +35,13 @@ const getOrders_Users = async (userId) => {
             },
         ],
     });
+    !orders? null : await axios.post(`${REACT_APP_BASEURL}/mail/neworder`, {
+        username: orders.user.email, 
+        idOrder: orders.id, 
+        date: orders.date, 
+        products: orders.totalProducts,
+        totalAmount: orders.totalAmount
+    })
     return orders;
 };
 

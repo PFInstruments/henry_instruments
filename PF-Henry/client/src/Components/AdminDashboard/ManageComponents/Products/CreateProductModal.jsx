@@ -1,5 +1,5 @@
 // import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
-import React, { useState, useReducer /* useEffect */ } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { useDispatch /* useSelector*/ } from "react-redux";
 import {
     getProducts,
@@ -11,16 +11,12 @@ import {
 // import checkmark from "../../../../Images/checkmark.gif";
 import checkmarkInfinito from "../../../../Images/checkmarkInfinito.gif";
 
-export default function CreateProductModal({
-    localCategories,
-    setLocalProducts,
-}) {
+export default function CreateProductModal({ localCategories }) {
     ///DISPATCH///
     const dispatch = useDispatch();
 
     ///ESTADOS LOCALES///
-    //    const [disabledSubmit, setDisabledSubmit] = useState(true);
-    //    const [checkActive, setCheckActive] = useState([]);
+    const [disabledSubmit, setDisabledSubmit] = useState(true);
     const [postSuccess, setPostSuccess] = useState(false);
 
     /////Creo una lista de categorias en orden ascendente y Creo el componente option list/////
@@ -45,7 +41,7 @@ export default function CreateProductModal({
     const initialState = {
         name: "",
         image: "",
-        category: "",
+        category: "-",
         model: "",
         brand: "",
         price: 0,
@@ -124,6 +120,21 @@ export default function CreateProductModal({
         createProductReducer,
         initialState
     );
+
+    /// HOOKS ///
+
+    useEffect(() => {
+        let arr = productForm;
+        if (
+            arr.name !== "" &&
+            arr.model !== "" &&
+            arr.brand !== "" &&
+            arr.category !== "-" &&
+            arr.description !== ""
+        ) {
+            setDisabledSubmit(false);
+        } else setDisabledSubmit(true);
+    }, [productForm]);
 
     ////SETEO LA FOTO  A BASE 64////
 
@@ -219,7 +230,27 @@ export default function CreateProductModal({
                                         htmlFor="product-name"
                                         className="col-form-label"
                                     >
-                                        Name:
+                                        Name{" "}
+                                        {productForm.name !== "" &&
+                                        productForm.name[0] !== " " &&
+                                        productForm.name !== " " &&
+                                        productForm.name !== "  " &&
+                                        productForm.name !== "   " &&
+                                        productForm.name !== "    " &&
+                                        productForm.name !== "     " &&
+                                        productForm.name !== "      " &&
+                                        productForm.name !== "       " &&
+                                        productForm.name !== "        " &&
+                                        productForm.name !== "         " &&
+                                        productForm.name !== "          " &&
+                                        productForm.name !== "           " &&
+                                        productForm.name !== "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <input
                                         type="text"
@@ -239,7 +270,27 @@ export default function CreateProductModal({
                                         htmlFor="product-model"
                                         className="col-form-label"
                                     >
-                                        Model:
+                                        Model{" "}
+                                        {productForm.model !== "" &&
+                                        productForm.model[0] !== " " &&
+                                        productForm.model !== " " &&
+                                        productForm.model !== "  " &&
+                                        productForm.model !== "   " &&
+                                        productForm.model !== "    " &&
+                                        productForm.model !== "     " &&
+                                        productForm.model !== "      " &&
+                                        productForm.model !== "       " &&
+                                        productForm.model !== "        " &&
+                                        productForm.model !== "         " &&
+                                        productForm.model !== "          " &&
+                                        productForm.model !== "           " &&
+                                        productForm.model !== "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <input
                                         type="text"
@@ -259,7 +310,27 @@ export default function CreateProductModal({
                                         htmlFor="product-brand"
                                         className="col-form-label"
                                     >
-                                        Brand:
+                                        Brand{" "}
+                                        {productForm.brand !== "" &&
+                                        productForm.brand[0] !== " " &&
+                                        productForm.brand !== " " &&
+                                        productForm.brand !== "  " &&
+                                        productForm.brand !== "   " &&
+                                        productForm.brand !== "    " &&
+                                        productForm.brand !== "     " &&
+                                        productForm.brand !== "      " &&
+                                        productForm.brand !== "       " &&
+                                        productForm.brand !== "        " &&
+                                        productForm.brand !== "         " &&
+                                        productForm.brand !== "          " &&
+                                        productForm.brand !== "           " &&
+                                        productForm.brand !== "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <input
                                         type="text"
@@ -336,7 +407,14 @@ export default function CreateProductModal({
                                         className="col-form-label"
                                         htmlFor="inputGroupFile01"
                                     >
-                                        Category
+                                        Category{" "}
+                                        {productForm.category !== "-" ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <select
                                         name="selectType"
@@ -362,7 +440,32 @@ export default function CreateProductModal({
                                         htmlFor="message-text"
                                         className="col-form-label"
                                     >
-                                        Description:
+                                        Description{" "}
+                                        {productForm.description !== "" &&
+                                        productForm.description[0] !== " " &&
+                                        productForm.description !== " " &&
+                                        productForm.description !== "  " &&
+                                        productForm.description !== "   " &&
+                                        productForm.description !== "    " &&
+                                        productForm.description !== "     " &&
+                                        productForm.description !== "      " &&
+                                        productForm.description !== "       " &&
+                                        productForm.description !==
+                                            "        " &&
+                                        productForm.description !==
+                                            "         " &&
+                                        productForm.description !==
+                                            "          " &&
+                                        productForm.description !==
+                                            "           " &&
+                                        productForm.description !==
+                                            "            " ? (
+                                            <span> ✅</span>
+                                        ) : (
+                                            <span className="fs-6 text-danger">
+                                                *required
+                                            </span>
+                                        )}
                                     </label>
                                     <textarea
                                         className="form-control"
@@ -431,6 +534,7 @@ export default function CreateProductModal({
                                         Close
                                     </button>
                                     <button
+                                        disabled={disabledSubmit}
                                         type="submit"
                                         className="btn btn-success"
                                     >
