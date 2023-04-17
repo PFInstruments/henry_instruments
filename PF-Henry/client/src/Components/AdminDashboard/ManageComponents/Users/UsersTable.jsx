@@ -5,6 +5,7 @@ import {
     prefixDetail,
     numeral,
 } from "../../../Utils/variables";
+import DetailUserModal from "./DetailUserModal";
 import EditUserModal from "./EditUserModal";
 
 function decodeHtmlCharCodes(str) {
@@ -55,7 +56,11 @@ export default function UsersTable({ localUsers }) {
                                             className="btn btn-light tw-px-3 tw-py-2 tw-text-sm tw-font-medium"
                                             data-bs-toggle="modal"
                                             data-bs-target={
-                                                numeral + prefixDetail + user.id
+                                                numeral +
+                                                prefixDetail +
+                                                user.nickname
+                                                    .split(".")
+                                                    .join("")
                                             }
                                         >
                                             {user.nickname}
@@ -138,6 +143,10 @@ export default function UsersTable({ localUsers }) {
                                         </button>
 
                                         <EditUserModal
+                                            user={user}
+                                            key={user.id + "a"}
+                                        />
+                                        <DetailUserModal
                                             user={user}
                                             key={user.id + "a"}
                                         />

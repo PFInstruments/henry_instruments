@@ -11,9 +11,10 @@ function productSum(array) {
 
 export default function DetailOrderModal({ order }) {
     //   const dispatch = useDispatch();
-
+    console.log(order.totalProducts[0].quantity);
     return (
         <div
+            key={order.id}
             className="modal fade"
             id={prefixDetail + order.id}
             tabIndex="-1"
@@ -44,7 +45,7 @@ export default function DetailOrderModal({ order }) {
                                         </div>
                                         <div className="tw-m-2">
                                             <span>
-                                                Quantity: {order.quantity}{" "}
+                                                Quantity: {item.quantity}
                                                 <h5 className="text-xl font-bold">
                                                     {item.name}
                                                 </h5>
