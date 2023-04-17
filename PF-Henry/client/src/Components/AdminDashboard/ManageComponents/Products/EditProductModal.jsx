@@ -33,7 +33,7 @@ export default function EditProductModal({ product, localCategories }) {
     id: product.id,
     name: product.name,
     image: product.image,
-    category: product.category.name,
+    category: product.category,
     model: product.model,
     brand: product.brand,
     price: product.price,
